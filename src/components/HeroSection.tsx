@@ -3,7 +3,7 @@ import { ArrowLeft, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-gaming-bg.jpg";
 import heroImage1 from "@/assets/hero/asus1.jpg";
-import heroImage2 from "@/assets/hero/meta1.jpg";
+import heroImage2 from "@/assets/hero/metagirl2.png";
 
 // FEATURE FLAG: Toggle between hero variants
 // Options: "gaming" | "photo" | "photo-carousel"
