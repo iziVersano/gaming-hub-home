@@ -85,7 +85,7 @@ const FeaturedProducts = () => {
               המוצרים הפופולריים ביותר השבוע
             </p>
           </div>
-          <Button variant="ghost" className="group text-primary hover:text-primary hover:bg-primary/10">
+          <Button variant="outline" className="group border-accent/50 text-accent hover:bg-accent/10 hover:border-accent">
             צפה בהכל
             <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
           </Button>
