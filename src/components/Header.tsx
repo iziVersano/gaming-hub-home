@@ -4,11 +4,11 @@ import { Input } from "@/components/ui/input";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/85">
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo - Right side in RTL */}
         <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg gaming-border bg-card">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg gaming-border bg-background">
             <span className="text-xl font-bold text-gradient-gaming">G</span>
           </div>
           <span className="hidden text-xl font-bold text-foreground sm:inline-block">
@@ -18,13 +18,15 @@ const Header = () => {
 
         {/* Search - Center */}
         <div className="flex flex-1 max-w-md mx-4">
-          <div className="relative w-full">
-            <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative w-full flex">
             <Input
               type="search"
               placeholder="חפש מוצרים..."
-              className="w-full pr-10 bg-input border-border focus:border-primary focus:ring-primary/20 placeholder:text-muted-foreground"
+              className="w-full pr-4 bg-input border-border focus:border-primary focus:ring-primary/20 placeholder:text-muted-foreground rounded-l-none"
             />
+            <Button className="rounded-r-none bg-bright-orange hover:bg-bright-orange/90 text-white px-4">
+              <Search className="h-4 w-4" />
+            </Button>
           </div>
         </div>
 
@@ -49,36 +51,36 @@ const Header = () => {
       </div>
 
       {/* Categories Nav */}
-      <nav className="border-t border-border bg-card/50">
+      <nav className="border-t border-border bg-muted/30">
         <div className="container">
           <ul className="flex items-center gap-6 overflow-x-auto py-3 text-sm font-medium">
             <li>
-              <a href="#" className="text-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
                 מחשבי גיימינג
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
                 כרטיסי מסך
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
                 מסכים
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
                 ציוד היקפי
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
                 אביזרים
               </a>
             </li>
             <li>
-              <a href="#" className="text-secondary hover:text-secondary/80 transition-colors whitespace-nowrap font-bold">
+              <a href="#" className="text-neon-magenta hover:text-neon-magenta/80 transition-colors whitespace-nowrap font-bold">
                 מבצעים חמים 🔥
               </a>
             </li>

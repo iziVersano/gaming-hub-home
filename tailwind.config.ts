@@ -55,6 +55,12 @@ export default {
           magenta: "hsl(var(--neon-magenta))",
           purple: "hsl(var(--neon-purple))",
         },
+        electric: {
+          blue: "hsl(var(--electric-blue))",
+        },
+        bright: {
+          orange: "hsl(var(--bright-orange))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
