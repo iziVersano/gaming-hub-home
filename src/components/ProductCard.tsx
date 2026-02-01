@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 interface ProductCardProps {
   name: string;
-  price: number;
+  price?: number;
   originalPrice?: number;
   image: string;
   category: string;
@@ -21,21 +21,12 @@ const ProductCard = ({
   isNew,
   isSale,
 }: ProductCardProps) => {
-  const discount = originalPrice
-    ? Math.round(((originalPrice - price) / originalPrice) * 100)
-    : 0;
-
   return (
     <div className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border transition-all duration-300 hover:border-accent/50 hover:neon-glow-cyan">
       {/* Badges */}
       <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
         {isNew && (
           <Badge className="bg-electric-blue text-white">חדש</Badge>
-        )}
-        {isSale && discount > 0 && (
-          <Badge className="bg-neon-magenta text-white">
-            {discount}%- הנחה
-          </Badge>
         )}
       </div>
 
@@ -60,15 +51,7 @@ const ProductCard = ({
           {name}
         </h3>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-bold text-accent">₪{price.toLocaleString()}</span>
-            {originalPrice && (
-              <span className="text-sm text-muted-foreground line-through">
-                ₪{originalPrice.toLocaleString()}
-              </span>
-            )}
-          </div>
+        <div className="flex items-center justify-end">
           <Button
             size="icon"
             className="h-9 w-9 bg-gradient-cta hover:opacity-90 text-white"

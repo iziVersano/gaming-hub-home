@@ -1,70 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
-
 @layer base {
   :root {
-    --background: 235 45% 10%;
-    --foreground: 0 0% 100%;
+    /* Light theme - bright and vibrant */
+    --background: 0 0% 100%;
+    --foreground: 240 60% 25%;
 
-    --card: 240 40% 14%;
-    --card-foreground: 0 0% 100%;
+    --card: 210 100% 98%;
+    --card-foreground: 240 60% 25%;
 
-    --popover: 240 40% 12%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 60% 25%;
 
-    --primary: 212 100% 58%;
+    --primary: 212 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 280 100% 65%;
+    --secondary: 262 100% 58%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 30% 22%;
-    --muted-foreground: 220 20% 75%;
+    --muted: 220 30% 94%;
+    --muted-foreground: 240 30% 45%;
 
-    --accent: 187 100% 45%;
+    --accent: 187 100% 42%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 84% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 30% 28%;
-    --input: 240 30% 18%;
-    --ring: 212 100% 58%;
+    --border: 220 30% 85%;
+    --input: 220 30% 96%;
+    --ring: 212 100% 50%;
 
     --radius: 0.5rem;
 
-    /* Vibrant gaming custom tokens */
-    --neon-cyan: 187 100% 45%;
-    --neon-magenta: 296 100% 62%;
-    --neon-purple: 262 100% 65%;
-    --electric-blue: 212 100% 58%;
+    /* Vibrant gaming custom tokens - adjusted for light backgrounds */
+    --neon-cyan: 187 100% 42%;
+    --neon-magenta: 320 100% 55%;
+    --neon-purple: 262 100% 58%;
+    --electric-blue: 212 100% 50%;
     --bright-orange: 36 100% 50%;
-    --neon-glow-cyan: 0 0 20px hsl(187 100% 45% / 0.6), 0 0 40px hsl(187 100% 45% / 0.4), 0 0 60px hsl(187 100% 45% / 0.2);
-    --neon-glow-magenta: 0 0 20px hsl(296 100% 62% / 0.6), 0 0 40px hsl(296 100% 62% / 0.4);
-    --neon-glow-purple: 0 0 20px hsl(262 100% 65% / 0.6), 0 0 40px hsl(262 100% 65% / 0.4);
-    --neon-glow-blue: 0 0 20px hsl(212 100% 58% / 0.6), 0 0 40px hsl(212 100% 58% / 0.4);
-    --gradient-gaming: linear-gradient(135deg, hsl(212 100% 58%) 0%, hsl(262 100% 65%) 50%, hsl(296 100% 62%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(235 50% 12%) 0%, hsl(260 50% 18%) 50%, hsl(235 50% 12%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(240 40% 18%) 0%, hsl(240 40% 12%) 100%);
-    --gradient-section: linear-gradient(180deg, hsl(235 45% 12%) 0%, hsl(250 45% 16%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(212 100% 58%) 0%, hsl(262 100% 65%) 100%);
 
-    --sidebar-background: 240 40% 12%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 212 100% 58%;
+    /* Glow effects - softer for light backgrounds */
+    --neon-glow-cyan: 0 4px 20px hsl(187 100% 42% / 0.25), 0 8px 40px hsl(187 100% 42% / 0.15);
+    --neon-glow-magenta: 0 4px 20px hsl(320 100% 55% / 0.25), 0 8px 40px hsl(320 100% 55% / 0.15);
+    --neon-glow-purple: 0 4px 20px hsl(262 100% 58% / 0.25), 0 8px 40px hsl(262 100% 58% / 0.15);
+    --neon-glow-blue: 0 4px 20px hsl(212 100% 50% / 0.25), 0 8px 40px hsl(212 100% 50% / 0.15);
+
+    /* Gradients - bright and vibrant */
+    --gradient-gaming: linear-gradient(135deg, hsl(187 100% 42%) 0%, hsl(212 100% 50%) 33%, hsl(262 100% 58%) 66%, hsl(320 100% 55%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 97%) 0%, hsl(280 60% 97%) 50%, hsl(210 100% 97%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 100% 98%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(210 100% 98%) 0%, hsl(280 60% 98%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(212 100% 50%) 0%, hsl(262 100% 58%) 100%);
+
+    /* Sidebar - light purple tint */
+    --sidebar-background: 280 60% 98%;
+    --sidebar-foreground: 240 60% 25%;
+    --sidebar-primary: 212 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 30% 22%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 240 30% 28%;
-    --sidebar-ring: 212 100% 58%;
-  }
-
-  .dark {
-    --background: 235 45% 10%;
-    --foreground: 0 0% 100%;
+    --sidebar-accent: 220 30% 92%;
+    --sidebar-accent-foreground: 240 60% 25%;
+    --sidebar-border: 220 30% 85%;
+    --sidebar-ring: 212 100% 50%;
   }
 }
 
@@ -154,5 +155,125 @@
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+  }
+
+  /* ============================================
+     HERO SECTION FEATURE FLAG VARIANTS
+     ============================================
+
+     USAGE:
+     Change the HERO_VARIANT constant in src/components/HeroSection.tsx
+
+     Options:
+     - "gaming": Bright, vibrant gaming style with neon colors and animated glows
+     - "photo": Editorial photographic style with dark overlay (ISFAR-style)
+     - "photo-carousel": Auto-rotating carousel with 3 images (5 sec intervals)
+
+     The same HTML markup is used for all variants.
+     Only backgrounds, overlays, and effects change via CSS.
+
+     ============================================ */
+
+  /* GAMING VARIANT - Bright, vibrant gaming style */
+  .hero--gaming .hero__overlay {
+    background: linear-gradient(to bottom,
+      hsl(0 0% 100% / 0.85),
+      hsl(0 0% 100% / 0.7),
+      hsl(0 0% 100% / 0.9));
+  }
+
+  .hero--gaming .hero__colored-overlay {
+    background: linear-gradient(to right,
+      hsl(var(--neon-purple) / 0.2),
+      transparent,
+      hsl(var(--electric-blue) / 0.2));
+  }
+
+  .hero--gaming .hero__glow-1 {
+    background-color: hsl(var(--electric-blue) / 0.2);
+  }
+
+  .hero--gaming .hero__glow-2 {
+    background-color: hsl(var(--neon-magenta) / 0.2);
+  }
+
+  .hero--gaming .hero__glow-3 {
+    background-color: hsl(var(--neon-purple) / 0.2);
+  }
+
+  .hero--gaming .hero__grid {
+    opacity: 0.1;
+    background-image:
+      linear-gradient(hsl(var(--accent) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--accent) / 0.4) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* PHOTO VARIANT - Editorial, premium photographic style */
+  .hero--photo .hero__overlay {
+    /* Dark gradient overlay for text readability over photo */
+    background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.3),
+      transparent);
+  }
+
+  /* Hide gaming-specific effects in photo variant */
+  .hero--photo .hero__colored-overlay {
+    display: none;
+  }
+
+  .hero--photo .hero__glow-container {
+    display: none;
+  }
+
+  .hero--photo .hero__grid {
+    display: none;
+  }
+
+  /* Optional: Override text colors for photo variant if needed */
+  .hero--photo .hero h1,
+  .hero--photo .hero p {
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero--photo .hero h1 .text-foreground {
+    color: white !important;
+  }
+
+  /* PHOTO CAROUSEL VARIANT - Full-width image carousel (images only, no content) */
+  .hero--photo-carousel {
+    /* No padding - images take full height */
+    padding: 0;
+  }
+
+  .hero-carousel {
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-carousel__slide {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Carousel dots styling */
+  .hero__dots {
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+  }
+
+  .hero__dot {
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hero__dot:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
   }
 }

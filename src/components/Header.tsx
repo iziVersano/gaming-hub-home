@@ -1,48 +1,53 @@
-import { Search, User, ShoppingCart, Menu } from "lucide-react";
+import { Search, User, ShoppingCart, Menu, Home, Info, Package, Mail, Accessibility } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/85">
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo - Right side in RTL */}
-        <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg gaming-border bg-background">
-            <span className="text-xl font-bold text-gradient-gaming">G</span>
-          </div>
-          <span className="hidden text-xl font-bold text-foreground sm:inline-block">
-            גיימינג<span className="text-primary">סטור</span>
-          </span>
+        <div className="flex items-center">
+          <img
+            src={logo}
+            alt="ConsolTech"
+            className="h-12 md:h-14 w-auto"
+          />
         </div>
 
         {/* Search - Center */}
-        <div className="flex flex-1 max-w-md mx-4">
+        <div className="flex flex-1 max-w-lg mx-4">
           <div className="relative w-full flex">
             <Input
               type="search"
-              placeholder="חפש מוצרים..."
-              className="w-full pr-4 bg-input border-border focus:border-primary focus:ring-primary/20 placeholder:text-muted-foreground rounded-l-none"
+              placeholder="חיפוש..."
+              className="w-full pr-4 h-11 bg-white border-2 border-primary/30 focus:border-primary focus:ring-primary/20 placeholder:text-muted-foreground rounded-l-none text-base"
             />
-            <Button className="rounded-r-none bg-bright-orange hover:bg-bright-orange/90 text-white px-4">
-              <Search className="h-4 w-4" />
+            <Button className="rounded-r-none bg-primary hover:bg-primary/90 text-white px-5 h-11">
+              <Search className="h-5 w-5" />
             </Button>
           </div>
         </div>
 
         {/* Actions - Left side in RTL */}
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="text-foreground hover:text-primary hover:bg-primary/10">
+        <div className="flex items-center gap-1 md:gap-3">
+          {/* Login/Register */}
+          <Button variant="ghost" className="hidden md:flex items-center gap-2 text-foreground hover:text-primary hover:bg-primary/10 px-3">
             <User className="h-5 w-5" />
-            <span className="sr-only">חשבון</span>
+            <span className="text-sm font-medium">התחבר / הירשם</span>
           </Button>
-          <Button variant="ghost" size="icon" className="relative text-foreground hover:text-primary hover:bg-primary/10">
+
+          {/* Cart */}
+          <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4">
             <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -top-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-xs font-bold text-secondary-foreground">
-              3
+            <span className="flex items-center gap-1">
+              <span className="bg-white text-primary text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">1</span>
+              <span className="hidden sm:inline text-sm font-medium">עגלה</span>
             </span>
-            <span className="sr-only">עגלה</span>
           </Button>
+
+          {/* Mobile Menu */}
           <Button variant="ghost" size="icon" className="md:hidden text-foreground hover:text-primary hover:bg-primary/10">
             <Menu className="h-5 w-5" />
             <span className="sr-only">תפריט</span>
@@ -50,38 +55,38 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Categories Nav */}
-      <nav className="border-t border-border bg-muted/30">
+      {/* Main Navigation */}
+      <nav className="border-t border-primary/20 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 hidden md:block">
         <div className="container">
-          <ul className="flex items-center gap-6 overflow-x-auto py-3 text-sm font-medium">
+          <ul className="flex items-center gap-2 lg:gap-4 py-3">
             <li>
-              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
-                מחשבי גיימינג
+              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg text-foreground font-semibold hover:text-white hover:bg-primary transition-all duration-200 group">
+                <Home className="h-5 w-5" />
+                <span>בית</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
-                כרטיסי מסך
+              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg text-foreground font-semibold hover:text-white hover:bg-primary transition-all duration-200 group">
+                <Info className="h-5 w-5" />
+                <span>אודות</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
-                מסכים
+              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg text-foreground font-semibold hover:text-white hover:bg-primary transition-all duration-200 group">
+                <Package className="h-5 w-5" />
+                <span>מוצרים</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
-                ציוד היקפי
+              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg text-foreground font-semibold hover:text-white hover:bg-primary transition-all duration-200 group">
+                <Mail className="h-5 w-5" />
+                <span>צור קשר</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-foreground hover:text-accent transition-colors whitespace-nowrap">
-                אביזרים
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-neon-magenta hover:text-neon-magenta/80 transition-colors whitespace-nowrap font-bold">
-                מבצעים חמים 🔥
+              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg text-foreground font-semibold hover:text-white hover:bg-primary transition-all duration-200 group">
+                <Accessibility className="h-5 w-5" />
+                <span>נגישות</span>
               </a>
             </li>
           </ul>
