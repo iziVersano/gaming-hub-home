@@ -1,15 +1,16 @@
 import { Gamepad2, Smartphone, Monitor, Headphones, Package, ArrowLeft } from "lucide-react";
 
-// Import category images from assets/categories/
-import consolesImg from "@/assets/categories/CFI_300x.avif";
-import handheldImg from "@/assets/categories/GPDRA-RGB-PCK_300x.avif";
-import tvImg from "@/assets/categories/65_X80K_blk_blk_dot_outsideh_front_300x.avif";
+// Import product images for categories
+import asusBright from "@/assets/products/asus_bright.png";
+import monitorBright from "@/assets/products/Monitor_bright.png";
+import sonyPlayStationBright from "@/assets/products/sony_play_station_bright.png";
+import metaBright from "@/assets/products/meta_bright.png";
 
 const categories = [
   {
     id: 1,
     name: "גיימינג",
-    image: consolesImg,
+    image: asusBright,
     icon: Gamepad2,
     // Gradient: Blue start
     gradient: "bg-gradient-to-br from-blue-500/15 to-violet-500/15",
@@ -19,7 +20,7 @@ const categories = [
   {
     id: 2,
     name: "אלקטרוניקה",
-    image: handheldImg,
+    image: monitorBright,
     icon: Smartphone,
     // Gradient: Blue-violet
     gradient: "bg-gradient-to-br from-violet-500/15 to-purple-500/15",
@@ -29,7 +30,7 @@ const categories = [
   {
     id: 3,
     name: "טלוויזיות",
-    image: tvImg,
+    image: monitorBright,
     icon: Monitor,
     // Gradient: Purple center
     gradient: "bg-gradient-to-br from-purple-500/15 to-fuchsia-500/15",
@@ -39,7 +40,7 @@ const categories = [
   {
     id: 4,
     name: "קונסולות",
-    image: handheldImg,
+    image: sonyPlayStationBright,
     icon: Headphones,
     // Gradient: Purple-magenta
     gradient: "bg-gradient-to-br from-fuchsia-500/15 to-pink-500/15",
@@ -49,7 +50,7 @@ const categories = [
   {
     id: 5,
     name: "מציאות מדומה",
-    image: consolesImg,
+    image: metaBright,
     icon: Package,
     // Gradient: Magenta end
     gradient: "bg-gradient-to-br from-pink-500/15 to-rose-500/15",
