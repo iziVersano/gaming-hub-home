@@ -1,56 +1,68 @@
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter, Gamepad2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="border-t border-border">
       {/* Newsletter Section */}
-      <div className="border-b border-border bg-gradient-section">
-        <div className="container py-8">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <div>
-              <h3 className="text-xl font-bold text-foreground">הירשמו לניוזלטר שלנו</h3>
-              <p className="text-muted-foreground">קבלו עדכונים על מבצעים ומוצרים חדשים</p>
+      <div className="border-b border-gray-200 bg-gray-50">
+        <div className="container px-3 md:px-4 py-6 md:py-8">
+          <div className="flex flex-col items-center justify-between gap-3 md:gap-4 md:flex-row">
+            <div className="text-center md:text-right">
+              <h3 className="text-lg md:text-xl font-bold text-gray-800">הירשמו לניוזלטר שלנו</h3>
+              <p className="text-sm md:text-base text-gray-600">קבלו עדכונים על מבצעים ומוצרים חדשים</p>
             </div>
             <div className="flex w-full max-w-md gap-2">
               <Input
                 type="email"
                 placeholder="הזינו את האימייל שלכם"
-                className="bg-input border-border"
+                className="bg-white border-gray-300 text-sm md:text-base text-gray-800 placeholder:text-gray-500"
               />
-              <Button className="bg-gradient-cta hover:opacity-90 text-white font-bold">הרשמה</Button>
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm md:text-base px-3 md:px-4">הרשמה</Button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container py-12">
+      {/* Main Footer Content - with gradient */}
+      <div className="py-8 md:py-12" style={{ background: 'linear-gradient(90deg, #06b6d4 0%, #8b5cf6 25%, #d946ef 50%, #8b5cf6 75%, #06b6d4 100%)' }}>
+        <div className="container px-3 md:px-4">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* About */}
           <div>
-            <div className="mb-4 flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg gaming-border bg-background">
-                <span className="text-xl font-bold text-gradient-gaming">G</span>
+            {/* Logo - same as header */}
+            <a
+              href="#"
+              className="flex items-center gap-2 md:gap-3 group mb-4"
+              aria-label="Consoltech - Home"
+            >
+              <div className="relative">
+                <Gamepad2
+                  className="h-7 w-7 md:h-10 md:w-10 text-white group-hover:text-cyan-200 transition-colors duration-300"
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 rounded-lg bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
               </div>
-              <span className="text-xl font-bold text-foreground">
-                גיימינג<span className="text-primary">סטור</span>
+              <span className="logo-text text-xl md:text-2xl lg:text-3xl">
+                <span className="text-white font-bold">CONSOL</span>
+                <span className="text-cyan-200 font-bold">TECH</span>
               </span>
-            </div>
-            <p className="mb-4 text-sm text-muted-foreground">
+            </a>
+            <p className="mb-4 text-sm text-white/80">
               החנות המובילה בישראל לציוד גיימינג. מביאים לכם את הטכנולוגיה החדשה ביותר במחירים הטובים ביותר.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted/50 text-muted-foreground transition-colors hover:bg-electric-blue hover:text-white">
+              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20 text-white transition-colors hover:bg-white/30">
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted/50 text-muted-foreground transition-colors hover:bg-neon-magenta hover:text-white">
+              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20 text-white transition-colors hover:bg-white/30">
                 <Instagram className="h-4 w-4" />
               </a>
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted/50 text-muted-foreground transition-colors hover:bg-accent hover:text-white">
+              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20 text-white transition-colors hover:bg-white/30">
                 <Twitter className="h-4 w-4" />
               </a>
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted/50 text-muted-foreground transition-colors hover:bg-destructive hover:text-white">
+              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20 text-white transition-colors hover:bg-white/30">
                 <Youtube className="h-4 w-4" />
               </a>
             </div>
@@ -58,58 +70,54 @@ const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4 className="mb-4 font-bold text-foreground">קישורים מהירים</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-accent transition-colors">אודות</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">תקנון האתר</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">מדיניות פרטיות</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">החזרות וביטולים</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">שאלות נפוצות</a></li>
+            <h4 className="mb-4 font-bold text-white">קישורים מהירים</h4>
+            <ul className="space-y-2 text-sm text-white/80">
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">אודות</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">תקנון האתר</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">מדיניות פרטיות</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">החזרות וביטולים</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">שאלות נפוצות</a></li>
             </ul>
           </div>
 
           {/* Categories */}
           <div>
-            <h4 className="mb-4 font-bold text-foreground">קטגוריות</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-accent transition-colors">מחשבי גיימינג</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">כרטיסי מסך</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">מסכים</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">ציוד היקפי</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">אביזרים</a></li>
+            <h4 className="mb-4 font-bold text-white">קטגוריות</h4>
+            <ul className="space-y-2 text-sm text-white/80">
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">מחשבי גיימינג</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">כרטיסי מסך</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">מסכים</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">ציוד היקפי</a></li>
+              <li><a href="#" className="hover:text-cyan-200 transition-colors">אביזרים</a></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="mb-4 font-bold text-foreground">צור קשר</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+            <h4 className="mb-4 font-bold text-white">צור קשר</h4>
+            <ul className="space-y-3 text-sm text-white/80">
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-accent" />
+                <Phone className="h-4 w-4 text-cyan-200" />
                 <span>03-1234567</span>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-accent" />
+                <Mail className="h-4 w-4 text-cyan-200" />
                 <span>info@gamingstore.co.il</span>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-accent mt-1" />
+                <MapPin className="h-4 w-4 text-cyan-200 mt-1" />
                 <span>רחוב הגיימינג 42, תל אביב</span>
               </li>
             </ul>
           </div>
         </div>
+        </div>
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-border bg-muted/20 py-4">
-        <div className="container flex flex-col items-center justify-between gap-2 text-center text-sm text-muted-foreground md:flex-row">
-          <p>© 2025 גיימינגסטור. כל הזכויות שמורות.</p>
-          <div className="flex items-center gap-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-          </div>
+      <div className="border-t border-gray-200 bg-gray-100 py-4">
+        <div className="container px-3 md:px-4 text-center text-sm text-gray-600">
+          <p>© 2025 CONSOLTECH. כל הזכויות שמורות.</p>
         </div>
       </div>
     </footer>

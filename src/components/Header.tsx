@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border backdrop-blur-sm" style={{ background: 'linear-gradient(90deg, #06b6d4 0%, #8b5cf6 25%, #d946ef 50%, #8b5cf6 75%, #06b6d4 100%)' }}>
-      <div className="container flex h-16 md:h-20 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full border-b border-border backdrop-blur-sm relative">
+      <div className="absolute inset-0 -z-10" style={{ background: 'linear-gradient(90deg, #06b6d4 0%, #8b5cf6 25%, #d946ef 50%, #8b5cf6 75%, #06b6d4 100%)' }}></div>
+      <div className="container flex h-16 md:h-20 items-center justify-between gap-2 md:gap-4 px-3 md:px-4">
         {/* Logo - Right side in RTL */}
         <a
           href="#"
@@ -14,26 +15,26 @@ const Header = () => {
         >
           <div className="relative">
             <Gamepad2
-              className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-cyan-200 transition-colors duration-300"
+              className="h-7 w-7 md:h-10 md:w-10 text-white group-hover:text-cyan-200 transition-colors duration-300"
               aria-hidden="true"
             />
             <div className="absolute inset-0 rounded-lg bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
           </div>
-          <span className="logo-text text-2xl md:text-3xl lg:text-4xl">
+          <span className="logo-text text-xl md:text-3xl lg:text-4xl">
             <span className="text-white font-bold">CONSOL</span>
             <span className="text-cyan-200 font-bold">TECH</span>
           </span>
         </a>
 
         {/* Search - Center */}
-        <div className="flex flex-1 max-w-md lg:max-w-lg mx-4">
+        <div className="hidden sm:flex flex-1 max-w-md lg:max-w-lg mx-2 md:mx-4">
           <div className="relative w-full flex">
             <Input
               type="search"
               placeholder="חיפוש..."
               className="w-full pr-4 h-10 md:h-11 bg-white/90 border-2 border-white/50 focus:border-white focus:ring-white/30 placeholder:text-gray-500 rounded-l-none text-sm md:text-base text-gray-800"
             />
-            <Button className="rounded-r-none bg-white/20 hover:bg-white/30 text-white border-l border-white/30 px-4 md:px-5 h-10 md:h-11">
+            <Button className="rounded-r-none bg-white/20 hover:bg-white/30 text-white border-l border-white/30 px-3 md:px-5 h-10 md:h-11">
               <Search className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
           </div>
@@ -48,12 +49,10 @@ const Header = () => {
           </Button>
 
           {/* Cart */}
-          <Button variant="default" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white border border-white/30 px-3 md:px-4 h-10">
-            <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
-            <span className="flex items-center gap-1">
-              <span className="bg-white text-purple-600 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">1</span>
-              <span className="hidden sm:inline text-sm font-medium">עגלה</span>
-            </span>
+          <Button variant="default" className="flex items-center gap-1 md:gap-2 bg-white/20 hover:bg-white/30 text-white border border-white/30 px-2 md:px-4 h-10 relative">
+            <ShoppingCart className="h-5 w-5" />
+            <span className="absolute -top-1 -right-1 bg-white text-purple-600 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-purple-500">1</span>
+            <span className="hidden sm:inline text-sm font-medium">עגלה</span>
           </Button>
 
           {/* Mobile Menu */}
@@ -65,36 +64,35 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
-      <nav className="border-t border-white/30 hidden md:block relative">
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white pointer-events-none"></div>
-        <div className="container relative z-10">
+      <nav className="border-t border-white/30 hidden md:block bg-white">
+        <div className="container">
           <ul className="flex items-center gap-2 lg:gap-4 py-3">
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-white font-semibold text-base hover:bg-white/25 hover:shadow-lg transition-all duration-200">
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
                 <Home className="h-5 w-5" />
                 <span>בית</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-white font-semibold text-base hover:bg-white/25 hover:shadow-lg transition-all duration-200">
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
                 <Info className="h-5 w-5" />
                 <span>אודות</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-white font-semibold text-base hover:bg-white/25 hover:shadow-lg transition-all duration-200">
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
                 <Package className="h-5 w-5" />
                 <span>מוצרים</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-white font-semibold text-base hover:bg-white/25 hover:shadow-lg transition-all duration-200">
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
                 <Mail className="h-5 w-5" />
                 <span>צור קשר</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-white font-semibold text-base hover:bg-white/25 hover:shadow-lg transition-all duration-200">
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
                 <Accessibility className="h-5 w-5" />
                 <span>נגישות</span>
               </a>

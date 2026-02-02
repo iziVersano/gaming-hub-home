@@ -61,8 +61,8 @@ const categories = [
 const CategoryBanner = () => {
   return (
     <section className="pt-6 pb-12 bg-white">
-      <div className="container">
-        <div className="grid grid-cols-3 gap-3 md:grid-cols-5 md:gap-4 lg:gap-6">
+      <div className="container px-3 md:px-4">
+        <div className="grid grid-cols-3 gap-2 md:grid-cols-5 md:gap-4 lg:gap-6">
           {categories.map((category) => {
             const Icon = category.icon;
 
@@ -70,22 +70,22 @@ const CategoryBanner = () => {
               <a
                 key={category.id}
                 href="#"
-                className="group flex flex-col items-center text-center p-2 transition-all duration-300"
+                className="group flex flex-col items-center text-center p-1 md:p-2 transition-all duration-300"
               >
                 {/* Product Image */}
-                <div className="relative mb-4 flex items-center justify-center">
+                <div className="relative mb-2 md:mb-4 flex items-center justify-center">
                   <img
                     src={category.image}
                     alt={category.name}
-                    className="h-32 md:h-40 lg:h-44 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    className="h-20 sm:h-28 md:h-40 lg:h-44 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
 
                 {/* Category Name with Arrow */}
                 <div className="flex items-center gap-1 text-primary">
-                  <ArrowLeft className="h-4 w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                  <h3 className="text-sm md:text-base font-semibold transition-colors duration-300">
+                  <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                  <h3 className="text-xs sm:text-sm md:text-base font-semibold transition-colors duration-300">
                     {category.name}
                   </h3>
                 </div>
