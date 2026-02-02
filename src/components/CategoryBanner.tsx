@@ -80,20 +80,20 @@ const CategoryBanner = () => {
                 <a
                   key={category.id}
                   href="#"
-                  className="category-card-mobile group flex flex-col items-center text-center p-3 md:p-2 transition-all duration-300"
+                  className="category-card-mobile group flex flex-col items-center text-center p-2 md:p-2 transition-all duration-300"
                 >
                   {/* Product Image */}
-                  <div className="relative mb-2 md:mb-4 flex items-center justify-center">
+                  <div className="relative mb-1.5 md:mb-3 flex items-center justify-center flex-1 w-full">
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="h-24 md:h-40 lg:h-44 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                      className="h-32 md:h-44 lg:h-48 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
                   </div>
 
                   {/* Category Name with Arrow */}
-                  <div className="flex items-center gap-1 text-primary">
+                  <div className="flex items-center gap-1 text-primary pb-1">
                     <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
                     <h3 className="text-xs md:text-base font-semibold transition-colors duration-300">
                       {category.name}
