@@ -10,8 +10,8 @@ const Footer = () => {
         <div className="container px-3 md:px-4 py-4 md:py-8">
           <div className="flex flex-col items-center justify-between gap-2 md:gap-4 md:flex-row">
             <div className="text-center md:text-right">
-              <h3 className="text-base md:text-xl font-bold text-gray-800">הירשמו לניוזלטר שלנו</h3>
-              <p className="text-xs md:text-base text-gray-600">קבלו עדכונים על מבצעים ומוצרים חדשים</p>
+              <h3 className="text-lg md:text-2xl font-extrabold text-gray-800">הירשמו לניוזלטר שלנו</h3>
+              <p className="text-sm md:text-lg font-medium text-gray-700">קבלו עדכונים על מבצעים ומוצרים חדשים</p>
             </div>
             <div className="flex w-full max-w-md gap-2">
               <Input
@@ -49,7 +49,7 @@ const Footer = () => {
                 <span className="text-cyan-200 font-bold">TECH</span>
               </span>
             </a>
-            <p className="mb-3 md:mb-4 text-xs md:text-sm text-white/80 line-clamp-2 md:line-clamp-none">
+            <p className="mb-3 md:mb-4 text-sm md:text-base font-medium text-white/90 line-clamp-2 md:line-clamp-none">
               החנות המובילה בישראל לציוד גיימינג. מביאים לכם את הטכנולוגיה החדשה ביותר במחירים הטובים ביותר.
             </p>
             <div className="flex gap-2 md:gap-3">
@@ -70,8 +70,8 @@ const Footer = () => {
 
           {/* Links - hidden on mobile */}
           <div className="hidden md:block">
-            <h4 className="mb-4 font-bold text-white">קישורים מהירים</h4>
-            <ul className="space-y-2 text-sm text-white/80">
+            <h4 className="mb-4 text-lg font-extrabold text-white">קישורים מהירים</h4>
+            <ul className="space-y-2 text-base font-medium text-white/90">
               <li><a href="#" className="hover:text-cyan-200 transition-colors">אודות</a></li>
               <li><a href="#" className="hover:text-cyan-200 transition-colors">תקנון האתר</a></li>
               <li><a href="#" className="hover:text-cyan-200 transition-colors">מדיניות פרטיות</a></li>
@@ -82,8 +82,8 @@ const Footer = () => {
 
           {/* Categories - hidden on mobile */}
           <div className="hidden md:block">
-            <h4 className="mb-2 md:mb-4 font-bold text-white text-sm md:text-base">קטגוריות</h4>
-            <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-white/80">
+            <h4 className="mb-2 md:mb-4 text-lg font-extrabold text-white">קטגוריות</h4>
+            <ul className="space-y-1 md:space-y-2 text-base font-medium text-white/90">
               <li><a href="#" className="hover:text-cyan-200 transition-colors">מחשבי גיימינג</a></li>
               <li><a href="#" className="hover:text-cyan-200 transition-colors">כרטיסי מסך</a></li>
               <li><a href="#" className="hover:text-cyan-200 transition-colors">מסכים</a></li>
@@ -94,18 +94,18 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="mb-2 md:mb-4 font-bold text-white text-sm md:text-base">צור קשר</h4>
-            <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-white/80">
-              <li className="flex items-center gap-1.5 md:gap-2">
-                <Phone className="h-3.5 w-3.5 md:h-4 md:w-4 text-cyan-200" />
+            <h4 className="mb-2 md:mb-4 text-lg font-extrabold text-white">צור קשר</h4>
+            <ul className="space-y-2 md:space-y-3 text-sm md:text-base font-medium text-white/90">
+              <li className="flex items-center gap-2 md:gap-3">
+                <Phone className="h-4 w-4 md:h-5 md:w-5 text-cyan-200" />
                 <span>03-1234567</span>
               </li>
-              <li className="flex items-center gap-1.5 md:gap-2">
-                <Mail className="h-3.5 w-3.5 md:h-4 md:w-4 text-cyan-200" />
-                <span className="text-xs md:text-sm">info@gamingstore.co.il</span>
+              <li className="flex items-center gap-2 md:gap-3">
+                <Mail className="h-4 w-4 md:h-5 md:w-5 text-cyan-200" />
+                <span>info@gamingstore.co.il</span>
               </li>
-              <li className="flex items-start gap-1.5 md:gap-2">
-                <MapPin className="h-3.5 w-3.5 md:h-4 md:w-4 text-cyan-200 mt-0.5 md:mt-1" />
+              <li className="flex items-start gap-2 md:gap-3">
+                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-cyan-200 mt-0.5 md:mt-1" />
                 <span>רחוב הגיימינג 42, תל אביב</span>
               </li>
             </ul>
@@ -116,7 +116,7 @@ const Footer = () => {
 
       {/* Bottom */}
       <div className="border-t border-gray-200 bg-gray-100 py-3 md:py-4">
-        <div className="container px-3 md:px-4 text-center text-xs md:text-sm text-gray-600">
+        <div className="container px-3 md:px-4 text-center text-sm md:text-base font-semibold text-gray-700">
           <p>© 2025 CONSOLTECH. כל הזכויות שמורות.</p>
         </div>
       </div>

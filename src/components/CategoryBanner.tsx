@@ -63,10 +63,10 @@ const CategoryBanner = () => {
   return (
     <section className="pt-3 pb-6 md:pt-6 md:pb-12 bg-white">
       {/* Mobile scroll hint - hidden on desktop */}
-      <div className="category-scroll-hint flex items-center justify-center gap-2 mb-3 md:hidden text-xs font-medium text-purple-600">
-        <ArrowLeft className="h-3 w-3" />
+      <div className="category-scroll-hint flex items-center justify-center gap-2 mb-3 md:hidden text-sm font-bold text-purple-600">
+        <ArrowLeft className="h-4 w-4" />
         <span>החלק לצפייה בקטגוריות</span>
-        <ArrowLeft className="h-3 w-3 rotate-180" />
+        <ArrowLeft className="h-4 w-4 rotate-180" />
       </div>
 
       <div className="container px-0 md:px-4">
@@ -95,8 +95,8 @@ const CategoryBanner = () => {
 
                   {/* Category Name with Arrow */}
                   <div className="flex items-center gap-1 text-primary pb-1">
-                    <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                    <h3 className="text-xs md:text-base font-semibold transition-colors duration-300">
+                    <ArrowLeft className="h-3.5 w-3.5 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                    <h3 className="text-sm md:text-lg font-bold transition-colors duration-300">
                       {category.name}
                     </h3>
                   </div>

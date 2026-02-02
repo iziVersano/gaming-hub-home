@@ -46,8 +46,8 @@ const ProductCard = ({
 
       {/* Content */}
       <div className="p-2 md:p-4">
-        <p className="mb-0.5 md:mb-1 text-[10px] md:text-xs text-muted-foreground">{category}</p>
-        <h3 className="mb-2 md:mb-3 line-clamp-2 text-xs md:text-sm font-medium text-foreground group-hover:text-accent transition-colors leading-tight">
+        <p className="mb-1 md:mb-2 text-xs md:text-sm font-medium text-muted-foreground">{category}</p>
+        <h3 className="mb-2 md:mb-3 line-clamp-2 text-sm md:text-base font-semibold text-foreground group-hover:text-accent transition-colors leading-snug">
           {name}
         </h3>
 

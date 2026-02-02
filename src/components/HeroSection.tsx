@@ -102,8 +102,8 @@ const HeroSection = () => {
 
       <div className="container relative z-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-2 text-sm font-medium text-accent vibrant-border">
-            <Zap className="h-4 w-4" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-accent/20 px-5 py-2.5 text-base md:text-lg font-bold text-accent vibrant-border">
+            <Zap className="h-5 w-5" />
             <span>משלוח חינם בהזמנה מעל ₪500</span>
           </div>
 
@@ -113,7 +113,7 @@ const HeroSection = () => {
             <span className="text-gradient-gaming">לגיימרים אמיתיים</span>
           </h1>
 
-          <p className="mb-8 text-lg text-foreground/90 md:text-xl drop-shadow-md">
+          <p className="mb-8 text-xl md:text-2xl font-semibold text-foreground/90 drop-shadow-md leading-relaxed">
             מבחר ענק של מוצרי גיימינג מהמותגים המובילים בעולם.
             <br className="hidden sm:block" />
             מחשבים, כרטיסי מסך, ציוד היקפי ועוד - הכל במקום אחד!
@@ -133,15 +133,15 @@ const HeroSection = () => {
           <div className="mt-12 grid grid-cols-3 gap-4 md:gap-8">
             <div className="text-center bg-background/40 backdrop-blur-sm rounded-xl p-4 vibrant-border">
               <div className="text-2xl font-bold text-accent md:text-4xl">5,000+</div>
-              <div className="text-sm text-muted-foreground">מוצרים</div>
+              <div className="text-sm md:text-base font-bold text-muted-foreground">מוצרים</div>
             </div>
             <div className="text-center bg-background/40 backdrop-blur-sm rounded-xl p-4 vibrant-border">
               <div className="text-2xl font-bold text-neon-magenta md:text-4xl">50,000+</div>
-              <div className="text-sm text-muted-foreground">לקוחות מרוצים</div>
+              <div className="text-sm md:text-base font-bold text-muted-foreground">לקוחות מרוצים</div>
             </div>
             <div className="text-center bg-background/40 backdrop-blur-sm rounded-xl p-4 vibrant-border">
               <div className="text-2xl font-bold text-neon-purple md:text-4xl">24/7</div>
-              <div className="text-sm text-muted-foreground">תמיכה טכנית</div>
+              <div className="text-sm md:text-base font-bold text-muted-foreground">תמיכה טכנית</div>
             </div>
           </div>
         </div>

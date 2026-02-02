@@ -53,17 +53,17 @@ const FeaturedProducts = () => {
       <div className="container px-3 md:px-4">
         <div className="mb-6 md:mb-8 flex items-center justify-between gap-2">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-foreground lg:text-3xl">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground lg:text-4xl">
               מוצרים <span className="text-gradient-gaming">מומלצים</span>
             </h2>
-            <p className="mt-1 md:mt-2 text-sm md:text-base text-muted-foreground">
+            <p className="mt-1 md:mt-2 text-base md:text-lg font-medium text-muted-foreground">
               המוצרים הפופולריים ביותר השבוע
             </p>
           </div>
-          <Button variant="outline" className="group border-accent/50 text-accent hover:bg-accent/10 hover:border-accent text-xs md:text-sm px-3 md:px-4">
+          <Button variant="outline" className="group border-accent/50 text-accent hover:bg-accent/10 hover:border-accent text-sm md:text-base font-bold px-4 md:px-5 py-2 md:py-2.5">
             <span className="hidden sm:inline">צפה בהכל</span>
             <span className="sm:hidden">הכל</span>
-            <ArrowLeft className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="mr-1 md:mr-2 h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:-translate-x-1" />
           </Button>
         </div>
 

@@ -68,32 +68,32 @@ const Header = () => {
         <div className="container">
           <ul className="flex items-center gap-2 lg:gap-4 py-3">
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
-                <Home className="h-5 w-5" />
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-800 font-bold text-base lg:text-lg hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
+                <Home className="h-5 w-5 lg:h-6 lg:w-6" />
                 <span>בית</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
-                <Info className="h-5 w-5" />
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-800 font-bold text-base lg:text-lg hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
+                <Info className="h-5 w-5 lg:h-6 lg:w-6" />
                 <span>אודות</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
-                <Package className="h-5 w-5" />
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-800 font-bold text-base lg:text-lg hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
+                <Package className="h-5 w-5 lg:h-6 lg:w-6" />
                 <span>מוצרים</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
-                <Mail className="h-5 w-5" />
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-800 font-bold text-base lg:text-lg hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
+                <Mail className="h-5 w-5 lg:h-6 lg:w-6" />
                 <span>צור קשר</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-700 font-semibold text-base hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
-                <Accessibility className="h-5 w-5" />
+              <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-gray-800 font-bold text-base lg:text-lg hover:bg-purple-100 hover:text-purple-600 hover:shadow-lg transition-all duration-200">
+                <Accessibility className="h-5 w-5 lg:h-6 lg:w-6" />
                 <span>נגישות</span>
               </a>
             </li>
