@@ -60,37 +60,59 @@ const categories = [
 
 const CategoryBanner = () => {
   return (
-    <section className="pt-3 pb-8 md:pt-6 md:pb-12 bg-white">
-      <div className="container px-0 md:px-4">
-        {/* Mobile: Horizontal slider | Desktop: Grid */}
-        <div className="category-slider-mobile md:grid md:grid-cols-5 md:gap-4 lg:gap-6">
-          {categories.map((category) => {
-            return (
-              <a
-                key={category.id}
-                href="#"
-                className="category-card-mobile group flex flex-col items-center text-center p-3 md:p-2 transition-all duration-300"
-              >
-                {/* Product Image */}
-                <div className="relative mb-2 md:mb-4 flex items-center justify-center">
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="h-24 md:h-40 lg:h-44 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
+    <section className="pt-3 pb-6 md:pt-6 md:pb-12 bg-white">
+      {/* Mobile scroll hint - hidden on desktop */}
+      <div className="category-scroll-hint flex items-center justify-center gap-2 mb-3 md:hidden text-xs font-medium text-purple-600">
+        <ArrowLeft className="h-3 w-3" />
+        <span>החלק לצפייה בקטגוריות</span>
+        <ArrowLeft className="h-3 w-3 rotate-180" />
+      </div>
 
-                {/* Category Name with Arrow */}
-                <div className="flex items-center gap-1 text-primary">
-                  <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                  <h3 className="text-xs md:text-base font-semibold transition-colors duration-300">
-                    {category.name}
-                  </h3>
-                </div>
-              </a>
-            );
-          })}
+      <div className="container px-0 md:px-4">
+        {/* Mobile: Horizontal slider with fade gradient | Desktop: Grid */}
+        <div className="relative">
+          {/* Gradient fade overlay on left edge - mobile only */}
+          <div className="category-fade-left md:hidden absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"></div>
+
+          <div className="category-slider-mobile md:grid md:grid-cols-5 md:gap-4 lg:gap-6">
+            {categories.map((category) => {
+              return (
+                <a
+                  key={category.id}
+                  href="#"
+                  className="category-card-mobile group flex flex-col items-center text-center p-3 md:p-2 transition-all duration-300"
+                >
+                  {/* Product Image */}
+                  <div className="relative mb-2 md:mb-4 flex items-center justify-center">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="h-24 md:h-40 lg:h-44 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Category Name with Arrow */}
+                  <div className="flex items-center gap-1 text-primary">
+                    <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                    <h3 className="text-xs md:text-base font-semibold transition-colors duration-300">
+                      {category.name}
+                    </h3>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Scroll dots indicator - mobile only */}
+        <div className="flex justify-center gap-1.5 mt-4 md:hidden">
+          {categories.map((_, index) => (
+            <div
+              key={index}
+              className="category-dot h-1.5 w-1.5 rounded-full bg-gray-300"
+            ></div>
+          ))}
         </div>
       </div>
     </section>
