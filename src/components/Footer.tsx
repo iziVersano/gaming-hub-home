@@ -80,8 +80,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Categories */}
-          <div>
+          {/* Categories - hidden on mobile */}
+          <div className="hidden md:block">
             <h4 className="mb-2 md:mb-4 font-bold text-white text-sm md:text-base">קטגוריות</h4>
             <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-white/80">
               <li><a href="#" className="hover:text-cyan-200 transition-colors">מחשבי גיימינג</a></li>
