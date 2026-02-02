@@ -8,7 +8,7 @@ import tvImg from "@/assets/categories/65_X80K_blk_blk_dot_outsideh_front_300x.a
 const categories = [
   {
     id: 1,
-    name: "קונסולות",
+    name: "גיימינג",
     image: consolesImg,
     icon: Gamepad2,
     // Gradient: Blue start
@@ -18,7 +18,7 @@ const categories = [
   },
   {
     id: 2,
-    name: "קונסולת יד",
+    name: "אלקטרוניקה",
     image: handheldImg,
     icon: Smartphone,
     // Gradient: Blue-violet
@@ -28,7 +28,7 @@ const categories = [
   },
   {
     id: 3,
-    name: "מסכים",
+    name: "טלוויזיות",
     image: tvImg,
     icon: Monitor,
     // Gradient: Purple center
@@ -38,7 +38,7 @@ const categories = [
   },
   {
     id: 4,
-    name: "ציוד היקפי",
+    name: "קונסולות",
     image: handheldImg,
     icon: Headphones,
     // Gradient: Purple-magenta
@@ -48,7 +48,7 @@ const categories = [
   },
   {
     id: 5,
-    name: "אביזרים",
+    name: "מציאות מדומה",
     image: consolesImg,
     icon: Package,
     // Gradient: Magenta end
