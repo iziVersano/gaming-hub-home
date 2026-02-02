@@ -65,8 +65,9 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
-      <nav className="border-t border-white/30 bg-white/15 backdrop-blur-sm hidden md:block">
-        <div className="container">
+      <nav className="border-t border-white/30 hidden md:block relative">
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white pointer-events-none"></div>
+        <div className="container relative z-10">
           <ul className="flex items-center gap-2 lg:gap-4 py-3">
             <li>
               <a href="#" className="flex items-center gap-2 px-4 lg:px-6 py-2.5 rounded-lg text-white font-semibold text-base hover:bg-white/25 hover:shadow-lg transition-all duration-200">
