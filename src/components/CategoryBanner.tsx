@@ -3,8 +3,9 @@ import { Gamepad2, Smartphone, Monitor, Headphones, Package, ArrowLeft } from "l
 // Import product images for categories
 import asusBright from "@/assets/products/asus_bright.png";
 import monitorBright from "@/assets/products/Monitor_bright.png";
-import sonyPlayStationBright from "@/assets/products/sony_play_station_bright.png";
 import metaBright from "@/assets/products/meta_bright.png";
+// Import category background image
+import ps52 from "@/assets/categories/ps52.png";
 
 const categories = [
   {
@@ -40,12 +41,13 @@ const categories = [
   {
     id: 4,
     name: "קונסולות",
-    image: sonyPlayStationBright,
+    image: ps52,
     icon: Headphones,
     // Gradient: Purple-magenta
     gradient: "bg-gradient-to-br from-fuchsia-500/15 to-pink-500/15",
     iconColor: "text-fuchsia-500",
     iconBg: "bg-fuchsia-500/20",
+    useBackground: true, // Special flag to use as background
   },
   {
     id: 5,
@@ -77,29 +79,58 @@ const CategoryBanner = () => {
 
           <div className="category-slider-mobile md:grid md:grid-cols-5 md:gap-4 lg:gap-6">
             {categories.map((category) => {
+              // Check if this category should use background image
+              const useBackground = category.useBackground;
+
               return (
                 <a
                   key={category.id}
                   href="#"
-                  className="category-card-mobile group flex flex-col items-center text-center p-2 md:p-2 transition-all duration-300"
+                  className={`category-card-mobile group flex flex-col items-center text-center transition-all duration-300 ${
+                    useBackground ? 'p-0 relative overflow-hidden' : 'p-2 md:p-2'
+                  }`}
+                  style={useBackground ? {
+                    backgroundImage: `url(${category.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    minHeight: '200px',
+                  } : {}}
                 >
-                  {/* Product Image */}
-                  <div className="relative mb-1.5 md:mb-3 flex items-center justify-center flex-1 w-full">
-                    <img
-                      src={category.image}
-                      alt={category.name}
-                      className="h-32 md:h-44 lg:h-48 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
+                  {useBackground ? (
+                    // Background image version with overlay
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      <div className="relative z-10 mt-auto pb-3 w-full">
+                        <div className="flex items-center justify-center gap-1 text-white">
+                          <ArrowLeft className="h-3.5 w-3.5 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                          <h3 className="text-sm md:text-lg font-bold transition-colors duration-300 drop-shadow-lg">
+                            {category.name}
+                          </h3>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    // Regular image version
+                    <>
+                      {/* Product Image */}
+                      <div className="relative mb-1.5 md:mb-3 flex items-center justify-center flex-1 w-full">
+                        <img
+                          src={category.image}
+                          alt={category.name}
+                          className="h-32 md:h-44 lg:h-48 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
 
-                  {/* Category Name with Arrow */}
-                  <div className="flex items-center gap-1 text-primary pb-1">
-                    <ArrowLeft className="h-3.5 w-3.5 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                    <h3 className="text-sm md:text-lg font-bold transition-colors duration-300">
-                      {category.name}
-                    </h3>
-                  </div>
+                      {/* Category Name with Arrow */}
+                      <div className="flex items-center gap-1 text-primary pb-1">
+                        <ArrowLeft className="h-3.5 w-3.5 md:h-4 md:w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                        <h3 className="text-sm md:text-lg font-bold transition-colors duration-300">
+                          {category.name}
+                        </h3>
+                      </div>
+                    </>
+                  )}
                 </a>
               );
             })}
