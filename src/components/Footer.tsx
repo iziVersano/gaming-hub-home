@@ -28,7 +28,7 @@ const Footer = () => {
       {/* Main Footer Content - with gradient */}
       <div className="py-6 md:py-12" style={{ background: 'linear-gradient(90deg, #06b6d4 0%, #8b5cf6 25%, #d946ef 50%, #8b5cf6 75%, #06b6d4 100%)' }}>
         <div className="container px-3 md:px-4">
-        <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 md:gap-12 md:grid-cols-2">
           {/* About */}
           <div>
             {/* Logo - same as header */}
@@ -50,7 +50,7 @@ const Footer = () => {
               </span>
             </a>
             <p className="mb-3 md:mb-4 text-sm md:text-base font-medium text-white/90 line-clamp-2 md:line-clamp-none">
-              החנות המובילה בישראל לציוד גיימינג. מביאים לכם את הטכנולוגיה החדשה ביותר במחירים הטובים ביותר.
+              מובילים עולמיים בתחום הפצת אלקטרוניקה וגיימינג, מחברים חדשנות עם שווקים ברחבי העולם.
             </p>
             <div className="flex gap-2 md:gap-3">
               <a href="#" className="flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-lg bg-white/20 text-white transition-colors hover:bg-white/30">
@@ -68,45 +68,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links - hidden on mobile */}
-          <div className="hidden md:block">
-            <h4 className="mb-4 text-lg font-extrabold text-white">קישורים מהירים</h4>
-            <ul className="space-y-2 text-base font-medium text-white/90">
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">אודות</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">תקנון האתר</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">מדיניות פרטיות</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">החזרות וביטולים</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">שאלות נפוצות</a></li>
-            </ul>
-          </div>
-
-          {/* Categories - hidden on mobile */}
-          <div className="hidden md:block">
-            <h4 className="mb-2 md:mb-4 text-lg font-extrabold text-white">קטגוריות</h4>
-            <ul className="space-y-1 md:space-y-2 text-base font-medium text-white/90">
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">מחשבי גיימינג</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">כרטיסי מסך</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">מסכים</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">ציוד היקפי</a></li>
-              <li><a href="#" className="hover:text-cyan-200 transition-colors">אביזרים</a></li>
-            </ul>
-          </div>
-
           {/* Contact */}
           <div>
-            <h4 className="mb-2 md:mb-4 text-lg font-extrabold text-white">צור קשר</h4>
-            <ul className="space-y-2 md:space-y-3 text-sm md:text-base font-medium text-white/90">
+            <h4 className="mb-4 md:mb-6 text-xl md:text-2xl font-black text-white">צור קשר</h4>
+            <ul className="space-y-3 md:space-y-4">
               <li className="flex items-center gap-2 md:gap-3">
-                <Phone className="h-4 w-4 md:h-5 md:w-5 text-cyan-200" />
-                <span>03-1234567</span>
+                <Phone className="h-5 w-5 md:h-6 md:w-6 text-cyan-200 flex-shrink-0" />
+                <span className="text-base md:text-lg font-bold text-white">+972-52-2768607</span>
               </li>
               <li className="flex items-center gap-2 md:gap-3">
-                <Mail className="h-4 w-4 md:h-5 md:w-5 text-cyan-200" />
-                <span>info@gamingstore.co.il</span>
+                <Mail className="h-5 w-5 md:h-6 md:w-6 text-cyan-200 flex-shrink-0" />
+                <span className="text-base md:text-lg font-bold text-white">sales@consoltech.shop</span>
               </li>
               <li className="flex items-start gap-2 md:gap-3">
-                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-cyan-200 mt-0.5 md:mt-1" />
-                <span>רחוב הגיימינג 42, תל אביב</span>
+                <MapPin className="h-5 w-5 md:h-6 md:w-6 text-cyan-200 flex-shrink-0 mt-0.5 md:mt-1" />
+                <span className="text-base md:text-lg font-bold text-white">רחוב משה סנה 47, תל אביב 6930243, ישראל</span>
               </li>
             </ul>
           </div>
@@ -117,7 +93,7 @@ const Footer = () => {
       {/* Bottom */}
       <div className="border-t border-gray-200 bg-gray-100 py-3 md:py-4">
         <div className="container px-3 md:px-4 text-center text-sm md:text-base font-semibold text-gray-700">
-          <p>© 2025 CONSOLTECH. כל הזכויות שמורות.</p>
+          <p>© 2026 CONSOLTECH. כל הזכויות שמורות. | מצוינות בייבוא והפצה עולמית</p>
         </div>
       </div>
     </footer>
