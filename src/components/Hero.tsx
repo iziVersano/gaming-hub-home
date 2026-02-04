@@ -19,28 +19,37 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center pt-20 pb-8 md:pt-24 md:pb-16 overflow-hidden">
-      {/* Clean Professional Background */}
+      {/* Background Image with Professional Treatment */}
       <div className="absolute inset-0 z-0">
-        {/* Subtle gradient background using design tokens */}
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-        
-        {/* Subtle pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
-            backgroundSize: '40px 40px',
-          }}
+        {/* Loading placeholder */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 transition-opacity duration-700 ${
+            imageLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
         />
+
+        {/* Hero Background Image */}
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+
+        {/* Professional overlay - subtle gradient for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/90" />
+        
+        {/* Accent color tint */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       </div>
 
-      {/* Elegant floating shapes */}
+      {/* Subtle decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-        {/* Soft gradient orbs using design tokens */}
-        <div className="absolute top-1/4 right-[16%] w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 left-[16%] w-96 h-96 bg-accent/5 rounded-full blur-3xl" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
+        {/* Soft ambient glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full blur-[80px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
