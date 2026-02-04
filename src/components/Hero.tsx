@@ -75,19 +75,21 @@ const Hero = () => {
           </div>
 
           {/* Main Headline */}
-          <div className="space-y-4">
-            <h1 className="text-center text-2xl md:text-3xl lg:text-4xl leading-tight font-bold">
-              <span className="block text-2xl md:text-3xl lg:text-5xl font-extrabold mb-2 leading-tight text-foreground">
-                {t('hero.headline1')}<span className="text-primary">{t('hero.innovation')}</span>
+          <div className="space-y-6">
+            <h1 className="text-center">
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-extrabold leading-relaxed text-foreground">
+                {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span>
               </span>
-              <span className="block text-muted-foreground text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
-                {t('hero.headline2')}<span className="text-accent font-bold">{t('hero.toys')}</span>{t('hero.headline2b')}
+              <span className="block text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed text-foreground/90 mt-4">
+                {t('hero.headline2')} {t('hero.toys')}
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              {t('hero.desc')}
-            </p>
+            <div className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+              <p className="text-base md:text-lg lg:text-xl text-foreground font-semibold">
+                {t('hero.desc')}
+              </p>
+            </div>
           </div>
 
           {/* CTA Buttons */}
