@@ -1,24 +1,136 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CONSOLTECH - Gaming & Electronics Distribution</title>
-    <meta name="description" content="מובילים עולמיים בתחום הפצת אלקטרוניקה וגיימינג. קונסולות, מחשבים, ציוד גיימינג ואלקטרוניקה מהמותגים המובילים בעולם." />
+    <title>CONSOLTECH - Global Import & Distribution of Electronics, Gaming & Innovation</title>
+    <meta name="description" content="Premier global distributor of electronics, gaming consoles, drones, e-bikes, and smart technology. Shop Meta Quest 3, ASUS ROG Gaming Laptops, Nintendo Switch 2, PlayStation 5, Xbox, Smart TVs & more. Trusted by 50+ countries worldwide." />
+    <meta name="keywords" content="gaming consoles, Meta Quest 3, ASUS ROG Gaming Laptop, Nintendo Switch 2, PlayStation 5, Xbox Series X, drones, e-bikes, smart TV, electronics distributor, gaming accessories, VR headset, tech distribution" />
     <meta name="author" content="CONSOLTECH" />
-    <meta name="keywords" content="גיימינג, קונסולות, אלקטרוניקה, PlayStation, Xbox, Nintendo, מחשבי גיימינג" />
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <meta property="og:title" content="CONSOLTECH - Gaming & Electronics Distribution" />
-    <meta property="og:description" content="מובילים עולמיים בתחום הפצת אלקטרוניקה וגיימינג" />
+    <meta property="og:title" content="CONSOLTECH - Gaming Consoles, Electronics & Tech Distribution" />
+    <meta property="og:description" content="Shop Meta Quest 3, ASUS ROG Gaming Laptops, Nintendo Switch 2, PlayStation 5, Xbox, Smart TVs, Drones & more. Premier global tech distributor serving 50+ countries." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://consoltech.shop" />
+    <meta property="og:url" content="https://consoltech.shop/" />
+    <meta property="og:image" content="https://consoltech.shop/images/41931538-f28c-4223-89e9-23b458ec78db.png" />
+    <meta property="og:site_name" content="CONSOLTECH" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@CONSOLTECH" />
+    <meta name="twitter:title" content="CONSOLTECH - Gaming Consoles, Electronics & Tech Distribution" />
+    <meta name="twitter:description" content="Shop Meta Quest 3, ASUS ROG Gaming Laptops, Nintendo Switch 2, PlayStation 5, Xbox, Smart TVs & more." />
+    <meta name="twitter:image" content="https://consoltech.shop/images/41931538-f28c-4223-89e9-23b458ec78db.png" />
+    <link rel="canonical" href="https://consoltech.shop/" />
+    <meta name="x-build" content="redeploy-2025-08-12" />
+    
+    <!-- Favicon Links -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   </head>
 
   <body>
     <div id="root"></div>
+    <!-- GitHub Pages SPA redirect handler -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.getItem('spa-redirect');
+        if (redirect) {
+          sessionStorage.removeItem('spa-redirect');
+          window.history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Product Inquiry Script -->
+    <script>
+    (function () {
+      // 1) Config — WhatsApp number (international format, no +, no spaces)
+      const WHATSAPP_NUMBER = "972522768607";
+
+      // 2) Simple mobile detection
+      function isMobile() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        const mobileUA = /android|iphone|ipad|ipod|iemobile|blackberry|opera mini/i.test(ua);
+        const narrow = window.matchMedia && window.matchMedia("(max-width: 820px)").matches;
+        return mobileUA || narrow;
+      }
+
+      // 3) Build URLs
+      function buildWhatsAppURL(product, sku) {
+        const msg = `Hi! I'm interested in "${product}"${sku ? ` (SKU: ${sku})` : ""}. Please share availability & pricing.`;
+        const text = encodeURIComponent(msg + " https://consoltech.shop");
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+      }
+
+      function buildContactURL(product, sku) {
+        const subject = encodeURIComponent(`Product Inquiry: ${product}`);
+        const message = encodeURIComponent(
+          `Hi! I'm interested in "${product}"${sku ? ` (SKU: ${sku})` : ""}. Please share availability & pricing.`
+        );
+        return `/contact?subject=${subject}&message=${message}`;
+      }
+
+      // 4) Click handler
+      function onInquiryClick(e) {
+        const el = e.currentTarget;
+        const product = el.getAttribute("data-product") || "Product";
+        const sku = el.getAttribute("data-sku") || "";
+
+        const url = isMobile() ? buildWhatsAppURL(product, sku) : buildContactURL(product, sku);
+
+        // Analytics hook (optional)
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'product_inquiry',
+            product: product,
+            device: isMobile() ? 'mobile' : 'desktop'
+          });
+        }
+
+        // On mobile, open WhatsApp in a new tab
+        if (isMobile()) {
+          window.open(url, "_blank", "noopener");
+        } else {
+          window.location.href = url;
+        }
+      }
+
+      // 5) Bind to all buttons
+      function bindInquiryButtons() {
+        document.querySelectorAll(".btn-inquiry").forEach(btn => {
+          btn.removeEventListener("click", onInquiryClick);
+          btn.addEventListener("click", onInquiryClick);
+        });
+      }
+
+      // 6) Initialize and handle dynamic content with safety guards
+      document.addEventListener("DOMContentLoaded", () => {
+        try {
+          bindInquiryButtons();
+        } catch (e) {
+          console.warn('Inquiry buttons binding failed:', e);
+        }
+      });
+      
+      // Also bind when content changes (for SPAs) with error handling
+      const observer = new MutationObserver(() => {
+        try {
+          bindInquiryButtons();
+        } catch (e) {
+          console.warn('Dynamic inquiry buttons binding failed:', e);
+        }
+      });
+      
+      if (document.body) {
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    })();
+    </script>
   </body>
 </html>

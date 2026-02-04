@@ -1,71 +1,140 @@
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* CONSOLTECH Design System - Futuristic Tech Theme
+All colors MUST be HSL. Premium blue gradients with neon accents.
+*/
+
 @layer base {
   :root {
-    /* Light theme - bright and vibrant */
+    /* Light Theme - Clean White */
     --background: 0 0% 100%;
-    --foreground: 240 60% 25%;
+    --foreground: 222 47% 11%;
 
-    --card: 210 100% 98%;
-    --card-foreground: 240 60% 25%;
+    /* Light Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
+    /* Light Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 240 60% 25%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 212 100% 50%;
+    /* Primary - Modern Electric Blue */
+    --primary: 200 100% 45%;
     --primary-foreground: 0 0% 100%;
+    --primary-glow: 200 100% 55%;
 
-    --secondary: 262 100% 58%;
-    --secondary-foreground: 0 0% 100%;
+    /* Light Secondary */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 30% 94%;
-    --muted-foreground: 240 30% 45%;
+    /* Light Muted */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 187 100% 42%;
+    /* Accent - Vibrant Purple */
+    --accent: 262 83% 58%;
     --accent-foreground: 0 0% 100%;
+    --accent-glow: 262 83% 68%;
 
-    --destructive: 0 84% 55%;
+    /* Status */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 30% 85%;
-    --input: 220 30% 96%;
-    --ring: 212 100% 50%;
+    /* Light Borders */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 200 100% 45%;
 
-    --radius: 0.5rem;
+    /* Design System Extensions - adjusted for light theme */
+    --neon: 142 76% 36%;
+    --electric: 185 84% 39%;
+    --tech-blue: 210 100% 50%;
+    --cyber-purple: 262 83% 58%;
 
-    /* Vibrant gaming custom tokens - adjusted for light backgrounds */
-    --neon-cyan: 187 100% 42%;
-    --neon-magenta: 320 100% 55%;
-    --neon-purple: 262 100% 58%;
-    --electric-blue: 212 100% 50%;
-    --bright-orange: 36 100% 50%;
+    /* Light Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(220 14% 98%), hsl(220 14% 96%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 14% 98%));
+    --gradient-neon: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--electric)));
+    --gradient-tech: linear-gradient(135deg, hsl(var(--tech-blue)), hsl(var(--cyber-purple)));
+    --gradient-logo-blue: linear-gradient(90deg, hsl(210 100% 50%), hsl(210 100% 40%));
 
-    /* Glow effects - softer for light backgrounds */
-    --neon-glow-cyan: 0 4px 20px hsl(187 100% 42% / 0.25), 0 8px 40px hsl(187 100% 42% / 0.15);
-    --neon-glow-magenta: 0 4px 20px hsl(320 100% 55% / 0.25), 0 8px 40px hsl(320 100% 55% / 0.15);
-    --neon-glow-purple: 0 4px 20px hsl(262 100% 58% / 0.25), 0 8px 40px hsl(262 100% 58% / 0.15);
-    --neon-glow-blue: 0 4px 20px hsl(212 100% 50% / 0.25), 0 8px 40px hsl(212 100% 50% / 0.15);
+    /* Shadows - softer for light theme */
+    --shadow-neon: 0 0 20px hsl(var(--accent) / 0.2);
+    --shadow-primary: 0 10px 30px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 4px 20px hsl(220 14% 10% / 0.08);
+    --glow-accent: 0 0 40px hsl(var(--accent) / 0.25);
+    --glow-primary: 0 0 30px hsl(var(--primary) / 0.2);
 
-    /* Gradients - bright and vibrant */
-    --gradient-gaming: linear-gradient(135deg, hsl(187 100% 42%) 0%, hsl(212 100% 50%) 33%, hsl(262 100% 58%) 66%, hsl(320 100% 55%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(210 100% 97%) 0%, hsl(280 60% 97%) 50%, hsl(210 100% 97%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 100% 98%) 100%);
-    --gradient-section: linear-gradient(180deg, hsl(210 100% 98%) 0%, hsl(280 60% 98%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(212 100% 50%) 0%, hsl(262 100% 58%) 100%);
+    /* Brand tile background (logos readable on all themes) */
+    --brand-tile-bg: 0 0% 100%;
 
-    /* Sidebar - light purple tint */
-    --sidebar-background: 280 60% 98%;
-    --sidebar-foreground: 240 60% 25%;
-    --sidebar-primary: 212 100% 50%;
+    /* Animation and transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.4s ease-out;
+    --animation-float: float 6s ease-in-out infinite;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 30% 92%;
-    --sidebar-accent-foreground: 240 60% 25%;
-    --sidebar-border: 220 30% 85%;
-    --sidebar-ring: 212 100% 50%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brand tile background (force light surface in dark mode) */
+    --brand-tile-bg: 0 0% 100%;
   }
 }
 
@@ -74,314 +143,513 @@
     @apply border-border;
   }
 
-  html {
-    direction: rtl;
-  }
-
   body {
-    @apply bg-background text-foreground font-heebo antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    letter-spacing: -0.01em;
   }
 }
 
-@layer utilities {
-  .neon-glow-cyan {
-    box-shadow: var(--neon-glow-cyan);
+@layer components {
+
+  /* Enhanced Neon Button - adjusted for light theme */
+  .btn-neon {
+    @apply bg-transparent border-2 border-accent text-accent px-6 py-3 font-medium transition-all duration-300 hover:bg-accent hover:text-white relative gap-2 inline-flex items-center justify-center;
+    box-shadow: var(--shadow-neon);
+    font-weight: 500;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.025em;
+    line-height: 1.4;
   }
 
-  .neon-glow-magenta {
-    box-shadow: var(--neon-glow-magenta);
+  .btn-neon:hover {
+    box-shadow: var(--glow-accent);
   }
 
-  .neon-glow-purple {
-    box-shadow: var(--neon-glow-purple);
+  /* Enhanced Hero Button */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-3 font-medium transition-all duration-300 hover:scale-105 relative overflow-hidden gap-2 inline-flex items-center justify-center;
+    box-shadow: var(--shadow-primary);
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.4;
   }
 
-  .neon-glow-blue {
-    box-shadow: var(--neon-glow-blue);
+  .btn-hero::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
   }
 
-  .text-gradient-gaming {
-    background: var(--gradient-gaming);
+  .btn-hero:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .btn-hero:hover {
+    box-shadow: var(--glow-primary);
+  }
+
+  /* Standard Button Variants for Small Buttons */
+  .btn-primary-small {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative overflow-hidden gap-2 inline-flex items-center justify-center;
+    box-shadow: var(--shadow-primary);
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.4;
+  }
+
+  .btn-primary-small::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
+  }
+
+  .btn-primary-small:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .btn-primary-small:hover {
+    box-shadow: var(--glow-primary);
+  }
+
+  .btn-accent-small {
+    @apply bg-transparent border-2 border-accent text-accent px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-accent hover:text-background relative gap-2 inline-flex items-center justify-center;
+    box-shadow: 0 0 10px hsl(var(--accent) / 0.3);
+    font-weight: 500;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.025em;
+    line-height: 1.4;
+  }
+
+  .btn-accent-small:hover {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.4);
+  }
+
+  /* Navigation Button Variant */
+  .btn-nav {
+    @apply bg-gradient-to-r from-tech-blue via-electric to-cyber-purple text-white px-4 py-2 font-medium transition-all duration-300 hover:scale-105 relative gap-2 inline-flex items-center justify-center;
+    box-shadow: var(--shadow-neon);
+    font-weight: 500;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.025em;
+    line-height: 1.4;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  }
+
+  .btn-nav:hover {
+    box-shadow: var(--glow-accent);
+  }
+
+  /* Square Button Variants - Light Theme */
+  .btn-hero-square {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-white 
+           w-48 h-48 md:w-56 md:h-56 flex flex-row items-center justify-center text-center
+           font-medium text-lg md:text-xl transition-all duration-300 hover:scale-105 relative overflow-hidden
+           border-2 border-primary/30 hover:border-primary/60 gap-3;
+    box-shadow: 0 8px 30px hsl(var(--primary) / 0.3);
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.4;
+  }
+
+  .btn-hero-square::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
+  }
+
+  .btn-hero-square:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .btn-hero-square:hover {
+    box-shadow: 0 12px 40px hsl(var(--primary) / 0.4);
+  }
+
+  .btn-neon-square {
+    @apply bg-gradient-to-r from-accent to-cyber-purple text-white
+           w-48 h-48 md:w-56 md:h-56 flex flex-row items-center justify-center text-center
+           border-2 border-accent/50 font-medium text-lg md:text-xl transition-all duration-300 hover:scale-105 relative gap-3;
+    box-shadow: 0 8px 30px hsl(var(--accent) / 0.3);
+    font-weight: 500;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.025em;
+    line-height: 1.4;
+  }
+
+  .btn-neon-square:hover {
+    box-shadow: 0 12px 40px hsl(var(--accent) / 0.4);
+    border-color: hsl(var(--accent) / 0.8);
+  }
+
+  /* Enhanced Product Card - Light Theme */
+  .product-card {
+    @apply bg-card rounded-2xl p-6 transition-all duration-500 hover:scale-105 relative overflow-hidden;
+    box-shadow: 0 2px 12px hsl(220 14% 10% / 0.06);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .product-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 30px hsl(220 14% 10% / 0.12);
+    border-color: hsl(var(--primary) / 0.4);
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  /* Text glow - subtle for light theme */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--accent) / 0.4);
+    font-weight: 600;
+  }
+
+  /* Floating animation */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Progress bar animation for spotlight */
+  .animate-progress {
+    animation: progress linear forwards;
+    width: 0%;
+  }
+
+  @keyframes progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  /* Pulse glow animation */
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    from {
+      box-shadow: var(--shadow-neon);
+    }
+    to {
+      box-shadow: var(--glow-accent);
+    }
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-neon);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .bg-gradient-hero {
-    background: var(--gradient-hero);
-  }
-
-  .bg-gradient-card {
-    background: var(--gradient-card);
-  }
-
-  .bg-gradient-section {
-    background: var(--gradient-section);
-  }
-
-  .bg-gradient-cta {
-    background: var(--gradient-cta);
-  }
-
-  .gaming-border {
-    position: relative;
-  }
-
-  .gaming-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: var(--gradient-gaming);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-
-  .vibrant-border {
-    position: relative;
-  }
-
-  .vibrant-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, hsl(187 100% 45%) 0%, hsl(262 100% 65%) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-
-  /* Logo text styles */
+  /* Logo styling */
   .logo-text {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    @apply font-orbitron font-bold tracking-wider transition-all duration-300;
   }
 
   .logo-consol {
-    color: hsl(var(--foreground));
+    @apply text-white;
   }
 
   .logo-tech {
-    color: hsl(var(--primary));
+    background: var(--gradient-logo-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* ============================================
-     HERO SECTION FEATURE FLAG VARIANTS
-     ============================================
-
-     USAGE:
-     Change the HERO_VARIANT constant in src/components/HeroSection.tsx
-
-     Options:
-     - "gaming": Bright, vibrant gaming style with neon colors and animated glows
-     - "photo": Editorial photographic style with dark overlay (ISFAR-style)
-     - "photo-carousel": Auto-rotating carousel with 3 images (5 sec intervals)
-
-     The same HTML markup is used for all variants.
-     Only backgrounds, overlays, and effects change via CSS.
-
-     ============================================ */
-
-  /* GAMING VARIANT - Bright, vibrant gaming style */
-  .hero--gaming .hero__overlay {
-    background: linear-gradient(to bottom,
-      hsl(0 0% 100% / 0.85),
-      hsl(0 0% 100% / 0.7),
-      hsl(0 0% 100% / 0.9));
+  /* Navigation styling */
+  .nav-glass {
+    backdrop-filter: blur(12px);
+    background: rgba(8, 8, 12, 0.97);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   }
 
-  .hero--gaming .hero__colored-overlay {
-    background: linear-gradient(to right,
-      hsl(var(--neon-purple) / 0.2),
-      transparent,
-      hsl(var(--electric-blue) / 0.2));
-  }
-
-  .hero--gaming .hero__glow-1 {
-    background-color: hsl(var(--electric-blue) / 0.2);
-  }
-
-  .hero--gaming .hero__glow-2 {
-    background-color: hsl(var(--neon-magenta) / 0.2);
-  }
-
-  .hero--gaming .hero__glow-3 {
-    background-color: hsl(var(--neon-purple) / 0.2);
-  }
-
-  .hero--gaming .hero__grid {
-    opacity: 0.1;
-    background-image:
-      linear-gradient(hsl(var(--accent) / 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--accent) / 0.4) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  /* PHOTO VARIANT - Editorial, premium photographic style */
-  .hero--photo .hero__overlay {
-    /* Dark gradient overlay for text readability over photo */
-    background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0.3),
-      transparent);
-  }
-
-  /* Hide gaming-specific effects in photo variant */
-  .hero--photo .hero__colored-overlay {
-    display: none;
-  }
-
-  .hero--photo .hero__glow-container {
-    display: none;
-  }
-
-  .hero--photo .hero__grid {
-    display: none;
-  }
-
-  /* Optional: Override text colors for photo variant if needed */
-  .hero--photo .hero h1,
-  .hero--photo .hero p {
-    color: white;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero--photo .hero h1 .text-foreground {
-    color: white !important;
-  }
-
-  /* PHOTO CAROUSEL VARIANT - Full-width image carousel (images only, no content) */
-  .hero--photo-carousel {
-    /* No padding - images take full height */
-    padding: 0;
-  }
-
-  .hero-carousel {
-    position: relative;
+  /* Product Slider Custom Styling */
+  .product-swiper {
+    @apply pb-12;
     width: 100%;
+    height: auto;
+    min-height: 400px;
   }
 
-  .hero-carousel__slide {
-    position: absolute;
-    inset: 0;
+  .product-swiper .swiper-wrapper {
+    @apply items-stretch;
+    height: auto;
   }
 
-  /* Carousel dots styling */
-  .hero__dots {
-    padding: 0.5rem 0.75rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
-    border-radius: 999px;
+  .product-swiper .swiper-slide {
+    height: auto;
+    display: flex;
   }
 
-  .hero__dot {
-    border: none;
-    cursor: pointer;
-    padding: 0;
+  /* Custom pagination bullets */
+  .product-swiper .swiper-pagination {
+    @apply bottom-0;
+    position: relative !important;
+    margin-top: 2rem;
   }
 
-  .hero__dot:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 2px;
+  .product-slider-bullet {
+    @apply w-3 h-3 bg-muted-foreground/30 rounded-full cursor-pointer transition-all duration-300;
+    margin: 0 4px !important;
   }
 
-  /* ============================================
-     CATEGORY SLIDER - MOBILE ONLY (≤768px)
-     ============================================
+  .product-slider-bullet-active {
+    @apply bg-accent scale-125;
+    box-shadow: 0 0 10px hsl(var(--accent) / 0.5);
+  }
 
-     Mobile: Horizontal swipeable slider with snap scrolling
-     Desktop (md+): Grid layout (applied via Tailwind classes)
+  .product-slider-bullet:hover {
+    @apply bg-accent/60 scale-110;
+  }
 
-     ============================================ */
+  /* Swiper navigation button styling */
+  .product-swiper .swiper-button-disabled {
+    @apply opacity-30;
+  }
 
-  /* Mobile only: Horizontal slider container */
+  /* Futuristic Tech Elements */
+  .tech-grid {
+    @apply absolute inset-0 opacity-10;
+    background-image: 
+      linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-move 20s linear infinite;
+  }
+
+  @keyframes grid-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(60px, 60px); }
+  }
+
+  /* Holographic Rings */
+  .holographic-ring {
+    @apply absolute inset-0 rounded-full border opacity-20;
+    border-color: hsl(var(--accent));
+    animation: ring-pulse 4s ease-in-out infinite;
+  }
+
+  .ring-1 {
+    @apply border-2;
+    animation-delay: 0s;
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.3);
+  }
+
+  .ring-2 {
+    @apply border;
+    animation-delay: 1s;
+    transform: scale(1.3);
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.2);
+  }
+
+  .ring-3 {
+    @apply border-2;
+    animation-delay: 2s;
+    border-color: hsl(var(--electric));
+    box-shadow: 0 0 25px hsl(var(--electric) / 0.3);
+  }
+
+  .ring-4 {
+    @apply border;
+    animation-delay: 3s;
+    transform: scale(1.4);
+    border-color: hsl(var(--accent-glow));
+    box-shadow: 0 0 10px hsl(var(--accent-glow) / 0.2);
+  }
+
+  .ring-5 {
+    @apply border-2;
+    animation-delay: 1.5s;
+    border-color: hsl(var(--tech-blue));
+    box-shadow: 0 0 30px hsl(var(--tech-blue) / 0.4);
+  }
+
+  @keyframes ring-pulse {
+    0%, 100% { 
+      opacity: 0.1;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.3;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Tech Lines */
+  .tech-lines {
+    @apply absolute inset-0 pointer-events-none;
+  }
+
+  .tech-line {
+    @apply absolute opacity-20;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent)), transparent);
+    height: 1px;
+    animation: tech-line-move 8s linear infinite;
+  }
+
+  .line-1 {
+    @apply top-1/4 left-0 w-full;
+    animation-delay: 0s;
+  }
+
+  .line-2 {
+    @apply top-2/3 left-0 w-full;
+    animation-delay: 2s;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  }
+
+  .line-3 {
+    @apply top-1/2 left-0 w-full;
+    animation-delay: 4s;
+    background: linear-gradient(90deg, transparent, hsl(var(--electric)), transparent);
+  }
+
+  @keyframes tech-line-move {
+    0% { 
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% { 
+      opacity: 0.2;
+    }
+    100% { 
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  /* Pulse animations for tech particles */
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-slower {
+    animation: pulse-slower 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { 
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes pulse-slower {
+    0%, 100% { 
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.6;
+      transform: scale(1.1);
+    }
+  }
+
+  /* Brand cards */
+  .brand-card {
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    background: hsl(var(--brand-tile-bg));
+    border-radius: var(--radius);
+  }
+
+  .brand-card img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: none;
+    mix-blend-mode: normal;
+  }
+
+  /* Mobile optimization for tech elements */
   @media (max-width: 768px) {
-    .category-slider-mobile {
-      display: flex;
-      overflow-x: auto;
-      overflow-y: hidden;
-      /* Smooth scrolling behavior */
-      scroll-behavior: smooth;
-      /* Snap to cards when scrolling */
-      scroll-snap-type: x mandatory;
-      /* Hide scrollbar for cleaner look */
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE/Edge */
-      /* RTL-safe: Natural scroll direction for Hebrew */
-      direction: rtl;
-      /* Asymmetric padding: larger on right (start) to show peek effect */
-      padding: 0 0.5rem 0 1rem;
-      gap: 0.75rem;
-      /* Position relative for gradient overlay */
-      position: relative;
+    .tech-grid {
+      background-size: 40px 40px;
     }
 
-    /* Hide scrollbar for WebKit browsers */
-    .category-slider-mobile::-webkit-scrollbar {
-      display: none;
+    .holographic-ring {
+      @apply opacity-10;
     }
 
-    /* Mobile: Fixed-width cards to show 1.3-1.4 cards at once */
-    .category-card-mobile {
-      /* Fixed width: ~65% of viewport to show more of next card */
-      min-width: 65vw;
-      max-width: 65vw;
-      flex-shrink: 0;
-      /* Snap alignment for smooth scrolling stops */
-      scroll-snap-align: start;
-      /* Card styling: rounded corners and enhanced shadow */
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06);
-      /* RTL text alignment */
-      direction: rtl;
-      /* Subtle border for card definition */
-      border: 1px solid rgba(0, 0, 0, 0.05);
+    .tech-line {
+      @apply opacity-10;
     }
+  }
+}
 
-    /* Hover effects disabled on mobile (touch devices) */
-    @media (hover: none) {
-      .category-card-mobile:hover {
-        transform: none;
-      }
-    }
+/* Accessibility Styles */
+@layer utilities {
+  /* High Contrast Mode */
+  body.high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --muted-foreground: 0 0% 90%;
+    --border: 0 0% 40%;
+  }
 
-    /* Scroll hint animation */
-    @keyframes pulse-slow {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
-    }
+  body.high-contrast * {
+    border-color: white !important;
+  }
 
-    .category-scroll-hint {
-      animation: pulse-slow 2s ease-in-out infinite;
-    }
+  /* Highlight Links */
+  body.highlight-links a:not(.no-highlight) {
+    background-color: rgba(255, 255, 0, 0.3) !important;
+    text-decoration: underline !important;
+    outline: 2px solid yellow !important;
+  }
 
-    /* Gradient fade on left edge to indicate more content */
-    .category-fade-left {
-      background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    }
+  /* Highlight Headings */
+  body.highlight-headings h1,
+  body.highlight-headings h2,
+  body.highlight-headings h3,
+  body.highlight-headings h4,
+  body.highlight-headings h5,
+  body.highlight-headings h6 {
+    background-color: rgba(0, 255, 255, 0.2) !important;
+    outline: 2px solid cyan !important;
+    padding: 4px !important;
+  }
 
-    /* Scroll dots enhancement */
-    .category-dot {
-      transition: all 0.3s ease;
-    }
+  /* Enhanced Focus Highlight */
+  body.enhanced-focus *:focus {
+    outline: 4px solid #ff6600 !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 0 8px rgba(255, 102, 0, 0.3) !important;
+  }
 
-    /* First dot is highlighted to show starting position */
-    .category-dot:first-child {
-      background-color: #8b5cf6;
-      width: 1.25rem;
-    }
+  /* Disable Animations */
+  body.reduce-motion,
+  body.reduce-motion * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

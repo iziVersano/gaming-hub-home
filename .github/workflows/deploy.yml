@@ -1,0 +1,132 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Copy 404.html with admin redirect
+        run: cp public/404.html dist/404.html
+
+      - name: Verify build output
+        run: |
+          echo "=== BUILD VERIFICATION ==="
+          
+          # 1. Check dist folder exists
+          test -f dist/index.html || { echo "❌ ERROR: dist/index.html missing"; exit 1; }
+          echo "✅ dist/index.html exists"
+          
+          # 2. CRITICAL: Fail hard if source file references found
+          if grep -E "\.tsx?\b|/src/" dist/index.html; then
+            echo "❌ CRITICAL ERROR: Source files referenced in built index.html:"
+            grep -E "\.tsx?\b|/src/" dist/index.html
+            echo "This will cause MIME type errors in production!"
+            exit 1
+          fi
+          echo "✅ No source file references in index.html"
+          
+          # 3. Ensure compiled JS assets exist
+          if ! ls dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ ERROR: No compiled JS assets found in dist/assets/"
+            ls -la dist/assets/ || echo "dist/assets/ doesn't exist"
+            exit 1
+          fi
+          echo "✅ Compiled JS assets found: $(ls dist/assets/*.js | wc -l) files"
+          
+          # 4. Verify index.html references only compiled assets
+          if ! grep -q "/assets/.*\.js" dist/index.html; then
+            echo "❌ ERROR: index.html doesn't reference compiled assets"
+            echo "Contents of index.html:"
+            cat dist/index.html
+            exit 1
+          fi
+          echo "✅ index.html references compiled assets correctly"
+          
+          # 5. Show what we're actually deploying
+          echo "📋 Final asset list:"
+          find dist -name "*.js" -o -name "*.css" | head -10
+          
+          echo "🎉 BUILD VERIFICATION PASSED - Ready for deployment"
+
+      - name: Add CNAME
+        run: |
+          if [ -f CNAME ]; then
+            cp CNAME dist/CNAME
+          else
+            echo "consoltech.shop" > dist/CNAME
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      - name: Post-Deploy Health Check
+        run: |
+          echo "🏥 Running post-deployment health check..."
+          
+          # Wait a moment for deployment to propagate
+          sleep 30
+          
+          # Check the main site loads
+          SITE_URL="${{ steps.deployment.outputs.page_url }}"
+          echo "🔍 Checking site: $SITE_URL"
+          
+          # Basic health check
+          if curl -f -s -I "$SITE_URL" > /dev/null; then
+            echo "✅ Site is responding"
+          else
+            echo "❌ Site not responding"
+            exit 1
+          fi
+          
+          # Check health endpoint
+          if curl -f -s "$SITE_URL/health" | grep -q "System Health Check"; then
+            echo "✅ Health endpoint working"
+          else
+            echo "⚠️ Health endpoint may need a moment to load"
+          fi
+          
+          echo "🎉 Post-deployment checks completed"

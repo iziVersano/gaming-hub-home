@@ -1,0 +1,93 @@
+[
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "71310bcd-d66c-4e17-aa84-3635c4f96464",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "John Doe",
+    "Email": "john.doe@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/9c51994f-9c77-41cd-b6e1-92879439854e_lastblue.png",
+    "InvoiceFileName": "lastblue.png",
+    "CreatedAt": "2026-01-20T14:49:58.2582065Z"
+  },
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "142525b9-326c-438a-8984-7fe9bd124702",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "John Doe",
+    "Email": "john.doe@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/039c6825-81aa-4b55-9352-720bbe05b5a6_bck.jpg",
+    "InvoiceFileName": "bck.jpg",
+    "CreatedAt": "2026-01-20T14:49:08.5440292Z"
+  },
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "e9a60068-a0f4-45ee-9a2b-701ca992cd45",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "John Doe",
+    "Email": "john.doe@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/4b0d524f-b4f4-412b-9103-8befe828ef9e_bck.jpg",
+    "InvoiceFileName": "bck.jpg",
+    "CreatedAt": "2026-01-20T14:48:59.1753415Z"
+  },
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "1676a737-1c06-4e42-8796-d29668888963",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "John Doe",
+    "Email": "john.doe@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/b9057822-61ee-476a-94a5-cdc65934a95b_bck.jpg",
+    "InvoiceFileName": "bck.jpg",
+    "CreatedAt": "2026-01-20T14:48:53.5324479Z"
+  },
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "0feccfd4-c926-417e-89a2-d0773d078ad8",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "John Doe",
+    "Email": "john.doe@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/910ebb8c-e9b6-4561-872d-381143cec49f_lastblue.png",
+    "InvoiceFileName": "lastblue.png",
+    "CreatedAt": "2026-01-20T14:34:30.9243056Z"
+  },
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "e0ef3f4a-157e-4aad-84c6-6f722654e8f5",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "John Doe",
+    "Email": "john@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/0bba30b2-36f8-46da-9d62-99c1651febfa_test-invoice.txt",
+    "InvoiceFileName": "test-invoice.txt",
+    "CreatedAt": "2026-01-20T10:08:25.6338763Z"
+  },
+  {
+    "PartitionKey": "Warranty",
+    "RowKey": "d83baf6a-b856-489f-b713-17aef2b716be",
+    "Timestamp": null,
+    "ETag": null,
+    "CustomerName": "izi versano",
+    "Email": "john.doe@example.com",
+    "Product": "Nintendo Switch 2",
+    "SerialNumber": "XAW12345678",
+    "InvoiceUrl": "/warranty-uploads/e4e553bf-560a-4614-a4cf-702edee0cc0c_Invoice-73EF143A-199181.pdf",
+    "InvoiceFileName": "Invoice-73EF143A-199181.pdf",
+    "CreatedAt": "2026-01-20T14:52:18.8514104Z"
+  }
+]

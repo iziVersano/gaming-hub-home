@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo Switch 2 - מדריך התקנה (שלבים 1-15)</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e74c3c; }
+        .header h1 { font-size: 1.8rem; color: #e74c3c; margin-bottom: 10px; }
+        .header .subtitle { font-size: 1rem; color: #666; }
+        .step-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        .step-section:first-of-type { border-top: none; margin-top: 20px; padding-top: 0; }
+        .step-title { font-size: 1.3rem; color: #2c3e50; margin-bottom: 15px; padding-right: 15px; border-right: 4px solid #e74c3c; }
+        .step-content { display: flex; flex-direction: column; gap: 15px; }
+        .step-image { text-align: center; }
+        .step-image img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .step-image figcaption { margin-top: 8px; font-size: 0.85rem; color: #666; font-style: italic; }
+        .step-text { font-size: 1rem; line-height: 1.7; color: #444; padding: 15px; background: #f9f9f9; border-radius: 8px; text-align: right; }
+        .step-text p { margin-bottom: 10px; }
+        .step-text p:last-child { margin-bottom: 0; }
+        /* Table of Contents */
+        .toc { background: #f0f7fc; border: 1px solid #d0e3f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+        .toc h3 { font-size: 1.2rem; color: #2c3e50; margin-bottom: 15px; }
+        .toc ol { margin: 0; padding-right: 25px; padding-left: 0; }
+        .toc li { margin-bottom: 8px; line-height: 1.5; }
+        .toc a { color: #3498db; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .toc .sub-item { margin-right: 20px; margin-left: 0; font-size: 0.95rem; }
+        /* Languages */
+        .languages { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+        .lang-btn { display: inline-flex; align-items: center; gap: 5px; padding: 8px 15px; border: 1px solid #ddd; border-radius: 20px; background: #fff; color: #333; text-decoration: none; font-size: 0.9rem; }
+        .lang-btn:hover { background: #f5f5f5; border-color: #bbb; }
+        .lang-label { font-size: 0.75rem; color: #666; text-align: center; margin-bottom: 10px; }
+        /* Resources Section */
+        .resources-section { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e74c3c; }
+        .resources-section h2 { font-size: 1.3rem; color: #2c3e50; margin-bottom: 15px; }
+        .resources-section h3 { font-size: 1.1rem; color: #555; margin: 15px 20px 10px 0; }
+        @media print { body { background: #fff; padding: 0; } .container { box-shadow: none; } .step-section { page-break-inside: avoid; } .toc { background: #fff; } }
+        @media (max-width: 600px) { .header h1 { font-size: 1.4rem; } .step-title { font-size: 1.1rem; } .languages { gap: 8px; } .lang-btn { padding: 6px 10px; font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Nintendo Switch 2</h1>
+            <p class="subtitle">מדריך התקנה (שלב אחר שלב)</p>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h3>תוכן עניינים</h3>
+            <ol>
+                <li><a href="#step-1">שלב 1: הפעלת ה-Nintendo Switch 2</a></li>
+                <li><a href="#step-2">שלב 2: חיבור בקרי ה-Joy-Con</a></li>
+                <li><a href="#step-3">שלב 3: בחירת שפה ואזור</a></li>
+                <li><a href="#step-4">שלב 4: עיון ואישור הסכם המשתמש</a></li>
+                <li><a href="#step-5">שלב 5: התחברות לאינטרנט</a></li>
+                <li><a href="#step-6">שלב 6: עדכון מערכת</a></li>
+                <li><a href="#step-7">שלב 7: הגדרת אזור זמן</a></li>
+                <li><a href="#step-8">שלב 8: סגנונות משחק והגדרות</a></li>
+                <li><a href="#step-9">שלב 9: ניתוק בקרי ה-Joy-Con</a></li>
+                <li><a href="#step-10">שלב 10: חיבור לטלוויזיה (אופציונלי)</a></li>
+                <li><a href="#step-11">שלב 11: בחירת סגנון ההגדרה</a></li>
+                <li><a href="#step-12">שלב 12: השלמת עדכון המערכת</a></li>
+                <li><a href="#step-13">שלב 13: הוספת חשבון משתמש</a></li>
+                <li><a href="#step-14">שלב 14: הגדרת בקרת הורים (אופציונלי)</a></li>
+                <li><a href="#step-15">שלב 15: סיום ההתקנה</a></li>
+                <li><a href="#resources">מסמכים / משאבים</a>
+                    <div class="sub-item">16.1. <a href="#languages">בשפות נוספות</a></div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- שלב 1 -->
+        <section id="step-1" class="step-section">
+            <h2 class="step-title">שלב 1: הפעלת ה-Nintendo Switch 2</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/nintendo-switch-2-power-button.jpg" alt="כפתור ההפעלה של Nintendo Switch 2">
+                    <figcaption>אתרו ולחצו על כפתור ההפעלה</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>כדי להתחיל בהגדרת ה-Nintendo Switch 2 שלכם, אתרו את כפתור ההפעלה על הקונסולה. לחצו והחזיקו את הכפתור עד שהמערכת תיכנס לפעולה.</p>
+                    <p>תדעו שההפעלה הושלמה כאשר מסך הבית יופיע על הצג.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 2 -->
+        <section id="step-2" class="step-section">
+            <h2 class="step-title">שלב 2: חיבור בקרי ה-Joy-Con</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/detaching-joy-con-controller.jpg" alt="חיבור בקר Joy-Con">
+                    <figcaption>החליקו את בקר ה-Joy-Con למקומו</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>קחו אחד מבקרי ה-Joy-Con שסופקו עם הקונסולה. יישרו אותו עם צד ה-Nintendo Switch 2 והחליקו אותו למקומו.</p>
+                    <p>תשמעו קליק כאשר הבקר מחובר כראוי.</p>
+                </div>
+                <figure class="step-image">
+                    <img src="images/instructions-for-detaching-joy-cons.jpg" alt="ניתוק בקרי Joy-Con">
+                    <figcaption>לניתוק: לחצו על לחצן השחרור והחליקו החוצה</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>לניתוק, פשוט לחצו על לחצן השחרור הקטן בגב והחליקו החוצה.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 3 -->
+        <section id="step-3" class="step-section">
+            <h2 class="step-title">שלב 3: בחירת שפה ואזור</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>כעת, הגיע הזמן לבחור את השפה המועדפת עליכם. תוכלו לעשות זאת על ידי נגיעה במסך או שימוש בבקר על ידי לחיצה על כפתור A.</p>
+                    <p>לאחר מכן, בחרו את האזור הנכון. לדוגמה, אם אתם בישראל, בחרו את האזור המתאים מהאפשרויות המוצגות.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 4 -->
+        <section id="step-4" class="step-section">
+            <h2 class="step-title">שלב 4: עיון ואישור הסכם המשתמש</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>לפני שתמשיכו, תתבקשו לעיין בהסכם רישיון למשתמש קצה.</p>
+                    <p>לאחר שקראתם והסכמתם לתנאים, לחצו על 'המשך' כדי להתקדם.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 5 -->
+        <section id="step-5" class="step-section">
+            <h2 class="step-title">שלב 5: התחברות לאינטרנט</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/wi-fi-connection-screen.jpg" alt="מסך חיבור Wi-Fi">
+                    <figcaption>בחרו את רשת ה-Wi-Fi שלכם</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>כעת, חברו את ה-Nintendo Switch 2 לאינטרנט. בחרו את רשת ה-Wi-Fi שלכם מהרשימה והזינו את הסיסמה.</p>
+                    <p>שלב זה מבטיח שיהיו לכם העדכונים האחרונים של המערכת מוכנים להתקנה.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 6 -->
+        <section id="step-6" class="step-section">
+            <h2 class="step-title">שלב 6: עדכון מערכת</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>לאחר ההתחברות לאינטרנט, המערכת תבקש מכם להוריד ולהתקין עדכונים זמינים.</p>
+                    <p>תהליך זה ישפר את ביצועי המערכת ואת האבטחה שלה. לחצו על הבא כדי להתחיל את העדכון.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 7 -->
+        <section id="step-7" class="step-section">
+            <h2 class="step-title">שלב 7: הגדרת אזור זמן</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/time-zone-selection-screen.jpg" alt="מסך בחירת אזור זמן">
+                    <figcaption>בחרו את אזור הזמן שלכם</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>בחרו את אזור הזמן המתאים בהתאם למיקומכם.</p>
+                    <p>לדוגמה, אם אתם בישראל, בחרו באזור הזמן של ישראל (GMT+2) כדי להבטיח שעון מדויק בקונסולה שלכם.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 8 -->
+        <section id="step-8" class="step-section">
+            <h2 class="step-title">שלב 8: סגנונות משחק והגדרות</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/nintendo-switch-2-kickstand.jpg" alt="מעמד Nintendo Switch 2">
+                    <figcaption>השתמשו במעמד המובנה למצב שולחני</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>ה-Nintendo Switch 2 שלכם מציע מגוון סגנונות משחק. למצב שולחני, השתמשו במעמד המובנה בגב המכשיר.</p>
+                    <p>תוכלו גם להכניס כרטיס Micro SD לאחסון נוסף על ידי הרמת המעמד. זכרו להשתמש בכרטיסי Micro SD Express לתאימות מלאה.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 9 -->
+        <section id="step-9" class="step-section">
+            <h2 class="step-title">שלב 9: ניתוק בקרי ה-Joy-Con</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/instructions-for-detaching-joy-cons.jpg" alt="ניתוק בקרי Joy-Con">
+                    <figcaption>לחצו על לחצן השחרור והחליקו החוצה</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>המערכת עשויה לבקש מכם לנתק את בקרי ה-Joy-Con לצורך ההגדרה.</p>
+                    <p>פשוט לחצו על לחצן השחרור בכל בקר והחליקו אותם החוצה בזהירות. תוכלו להתחיל עם הצד הימני או השמאלי.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 10 -->
+        <section id="step-10" class="step-section">
+            <h2 class="step-title">שלב 10: חיבור לטלוויזיה (אופציונלי)</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>אם תרצו לשחק משחקים על מסך גדול יותר, ה-Nintendo Switch 2 יכול להתחבר לטלוויזיה באמצעות תחנת העגינה שלו.</p>
+                    <p>תוכלו לבחור להגדיר זאת מאוחר יותר אם תעדיפו.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 11 -->
+        <section id="step-11" class="step-section">
+            <h2 class="step-title">שלב 11: בחירת סגנון ההגדרה</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/joy-con-controller-setup-options.jpg" alt="אפשרויות הגדרת בקר Joy-Con">
+                    <figcaption>בחרו כיצד להשתמש בבקרי ה-Joy-Con שלכם</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>בשלב זה, יש לכם אפשרות לבחור כיצד תרצו להשתמש בבקרי ה-Joy-Con.</p>
+                    <p>חברו אותם בדרכים שונות באמצעות האביזרים שסופקו. תוכלו לשנות הגדרה זו בכל עת.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 12 -->
+        <section id="step-12" class="step-section">
+            <h2 class="step-title">שלב 12: השלמת עדכון המערכת</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>לאחר השלמת עדכון המערכת, החליטו האם להתחיל העברת נתונים. אפשרות זו מיועדת למשתמשים שמעבירים נתונים מקונסולת Switch אחרת.</p>
+                    <p>אם אתם מעדיפים לא להעביר נתונים, בחרו 'אל תעביר' כדי להתחיל מחדש.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 13 -->
+        <section id="step-13" class="step-section">
+            <h2 class="step-title">שלב 13: הוספת חשבון משתמש</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/add-user-account-screen.png" alt="מסך הוספת חשבון משתמש">
+                    <figcaption>הוסיפו או התחברו לחשבון Nintendo שלכם</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>הגיע הזמן להוסיף משתמש ל-Nintendo Switch 2 שלכם. תוכלו להתחבר עם חשבון Nintendo קיים או ליצור חשבון חדש.</p>
+                    <p>אם תבחרו באפשרות הראשונה, תקבלו קוד QR לסריקה עם הטלפון שלכם לצורך אימות.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 14 -->
+        <section id="step-14" class="step-section">
+            <h2 class="step-title">שלב 14: הגדרת בקרת הורים (אופציונלי)</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/parental-controls-setup.jpg" alt="הגדרת בקרת הורים">
+                    <figcaption>הגדירו בקרת הורים במידת הצורך</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>למשתמשים עם ילדים, מומלץ להפעיל בקרת הורים. הגדירו הגדרות אלו בהתאם להעדפותיכם.</p>
+                    <p>תוכלו גם לדלג על שלב זה ולהגדיר זאת מאוחר יותר במידת הצורך.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- שלב 15 -->
+        <section id="step-15" class="step-section">
+            <h2 class="step-title">שלב 15: סיום ההתקנה</h2>
+            <div class="step-content">
+                <figure class="step-image">
+                    <img src="images/nintendo-switch-2-home-button.jpg" alt="כפתור הבית של Nintendo Switch 2">
+                    <figcaption>לחצו על כפתור הבית לגישה לתפריט</figcaption>
+                </figure>
+                <div class="step-text">
+                    <p>סיימתם את הגדרת ה-Nintendo Switch 2 שלכם!</p>
+                    <p>לחצו על כפתור הבית הנמצא בצד ימין של הקונסולה לגישה לתפריט הראשי. משם תוכלו להוריד משחקים ותוכן נוסף או לחקור את התכונות של המערכת החדשה שלכם.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- מסמכים / משאבים -->
+        <section id="resources" class="resources-section">
+            <h2>16. מסמכים / משאבים</h2>
+            <div id="languages">
+                <h3>16.1. בשפות נוספות</h3>
+                <div class="languages" style="justify-content: flex-start; margin-top: 15px;">
+                    <a href="#" class="lang-btn">🇩🇪 גרמנית</a>
+                    <a href="#" class="lang-btn">🇪🇸 ספרדית</a>
+                    <a href="#" class="lang-btn">🇫🇷 צרפתית</a>
+                    <a href="#" class="lang-btn">🇲🇽 מקסיקנית</a>
+                    <a href="#" class="lang-btn">🇳🇱 הולנדית</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,94 @@
+# CRITICAL: Force correct MIME types (prevents application/octet-stream)
+AddType application/javascript .js
+AddType text/javascript .mjs
+AddType text/css .css
+AddType application/wasm .wasm
+AddType image/svg+xml .svg
+AddDefaultCharset utf-8
+
+<FilesMatch "\.js$">
+  Header always set Content-Type "application/javascript; charset=utf-8"
+  Header always set X-Content-Type-Options nosniff
+</FilesMatch>
+
+<FilesMatch "\.mjs$">
+  Header always set Content-Type "text/javascript; charset=utf-8"
+  Header always set X-Content-Type-Options nosniff
+</FilesMatch>
+
+<FilesMatch "\.css$">
+  Header always set Content-Type "text/css; charset=utf-8"
+  Header always set X-Content-Type-Options nosniff
+</FilesMatch>
+
+# CRITICAL: Block ALL source files (prevents MIME errors even if accidentally referenced)
+<FilesMatch "\.(ts|tsx)$">
+  Require all denied
+  Header always set Content-Type "text/plain"
+</FilesMatch>
+
+# Block src directory access completely
+RewriteEngine On
+RewriteRule ^src/ - [F,L]
+
+# Block any TypeScript files that might slip through
+RewriteRule \.(ts|tsx)$ - [F,L]
+
+# CRITICAL: Cache Control (prevents stale MIME-typed assets)
+<FilesMatch "\.(html)$">
+  Header always set Cache-Control "no-store"
+  Header always set Pragma "no-cache"
+  Header always set Expires "0"
+</FilesMatch>
+
+# Long-term cache for content-hashed assets only
+<FilesMatch "\.(js|mjs|css|woff2|png|jpg|jpeg|gif|svg|ico|woff)$">
+  <If "%{REQUEST_URI} =~ m#\/assets\/#">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <Else>
+    Header always set Cache-Control "public, max-age=3600"
+  </Else>
+</FilesMatch>
+
+# API Rewrite Rules (continue RewriteEngine from above)
+
+# Enable proxy module  
+<IfModule mod_proxy.c>
+    ProxyPreserveHost On
+    ProxyRequests Off
+    
+    # Handle preflight OPTIONS request for contact
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^api/contact$ https://jqnbbwzbzgspwwlnackt.functions.supabase.co/contact [P,L]
+    
+    # Handle POST request for contact
+    RewriteCond %{REQUEST_METHOD} POST
+    RewriteRule ^api/contact$ https://jqnbbwzbzgspwwlnackt.functions.supabase.co/contact [P,L]
+</IfModule>
+
+# Fallback if mod_proxy not available - use redirect
+<IfModule !mod_proxy.c>
+    # Handle preflight OPTIONS request
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^api/contact$ https://jqnbbwzbzgspwwlnackt.functions.supabase.co/contact [R=307,L]
+    
+    # Handle POST request
+    RewriteCond %{REQUEST_METHOD} POST  
+    RewriteRule ^api/contact$ https://jqnbbwzbzgspwwlnackt.functions.supabase.co/contact [R=307,L]
+</IfModule>
+
+# SPA Fallback - Assets must never hit SPA fallback
+RewriteCond %{REQUEST_URI} ^/assets/ [OR]
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^ - [L]
+
+# Send non-file requests to index.html (SPA routing)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.html [L]
+
+# Security Headers
+Header always set X-Content-Type-Options nosniff
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Content-Security-Policy "frame-ancestors 'self' https://lovable.dev https://*.lovable.app;"

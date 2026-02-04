@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>תעודת אחריות – Nintendo Switch 2 | קונסולטק</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Heebo', sans-serif;
+      background: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+
+    .certificate {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      padding: 15mm 20mm 20mm 20mm;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25mm;
+    }
+
+    .logo-placeholder {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #c40000, #a80000);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .brand-text {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+    }
+
+    /* Diagonal Title Band */
+    .diagonal-band {
+      position: absolute;
+      top: 35mm;
+      right: -30mm;
+      width: 200mm;
+      background: linear-gradient(135deg, #c40000 0%, #a80000 100%);
+      color: white;
+      padding: 8mm 50mm;
+      transform: rotate(8deg);
+      box-shadow: 0 4px 15px rgba(196, 0, 0, 0.4);
+    }
+
+    .diagonal-band h1 {
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Importer Line */
+    .importer-line {
+      margin-top: 5mm;
+      text-align: center;
+      color: #555;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .importer-line strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    /* Warranty Period Strip */
+    .warranty-period {
+      background: linear-gradient(90deg, #c40000, #a80000);
+      color: white;
+      padding: 4mm 8mm;
+      margin: 8mm 0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .warranty-period span {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Coverage Section */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 8mm 0 4mm 0;
+      border-bottom: 2px solid #c40000;
+      padding-bottom: 2mm;
+    }
+
+    .coverage-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .coverage-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 2.5mm 0;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .check-icon {
+      width: 18px;
+      height: 18px;
+      background: #c40000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .check-icon::after {
+      content: '';
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-bottom: 2px;
+    }
+
+    /* Activation Section */
+    .activation-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: step-counter;
+    }
+
+    .activation-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 2.5mm 0;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+      counter-increment: step-counter;
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      background: #f5f5f5;
+      border: 2px solid #c40000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 700;
+      font-size: 12px;
+      color: #c40000;
+    }
+
+    .activation-list li a {
+      color: #c40000;
+      text-decoration: none;
+      font-weight: 500;
+      direction: ltr;
+    }
+
+    .activation-list li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Warranty Stamp */
+    .stamp-container {
+      display: flex;
+      justify-content: center;
+      margin: 10mm 0;
+    }
+
+    .warranty-stamp {
+      width: 80px;
+      height: 80px;
+      border: 4px solid #c40000;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #c40000;
+      transform: rotate(10deg);
+      position: relative;
+    }
+
+    .warranty-stamp::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 2px dashed #c40000;
+      border-radius: 50%;
+    }
+
+    .warranty-stamp .months {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .warranty-stamp .label {
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: auto;
+      padding-top: 8mm;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-right {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .footer-right a {
+      color: #c40000;
+      text-decoration: none;
+      font-weight: 500;
+      direction: ltr;
+    }
+
+    .footer-right p {
+      margin: 2mm 0;
+    }
+
+    .qr-placeholder {
+      width: 60px;
+      height: 60px;
+      border: 2px dashed #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #999;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    /* Print Styles */
+    @media print {
+      html, body {
+        background: white;
+        padding: 0;
+      }
+
+      .certificate {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+</style>
+</head>
+<body>
+  <div class="certificate">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-placeholder">CT</div>
+      <div class="brand-text">קונסולטק</div>
+    </div>
+
+    <!-- Diagonal Title Band -->
+    <div class="diagonal-band">
+      <h1>תעודת אחריות – Nintendo Switch 2</h1>
+    </div>
+
+    <!-- Importer Line -->
+    <p class="importer-line">יבואן ומפיץ רשמי: <strong>קונסולטק בע"מ</strong></p>
+
+    <!-- Warranty Period Strip -->
+    <div class="warranty-period">
+      <span>תקופת אחריות: 12 חודשים</span>
+    </div>
+
+    <!-- Warranty Coverage Section -->
+    <h2 class="section-title">כיסוי האחריות</h2>
+    <ul class="coverage-list">
+      <li>
+        <span class="check-icon"></span>
+        <span>פגמי ייצור בקונסולת Nintendo Switch 2 ובאביזרים הנלווים</span>
+      </li>
+      <li>
+        <span class="check-icon"></span>
+        <span>תקלות חומרה בתנאי שימוש רגילים</span>
+      </li>
+      <li>
+        <span class="check-icon"></span>
+        <span>בקרי Joy-Con פגומים, עגינה ומתאם חשמל</span>
+      </li>
+      <li>
+        <span class="check-icon"></span>
+        <span>בעיות תצוגה במסך שאינן נגרמות מנזק פיזי</span>
+      </li>
+      <li>
+        <span class="check-icon"></span>
+        <span>בעיות ביצועי סוללה (מתחת ל-80% קיבולת בתקופת האחריות)</span>
+      </li>
+    </ul>
+
+    <!-- Warranty Activation Section -->
+    <h2 class="section-title">הפעלת האחריות</h2>
+    <ul class="activation-list">
+      <li>
+        <span class="step-number">1</span>
+        <span>בקרו בפורטל רישום האחריות שלנו בכתובת <a href="https://consoltech.co.il/warranty">consoltech.co.il/warranty</a></span>
+      </li>
+      <li>
+        <span class="step-number">2</span>
+        <span>מלאו את הפרטים האישיים ואת המספר הסידורי של המוצר</span>
+      </li>
+      <li>
+        <span class="step-number">3</span>
+        <span>העלו עותק של חשבונית הרכישה או הקבלה</span>
+      </li>
+      <li>
+        <span class="step-number">4</span>
+        <span>קבלו אישור אחריות במייל תוך 24 שעות</span>
+      </li>
+    </ul>
+
+    <!-- Warranty Stamp -->
+    <div class="stamp-container">
+      <div class="warranty-stamp">
+        <span class="months">12</span>
+        <span class="label">חודשים</span>
+        <span class="label">אחריות</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="qr-placeholder">
+        QR Code<br>Placeholder
+      </div>
+      <div class="footer-right">
+        <p>לתביעות אחריות ותמיכה:</p>
+        <p><a href="mailto:warranty@consoltech.co.il">warranty@consoltech.co.il</a></p>
+        <p>קונסולטק בע"מ – השותף שלכם לגיימינג</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

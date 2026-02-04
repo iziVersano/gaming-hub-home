@@ -1,0 +1,12 @@
+# Azure Admin UI Deployment Folder
+
+This folder contains the Azure-specific build output and configuration for the Admin UI.
+
+## Contents:
+- `dist/` - Built React app for Azure deployment (generated during CI/CD)
+- `web.config` - IIS configuration for Azure App Service
+- `.gitkeep` - Keeps this folder in git (dist/ is gitignored)
+
+## Deployment:
+The GitHub Actions workflow builds the admin UI and outputs to `azure-admin/dist/`, then deploys this folder to Azure App Service.
+
