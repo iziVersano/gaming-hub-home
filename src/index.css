@@ -9,70 +9,72 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
 @layer base {
   :root {
-    /* Light Theme - Clean White */
-    --background: 0 0% 100%;
+    /* Professional Light Theme - Refined & Elegant */
+    --background: 210 20% 98%;
     --foreground: 222 47% 11%;
 
-    /* Light Cards */
+    /* Cards - Crisp white with depth */
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
 
-    /* Light Popover */
+    /* Popover */
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary - Modern Electric Blue */
-    --primary: 200 100% 45%;
+    /* Primary - Refined Ocean Blue */
+    --primary: 210 100% 45%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 200 100% 55%;
+    --primary-glow: 210 100% 52%;
 
-    /* Light Secondary */
+    /* Secondary - Subtle cool gray */
     --secondary: 220 14% 96%;
     --secondary-foreground: 222 47% 11%;
 
-    /* Light Muted */
+    /* Muted - Professional gray tones */
     --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted-foreground: 220 12% 45%;
 
-    /* Accent - Vibrant Purple */
-    --accent: 262 83% 58%;
+    /* Accent - Deep Violet for elegance */
+    --accent: 255 72% 55%;
     --accent-foreground: 0 0% 100%;
-    --accent-glow: 262 83% 68%;
+    --accent-glow: 255 72% 62%;
 
     /* Status */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Light Borders */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 200 100% 45%;
+    /* Borders - Refined and subtle */
+    --border: 220 13% 90%;
+    --input: 220 13% 90%;
+    --ring: 210 100% 45%;
 
-    /* Design System Extensions - adjusted for light theme */
-    --neon: 142 76% 36%;
-    --electric: 185 84% 39%;
+    /* Design System Extensions */
+    --neon: 162 78% 42%;
+    --electric: 185 84% 42%;
     --tech-blue: 210 100% 50%;
-    --cyber-purple: 262 83% 58%;
+    --cyber-purple: 255 72% 55%;
 
-    /* Light Gradients */
+    /* Professional Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(220 14% 98%), hsl(220 14% 96%));
+    --gradient-hero: linear-gradient(180deg, hsl(210 20% 98%), hsl(210 25% 96%));
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 14% 98%));
-    --gradient-neon: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--electric)));
+    --gradient-neon: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
     --gradient-tech: linear-gradient(135deg, hsl(var(--tech-blue)), hsl(var(--cyber-purple)));
     --gradient-logo-blue: linear-gradient(90deg, hsl(210 100% 50%), hsl(210 100% 40%));
+    --gradient-subtle: linear-gradient(180deg, hsl(220 20% 97%), hsl(220 25% 94%));
 
-    /* Shadows - softer for light theme */
-    --shadow-neon: 0 0 20px hsl(var(--accent) / 0.2);
-    --shadow-primary: 0 10px 30px hsl(var(--primary) / 0.15);
-    --shadow-card: 0 4px 20px hsl(220 14% 10% / 0.08);
-    --glow-accent: 0 0 40px hsl(var(--accent) / 0.25);
-    --glow-primary: 0 0 30px hsl(var(--primary) / 0.2);
+    /* Professional Shadows - Soft and elegant */
+    --shadow-neon: 0 4px 20px hsl(var(--accent) / 0.15);
+    --shadow-primary: 0 8px 30px hsl(var(--primary) / 0.12);
+    --shadow-card: 0 4px 24px hsl(220 14% 10% / 0.06);
+    --shadow-elevated: 0 12px 40px hsl(220 14% 10% / 0.08);
+    --glow-accent: 0 0 30px hsl(var(--accent) / 0.18);
+    --glow-primary: 0 0 25px hsl(var(--primary) / 0.15);
 
-    /* Brand tile background (logos readable on all themes) */
+    /* Brand tile background */
     --brand-tile-bg: 0 0% 100%;
 
-    /* Animation and transitions */
+    /* Smooth transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-glow: all 0.4s ease-out;
     --animation-float: float 6s ease-in-out infinite;
@@ -80,19 +82,12 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -145,44 +140,43 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background: var(--gradient-hero);
+    background: hsl(var(--background));
     min-height: 100vh;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
 }
 
 @layer components {
 
-  /* Enhanced Neon Button - adjusted for light theme */
+  /* Professional Button - Clean & Elegant */
   .btn-neon {
-    @apply bg-transparent border-2 border-accent text-accent px-6 py-3 font-medium transition-all duration-300 hover:bg-accent hover:text-white relative gap-2 inline-flex items-center justify-center;
-    box-shadow: var(--shadow-neon);
+    @apply bg-transparent border border-accent text-accent px-6 py-3 font-medium transition-all duration-300 hover:bg-accent hover:text-white relative gap-2 inline-flex items-center justify-center rounded-lg;
+    box-shadow: none;
     font-weight: 500;
-    border-radius: 0 !important;
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.01em;
     line-height: 1.4;
   }
 
   .btn-neon:hover {
-    box-shadow: var(--glow-accent);
+    box-shadow: var(--shadow-neon);
+    transform: translateY(-2px);
   }
 
-  /* Enhanced Hero Button */
+  /* Primary CTA Button - Professional */
   .btn-hero {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-3 font-medium transition-all duration-300 hover:scale-105 relative overflow-hidden gap-2 inline-flex items-center justify-center;
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-7 py-3.5 font-medium transition-all duration-300 hover:scale-[1.02] relative overflow-hidden gap-2 inline-flex items-center justify-center rounded-lg;
     box-shadow: var(--shadow-primary);
     font-weight: 500;
-    letter-spacing: 0.025em;
-    border-radius: 0 !important;
+    letter-spacing: 0.01em;
     font-family: 'Inter', sans-serif;
     line-height: 1.4;
   }
 
   .btn-hero::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] transition-transform duration-700;
   }
 
   .btn-hero:hover::before {
@@ -190,23 +184,23 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   }
 
   .btn-hero:hover {
-    box-shadow: var(--glow-primary);
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-2px) scale(1.02);
   }
 
-  /* Standard Button Variants for Small Buttons */
+  /* Small Primary Button */
   .btn-primary-small {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative overflow-hidden gap-2 inline-flex items-center justify-center;
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-[1.02] relative overflow-hidden gap-2 inline-flex items-center justify-center rounded-md;
     box-shadow: var(--shadow-primary);
     font-weight: 500;
-    letter-spacing: 0.025em;
-    border-radius: 0 !important;
+    letter-spacing: 0.01em;
     font-family: 'Inter', sans-serif;
     line-height: 1.4;
   }
 
   .btn-primary-small::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] transition-transform duration-700;
   }
 
   .btn-primary-small:hover::before {
@@ -214,56 +208,52 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   }
 
   .btn-primary-small:hover {
-    box-shadow: var(--glow-primary);
+    box-shadow: var(--shadow-elevated);
   }
 
   .btn-accent-small {
-    @apply bg-transparent border-2 border-accent text-accent px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-accent hover:text-background relative gap-2 inline-flex items-center justify-center;
-    box-shadow: 0 0 10px hsl(var(--accent) / 0.3);
+    @apply bg-transparent border border-accent text-accent px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-accent hover:text-white relative gap-2 inline-flex items-center justify-center rounded-md;
     font-weight: 500;
-    border-radius: 0 !important;
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.01em;
     line-height: 1.4;
   }
 
   .btn-accent-small:hover {
-    box-shadow: 0 0 20px hsl(var(--accent) / 0.4);
+    box-shadow: var(--shadow-neon);
+    transform: translateY(-1px);
   }
 
-  /* Navigation Button Variant */
+  /* Navigation Button */
   .btn-nav {
-    @apply bg-gradient-to-r from-tech-blue via-electric to-cyber-purple text-white px-4 py-2 font-medium transition-all duration-300 hover:scale-105 relative gap-2 inline-flex items-center justify-center;
-    box-shadow: var(--shadow-neon);
+    @apply bg-gradient-to-r from-primary to-primary-glow text-white px-4 py-2 font-medium transition-all duration-300 hover:scale-[1.02] relative gap-2 inline-flex items-center justify-center rounded-lg;
+    box-shadow: var(--shadow-primary);
     font-weight: 500;
-    border-radius: 0 !important;
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.01em;
     line-height: 1.4;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
   }
 
   .btn-nav:hover {
-    box-shadow: var(--glow-accent);
+    box-shadow: var(--shadow-elevated);
   }
 
-  /* Square Button Variants - Light Theme */
+  /* Hero Square Buttons - Refined */
   .btn-hero-square {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-white 
-           w-48 h-48 md:w-56 md:h-56 flex flex-row items-center justify-center text-center
-           font-medium text-lg md:text-xl transition-all duration-300 hover:scale-105 relative overflow-hidden
-           border-2 border-primary/30 hover:border-primary/60 gap-3;
-    box-shadow: 0 8px 30px hsl(var(--primary) / 0.3);
+    @apply bg-gradient-to-br from-primary via-primary-glow to-primary text-white 
+           w-44 h-44 md:w-52 md:h-52 flex flex-row items-center justify-center text-center
+           font-medium text-lg md:text-xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
+           border border-primary/20 gap-3 rounded-2xl;
+    box-shadow: var(--shadow-primary);
     font-weight: 500;
-    letter-spacing: 0.025em;
-    border-radius: 0 !important;
+    letter-spacing: 0.01em;
     font-family: 'Inter', sans-serif;
     line-height: 1.4;
   }
 
   .btn-hero-square::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] transition-transform duration-700;
   }
 
   .btn-hero-square:hover::before {
@@ -271,58 +261,51 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   }
 
   .btn-hero-square:hover {
-    box-shadow: 0 12px 40px hsl(var(--primary) / 0.4);
+    box-shadow: var(--shadow-elevated);
   }
 
   .btn-neon-square {
-    @apply bg-gradient-to-r from-accent to-cyber-purple text-white
-           w-48 h-48 md:w-56 md:h-56 flex flex-row items-center justify-center text-center
-           border-2 border-accent/50 font-medium text-lg md:text-xl transition-all duration-300 hover:scale-105 relative gap-3;
-    box-shadow: 0 8px 30px hsl(var(--accent) / 0.3);
+    @apply bg-gradient-to-br from-accent via-accent-glow to-accent text-white
+           w-44 h-44 md:w-52 md:h-52 flex flex-row items-center justify-center text-center
+           border border-accent/20 font-medium text-lg md:text-xl transition-all duration-300 hover:scale-[1.03] relative gap-3 rounded-2xl;
+    box-shadow: var(--shadow-neon);
     font-weight: 500;
-    border-radius: 0 !important;
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.01em;
     line-height: 1.4;
   }
 
   .btn-neon-square:hover {
-    box-shadow: 0 12px 40px hsl(var(--accent) / 0.4);
-    border-color: hsl(var(--accent) / 0.8);
+    box-shadow: var(--shadow-elevated);
   }
 
-  /* Enhanced Product Card - Light Theme */
+  /* Professional Product Card */
   .product-card {
-    @apply bg-card rounded-2xl p-6 transition-all duration-500 hover:scale-105 relative overflow-hidden;
-    box-shadow: 0 2px 12px hsl(220 14% 10% / 0.06);
+    @apply bg-card rounded-2xl p-6 transition-all duration-300 relative overflow-hidden;
+    box-shadow: var(--shadow-card);
     border: 1px solid hsl(var(--border));
   }
 
-  .product-card::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none;
-  }
-
   .product-card:hover {
-    box-shadow: 0 8px 30px hsl(220 14% 10% / 0.12);
-    border-color: hsl(var(--primary) / 0.4);
-    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-elevated);
+    border-color: hsl(var(--primary) / 0.2);
+    transform: translateY(-4px);
   }
 
-  /* Text glow - subtle for light theme */
+  /* Text glow - subtle */
   .text-glow {
-    text-shadow: 0 0 20px hsl(var(--accent) / 0.4);
+    text-shadow: 0 0 20px hsl(var(--accent) / 0.3);
     font-weight: 600;
   }
 
-  /* Floating animation */
+  /* Floating animation - smoother */
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
 
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-12px); }
   }
 
   /* Progress bar animation for spotlight */

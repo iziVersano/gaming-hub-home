@@ -82,35 +82,40 @@ const NewArrivalsSpotlight = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <Sparkles className="w-6 h-6 text-primary animate-pulse" />
-        <span className="text-lg font-semibold text-primary uppercase tracking-wider">
+    <div className="w-full max-w-5xl mx-auto">
+      {/* Header - Refined */}
+      <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/50" />
+        <Sparkles className="w-5 h-5 text-primary" />
+        <span className="text-sm font-medium text-primary uppercase tracking-widest">
           {t('products.newArrivalsHeader')}
         </span>
-        <Sparkles className="w-6 h-6 text-primary animate-pulse" />
+        <Sparkles className="w-5 h-5 text-primary" />
+        <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/50" />
       </div>
 
-      {/* Main Spotlight Container - Clickable */}
+      {/* Main Spotlight Container */}
       <Link
         to="/products?category=New+Arrivals"
-        className="block relative rounded-2xl overflow-hidden border border-primary/30 hover:border-primary/60 transition-all duration-500 shadow-2xl shadow-primary/20 cursor-pointer"
+        className="block relative rounded-2xl overflow-hidden border border-border hover:border-primary/40 transition-all duration-500 shadow-lg hover:shadow-xl cursor-pointer bg-card"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
         {/* Full Image Container */}
-        <div className="relative h-80 md:h-[450px]">
-          {/* Product Image - Full Size with rounded corners */}
+        <div className="relative h-72 md:h-[400px]">
+          {/* Product Image */}
           <img
             src={BRIGHT_IMAGES[currentProduct.id]}
             alt={currentProduct.title}
-            className="w-full h-full object-cover rounded-2xl transition-transform duration-700 hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
           />
+
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
           {/* Dots Indicator */}
           {newArrivals.length > 1 && (
-            <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-3">
+            <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2">
               {newArrivals.map((_, index) => (
                 <button
                   key={index}
@@ -119,10 +124,10 @@ const NewArrivalsSpotlight = () => {
                     e.stopPropagation();
                     goToSlide(index);
                   }}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex
-                      ? 'bg-primary w-8'
-                      : 'bg-white/40 hover:bg-white/60'
+                      ? 'bg-white w-8'
+                      : 'bg-white/40 hover:bg-white/60 w-2'
                   }`}
                   aria-label={`Go to product ${index + 1}`}
                 />
@@ -131,16 +136,16 @@ const NewArrivalsSpotlight = () => {
           )}
 
           {/* Text Overlay Bar */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-2xl py-5 px-4 text-center">
-            <h3 className="text-xl md:text-2xl font-bold text-white">
+          <div className="absolute bottom-0 left-0 right-0 py-4 px-6 text-center">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
               {getTranslatedTitle(currentProduct)}
             </h3>
-            <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto line-clamp-1">
+            <p className="text-white/80 text-sm md:text-base max-w-xl mx-auto line-clamp-1">
               {getTranslatedDescription(currentProduct)}
             </p>
           </div>
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Refined */}
           {newArrivals.length > 1 && (
             <>
               <button
@@ -149,10 +154,10 @@ const NewArrivalsSpotlight = () => {
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-white"
+                className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/90 hover:bg-white border border-border/50 hover:border-primary/50 transition-all duration-300 text-foreground shadow-md hover:shadow-lg"
                 aria-label="Previous product"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={(e) => {
@@ -160,10 +165,10 @@ const NewArrivalsSpotlight = () => {
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/90 hover:bg-white border border-border/50 hover:border-primary/50 transition-all duration-300 text-foreground shadow-md hover:shadow-lg"
                 aria-label="Next product"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </>
           )}
@@ -171,19 +176,19 @@ const NewArrivalsSpotlight = () => {
 
         {/* Auto-play progress bar */}
         {isAutoPlaying && newArrivals.length > 1 && (
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary/20 rounded-b-2xl">
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary/20">
             <div
               key={currentIndex}
-              className="h-full bg-primary animate-progress rounded-b-2xl"
+              className="h-full bg-primary animate-progress"
               style={{ animationDuration: '5s' }}
             />
           </div>
         )}
       </Link>
 
-      {/* Product Thumbnails */}
+      {/* Product Thumbnails - Cleaner */}
       {newArrivals.length > 1 && (
-        <div className="flex justify-center gap-4 mt-6">
+        <div className="flex justify-center gap-3 mt-4">
           {newArrivals.map((product, index) => (
             <button
               key={product.id}
@@ -192,16 +197,16 @@ const NewArrivalsSpotlight = () => {
                 e.stopPropagation();
                 goToSlide(index);
               }}
-              className={`relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+              className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                 index === currentIndex
-                  ? 'border-primary shadow-lg shadow-primary/30 scale-110'
-                  : 'border-border/50 hover:border-primary/50 opacity-60 hover:opacity-100'
+                  ? 'border-primary shadow-md scale-105'
+                  : 'border-border hover:border-primary/50 opacity-70 hover:opacity-100'
               }`}
             >
               <img
                 src={BRIGHT_IMAGES[product.id]}
                 alt={product.title}
-                className="w-full h-full object-contain bg-background/50 p-2"
+                className="w-full h-full object-contain bg-card p-1.5"
               />
             </button>
           ))}
