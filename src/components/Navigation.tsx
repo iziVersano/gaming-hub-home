@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,90 +17,66 @@ const Navigation = () => {
     { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
   ];
 
+  // Icons shown in the header bar on mobile (left of burger)
+  const mobileHeaderIcons = [
+    { href: '/products', icon: ShoppingBag, label: t('menu.products') },
+    { href: '/contact', icon: Mail, label: t('menu.contact') },
+    { href: '/about', icon: Building2, label: t('menu.about') },
+  ];
+
+  // Brand logos for the bottom of the full-screen menu
+  const menuBrands = [
+    { name: 'xbox', src: '/brands/xbox.svg' },
+    { name: 'playstation', src: '/brands/playstation.svg' },
+    { name: 'sony', src: '/brands/sony.svg' },
+    { name: 'samsung', src: '/brands/samsung.svg' },
+    { name: 'apple', src: '/brands/apple.svg' },
+  ];
+
   const isActive = (path: string) => location.pathname === path;
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   // TODO: Uncomment to re-enable language toggle
   function LanguageToggleInline() {
     return null;
-    // return (
-    //   <button
-    //     aria-label={lang === 'en' ? 'Switch to Hebrew' : 'החלף לאנגלית'}
-    //     className="ms-2 px-2 py-1 border rounded text-xs font-medium bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-    //     onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
-    //     style={{ minWidth: 48 }}
-    //   >
-    //     {lang === 'en' ? t('toggle.he') : t('toggle.en')}
-    //   </button>
-    // );
   }
 
   return (
-    <nav className="fixed top-0 w-full z-50 nav-glass" role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
-            aria-label="Consoltech - Home"
-          >
-            <div className="relative">
-              <Gamepad2 className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-            </div>
-            <span className="logo-text text-2xl md:text-3xl lg:text-4xl">
-              <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8" role="menubar">
-            {navigation.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  role="menuitem"
-                  aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`flex items-center gap-2 py-1 font-semibold text-[15px] tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded ${
-                    isActive(item.href)
-                      ? 'text-accent border-b-2 border-accent'
-                      : 'text-white hover:text-accent'
-                  }`}
-                >
-                  <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
-                  <span>{item.name}</span>
-                </Link>
-              );
-            })}
-            <Button className="btn-nav">
-              <MessageSquare className="h-4 w-4" aria-hidden="true" />
-              <span>{t('menu.getQuote')}</span>
-              <LanguageToggleInline />
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden order-first rtl:order-first ltr:order-last">
-            <Button
-              variant="mobile-menu"
-              size={null}
-              className="h-14 w-14 p-0 flex items-center justify-center rounded-full"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-expanded={isOpen}
-              aria-controls="mobile-menu"
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+    <>
+      <nav className="fixed top-0 w-full z-50 nav-glass" role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
+              aria-label="Consoltech - Home"
             >
-              {isOpen ? <X size={36} strokeWidth={2.5} aria-hidden="true" /> : <Menu size={36} strokeWidth={2.5} aria-hidden="true" />}
-            </Button>
-          </div>
-        </div>
+              <div className="relative">
+                <Gamepad2 className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              </div>
+              <span className="logo-text text-2xl md:text-3xl lg:text-4xl">
+                <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+              </span>
+            </Link>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div id="mobile-menu" className="md:hidden border-t border-border animate-fade-in" role="menu">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8" role="menubar">
               {navigation.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -109,30 +85,144 @@ const Navigation = () => {
                     to={item.href}
                     role="menuitem"
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`flex items-center gap-3 px-4 py-3 font-semibold text-[15px] tracking-wide transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded ${
+                    className={`flex items-center gap-2 py-1 font-semibold text-[15px] tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded ${
                       isActive(item.href)
-                        ? 'text-accent'
+                        ? 'text-accent border-b-2 border-accent'
                         : 'text-white hover:text-accent'
                     }`}
-                    onClick={() => setIsOpen(false)}
                   >
                     <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
                     <span>{item.name}</span>
                   </Link>
                 );
               })}
-              <div className="px-3 pt-2">
-                <Button className="btn-nav w-full">
-                  <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                  <span>{t('menu.getQuote')}</span>
-                  <LanguageToggleInline />
+              <Button className="btn-nav">
+                <MessageSquare className="h-4 w-4" aria-hidden="true" />
+                <span>{t('menu.getQuote')}</span>
+                <LanguageToggleInline />
+              </Button>
+            </div>
+
+            {/* Mobile: Icon shortcuts + Burger menu */}
+            <div className="flex md:hidden items-center gap-1">
+              {/* Compact icon-only nav items */}
+              {mobileHeaderIcons.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    aria-label={item.label}
+                    className={`p-2.5 rounded-full transition-colors duration-200 ${
+                      isActive(item.href)
+                        ? 'text-accent'
+                        : 'text-white/70 hover:text-white active:text-accent'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
+                  </Link>
+                );
+              })}
+
+              {/* Burger menu button */}
+              <button
+                className="p-2.5 rounded-full text-white/90 hover:text-white transition-colors duration-200 ms-1"
+                onClick={() => setIsOpen(true)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu-overlay"
+                aria-label="Open menu"
+              >
+                <Menu className="h-7 w-7" strokeWidth={2} aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Full-screen mobile menu overlay */}
+      {isOpen && (
+        <div
+          id="mobile-menu-overlay"
+          className="fixed inset-0 z-[60] md:hidden flex flex-col"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          dir={lang === 'he' ? 'rtl' : 'ltr'}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/95 backdrop-blur-md" />
+
+          {/* Menu content */}
+          <div className="relative flex flex-col h-full">
+            {/* Header with logo + close button */}
+            <div className="flex justify-between items-center h-16 px-5">
+              <Link
+                to="/"
+                className="flex items-center gap-3"
+                onClick={() => setIsOpen(false)}
+              >
+                <Gamepad2 className="h-8 w-8 text-white" aria-hidden="true" />
+                <span className="logo-text text-2xl">
+                  <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                </span>
+              </Link>
+              <button
+                className="p-2 rounded-full text-white/80 hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+                aria-label="Close menu"
+              >
+                <X className="h-8 w-8" strokeWidth={2} aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Navigation items - centered vertically */}
+            <div className="flex-1 flex flex-col justify-center px-8 -mt-16">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    role="menuitem"
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`flex items-center gap-4 py-4 text-2xl font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${
+                      isActive(item.href)
+                        ? 'text-accent'
+                        : 'text-white hover:text-accent'
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Icon className="h-6 w-6" strokeWidth={2} aria-hidden="true" />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+              {/* Get Quote button */}
+              <div className="mt-6">
+                <Button className="btn-nav w-full" onClick={() => setIsOpen(false)}>
+                  <MessageSquare className="h-5 w-5" aria-hidden="true" />
+                  <span className="text-lg">{t('menu.getQuote')}</span>
                 </Button>
               </div>
             </div>
+
+            {/* Brand logos at the bottom */}
+            <div className="px-8 pb-8">
+              <div className="flex items-center justify-center gap-6">
+                {menuBrands.map((brand) => (
+                  <img
+                    key={brand.name}
+                    src={brand.src}
+                    alt={brand.name}
+                    className="h-6 w-auto opacity-40"
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      )}
+    </>
   );
 };
 
