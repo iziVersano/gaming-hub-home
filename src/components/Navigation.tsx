@@ -65,14 +65,14 @@ const Navigation = () => {
             {/* Logo (left) */}
             <Link
               to="/"
-              className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
+              className="flex items-center gap-1.5 sm:gap-3 group shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
               aria-label="Consoltech - Home"
             >
               <div className="relative">
-                <Gamepad2 className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
+                <Gamepad2 className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
               </div>
-              <span className="logo-text hidden sm:inline text-2xl md:text-3xl lg:text-4xl">
+              <span className="logo-text text-base sm:text-2xl md:text-3xl lg:text-4xl">
                 <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
               </span>
             </Link>
@@ -105,8 +105,8 @@ const Navigation = () => {
               </Button>
             </div>
 
-            {/* Mobile: Icon shortcuts (between logo and burger) */}
-            <div className="flex md:hidden items-center gap-1">
+            {/* Mobile: Icon shortcuts + Burger (right side) */}
+            <div className="flex md:hidden items-center shrink-0">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -114,28 +114,28 @@ const Navigation = () => {
                     key={item.href}
                     to={item.href}
                     aria-label={item.label}
-                    className={`p-2.5 rounded-full transition-colors duration-200 ${
+                    className={`p-1.5 rounded-full transition-colors duration-200 ${
                       isActive(item.href)
                         ? 'text-accent'
                         : 'text-white/70 hover:text-white active:text-accent'
                     }`}
                   >
-                    <Icon className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
+                    <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
                   </Link>
                 );
               })}
-            </div>
 
-            {/* Mobile: Burger menu button (far right) */}
-            <button
-              className="flex md:hidden p-2.5 rounded-full text-white/90 hover:text-white transition-colors duration-200"
-              onClick={() => setIsOpen(true)}
-              aria-expanded={isOpen}
-              aria-controls="mobile-menu-overlay"
-              aria-label="Open menu"
-            >
-              <Menu className="h-8 w-8" strokeWidth={2} aria-hidden="true" />
-            </button>
+              {/* Burger menu button */}
+              <button
+                className="p-1.5 rounded-full text-white/90 hover:text-white transition-colors duration-200 ml-1"
+                onClick={() => setIsOpen(true)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu-overlay"
+                aria-label="Open menu"
+              >
+                <Menu className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
+              </button>
+            </div>
           </div>
         </div>
       </nav>
