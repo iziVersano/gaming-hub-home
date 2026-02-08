@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background with two rects to simulate gradient -->
+  <rect width="512" height="512" rx="96" fill="#1e3a8a"/>
+  <rect width="512" height="512" rx="96" fill="#4f46e5" opacity="0.5"/>
+  <!-- Gamepad body -->
+  <path d="M136 196 C136 164 162 140 194 140 L318 140 C350 140 376 164 376 196 L376 260 C376 280 368 298 354 312 L310 356 C298 368 280 368 268 356 L256 344 L244 356 C232 368 214 368 202 356 L158 312 C144 298 136 280 136 260 Z" fill="white" opacity="0.95"/>
+  <!-- Left d-pad -->
+  <rect x="178" y="218" width="44" height="12" rx="6" fill="#1e3a8a"/>
+  <rect x="194" y="202" width="12" height="44" rx="6" fill="#1e3a8a"/>
+  <!-- Right buttons -->
+  <circle cx="320" cy="208" r="11" fill="#6d28d9"/>
+  <circle cx="346" cy="224" r="11" fill="#1e3a8a"/>
+  <circle cx="320" cy="240" r="11" fill="#6d28d9"/>
+  <circle cx="294" cy="224" r="11" fill="#1e3a8a"/>
+  <!-- Center detail -->
+  <rect x="238" y="188" width="36" height="8" rx="4" fill="#1e3a8a" opacity="0.3"/>
+</svg>
