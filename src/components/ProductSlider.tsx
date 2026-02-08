@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -27,6 +27,11 @@ const ProductSlider = () => {
   const { t, lang } = useI18n();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+
+  const handleImageLoad = (productId: number) => {
+    setLoadedImages((prev) => new Set(prev).add(productId));
+  };
 
   // Refetch products when language changes
   useEffect(() => {
@@ -97,8 +102,21 @@ const ProductSlider = () => {
     return (
       <section className="pt-12 pb-6 md:pt-16 md:pb-8 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center h-64">
-            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          <div className="text-center mb-10 md:mb-16">
+            <div className="shimmer h-10 w-64 mx-auto rounded-lg mb-4" />
+            <div className="shimmer h-6 w-96 max-w-full mx-auto rounded-lg" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="product-card p-0 overflow-hidden">
+                <div className="shimmer h-48 sm:h-56 md:h-64 w-full" />
+                <div className="p-4 space-y-3">
+                  <div className="shimmer h-6 w-3/4 rounded" />
+                  <div className="shimmer h-4 w-full rounded" />
+                  <div className="shimmer h-4 w-2/3 rounded" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -174,13 +192,18 @@ const ProductSlider = () => {
                   custom={index}
                 >
                   <div className="relative overflow-hidden rounded-lg mb-4 flex-shrink-0">
+                    {!loadedImages.has(product.id) && (
+                      <div className="absolute inset-0 shimmer" />
+                    )}
                     <img
                       src={getImageUrl(product.image)}
                       alt={product.name}
                       className={cn(
-                        "w-full h-48 sm:h-56 md:h-64 transition-transform duration-500",
-                        "object-cover group-hover:scale-110"
+                        "w-full h-48 sm:h-56 md:h-64 transition-all duration-500",
+                        "object-cover group-hover:scale-110",
+                        loadedImages.has(product.id) ? "opacity-100" : "opacity-0"
                       )}
+                      onLoad={() => handleImageLoad(product.id)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="absolute top-4 left-4">

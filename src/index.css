@@ -552,6 +552,33 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     }
   }
 
+  /* Shimmer skeleton loader */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+    background: hsl(var(--muted));
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--muted-foreground) / 0.08) 40%,
+      hsl(var(--muted-foreground) / 0.15) 50%,
+      hsl(var(--muted-foreground) / 0.08) 60%,
+      transparent 100%
+    );
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
   /* Brand cards */
   .brand-card {
     aspect-ratio: 1 / 1;

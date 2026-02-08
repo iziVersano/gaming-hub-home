@@ -19,6 +19,11 @@ const NewArrivalsSpotlight = () => {
   const { lang, t } = useI18n();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+
+  const handleImageLoad = (productId: number) => {
+    setLoadedImages((prev) => new Set(prev).add(productId));
+  };
 
   // Refetch products when language changes - queryKey includes lang for cache invalidation
   const { data: products = [] } = useQuery({
@@ -103,11 +108,18 @@ const NewArrivalsSpotlight = () => {
       >
         {/* Full Image Container */}
         <div className="relative h-72 md:h-[400px]">
+          {/* Shimmer placeholder */}
+          {!loadedImages.has(currentProduct.id) && (
+            <div className="absolute inset-0 shimmer rounded-2xl" />
+          )}
           {/* Product Image */}
           <img
             src={BRIGHT_IMAGES[currentProduct.id]}
             alt={currentProduct.title}
-            className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+            className={`w-full h-full object-cover transition-all duration-700 hover:scale-[1.02] ${
+              loadedImages.has(currentProduct.id) ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={() => handleImageLoad(currentProduct.id)}
           />
 
           {/* Subtle gradient overlay */}
@@ -203,10 +215,16 @@ const NewArrivalsSpotlight = () => {
                   : 'border-border hover:border-primary/50 opacity-70 hover:opacity-100'
               }`}
             >
+              {!loadedImages.has(product.id) && (
+                <div className="absolute inset-0 shimmer rounded-xl" />
+              )}
               <img
                 src={BRIGHT_IMAGES[product.id]}
                 alt={product.title}
-                className="w-full h-full object-contain bg-card p-1.5"
+                className={`w-full h-full object-contain bg-card p-1.5 transition-opacity duration-500 ${
+                  loadedImages.has(product.id) ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={() => handleImageLoad(product.id)}
               />
             </button>
           ))}

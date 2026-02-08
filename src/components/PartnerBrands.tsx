@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import { useI18n } from '@/hooks/I18nContext';
 
 const PartnerBrands = () => {
   const { t } = useI18n();
+  const [loadedLogos, setLoadedLogos] = useState<Set<string>>(new Set());
+
+  const handleLogoLoad = (name: string) => {
+    setLoadedLogos((prev) => new Set(prev).add(name));
+  };
   // Keep brand names in English for image paths
   const brands = [
     'microsoft',
@@ -39,13 +45,20 @@ const PartnerBrands = () => {
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-electric/10 via-neon/10 to-cyber-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
 
+                {!loadedLogos.has(name) && (
+                  <div className="absolute inset-3 shimmer rounded-lg z-10" />
+                )}
                 <img
                   src={`/brands/${name}.svg`}
                   alt={label}
                   loading="lazy"
-                  className="w-4/5 h-4/5 object-contain transition-all duration-300 group-hover:scale-105 relative z-10"
+                  className={`w-4/5 h-4/5 object-contain transition-all duration-300 group-hover:scale-105 relative z-10 ${
+                    loadedLogos.has(name) ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={() => handleLogoLoad(name)}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
+                    handleLogoLoad(name);
                     target.style.display = 'none';
                     if (target.nextElementSibling) {
                       target.nextElementSibling.textContent = label;
