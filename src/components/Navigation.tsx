@@ -17,6 +17,12 @@ const Navigation = () => {
     { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
   ];
 
+  const mobileQuickLinks = [
+    { name: t('menu.about'), href: '/about', icon: Building2 },
+    { name: t('menu.contact'), href: '/contact', icon: Mail },
+    { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
+  ];
+
   const isActive = (path: string) => location.pathname === path;
 
   // TODO: Uncomment to re-enable language toggle
@@ -131,6 +137,27 @@ const Navigation = () => {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Mobile Quick Links - Always visible on mobile */}
+      <div className="md:hidden flex justify-center gap-2 px-3 py-2 border-t border-border/30">
+        {mobileQuickLinks.map((item) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                isActive(item.href)
+                  ? 'bg-primary/20 text-accent'
+                  : 'text-white/80 hover:text-accent hover:bg-white/5'
+              }`}
+            >
+              <Icon className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" />
+              <span>{item.name}</span>
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );
