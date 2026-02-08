@@ -60,8 +60,9 @@ const Navigation = () => {
     <>
       <nav className="fixed top-0 w-full z-50 nav-glass" role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
+          {/* Force LTR so layout is always: [Logo] [Icons] [Burger] */}
+          <div className="flex justify-between items-center h-16" dir="ltr">
+            {/* Logo (left) */}
             <Link
               to="/"
               className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
@@ -77,7 +78,7 @@ const Navigation = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8" role="menubar">
+            <div className="hidden md:flex items-center gap-8" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
               {navigation.map((item) => {
                 const Icon = item.icon;
                 return (
