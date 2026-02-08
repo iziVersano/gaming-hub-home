@@ -140,44 +140,37 @@ const Navigation = () => {
         </div>
       </nav>
 
-      {/* Full-screen mobile menu overlay */}
+      {/* Half-width slide-in mobile menu */}
       {isOpen && (
         <div
           id="mobile-menu-overlay"
-          className="fixed inset-0 z-[60] md:hidden flex flex-col"
+          className="fixed inset-0 z-[60] md:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
           dir={lang === 'he' ? 'rtl' : 'ltr'}
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/95 backdrop-blur-md" />
+          {/* Backdrop - click to close */}
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setIsOpen(false)}
+          />
 
-          {/* Menu content */}
-          <div className="relative flex flex-col h-full">
-            {/* Header with logo + close button */}
-            <div className="flex justify-between items-center h-16 px-5">
-              <Link
-                to="/"
-                className="flex items-center gap-3"
-                onClick={() => setIsOpen(false)}
-              >
-                <Gamepad2 className="h-8 w-8 text-white" aria-hidden="true" />
-                <span className="logo-text text-2xl">
-                  <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
-                </span>
-              </Link>
+          {/* Menu panel - half width, right side */}
+          <div className="absolute top-0 right-0 h-full w-[55%] bg-[#0a0a0f]/98 backdrop-blur-md border-l border-white/10 flex flex-col shadow-2xl">
+            {/* Close button */}
+            <div className="flex justify-end items-center h-16 px-4">
               <button
                 className="p-2 rounded-full text-white/80 hover:text-white transition-colors"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
               >
-                <X className="h-8 w-8" strokeWidth={2} aria-hidden="true" />
+                <X className="h-7 w-7" strokeWidth={2} aria-hidden="true" />
               </button>
             </div>
 
-            {/* Navigation items - centered vertically */}
-            <div className="flex-1 flex flex-col justify-center px-8 -mt-16">
+            {/* Navigation items */}
+            <div className="flex-1 flex flex-col justify-center px-5">
               {navigation.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -186,39 +179,43 @@ const Navigation = () => {
                     to={item.href}
                     role="menuitem"
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`flex items-center gap-4 py-4 text-2xl font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${
+                    className={`flex items-center gap-3 py-3.5 text-lg font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${
                       isActive(item.href)
                         ? 'text-accent'
                         : 'text-white hover:text-accent'
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
-                    <Icon className="h-6 w-6" strokeWidth={2} aria-hidden="true" />
+                    <Icon className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
                     <span>{item.name}</span>
                   </Link>
                 );
               })}
-              {/* Get Quote button */}
-              <div className="mt-6">
-                <Button className="btn-nav w-full" onClick={() => setIsOpen(false)}>
-                  <MessageSquare className="h-5 w-5" aria-hidden="true" />
-                  <span className="text-lg">{t('menu.getQuote')}</span>
-                </Button>
-              </div>
             </div>
 
             {/* Brand logos at the bottom */}
-            <div className="px-8 pb-8">
-              <div className="flex items-center justify-center gap-6">
+            <div className="px-4 pb-6">
+              <div className="flex items-center justify-center gap-4 mb-5">
                 {menuBrands.map((brand) => (
                   <img
                     key={brand.name}
                     src={brand.src}
                     alt={brand.name}
-                    className="h-6 w-auto opacity-40"
+                    className="h-5 w-auto opacity-40"
                   />
                 ))}
               </div>
+              {/* Company logo */}
+              <Link
+                to="/"
+                className="flex items-center justify-center gap-2"
+                onClick={() => setIsOpen(false)}
+              >
+                <Gamepad2 className="h-5 w-5 text-white/40" aria-hidden="true" />
+                <span className="logo-text text-sm opacity-40">
+                  <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                </span>
+              </Link>
             </div>
           </div>
         </div>
