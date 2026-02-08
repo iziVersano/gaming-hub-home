@@ -157,15 +157,15 @@ const Navigation = () => {
           />
 
           {/* Menu panel - half width, right side */}
-          <div className="absolute top-0 right-0 h-full w-[55%] bg-[#0a0a0f]/98 backdrop-blur-md border-l border-white/10 flex flex-col shadow-2xl">
+          <div className="absolute top-0 right-0 h-full w-[55%] bg-[#0a0a0f] border-l border-white/10 flex flex-col shadow-2xl">
             {/* Close button */}
             <div className="flex justify-end items-center h-16 px-4">
               <button
-                className="p-2 rounded-full text-white/80 hover:text-white transition-colors"
+                className="p-2 rounded-full text-white hover:text-accent transition-colors"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
               >
-                <X className="h-7 w-7" strokeWidth={2} aria-hidden="true" />
+                <X className="h-7 w-7" strokeWidth={2.5} aria-hidden="true" />
               </button>
             </div>
 
@@ -195,13 +195,13 @@ const Navigation = () => {
 
             {/* Brand logos at the bottom */}
             <div className="px-4 pb-6">
-              <div className="flex items-center justify-center gap-4 mb-5">
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
                 {menuBrands.map((brand) => (
                   <img
                     key={brand.name}
                     src={brand.src}
                     alt={brand.name}
-                    className="h-5 w-auto opacity-40"
+                    className="h-4 w-auto opacity-40"
                   />
                 ))}
               </div>
