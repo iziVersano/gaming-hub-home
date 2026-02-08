@@ -17,11 +17,12 @@ const Navigation = () => {
     { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
   ];
 
-  // Icons shown in the header bar on mobile (left of burger)
+  // Icons shown in the header bar on mobile (between logo and burger)
   const mobileHeaderIcons = [
+    { href: '/about', icon: Building2, label: t('menu.about') },
     { href: '/products', icon: ShoppingBag, label: t('menu.products') },
     { href: '/contact', icon: Mail, label: t('menu.contact') },
-    { href: '/about', icon: Building2, label: t('menu.about') },
+    { href: '/accessibility', icon: Accessibility, label: t('menu.accessibility') },
   ];
 
   // Brand logos for the bottom of the full-screen menu
@@ -103,9 +104,8 @@ const Navigation = () => {
               </Button>
             </div>
 
-            {/* Mobile: Icon shortcuts + Burger menu */}
+            {/* Mobile: Icon shortcuts (between logo and burger) */}
             <div className="flex md:hidden items-center gap-1">
-              {/* Compact icon-only nav items */}
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -123,18 +123,18 @@ const Navigation = () => {
                   </Link>
                 );
               })}
-
-              {/* Burger menu button */}
-              <button
-                className="p-2.5 rounded-full text-white/90 hover:text-white transition-colors duration-200 ms-1"
-                onClick={() => setIsOpen(true)}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu-overlay"
-                aria-label="Open menu"
-              >
-                <Menu className="h-7 w-7" strokeWidth={2} aria-hidden="true" />
-              </button>
             </div>
+
+            {/* Mobile: Burger menu button (far right) */}
+            <button
+              className="flex md:hidden p-2.5 rounded-full text-white/90 hover:text-white transition-colors duration-200"
+              onClick={() => setIsOpen(true)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu-overlay"
+              aria-label="Open menu"
+            >
+              <Menu className="h-7 w-7" strokeWidth={2} aria-hidden="true" />
+            </button>
           </div>
         </div>
       </nav>
