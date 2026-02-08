@@ -170,7 +170,7 @@ const Navigation = () => {
             </div>
 
             {/* Navigation items */}
-            <div className="flex-1 flex flex-col justify-center px-5">
+            <div className="flex flex-col px-5 pt-2">
               {navigation.map((item) => {
                 const Icon = item.icon;
                 return (
