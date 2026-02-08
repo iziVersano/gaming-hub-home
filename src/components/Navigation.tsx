@@ -193,15 +193,15 @@ const Navigation = () => {
               })}
             </div>
 
-            {/* Brand logos at the bottom */}
-            <div className="px-4 pb-6">
-              <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
+            {/* Brand logos */}
+            <div className="px-4 pb-4 mt-auto">
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
                 {menuBrands.map((brand) => (
                   <img
                     key={brand.name}
                     src={brand.src}
                     alt={brand.name}
-                    className="h-4 w-auto opacity-40"
+                    className="h-6 w-auto brightness-0 invert opacity-90"
                   />
                 ))}
               </div>
