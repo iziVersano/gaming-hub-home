@@ -82,16 +82,17 @@ const Navigation = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden order-first rtl:order-first ltr:order-last">
             <Button
               variant="mobile-menu"
-              size="icon"
+              size={null}
+              className="h-14 w-14 p-0 flex items-center justify-center rounded-full"
               onClick={() => setIsOpen(!isOpen)}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
-              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+              {isOpen ? <X size={36} strokeWidth={2.5} aria-hidden="true" /> : <Menu size={36} strokeWidth={2.5} aria-hidden="true" />}
             </Button>
           </div>
         </div>

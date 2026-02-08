@@ -85,7 +85,7 @@ const Hero = () => {
               </span>
             </h1>
 
-            <div className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+            <div className="flex items-center justify-center px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
               <p className="text-base md:text-lg lg:text-xl text-foreground font-semibold">
                 {t('hero.desc')}
               </p>
@@ -93,18 +93,18 @@ const Hero = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0 justify-center items-center pt-6">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 justify-center items-center pt-8">
             <Link to="/products">
-              <Button className="btn-hero-square group">
-                <Grid3X3 className="h-5 w-5 md:h-6 md:w-6" />
-                <span>{t('hero.explore', 'Explore Products')}</span>
+              <Button size={null} className="btn-hero-square group">
+                <Grid3X3 className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.explore', 'Explore Products')}</span>
               </Button>
             </Link>
 
             <Link to="/contact">
-              <Button className="btn-neon-square group">
-                <Send className="h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:translate-x-1" />
-                <span>{t('hero.contact', 'Contact Us')}</span>
+              <Button size={null} className="btn-neon-square group">
+                <Send className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8 transition-transform group-hover:translate-x-1" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.contact', 'Contact Us')}</span>
               </Button>
             </Link>
           </div>

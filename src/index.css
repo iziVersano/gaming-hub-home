@@ -240,10 +240,10 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   /* Hero Square Buttons - Refined */
   .btn-hero-square {
-    @apply bg-gradient-to-br from-primary via-primary-glow to-primary text-white 
-           w-44 h-44 md:w-52 md:h-52 flex flex-row items-center justify-center text-center
-           font-medium text-lg md:text-xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
-           border border-primary/20 gap-3 rounded-2xl;
+    @apply bg-gradient-to-br from-primary via-primary-glow to-primary text-white
+           w-60 h-60 md:w-auto md:h-auto md:px-20 md:py-8 lg:px-24 lg:py-9 flex flex-row items-center justify-center text-center
+           font-semibold text-xl md:text-3xl lg:text-4xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
+           border border-primary/20 gap-4 rounded-2xl md:rounded-full;
     box-shadow: var(--shadow-primary);
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -266,8 +266,8 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   .btn-neon-square {
     @apply bg-gradient-to-br from-accent via-accent-glow to-accent text-white
-           w-44 h-44 md:w-52 md:h-52 flex flex-row items-center justify-center text-center
-           border border-accent/20 font-medium text-lg md:text-xl transition-all duration-300 hover:scale-[1.03] relative gap-3 rounded-2xl;
+           w-60 h-60 md:w-auto md:h-auto md:px-20 md:py-8 lg:px-24 lg:py-9 flex flex-row items-center justify-center text-center
+           border border-accent/20 font-semibold text-xl md:text-3xl lg:text-4xl transition-all duration-300 hover:scale-[1.03] relative gap-4 rounded-2xl md:rounded-full;
     box-shadow: var(--shadow-neon);
     font-weight: 500;
     font-family: 'Inter', sans-serif;
