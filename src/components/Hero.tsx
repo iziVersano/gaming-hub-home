@@ -1,16 +1,66 @@
 import { Button } from '@/components/ui/button';
-import { Grid3X3, Send } from 'lucide-react';
+import { Grid3X3, Send, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import heroImage from '@/assets/hero-tech.jpg';
 import NewArrivalsSpotlight from '@/components/NewArrivalsSpotlight';
 import { isFeatureEnabled } from '@/lib/featureFlags';
 import { useI18n } from '@/hooks/I18nContext';
 
+const HERO_VIDEOS = [
+  { src: '/videos/hero-gls.mp4', label: 'Gaming Luxury Screens' },
+  { src: '/videos/hero-cubism.mp4', label: 'Cubism VR' },
+];
+
 const Hero = () => {
   const { t } = useI18n();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const transitionTimeout = useRef<ReturnType<typeof setTimeout>>();
+
+  const goToVideo = useCallback((index: number) => {
+    if (index === currentVideoIndex || isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentVideoIndex(index);
+    // Reset and play the new video
+    const newVideo = videoRefs.current[index];
+    if (newVideo) {
+      newVideo.currentTime = 0;
+      newVideo.play().catch(() => {});
+    }
+    // Clear transition lock after crossfade completes
+    transitionTimeout.current = setTimeout(() => {
+      setIsTransitioning(false);
+      // Pause the old videos
+      videoRefs.current.forEach((v, i) => {
+        if (i !== index && v) v.pause();
+      });
+    }, 700);
+  }, [currentVideoIndex, isTransitioning]);
+
+  const goToNext = useCallback(() => {
+    goToVideo((currentVideoIndex + 1) % HERO_VIDEOS.length);
+  }, [currentVideoIndex, goToVideo]);
+
+  const goToPrev = useCallback(() => {
+    goToVideo((currentVideoIndex - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length);
+  }, [currentVideoIndex, goToVideo]);
+
+  // When current video ends, advance to next
+  const handleVideoEnded = useCallback((index: number) => {
+    if (index === currentVideoIndex) {
+      goToNext();
+    }
+  }, [currentVideoIndex, goToNext]);
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimeout.current) clearTimeout(transitionTimeout.current);
+    };
+  }, []);
 
   useEffect(() => {
     const img = new Image();
@@ -58,21 +108,74 @@ const Hero = () => {
           {/* Hero Visual - Video mode / Spotlight / Promotional Image */}
           <div className="relative mb-6 md:mb-10">
             {isFeatureEnabled('HERO_VIDEO_MODE') ? (
-              /* Video Mode */
+              /* Video Carousel Mode */
               <div className="flex justify-center">
-                <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+                <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl relative group">
                   {!videoFailed ? (
-                    <video
-                      className="w-full h-auto"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      poster="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
-                      onError={() => setVideoFailed(true)}
-                    >
-                      <source src="/videos/hero.mp4" type="video/mp4" />
-                    </video>
+                    <div className="relative aspect-video">
+                      {/* Shimmer placeholder */}
+                      <div className="absolute inset-0 shimmer-card rounded-2xl z-0" />
+
+                      {/* Stacked videos with crossfade */}
+                      {HERO_VIDEOS.map((video, index) => (
+                        <video
+                          key={video.src}
+                          ref={(el) => { videoRefs.current[index] = el; }}
+                          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                            index === currentVideoIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                          }`}
+                          autoPlay={index === 0}
+                          muted
+                          playsInline
+                          poster="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
+                          onError={() => setVideoFailed(true)}
+                          onEnded={() => handleVideoEnded(index)}
+                        >
+                          <source src={video.src} type="video/mp4" />
+                        </video>
+                      ))}
+
+                      {/* Navigation arrows */}
+                      {HERO_VIDEOS.length > 1 && (
+                        <>
+                          <button
+                            onClick={goToPrev}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all duration-300 opacity-0 group-hover:opacity-100"
+                            aria-label="Previous video"
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={goToNext}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all duration-300 opacity-0 group-hover:opacity-100"
+                            aria-label="Next video"
+                          >
+                            <ChevronRight className="w-5 h-5" />
+                          </button>
+                        </>
+                      )}
+
+                      {/* Dots indicator */}
+                      {HERO_VIDEOS.length > 1 && (
+                        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-20">
+                          {HERO_VIDEOS.map((_, index) => (
+                            <button
+                              key={index}
+                              onClick={() => goToVideo(index)}
+                              className={`h-2 rounded-full transition-all duration-300 ${
+                                index === currentVideoIndex
+                                  ? 'bg-white w-8'
+                                  : 'bg-white/40 hover:bg-white/60 w-2'
+                              }`}
+                              aria-label={`Go to video ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Subtle bottom gradient for dots readability */}
+                      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 to-transparent z-[15] pointer-events-none" />
+                    </div>
                   ) : (
                     /* Animated fallback when no video file exists */
                     <div className="relative overflow-hidden aspect-video">
@@ -84,7 +187,7 @@ const Hero = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4 text-center">
                         <span className="inline-block px-4 py-2 bg-black/60 backdrop-blur-sm rounded-full text-white/80 text-sm">
-                          Video mode active — drop hero.mp4 in /videos
+                          Video mode active — drop hero videos in /videos
                         </span>
                       </div>
                     </div>
