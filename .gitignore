@@ -104,6 +104,7 @@ ScaffoldingReadMe.txt
 project.assets.json
 project.nuget.cache
 
-# Video files (too large for git)
+# Video files (too large for git) - except hero.mp4
 public/videos/*.mp4
+!public/videos/hero.mp4
 public/videos/*.webm

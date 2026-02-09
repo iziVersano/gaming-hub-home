@@ -71,7 +71,7 @@ const Hero = () => {
                       poster="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
                       onError={() => setVideoFailed(true)}
                     >
-                      <source src="/videos/AQNoBZ3Vdi1W83wyweiQCR1qXG14qEVLjagi6bE1LSquhgzbWAlWkyoT7hXqYck5qDCmxi3HA8QjSll_c0On2uR5.mp4" type="video/mp4" />
+                      <source src="/videos/hero.mp4" type="video/mp4" />
                     </video>
                   ) : (
                     /* Animated fallback when no video file exists */
