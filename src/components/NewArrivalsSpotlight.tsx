@@ -108,10 +108,18 @@ const NewArrivalsSpotlight = () => {
       >
         {/* Full Image Container */}
         <div className="relative h-72 md:h-[400px]">
-          {/* Shimmer placeholder */}
-          {!loadedImages.has(currentProduct.id) && (
-            <div className="absolute inset-0 shimmer rounded-2xl" />
-          )}
+          {/* Shimmer placeholder with content hint */}
+          <div
+            className={`absolute inset-0 shimmer-card rounded-2xl transition-opacity duration-700 ${
+              loadedImages.has(currentProduct.id) ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+          >
+            {/* Faux text lines at bottom to hint at content */}
+            <div className="absolute bottom-8 left-6 right-6 space-y-2.5">
+              <div className="h-5 w-3/5 rounded-md bg-muted-foreground/10" />
+              <div className="h-3.5 w-4/5 rounded-md bg-muted-foreground/6" />
+            </div>
+          </div>
           {/* Product Image */}
           <img
             src={BRIGHT_IMAGES[currentProduct.id]}
@@ -215,9 +223,11 @@ const NewArrivalsSpotlight = () => {
                   : 'border-border hover:border-primary/50 opacity-70 hover:opacity-100'
               }`}
             >
-              {!loadedImages.has(product.id) && (
-                <div className="absolute inset-0 shimmer rounded-xl" />
-              )}
+              <div
+                className={`absolute inset-0 shimmer rounded-xl transition-opacity duration-500 ${
+                  loadedImages.has(product.id) ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                }`}
+              />
               <img
                 src={BRIGHT_IMAGES[product.id]}
                 alt={product.title}

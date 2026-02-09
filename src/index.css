@@ -552,11 +552,17 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     }
   }
 
-  /* Shimmer skeleton loader */
+  /* Shimmer skeleton loader - premium tech style */
   .shimmer {
     position: relative;
     overflow: hidden;
-    background: hsl(var(--muted));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted-foreground) / 0.06) 50%,
+      hsl(var(--muted)) 100%
+    );
+    animation: shimmer-pulse 2.5s ease-in-out infinite;
   }
 
   .shimmer::after {
@@ -564,19 +570,64 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      90deg,
+      105deg,
       transparent 0%,
-      hsl(var(--muted-foreground) / 0.08) 40%,
-      hsl(var(--muted-foreground) / 0.15) 50%,
-      hsl(var(--muted-foreground) / 0.08) 60%,
+      transparent 35%,
+      hsl(var(--primary) / 0.06) 42%,
+      hsl(var(--primary) / 0.12) 50%,
+      hsl(var(--primary) / 0.06) 58%,
+      transparent 65%,
       transparent 100%
     );
-    animation: shimmer 1.8s ease-in-out infinite;
+    animation: shimmer-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
-  @keyframes shimmer {
+  @keyframes shimmer-sweep {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
+  }
+
+  @keyframes shimmer-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* Shimmer with content-hint lines (for card placeholders) */
+  .shimmer-card {
+    position: relative;
+    overflow: hidden;
+    background: hsl(var(--muted));
+  }
+
+  .shimmer-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+    background: linear-gradient(
+      to top,
+      hsl(var(--muted-foreground) / 0.08) 0%,
+      transparent 100%
+    );
+  }
+
+  .shimmer-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 35%,
+      hsl(var(--primary) / 0.06) 42%,
+      hsl(var(--primary) / 0.12) 50%,
+      hsl(var(--primary) / 0.06) 58%,
+      transparent 65%,
+      transparent 100%
+    );
+    animation: shimmer-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   /* Ken Burns slow zoom animation for video fallback */
