@@ -8,8 +8,8 @@ import { isFeatureEnabled } from '@/lib/featureFlags';
 import { useI18n } from '@/hooks/I18nContext';
 
 const HERO_VIDEOS = [
-  { src: '/videos/hero-gls.mp4', label: 'Gaming Luxury Screens' },
   { src: '/videos/hero-cubism.mp4', label: 'Cubism VR' },
+  { src: '/videos/hero-gls.mp4', label: 'Gaming Luxury Screens' },
 ];
 
 const Hero = () => {
