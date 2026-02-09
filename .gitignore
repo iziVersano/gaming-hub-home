@@ -103,3 +103,7 @@ ScaffoldingReadMe.txt
 *.cache
 project.assets.json
 project.nuget.cache
+
+# Video files (too large for git)
+public/videos/*.mp4
+public/videos/*.webm

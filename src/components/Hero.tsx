@@ -10,6 +10,7 @@ import { useI18n } from '@/hooks/I18nContext';
 const Hero = () => {
   const { t } = useI18n();
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     const img = new Image();
@@ -54,9 +55,43 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-6 md:space-y-8">
-          {/* Hero Visual - Toggle between Spotlight and Promotional Image */}
+          {/* Hero Visual - Video mode / Spotlight / Promotional Image */}
           <div className="relative mb-6 md:mb-10">
-            {isFeatureEnabled('HERO_NEW_ARRIVALS_SPOTLIGHT') ? (
+            {isFeatureEnabled('HERO_VIDEO_MODE') ? (
+              /* Video Mode */
+              <div className="flex justify-center">
+                <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+                  {!videoFailed ? (
+                    <video
+                      className="w-full h-auto"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      poster="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
+                      onError={() => setVideoFailed(true)}
+                    >
+                      <source src="/videos/AQNoBZ3Vdi1W83wyweiQCR1qXG14qEVLjagi6bE1LSquhgzbWAlWkyoT7hXqYck5qDCmxi3HA8QjSll_c0On2uR5.mp4" type="video/mp4" />
+                    </video>
+                  ) : (
+                    /* Animated fallback when no video file exists */
+                    <div className="relative overflow-hidden aspect-video">
+                      <img
+                        src="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
+                        alt="Consoltech products showcase"
+                        className="absolute inset-0 w-full h-full object-cover animate-ken-burns"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4 text-center">
+                        <span className="inline-block px-4 py-2 bg-black/60 backdrop-blur-sm rounded-full text-white/80 text-sm">
+                          Video mode active — drop hero.mp4 in /videos
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : isFeatureEnabled('HERO_NEW_ARRIVALS_SPOTLIGHT') ? (
               /* New Arrivals Spotlight */
               <div className="flex justify-center">
                 <NewArrivalsSpotlight />
