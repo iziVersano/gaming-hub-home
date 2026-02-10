@@ -21,10 +21,10 @@ const PartnerBrands = () => {
   ];
 
   return (
-    <section className="pt-10 pb-2 md:pt-8 md:pb-4 bg-card/30">
+    <section className="pt-6 pb-2 md:pt-8 md:pb-4 bg-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+        <div className="text-center mb-6 md:mb-12">
+          <h2 className="text-4xl md:text-4xl font-bold mb-6">
             {t('products.trustedTitle')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -33,13 +33,13 @@ const PartnerBrands = () => {
         </div>
 
         {/* Brand logos grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-4 p-2 sm:p-4 bg-card/20 rounded-2xl border border-border/20">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 p-3 sm:p-4 bg-card/20 rounded-2xl border border-border/20">
           {brands.map((name, index) => {
             const label = name.charAt(0).toUpperCase() + name.slice(1);
             return (
               <div
                 key={name}
-                className="brand-card grid place-items-center p-3 rounded-xl transition-all duration-300 group relative overflow-hidden border border-border/10"
+                className="brand-card grid place-items-center p-4 rounded-xl transition-all duration-300 group relative overflow-hidden border border-border/10"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Hover glow effect */}

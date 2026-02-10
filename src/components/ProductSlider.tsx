@@ -109,7 +109,7 @@ const ProductSlider = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((i) => (
               <div key={i} className="product-card p-0 overflow-hidden" style={{ animationDelay: `${i * 150}ms` }}>
-                <div className="shimmer-card h-48 sm:h-56 md:h-64 w-full rounded-t-2xl" />
+                <div className="shimmer-card h-56 sm:h-56 md:h-64 w-full rounded-t-2xl" />
                 <div className="p-4 space-y-3">
                   <div className="shimmer h-5 w-1/3 rounded-full" />
                   <div className="shimmer h-6 w-3/4 rounded-md" />
@@ -135,9 +135,9 @@ const ProductSlider = () => {
     <section className="pt-12 pb-6 md:pt-16 md:pb-8 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <div className="mb-8">
-            <span className="gradient-text text-3xl md:text-4xl font-bold block mb-2">{t('products.featuredTitle')}</span>
+            <span className="gradient-text text-4xl md:text-4xl font-bold block mb-2">{t('products.featuredTitle')}</span>
             <div className="text-lg md:text-2xl text-muted-foreground">{t('products.featuredDescription')}</div>
           </div>
         </div>
@@ -169,7 +169,7 @@ const ProductSlider = () => {
             breakpoints={{
               320: {
                 slidesPerView: 1,
-                spaceBetween: 16,
+                spaceBetween: 12,
               },
               768: {
                 slidesPerView: 2,
@@ -205,7 +205,7 @@ const ProductSlider = () => {
                       src={getImageUrl(product.image)}
                       alt={product.name}
                       className={cn(
-                        "w-full h-48 sm:h-56 md:h-64 transition-all duration-500",
+                        "w-full h-56 sm:h-56 md:h-64 transition-all duration-500",
                         "object-cover group-hover:scale-110",
                         loadedImages.has(product.id) ? "opacity-100" : "opacity-0"
                       )}

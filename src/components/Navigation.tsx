@@ -60,53 +60,67 @@ const Navigation = () => {
     <>
       <nav className="fixed top-0 w-full z-50 nav-glass" role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Force LTR so layout is always: [Logo] [Icons] [Burger] */}
-          <div className="flex justify-between items-center h-16" dir="ltr">
-            {/* Logo (left) */}
-            <Link
-              to="/"
-              className="flex items-center gap-1.5 sm:gap-3 group shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
-              aria-label="Consoltech - Home"
-            >
-              <div className="relative">
-                <Gamepad2 className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-              </div>
-              <span className="logo-text text-base sm:text-2xl md:text-3xl lg:text-4xl">
-                <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
-              </span>
-            </Link>
+          {/* Force LTR so layout is always: [Logo] [Burger] */}
+          <div className="flex flex-col" dir="ltr">
+            {/* Row 1: Logo + Burger */}
+            <div className="flex justify-between items-center h-16">
+              {/* Logo (left) */}
+              <Link
+                to="/"
+                className="flex items-center gap-1.5 sm:gap-3 group shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
+                aria-label="Consoltech - Home"
+              >
+                <div className="relative">
+                  <Gamepad2 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                </div>
+                <span className="logo-text text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                  <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                </span>
+              </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
-              {navigation.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    role="menuitem"
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`flex items-center gap-2 py-1 font-semibold text-[15px] tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded ${
-                      isActive(item.href)
-                        ? 'text-accent border-b-2 border-accent'
-                        : 'text-white hover:text-accent'
-                    }`}
-                  >
-                    <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
-              <Button className="btn-nav">
-                <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                <span>{t('menu.getQuote')}</span>
-                <LanguageToggleInline />
-              </Button>
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center gap-8" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+                {navigation.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      role="menuitem"
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                      className={`flex items-center gap-2 py-1 font-semibold text-[15px] tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded ${
+                        isActive(item.href)
+                          ? 'text-accent border-b-2 border-accent'
+                          : 'text-white hover:text-accent'
+                      }`}
+                    >
+                      <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+                <Button className="btn-nav">
+                  <MessageSquare className="h-4 w-4" aria-hidden="true" />
+                  <span>{t('menu.getQuote')}</span>
+                  <LanguageToggleInline />
+                </Button>
+              </div>
+
+              {/* Mobile: Burger only (right side) */}
+              <button
+                className="md:hidden p-3 rounded-full text-white hover:text-accent transition-colors duration-200"
+                onClick={() => setIsOpen(true)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu-overlay"
+                aria-label="Open menu"
+              >
+                <Menu className="h-7 w-7" strokeWidth={3} aria-hidden="true" />
+              </button>
             </div>
 
-            {/* Mobile: Icon shortcuts + Burger (right side) */}
-            <div className="flex md:hidden items-center shrink-0">
+            {/* Row 2: Mobile nav icon shortcuts (below logo, always visible) */}
+            <div className="flex md:hidden items-center justify-center gap-5 pb-2">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -114,27 +128,16 @@ const Navigation = () => {
                     key={item.href}
                     to={item.href}
                     aria-label={item.label}
-                    className={`p-1.5 rounded-full transition-colors duration-200 ${
+                    className={`p-2.5 rounded-full transition-colors duration-200 ${
                       isActive(item.href)
                         ? 'text-accent'
                         : 'text-white/70 hover:text-white active:text-accent'
                     }`}
                   >
-                    <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
+                    <Icon className="h-6 w-6" strokeWidth={2} aria-hidden="true" />
                   </Link>
                 );
               })}
-
-              {/* Burger menu button */}
-              <button
-                className="p-1.5 rounded-full text-white/90 hover:text-white transition-colors duration-200 ml-1"
-                onClick={() => setIsOpen(true)}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu-overlay"
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
-              </button>
             </div>
           </div>
         </div>
