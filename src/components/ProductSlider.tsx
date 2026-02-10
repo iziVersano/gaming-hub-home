@@ -100,9 +100,9 @@ const ProductSlider = () => {
 
   if (isLoading) {
     return (
-      <section className="pt-12 pb-6 md:pt-16 md:pb-8 relative">
+      <section className="pt-6 pb-4 md:pt-16 md:pb-8 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-6 md:mb-16">
             <div className="shimmer h-10 w-64 mx-auto rounded-lg mb-4" />
             <div className="shimmer h-6 w-96 max-w-full mx-auto rounded-lg" />
           </div>
@@ -132,10 +132,10 @@ const ProductSlider = () => {
   }
 
   return (
-    <section className="pt-12 pb-6 md:pt-16 md:pb-8 relative">
+    <section className="pt-6 pb-4 md:pt-16 md:pb-8 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <div className="mb-8">
             <span className="gradient-text text-4xl md:text-4xl font-bold block mb-2">{t('products.featuredTitle')}</span>
             <div className="text-lg md:text-2xl text-muted-foreground">{t('products.featuredDescription')}</div>

@@ -33,13 +33,13 @@ const PartnerBrands = () => {
         </div>
 
         {/* Brand logos grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 p-3 sm:p-4 bg-card/20 rounded-2xl border border-border/20">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-4 p-4 sm:p-4 bg-card/20 rounded-2xl border border-border/20">
           {brands.map((name, index) => {
             const label = name.charAt(0).toUpperCase() + name.slice(1);
             return (
               <div
                 key={name}
-                className="brand-card grid place-items-center p-4 rounded-xl transition-all duration-300 group relative overflow-hidden border border-border/10"
+                className="brand-card grid place-items-center p-5 rounded-xl transition-all duration-300 group relative overflow-hidden border border-border/10"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Hover glow effect */}
@@ -75,7 +75,7 @@ const PartnerBrands = () => {
         </div>
 
         {/* Partnership CTA */}
-        <div className="text-center mt-8 md:mt-12">
+        <div className="text-center mt-4 md:mt-12">
           <div className="inline-flex items-center space-x-2 text-muted-foreground">
             <div className="flex -space-x-2">
               {[1, 2, 3].map((i) => (

@@ -69,10 +69,10 @@ const Index = () => {
       <PartnerBrands />
       
       {/* Why Choose Us Section */}
-      <section className="pt-4 md:pt-6 pb-12 md:pb-20">
+      <section className="pt-2 md:pt-6 pb-6 md:pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
               {t('index.whyChoose.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -95,7 +95,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-primary/10 to-accent/10">
+      <section className="py-8 md:py-20 bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             {t('index.cta.title')}
@@ -121,7 +121,7 @@ const Index = () => {
       </section>
 
       {/* About Consoltech Section */}
-      <section id="about-home" className="block w-full py-10 px-4 sm:px-6 mt-12 mb-8">
+      <section id="about-home" className="block w-full py-6 px-4 sm:px-6 mt-4 md:mt-12 mb-4 md:mb-8">
         <div className="max-w-7xl mx-auto">
           {/* About Card */}
           <div className="product-card p-8 mb-8">

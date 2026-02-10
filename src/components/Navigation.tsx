@@ -71,10 +71,10 @@ const Navigation = () => {
                 aria-label="Consoltech - Home"
               >
                 <div className="relative">
-                  <Gamepad2 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
+                  <Gamepad2 className="h-10 w-10 sm:h-10 sm:w-10 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </div>
-                <span className="logo-text text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                <span className="logo-text text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
                   <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                 </span>
               </Link>
@@ -115,12 +115,12 @@ const Navigation = () => {
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-7 w-7" strokeWidth={3} aria-hidden="true" />
+                <Menu className="h-9 w-9" strokeWidth={3} aria-hidden="true" />
               </button>
             </div>
 
             {/* Row 2: Mobile nav icon shortcuts (below logo, always visible) */}
-            <div className="flex md:hidden items-center justify-center gap-5 pb-2">
+            <div className="flex md:hidden items-center justify-center gap-6 pb-2 pt-1 border-t border-white/10">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (

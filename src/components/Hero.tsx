@@ -69,7 +69,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-8 md:pt-24 md:pb-16 overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center pt-32 pb-4 md:pt-24 md:pb-16 overflow-hidden">
       {/* Background Image with Professional Treatment */}
       <div className="absolute inset-0 z-0">
         {/* Loading placeholder */}
