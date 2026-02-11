@@ -358,19 +358,20 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   }
 
   /* Navigation styling */
+  /* Primary header layer - deep navy with subtle blue tint */
   .nav-glass {
     backdrop-filter: blur(16px);
-    background: rgba(6, 6, 10, 0.98);
+    background: linear-gradient(180deg, rgba(10, 14, 28, 0.99), rgba(8, 10, 22, 0.98));
     border-bottom: none;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   }
 
-  /* Mobile nav bar (icon row) - secondary layer */
+  /* Secondary nav bar (icon row) - distinct darker tone with accent edge */
   .nav-icon-bar {
-    background: linear-gradient(180deg, rgba(20, 20, 30, 0.95), rgba(12, 12, 18, 0.98));
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    background: linear-gradient(180deg, rgba(14, 10, 22, 0.97), rgba(10, 8, 18, 0.99));
+    border-top: 1px solid rgba(120, 80, 220, 0.15);
+    border-bottom: 1px solid rgba(120, 80, 220, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(120, 80, 220, 0.08);
   }
 
   /* Product Slider Custom Styling */
