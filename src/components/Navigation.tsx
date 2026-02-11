@@ -76,7 +76,7 @@ const Navigation = () => {
                   <Gamepad2 className="h-10 w-10 sm:h-10 sm:w-10 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </div>
-                <span className="logo-text text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
+                <span className="logo-text text-[1.6rem] sm:text-2xl md:text-3xl lg:text-4xl">
                   <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                 </span>
               </Link>
@@ -111,18 +111,18 @@ const Navigation = () => {
 
               {/* Mobile: Burger only (right side) */}
               <button
-                className="md:hidden p-3 rounded-full text-white hover:text-accent transition-colors duration-200"
+                className="md:hidden p-3 rounded-xl bg-white/[0.08] border border-white/10 text-white hover:text-accent hover:bg-white/[0.12] hover:border-accent/30 transition-all duration-200"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-9 w-9" strokeWidth={3} aria-hidden="true" />
+                <Menu className="h-7 w-7" strokeWidth={2.5} aria-hidden="true" />
               </button>
             </div>
 
-            {/* Row 2: Mobile nav icon shortcuts (below logo, always visible) */}
-            <div className="flex md:hidden items-center justify-center gap-4 pb-2.5 pt-2.5 border-t border-white/20 bg-gradient-to-r from-primary/10 via-transparent to-accent/10">
+            {/* Row 2: Mobile nav icon shortcuts - visually distinct secondary layer */}
+            <div className="flex md:hidden items-center justify-center gap-3 py-2.5 nav-icon-bar">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -130,10 +130,10 @@ const Navigation = () => {
                     key={item.href}
                     to={item.href}
                     aria-label={item.label}
-                    className={`p-2.5 rounded-lg transition-colors duration-200 ${
+                    className={`p-2.5 rounded-lg transition-all duration-200 ${
                       isActive(item.href)
-                        ? 'text-accent bg-accent/10'
-                        : 'text-white hover:text-accent active:text-accent'
+                        ? 'text-accent bg-accent/15 shadow-[0_0_12px_hsl(var(--accent)/0.25)] border border-accent/20'
+                        : 'text-white/60 hover:text-white hover:bg-white/[0.06] active:text-accent'
                     }`}
                   >
                     <Icon className="h-6 w-6" strokeWidth={2.2} aria-hidden="true" />
