@@ -111,7 +111,7 @@ const Navigation = () => {
 
               {/* Mobile: Burger only (right side) */}
               <button
-                className="md:hidden p-3 rounded-xl bg-accent/20 border border-accent/30 text-accent hover:bg-accent/30 hover:border-accent/50 transition-all duration-200 shadow-[0_0_12px_hsl(var(--accent)/0.2)]"
+                className="md:hidden p-3 rounded-xl bg-white/90 border border-white/60 text-gray-900 hover:bg-white hover:border-white transition-all duration-200 shadow-[0_0_16px_rgba(255,255,255,0.3)]"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
