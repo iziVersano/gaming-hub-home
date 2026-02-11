@@ -214,7 +214,7 @@ const Warranty = () => {
         <html lang="he" />
       </Helmet>
 
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 pt-32 md:pt-24">
       <div className="max-w-2xl mx-auto px-4 py-8 sm:py-16">
         {/* Header */}
         <div className="text-center mb-8">

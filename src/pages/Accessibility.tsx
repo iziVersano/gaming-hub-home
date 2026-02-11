@@ -19,7 +19,7 @@ const Accessibility = () => {
 
       <Navigation />
 
-      <main id="main-content" className="flex-1 pt-24 pb-16" dir="rtl" lang="he">
+      <main id="main-content" className="flex-1 pt-32 md:pt-24 pb-16" dir="rtl" lang="he">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <header className="mb-12 text-center">
             <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-4">

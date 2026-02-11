@@ -166,7 +166,7 @@ const NintendoSwitch2Manual = () => {
       <Navigation />
 
       {/* Main content is RTL Hebrew */}
-      <main id="main-content" dir="rtl" className="container px-4 md:px-6 pt-24 pb-16 flex-1">
+      <main id="main-content" dir="rtl" className="container px-4 md:px-6 pt-32 md:pt-24 pb-16 flex-1">
         {/* CTA Banner - Top */}
         <div className="mb-10">
           <WarrantyCTABanner />
