@@ -120,7 +120,7 @@ const Navigation = () => {
             </div>
 
             {/* Row 2: Mobile nav icon shortcuts (below logo, always visible) */}
-            <div className="flex md:hidden items-center justify-center gap-6 pb-2 pt-1 border-t border-white/10">
+            <div className="flex md:hidden items-center justify-center gap-6 pb-2.5 pt-2.5 border-t border-white/25 bg-white/[0.03]">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -128,13 +128,13 @@ const Navigation = () => {
                     key={item.href}
                     to={item.href}
                     aria-label={item.label}
-                    className={`p-2.5 rounded-full transition-colors duration-200 ${
+                    className={`p-2.5 rounded-lg transition-colors duration-200 ${
                       isActive(item.href)
-                        ? 'text-accent'
-                        : 'text-white/70 hover:text-white active:text-accent'
+                        ? 'text-accent bg-accent/10'
+                        : 'text-white hover:text-accent active:text-accent'
                     }`}
                   >
-                    <Icon className="h-6 w-6" strokeWidth={2} aria-hidden="true" />
+                    <Icon className="h-6 w-6" strokeWidth={2.2} aria-hidden="true" />
                   </Link>
                 );
               })}
