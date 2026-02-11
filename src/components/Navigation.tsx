@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility } from 'lucide-react';
+import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
 
@@ -19,9 +19,11 @@ const Navigation = () => {
 
   // Icons shown in the header bar on mobile (between logo and burger)
   const mobileHeaderIcons = [
+    { href: '/', icon: House, label: t('menu.home') },
     { href: '/about', icon: Building2, label: t('menu.about') },
     { href: '/products', icon: ShoppingBag, label: t('menu.products') },
     { href: '/contact', icon: Mail, label: t('menu.contact') },
+    { href: '/warranty', icon: ShieldCheck, label: t('menu.warranty', 'Warranty') },
     { href: '/accessibility', icon: Accessibility, label: t('menu.accessibility') },
   ];
 
@@ -120,7 +122,7 @@ const Navigation = () => {
             </div>
 
             {/* Row 2: Mobile nav icon shortcuts (below logo, always visible) */}
-            <div className="flex md:hidden items-center justify-center gap-6 pb-2.5 pt-2.5 border-t border-white/25 bg-white/[0.03]">
+            <div className="flex md:hidden items-center justify-center gap-4 pb-2.5 pt-2.5 border-t border-white/20 bg-gradient-to-r from-primary/10 via-transparent to-accent/10">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
                 return (
