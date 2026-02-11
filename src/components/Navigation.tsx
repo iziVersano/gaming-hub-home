@@ -111,7 +111,7 @@ const Navigation = () => {
 
               {/* Mobile: Burger only (right side) */}
               <button
-                className="md:hidden p-3 rounded-xl bg-white/90 border border-white/60 text-gray-900 hover:bg-white hover:border-white transition-all duration-200 shadow-[0_0_16px_rgba(255,255,255,0.3)]"
+                className="md:hidden p-3 rounded-lg bg-primary/15 border border-primary/30 text-white hover:bg-primary/25 hover:border-primary/50 hover:shadow-[0_0_14px_hsl(var(--primary)/0.3)] transition-all duration-300"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
@@ -130,10 +130,10 @@ const Navigation = () => {
                     key={item.href}
                     to={item.href}
                     aria-label={item.label}
-                    className={`p-2.5 rounded-lg transition-all duration-200 ${
+                    className={`p-2.5 rounded-lg transition-all duration-300 ${
                       isActive(item.href)
-                        ? 'text-accent bg-accent/15 shadow-[0_0_12px_hsl(var(--accent)/0.25)] border border-accent/20'
-                        : 'text-white/60 hover:text-white hover:bg-white/[0.06] active:text-accent'
+                        ? 'text-primary nav-icon-active'
+                        : 'text-white/50 hover:text-white hover:bg-white/[0.05] active:text-primary'
                     }`}
                   >
                     <Icon className="h-6 w-6" strokeWidth={2.2} aria-hidden="true" />
