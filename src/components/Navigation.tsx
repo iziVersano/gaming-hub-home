@@ -74,7 +74,7 @@ const Navigation = () => {
                   <Gamepad2 className="h-10 w-10 sm:h-12 sm:w-12 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </div>
-                <span className="logo-text text-[min(10vw,2.6rem)] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.12em] sm:tracking-[0.2em] md:tracking-wider">
+                <span className="logo-text text-[min(8.5vw,2.6rem)] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.06em] sm:tracking-[0.2em] md:tracking-wider">
                   <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                 </span>
               </Link>
