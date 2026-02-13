@@ -143,7 +143,7 @@ const Products = () => {
       <Navigation />
       <main className="container px-4 md:px-6 pt-32 md:pt-24 pb-16 flex-1">
         <header className="max-w-4xl mx-auto text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold">{t('products.title')}</h1>
+          <h1 className="text-4xl md:text-5xl text-section-heading">{t('products.title')}</h1>
         </header>
 
         {/* Category Filter */}
@@ -222,7 +222,7 @@ const Products = () => {
                   </div>
                   
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors whitespace-nowrap overflow-hidden text-ellipsis">
+                    <h3 className="text-xl text-sub-bold text-foreground group-hover:text-accent transition-colors whitespace-nowrap overflow-hidden text-ellipsis">
                       {product.name}
                     </h3>
                     
@@ -279,10 +279,10 @@ const Products = () => {
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-primary/10 to-accent/10">
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl text-section-heading mb-6">
               {t('products.customSolutionTitle')}
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground text-desc-bold mb-8">
               {t('products.customSolutionDescription')}
             </p>
             <Button asChild className="btn-hero">

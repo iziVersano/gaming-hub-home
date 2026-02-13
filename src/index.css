@@ -298,6 +298,55 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     font-weight: 600;
   }
 
+  /* Bold heading text - high impact, stands out like billboard text */
+  .text-bold-heading {
+    font-weight: 900;
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.15);
+    letter-spacing: -0.02em;
+  }
+
+  /* Hero-level bold heading - maximum impact */
+  .text-hero-bold {
+    font-weight: 900;
+    text-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 6px 20px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.025em;
+  }
+
+  /* Outlined/stroked text for maximum contrast on any background */
+  .text-outline {
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.15);
+    paint-order: stroke fill;
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.25),
+      0 1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Section heading - strong but slightly less than hero */
+  .text-section-heading {
+    font-weight: 800;
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 3px 10px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.015em;
+  }
+
+  /* Bold subheading */
+  .text-sub-bold {
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Bold description text - makes body text more readable/punchy */
+  .text-desc-bold {
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    letter-spacing: 0.005em;
+  }
+
   /* Floating animation - smoother */
   .animate-float {
     animation: float 8s ease-in-out infinite;
@@ -339,6 +388,8 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-weight: 800;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 
   /* Logo styling */

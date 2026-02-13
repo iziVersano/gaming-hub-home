@@ -215,16 +215,16 @@ const Hero = () => {
           {/* Main Headline */}
           <div className="space-y-6">
             <h1 className="text-center">
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-extrabold leading-relaxed text-foreground">
+              <span className="block text-4xl md:text-5xl lg:text-6xl text-hero-bold text-outline leading-tight text-foreground">
                 {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span>
               </span>
-              <span className="block text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed text-foreground/90 mt-4">
+              <span className="block text-2xl md:text-3xl lg:text-4xl text-sub-bold leading-snug text-foreground/90 mt-4">
                 {t('hero.headline2')} {t('hero.toys')}
               </span>
             </h1>
 
             <div className="flex items-center justify-center px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
-              <p className="text-base md:text-lg lg:text-xl text-foreground font-semibold">
+              <p className="text-lg md:text-xl lg:text-2xl text-foreground text-desc-bold">
                 {t('hero.desc')}
               </p>
             </div>
@@ -250,20 +250,20 @@ const Hero = () => {
           {/* Stats - Cleaner presentation */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
             <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl font-bold text-primary">50+</div>
-              <div className="text-sm text-muted-foreground mt-1">{t('hero.countries', 'Countries Served')}</div>
+              <div className="text-3xl md:text-4xl text-bold-heading text-primary">50+</div>
+              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.countries', 'Countries Served')}</div>
             </div>
             <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl font-bold text-accent">1000+</div>
-              <div className="text-sm text-muted-foreground mt-1">{t('hero.products', 'Products')}</div>
+              <div className="text-3xl md:text-4xl text-bold-heading text-accent">1000+</div>
+              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.products', 'Products')}</div>
             </div>
             <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl font-bold text-primary">24/7</div>
-              <div className="text-sm text-muted-foreground mt-1">{t('hero.support', 'Support')}</div>
+              <div className="text-3xl md:text-4xl text-bold-heading text-primary">24/7</div>
+              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.support', 'Support')}</div>
             </div>
             <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl font-bold text-accent">15+</div>
-              <div className="text-sm text-muted-foreground mt-1">{t('hero.years', 'Years Experience')}</div>
+              <div className="text-3xl md:text-4xl text-bold-heading text-accent">15+</div>
+              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.years', 'Years Experience')}</div>
             </div>
           </div>
         </div>

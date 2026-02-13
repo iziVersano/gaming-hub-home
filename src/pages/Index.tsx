@@ -72,10 +72,10 @@ const Index = () => {
       <section className="pt-2 md:pt-6 pb-6 md:pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 md:mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
               {t('index.whyChoose.title')}
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground text-desc-bold max-w-3xl mx-auto">
               {t('index.whyChoose.description')}
             </p>
           </div>
@@ -86,8 +86,8 @@ const Index = () => {
                 <div className="w-20 h-20 md:w-16 md:h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                   <feature.icon className="h-10 w-10 md:h-8 md:w-8 text-white" />
                 </div>
-                <h3 className="text-2xl md:text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <h3 className="text-2xl md:text-xl text-sub-bold mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground text-desc-bold">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -97,10 +97,10 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-8 md:py-20 bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl text-section-heading mb-6">
             {t('index.cta.title')}
           </h2>
-          <p className="text-xl text-muted-foreground mb-6 md:mb-8">
+          <p className="text-xl text-muted-foreground text-desc-bold mb-6 md:mb-8">
             {t('index.cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -128,10 +128,10 @@ const Index = () => {
             <div className="flex flex-col gap-6 md:grid md:grid-cols-12 md:gap-8">
               {/* Left Column */}
               <div className="md:col-span-7 space-y-6">
-                <h2 className="text-4xl md:text-5xl font-bold">
+                <h2 className="text-4xl md:text-5xl text-section-heading">
                   {t('index.aboutSection.title')}
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-muted-foreground text-desc-bold leading-relaxed">
                   {t('index.aboutSection.description')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">

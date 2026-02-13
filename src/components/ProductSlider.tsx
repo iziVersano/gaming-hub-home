@@ -137,8 +137,8 @@ const ProductSlider = () => {
         {/* Header */}
         <div className="text-center mb-6 md:mb-16">
           <div className="mb-8">
-            <span className="gradient-text text-4xl md:text-4xl font-bold block mb-2">{t('products.featuredTitle')}</span>
-            <div className="text-lg md:text-2xl text-muted-foreground">{t('products.featuredDescription')}</div>
+            <span className="gradient-text text-4xl md:text-4xl text-section-heading block mb-2">{t('products.featuredTitle')}</span>
+            <div className="text-lg md:text-2xl text-muted-foreground text-desc-bold">{t('products.featuredDescription')}</div>
           </div>
         </div>
 

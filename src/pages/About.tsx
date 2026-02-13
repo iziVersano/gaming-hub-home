@@ -39,7 +39,7 @@ const About = () => {
       </Helmet>
       <main id="main-content" className="container px-4 md:px-6 pt-32 md:pt-24 pb-16 flex-1">
         <header className="max-w-4xl mx-auto text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold">{t('about.title')}</h1>
+          <h1 className="text-4xl md:text-5xl text-section-heading">{t('about.title')}</h1>
         </header>
         <section className="max-w-3xl mx-auto space-y-3 text-base leading-6 text-muted-foreground">
           <div className="space-y-0">
@@ -85,7 +85,7 @@ const About = () => {
           </div>
         </section>
         <section className="max-w-4xl mx-auto mt-12" aria-labelledby="connect-heading">
-          <h2 id="connect-heading" className="text-2xl md:text-3xl font-semibold mb-4">
+          <h2 id="connect-heading" className="text-2xl md:text-3xl text-sub-bold mb-4">
             {t('about.connect')}
           </h2>
           <p className="mb-6">{t('about.business')}</p>

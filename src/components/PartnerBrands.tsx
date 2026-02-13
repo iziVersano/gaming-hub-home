@@ -24,10 +24,10 @@ const PartnerBrands = () => {
     <section className="pt-6 pb-2 md:pt-8 md:pb-4 bg-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 md:mb-12">
-          <h2 className="text-4xl md:text-4xl font-bold mb-6">
+          <h2 className="text-4xl md:text-4xl text-section-heading mb-6">
             {t('products.trustedTitle')}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground text-desc-bold max-w-2xl mx-auto">
             {t('products.trustedDescription')}
           </p>
         </div>
