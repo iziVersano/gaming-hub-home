@@ -59,22 +59,22 @@ const Navigation = () => {
   return (
     <>
       <nav className="fixed top-0 w-full z-50 nav-glass" role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
             {/* Row 1: Logo (full width on mobile) + Desktop nav */}
-            <div className="flex justify-center md:justify-between items-center h-16">
-              {/* Logo - full width centered on mobile */}
+            <div className="flex justify-center md:justify-between items-center h-16 md:h-16">
+              {/* Logo - full width centered on mobile, stretched edge to edge */}
               <Link
                 to="/"
-                className="flex items-center justify-center gap-1.5 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
+                className="flex items-center justify-center gap-2 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-2"
                 aria-label="Consoltech - Home"
               >
                 <div className="relative">
-                  <Gamepad2 className="h-10 w-10 sm:h-10 sm:w-10 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
+                  <Gamepad2 className="h-12 w-12 sm:h-12 sm:w-12 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </div>
-                <span className="logo-text text-[1.6rem] sm:text-2xl md:text-3xl lg:text-4xl">
+                <span className="logo-text text-[2.4rem] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.15em] sm:tracking-[0.2em] md:tracking-wider">
                   <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                 </span>
               </Link>
@@ -108,36 +108,34 @@ const Navigation = () => {
               </div>
             </div>
 
-            {/* Row 2: Mobile nav icon shortcuts + burger - visually distinct secondary layer */}
-            <div className="flex md:hidden items-center justify-between py-2.5 nav-icon-bar">
-              <div className="flex items-center justify-center gap-3 flex-1">
-                {mobileHeaderIcons.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      to={item.href}
-                      aria-label={item.label}
-                      className={`p-2.5 rounded-lg transition-all duration-300 ${
-                        isActive(item.href)
-                          ? 'text-primary nav-icon-active'
-                          : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
-                      }`}
-                    >
-                      <Icon className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                    </Link>
-                  );
-                })}
-              </div>
-              {/* Burger button in nav bar */}
+            {/* Row 2: Mobile nav icon shortcuts + burger - evenly spread */}
+            <div className="flex md:hidden items-center justify-evenly py-1.5 nav-icon-bar">
+              {mobileHeaderIcons.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    aria-label={item.label}
+                    className={`p-2.5 rounded-lg transition-all duration-300 ${
+                      isActive(item.href)
+                        ? 'text-primary nav-icon-active'
+                        : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
+                    }`}
+                  >
+                    <Icon className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                  </Link>
+                );
+              })}
+              {/* Burger button */}
               <button
-                className="p-2.5 rounded-lg text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
+                className="p-2 rounded-lg text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-11 w-11" strokeWidth={3} aria-hidden="true" />
+                <Menu className="h-12 w-12" strokeWidth={3} aria-hidden="true" />
               </button>
             </div>
           </div>
