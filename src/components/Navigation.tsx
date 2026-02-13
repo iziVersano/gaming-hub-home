@@ -137,7 +137,7 @@ const Navigation = () => {
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-8 w-8" strokeWidth={2.8} aria-hidden="true" />
+                <Menu className="h-11 w-11" strokeWidth={3} aria-hidden="true" />
               </button>
             </div>
           </div>
