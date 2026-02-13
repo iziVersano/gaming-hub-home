@@ -37,7 +37,7 @@ const About = () => {
           })}
         </script>
       </Helmet>
-      <main id="main-content" className="container px-4 md:px-6 pt-32 md:pt-24 pb-16 flex-1">
+      <main id="main-content" className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
         <header className="max-w-4xl mx-auto text-center mb-10">
           <h1 className="text-4xl md:text-5xl text-section-heading">{t('about.title')}</h1>
         </header>
