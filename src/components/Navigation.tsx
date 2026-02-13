@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, ShieldCheck } from 'lucide-react';
+import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
 
@@ -23,8 +23,6 @@ const Navigation = () => {
     { href: '/about', icon: Building2, label: t('menu.about') },
     { href: '/products', icon: ShoppingBag, label: t('menu.products') },
     { href: '/contact', icon: Mail, label: t('menu.contact') },
-    { href: '/warranty', icon: ShieldCheck, label: t('menu.warranty', 'Warranty') },
-    { href: '/accessibility', icon: Accessibility, label: t('menu.accessibility') },
   ];
 
   // Brand logos for the bottom of the full-screen menu
@@ -139,7 +137,7 @@ const Navigation = () => {
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                <Menu className="h-8 w-8" strokeWidth={2.8} aria-hidden="true" />
               </button>
             </div>
           </div>
