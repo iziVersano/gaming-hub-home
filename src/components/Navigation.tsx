@@ -133,10 +133,10 @@ const Navigation = () => {
                     className={`p-2.5 rounded-lg transition-all duration-300 ${
                       isActive(item.href)
                         ? 'text-primary nav-icon-active'
-                        : 'text-white/50 hover:text-white hover:bg-white/[0.05] active:text-primary'
+                        : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
                     }`}
                   >
-                    <Icon className="h-6 w-6" strokeWidth={2.2} aria-hidden="true" />
+                    <Icon className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
                   </Link>
                 );
               })}
