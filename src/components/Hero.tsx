@@ -104,9 +104,9 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-2 md:space-y-4">
           {/* Hero Visual - Video mode / Spotlight / Promotional Image */}
-          <div className="relative mb-6 md:mb-10">
+          <div className="relative mb-2 md:mb-6">
             {isFeatureEnabled('HERO_VIDEO_MODE') ? (
               /* Video Carousel Mode */
               <div className="flex justify-center">
@@ -213,7 +213,7 @@ const Hero = () => {
           </div>
 
           {/* Main Headline */}
-          <div className="space-y-6">
+          <div className="space-y-2 md:space-y-6">
             <h1 className="text-center">
               <span className="block text-4xl md:text-5xl lg:text-6xl text-hero-bold text-outline leading-tight text-foreground">
                 {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span>
@@ -231,7 +231,7 @@ const Hero = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 justify-center items-center pt-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-1 md:pt-4">
             <Link to="/products">
               <Button size={null} className="btn-hero-square group">
                 <Grid3X3 className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8" />
