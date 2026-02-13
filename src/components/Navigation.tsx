@@ -64,12 +64,12 @@ const Navigation = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
-            {/* Row 1: Logo + Burger */}
-            <div className="flex justify-between items-center h-16">
-              {/* Logo (left) */}
+            {/* Row 1: Logo (full width on mobile) + Desktop nav */}
+            <div className="flex justify-center md:justify-between items-center h-16">
+              {/* Logo - full width centered on mobile */}
               <Link
                 to="/"
-                className="flex items-center gap-1.5 sm:gap-3 group shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
+                className="flex items-center justify-center gap-1.5 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg"
                 aria-label="Consoltech - Home"
               >
                 <div className="relative">
@@ -108,38 +108,39 @@ const Navigation = () => {
                   <LanguageToggleInline />
                 </Button>
               </div>
+            </div>
 
-              {/* Mobile: Burger only (right side) */}
+            {/* Row 2: Mobile nav icon shortcuts + burger - visually distinct secondary layer */}
+            <div className="flex md:hidden items-center justify-between py-2.5 nav-icon-bar">
+              <div className="flex items-center justify-center gap-3 flex-1">
+                {mobileHeaderIcons.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      aria-label={item.label}
+                      className={`p-2.5 rounded-lg transition-all duration-300 ${
+                        isActive(item.href)
+                          ? 'text-primary nav-icon-active'
+                          : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
+                      }`}
+                    >
+                      <Icon className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                    </Link>
+                  );
+                })}
+              </div>
+              {/* Burger button in nav bar */}
               <button
-                className="md:hidden p-3 rounded-lg bg-primary/15 border border-primary/30 text-white hover:bg-primary/25 hover:border-primary/50 hover:shadow-[0_0_14px_hsl(var(--primary)/0.3)] transition-all duration-300"
+                className="p-2.5 rounded-lg text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-7 w-7" strokeWidth={2.5} aria-hidden="true" />
+                <Menu className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
               </button>
-            </div>
-
-            {/* Row 2: Mobile nav icon shortcuts - visually distinct secondary layer */}
-            <div className="flex md:hidden items-center justify-center gap-3 py-2.5 nav-icon-bar">
-              {mobileHeaderIcons.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    aria-label={item.label}
-                    className={`p-2.5 rounded-lg transition-all duration-300 ${
-                      isActive(item.href)
-                        ? 'text-primary nav-icon-active'
-                        : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
-                    }`}
-                  >
-                    <Icon className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </div>
