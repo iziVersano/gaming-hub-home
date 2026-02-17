@@ -77,12 +77,17 @@ const Navigation = () => {
                 aria-label="Consoltech - Home"
               >
                 <div className="relative shrink-0">
-                  <Gamepad2 className="h-10 w-10 sm:h-12 sm:w-12 md:h-10 md:w-10 text-white group-hover:text-accent transition-colors duration-300" aria-hidden="true" />
+                  <Gamepad2 className="h-14 w-14 sm:h-16 sm:w-16 md:h-14 md:w-14 text-white group-hover:text-accent transition-colors duration-300" />
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </div>
-                <span className="logo-text text-[min(8.5vw,2.6rem)] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.06em] sm:tracking-[0.2em] md:tracking-wider">
-                  <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
-                </span>
+                <div className="flex flex-col items-center sm:items-start">
+                  <span className="logo-text text-[min(8.5vw,2.6rem)] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.06em] sm:tracking-[0.2em] md:tracking-wider">
+                    <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-xs tracking-[0.15em] sm:tracking-[0.2em] text-white/60 font-light uppercase -mt-0.5">
+                    Global Import &amp; Distribution
+                  </span>
+                </div>
               </Link>
 
               {/* Desktop Navigation */}
@@ -114,7 +119,7 @@ const Navigation = () => {
               </div>
             </div>
 
-            {/* Row 2: Mobile nav icon shortcuts + burger - evenly spread */}
+            {/* Row 2: Mobile nav icon shortcuts + burger - GameStation style with labels */}
             <div className="flex md:hidden items-center justify-evenly py-1.5 nav-icon-bar">
               {mobileHeaderIcons.map((item) => {
                 const Icon = item.icon;
@@ -122,14 +127,14 @@ const Navigation = () => {
                   <Link
                     key={item.href}
                     to={item.href}
-                    aria-label={item.label}
-                    className={`p-2.5 rounded-lg transition-all duration-300 ${
+                    className={`flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg transition-all duration-300 ${
                       isActive(item.href)
                         ? 'text-primary nav-icon-active'
                         : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
                     }`}
                   >
-                    <Icon className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                    <Icon className="h-5 w-5" strokeWidth={2.8} aria-hidden="true" />
+                    <span className="text-[10px] font-medium leading-none">{item.label}</span>
                   </Link>
                 );
               })}
@@ -138,20 +143,21 @@ const Navigation = () => {
                 href="https://wa.me/972522768607?text=Hi%20Consoltech,%20I%27d%20like%20to%20inquire%20about%20your%20products."
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="p-2.5 rounded-lg text-[#25D366] hover:text-[#128C7E] hover:bg-white/[0.05] active:text-[#128C7E] transition-all duration-300"
+                className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-[#25D366] hover:text-[#128C7E] hover:bg-white/[0.05] active:text-[#128C7E] transition-all duration-300"
               >
-                <WhatsAppIcon className="h-6 w-6" />
+                <WhatsAppIcon className="h-5 w-5" />
+                <span className="text-[10px] font-medium leading-none">WhatsApp</span>
               </a>
               {/* Burger button */}
               <button
-                className="p-2 rounded-lg text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
+                className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-12 w-12" strokeWidth={3} aria-hidden="true" />
+                <Menu className="h-7 w-7" strokeWidth={3} aria-hidden="true" />
+                <span className="text-[10px] font-medium leading-none">{t('menu.more', 'תפריט')}</span>
               </button>
             </div>
           </div>
@@ -229,7 +235,7 @@ const Navigation = () => {
                 className="flex items-center justify-center gap-2"
                 onClick={() => setIsOpen(false)}
               >
-                <Gamepad2 className="h-5 w-5 text-white/40" aria-hidden="true" />
+                <Gamepad2 className="h-5 w-5 text-white/40" />
                 <span className="logo-text text-sm opacity-40">
                   <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                 </span>

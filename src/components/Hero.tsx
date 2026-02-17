@@ -214,13 +214,8 @@ const Hero = () => {
 
           {/* Main Headline */}
           <div className="space-y-2 md:space-y-6">
-            <h1 className="text-center">
-              <span className="block text-4xl md:text-5xl lg:text-6xl text-hero-bold text-outline leading-tight text-foreground">
-                {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span>
-              </span>
-              <span className="block text-2xl md:text-3xl lg:text-4xl text-sub-bold leading-snug text-foreground/90 mt-4">
-                {t('hero.headline2')} {t('hero.toys')}
-              </span>
+            <h1 className="text-center whitespace-nowrap text-[clamp(0.95rem,3.8vw,1.5rem)] md:text-3xl lg:text-4xl text-hero-bold text-outline leading-tight text-foreground px-1">
+              {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span> – {t('hero.headline2')} {t('hero.toys')}
             </h1>
 
             <div className="flex items-center justify-center px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
