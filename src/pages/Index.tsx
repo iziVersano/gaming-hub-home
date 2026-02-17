@@ -75,7 +75,7 @@ const Index = () => {
       <Navigation />
 
       {/* Product Search Bar */}
-      <div className="fixed top-[6.5rem] md:top-16 w-full z-40 nav-glass border-b border-white/5">
+      <div className="fixed top-[9rem] md:top-16 w-full z-40 nav-glass border-b border-white/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <form onSubmit={handleSearch} className="relative flex items-center gap-2">
             <div className="relative flex-1">
