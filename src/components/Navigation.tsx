@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
 
@@ -12,8 +12,17 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
   const { lang, setLang, t } = useI18n();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/products?q=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
 
   const navigation = [
     { name: t('menu.home'), href: '/', icon: House },
@@ -117,6 +126,26 @@ const Navigation = () => {
                   <LanguageToggleInline />
                 </Button>
               </div>
+            </div>
+
+            {/* Mobile search bar - between logo and nav icons (Gamestation layout) */}
+            <div className="md:hidden px-2 pb-2">
+              <form onSubmit={handleSearch} className="relative flex items-center">
+                <button
+                  type="submit"
+                  className="absolute left-0 top-0 bottom-0 flex items-center justify-center w-10 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Search"
+                >
+                  <Search className="h-5 w-5" />
+                </button>
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder={t('products.searchPlaceholder')}
+                  className="w-full pl-10 pr-4 py-2.5 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                />
+              </form>
             </div>
 
             {/* Row 2: Mobile nav icon shortcuts + burger - GameStation style with labels */}
