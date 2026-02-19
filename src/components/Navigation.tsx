@@ -130,21 +130,21 @@ const Navigation = () => {
 
             {/* Mobile search bar - between logo and nav icons (Gamestation layout) */}
             <div className="md:hidden px-2 pb-2">
-              <form onSubmit={handleSearch} className="relative flex items-center">
-                <button
-                  type="submit"
-                  className="absolute left-0 top-0 bottom-0 flex items-center justify-center w-10 text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Search"
-                >
-                  <Search className="h-5 w-5" />
-                </button>
+              <form onSubmit={handleSearch} className="flex items-center gap-2 h-11">
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder={t('products.searchPlaceholder')}
-                  className="w-full pl-10 pr-4 py-2.5 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                  className="flex-1 min-w-0 h-11 px-4 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base leading-none"
                 />
+                <button
+                  type="submit"
+                  className="shrink-0 h-11 w-11 flex items-center justify-center rounded-lg bg-primary text-white hover:bg-primary/90 active:bg-primary/80 transition-colors"
+                  aria-label="Search"
+                >
+                  <Search className="h-5 w-5" />
+                </button>
               </form>
             </div>
 
