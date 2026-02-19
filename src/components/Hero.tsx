@@ -69,7 +69,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-[12.5rem] pb-4 md:pt-24 md:pb-16 overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center pt-[12.5rem] pb-4 md:pt-24 md:pb-16">
       {/* Background Image with Professional Treatment */}
       <div className="absolute inset-0 z-0">
         {/* Loading placeholder */}
@@ -214,11 +214,11 @@ const Hero = () => {
 
           {/* Main Headline */}
           <div className="space-y-2 md:space-y-6">
-            <h1 className="text-center whitespace-nowrap text-[clamp(0.95rem,3.8vw,1.5rem)] md:text-3xl lg:text-4xl text-hero-bold text-outline leading-tight text-foreground px-1">
+            <h1 className="text-center text-[clamp(0.95rem,3.8vw,1.5rem)] md:text-3xl lg:text-4xl text-hero-bold text-outline leading-tight text-foreground px-4 md:px-1 md:whitespace-nowrap">
               {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span> – {t('hero.headline2')} {t('hero.toys')}
             </h1>
 
-            <div className="flex items-center justify-center px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
+            <div className="flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
               <p className="text-lg md:text-xl lg:text-2xl text-foreground text-desc-bold">
                 {t('hero.desc')}
               </p>
