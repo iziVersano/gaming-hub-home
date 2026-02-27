@@ -20,7 +20,7 @@ import AdminProductForm from "./pages/admin/ProductForm";
 import WarrantyRecords from "./pages/admin/WarrantyRecords";
 import SkipLink from "./components/SkipLink";
 import AccessibilityMenu from "./components/AccessibilityMenu";
-import { I18nProvider, useI18n } from './hooks/I18nContext';
+import { I18nProvider, useI18n } from '@/hooks/I18nContext';
 
 import { useEffect } from "react";
 
