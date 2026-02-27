@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Gamepad2, Monitor, Plane, Bike, Cpu, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -136,9 +136,34 @@ const ProductSlider = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-6 md:mb-16">
-          <div className="mb-8">
+          <div className="mb-4">
             <span className="gradient-text text-4xl md:text-4xl text-section-heading block mb-2">{t('products.featuredTitle')}</span>
             <div className="text-lg md:text-2xl text-muted-foreground text-desc-bold">{t('products.featuredDescription')}</div>
+          </div>
+
+          {/* Category Icon Bar */}
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-border/40">
+            {[
+              { icon: Gamepad2, label: t('featured.cat.gaming', 'Gaming Consoles') },
+              { icon: Monitor, label: t('featured.cat.displays', 'Smart Displays') },
+              { icon: Plane, label: t('featured.cat.drones', 'Drones') },
+              { icon: Bike, label: t('featured.cat.ebikes', 'E-Bikes') },
+              { icon: Cpu, label: t('featured.cat.electronics', 'Electronics') },
+              { icon: ShoppingBag, label: t('featured.cat.all', 'All Products') },
+            ].map(({ icon: Icon, label }) => (
+              <Link
+                key={label}
+                to="/products"
+                className="flex flex-col items-center gap-2 group/cat min-w-[72px]"
+              >
+                <div className="w-12 h-12 rounded-xl bg-card border border-border/60 group-hover/cat:border-primary/50 group-hover/cat:bg-primary/10 flex items-center justify-center transition-all duration-300">
+                  <Icon className="w-6 h-6 text-muted-foreground group-hover/cat:text-primary transition-colors duration-300" />
+                </div>
+                <span className="text-xs text-primary font-medium group-hover/cat:underline underline-offset-4 transition-all duration-200 text-center leading-tight">
+                  {label}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
 
