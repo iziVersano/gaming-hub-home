@@ -49,7 +49,8 @@ const HtmlDirectionSetter = () => {
   return null;
 };
 
-const App = () => (
+const App = () => {
+  return (
   <I18nProvider>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
@@ -85,6 +86,7 @@ const App = () => (
       </HelmetProvider>
     </QueryClientProvider>
   </I18nProvider>
-);
+  );
+};
 
 export default App;
