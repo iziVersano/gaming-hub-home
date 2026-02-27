@@ -85,7 +85,7 @@ const Index = () => {
                 value={searchTerm} 
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={t('products.searchPlaceholder')}
-                className="w-full pl-10 pr-4 py-2.5 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset focus:border-transparent transition-all"
               />
             </div>
             <Button type="submit" className="btn-hero shrink-0">
