@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Send } from 'lucide-react';
+import { ArrowRight, Send, Gamepad2, Monitor, Bike, Plane, Cpu, ShoppingBag } from 'lucide-react';
 import playstationImg from '@/assets/playstation.jpg';
 import xboxImg from '@/assets/xbox.jpg';
 import droneImg from '@/assets/drone.jpg';
@@ -90,9 +90,34 @@ const FeaturedProducts = () => {
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto font-light leading-relaxed text-balance">
             {t('featured.description')}
           </p>
+
+          {/* Category Icon Bar */}
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-10 pt-8 border-t border-border/40">
+            {[
+              { icon: Gamepad2, label: t('featured.cat.gaming', 'Gaming Consoles') },
+              { icon: Monitor, label: t('featured.cat.displays', 'Smart Displays') },
+              { icon: Plane, label: t('featured.cat.drones', 'Drones') },
+              { icon: Bike, label: t('featured.cat.ebikes', 'E-Bikes') },
+              { icon: Cpu, label: t('featured.cat.electronics', 'Electronics') },
+              { icon: ShoppingBag, label: t('featured.cat.all', 'All Products') },
+            ].map(({ icon: Icon, label }) => (
+              <Link
+                key={label}
+                to="/products"
+                className="flex flex-col items-center gap-2 group/cat min-w-[80px]"
+              >
+                <div className="w-12 h-12 rounded-xl bg-card border border-border/60 group-hover/cat:border-primary/50 group-hover/cat:bg-primary/10 flex items-center justify-center transition-all duration-300">
+                  <Icon className="w-6 h-6 text-muted-foreground group-hover/cat:text-primary transition-colors duration-300" />
+                </div>
+                <span className="text-xs text-primary font-medium group-hover/cat:underline underline-offset-4 transition-all duration-200 text-center leading-tight">
+                  {label}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Enhanced Products Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {products.map((product, index) => (
             <div 
