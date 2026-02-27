@@ -82,7 +82,7 @@ const Navigation = () => {
               {/* Logo - full width centered on mobile, stretched edge to edge */}
               <Link
                 to="/"
-                className="flex items-center justify-center gap-2 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-1"
+                className="flex items-center justify-center gap-2 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset rounded-lg px-1"
                 aria-label="Consoltech - Home"
               >
                 <div className="relative shrink-0">
