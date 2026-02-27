@@ -13,6 +13,7 @@ const BRIGHT_IMAGES: Record<number, string> = {
   8: metaBright,
   9: asusBright,
   10: switchBright,
+  11: '/images/xbox-series-x-galaxy.png',
 };
 
 const NewArrivalsSpotlight = () => {
@@ -72,6 +73,7 @@ const NewArrivalsSpotlight = () => {
       8: t('products.titles.metaQuest3', product.title),
       9: t('products.titles.asusRog', product.title),
       10: t('products.titles.nintendoSwitch2', product.title),
+      11: t('products.titles.xboxSeriesX', product.title),
     };
     return titleMap[product.id] || product.title;
   };
@@ -82,6 +84,7 @@ const NewArrivalsSpotlight = () => {
       8: t('products.descriptions.metaQuest3', product.description),
       9: t('products.descriptions.asusRog', product.description),
       10: t('products.descriptions.nintendoSwitch2', product.description),
+      11: t('products.descriptions.xboxSeriesX', product.description),
     };
     return descriptionMap[product.id] || product.description;
   };

@@ -41,6 +41,14 @@ export const FALLBACK_PRODUCTS: Product[] = [
     price: 449.99
   },
   {
+    id: 11,
+    title: "Xbox Series X – Galaxy Black 2TB",
+    description: "The most powerful Xbox ever with 2TB storage, Galaxy Black special edition finish, and next-gen gaming performance.",
+    category: "New Arrivals",
+    imageUrl: "/images/xbox-series-x-galaxy.png",
+    price: 599.99
+  },
+  {
     id: 3,
     title: "Professional Drones",
     description: "High-performance drones for commercial photography, surveying, and recreational flying with advanced stabilization.",
