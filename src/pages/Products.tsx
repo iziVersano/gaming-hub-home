@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Filter, Search, Phone, RotateCcw, Loader2, X, ChevronDown, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getProducts, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS } from '@/lib/api';
-import { toast } from 'sonner';
+
 import { useI18n } from '@/hooks/I18nContext';
 
 interface Product {
@@ -35,7 +35,6 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [lightboxImage, setLightboxImage] = useState<{ url: string; alt: string } | null>(null);
   const [filterOpen, setFilterOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
 
@@ -72,25 +71,7 @@ const Products = () => {
     }
   }, [location.search]);
 
-  // Handle ESC key for lightbox
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && lightboxImage) {
-        setLightboxImage(null);
-      }
-    };
 
-    if (lightboxImage) {
-      document.addEventListener('keydown', handleEscape);
-      // Prevent body scroll when lightbox is open
-      document.body.style.overflow = 'hidden';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
-    };
-  }, [lightboxImage]);
 
   const loadProducts = async () => {
     try {
@@ -241,24 +222,14 @@ const Products = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="product-card group">
+                <Link key={product.id} to={`/products/${product.id}`} className="product-card group block">
                   <div className="relative overflow-hidden rounded-lg mb-4">
                     <img
                       src={getImageUrl(product.image)}
                       alt={product.name}
                       className={cn(
-                        "w-full h-48 transition-transform duration-500 object-contain bg-white group-hover:scale-110 cursor-pointer p-2"
+                        "w-full h-48 transition-transform duration-500 object-contain bg-white group-hover:scale-110 p-2"
                       )}
-                      onClick={() => setLightboxImage({ url: getImageUrl(product.image), alt: product.name })}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setLightboxImage({ url: getImageUrl(product.image), alt: product.name });
-                        }
-                      }}
-                      aria-label={`View larger image of ${product.name}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     <div className="absolute top-4 left-4">
@@ -277,30 +248,14 @@ const Products = () => {
                       {product.description}
                     </p>
                     
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-foreground">{t('products.keyFeatures')}:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {product.features.map((feature, index) => (
-                          <span key={index} className="bg-muted text-muted-foreground px-2 py-1 rounded-md text-xs">
-                            {feature}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-end pt-2">
-                      <button
-                        className="btn-inquiry inline-flex items-center gap-2 px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
-                        data-product={product.name}
-                        data-sku={`${product.category.toUpperCase()}-${product.id}`}
-                        aria-label={`Inquiry about ${product.name}`}
-                      >
-                        <Phone className="h-4 w-4" />
-                        <span>{t('products.inquireNow')}</span>
-                      </button>
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-lg font-bold text-primary">{product.price}</span>
+                      <span className="text-sm text-muted-foreground group-hover:text-accent transition-colors flex items-center gap-1">
+                        {t('products.viewDetails')} <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
@@ -341,42 +296,6 @@ const Products = () => {
           </div>
         </section>
       </main>
-      <Footer />
-
-      {/* Product Image Lightbox Modal */}
-      {lightboxImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 animate-in fade-in-0 duration-300"
-          onClick={() => setLightboxImage(null)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') {
-              setLightboxImage(null);
-            }
-          }}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Image lightbox"
-          tabIndex={-1}
-        >
-          <button
-            onClick={() => setLightboxImage(null)}
-            className="absolute top-4 right-4 z-10 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
-            aria-label="Close lightbox"
-          >
-            <X className="h-6 w-6" />
-          </button>
-          <div
-            className="relative max-w-7xl max-h-[90vh] p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={lightboxImage.url}
-              alt={lightboxImage.alt}
-              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
