@@ -115,7 +115,7 @@ const Products = () => {
   };
 
   const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+    const matchesCategory = selectedCategory === t('products.category.all') || product.category === selectedCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -269,7 +269,7 @@ const Products = () => {
                 <p className="text-muted-foreground mb-6">
                   {t('products.noResultsDescription')}
                 </p>
-                <Button onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }} className="btn-neon">
+                <Button onClick={() => { setSearchTerm(''); setSelectedCategory(t('products.category.all')); }} className="btn-neon">
                   <RotateCcw className="h-5 w-5" />
                   <span>{t('products.clearFilters')}</span>
                 </Button>
