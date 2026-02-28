@@ -247,7 +247,7 @@ const Products = () => {
                       src={getImageUrl(product.image)}
                       alt={product.name}
                       className={cn(
-                        "w-full h-48 transition-transform duration-500 object-cover group-hover:scale-110 cursor-pointer"
+                        "w-full h-48 transition-transform duration-500 object-contain bg-white group-hover:scale-110 cursor-pointer p-2"
                       )}
                       onClick={() => setLightboxImage({ url: getImageUrl(product.image), alt: product.name })}
                       role="button"
