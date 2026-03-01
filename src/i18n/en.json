@@ -139,6 +139,16 @@
   "contact.errors.required": "This field is required",
   "contact.errors.invalidEmail": "Please enter a valid email address",
 
+  "contact.faq.title": "Frequently Asked Questions",
+  "contact.faq.items.0.question": "How can I place a wholesale order?",
+  "contact.faq.items.0.answer": "Contact us via email or WhatsApp with your company details and the products you're interested in. Our team will get back to you with pricing and availability within 24 hours.",
+  "contact.faq.items.1.question": "What are your shipping options?",
+  "contact.faq.items.1.answer": "We offer worldwide shipping to over 50 countries. Delivery times and methods vary by destination. Contact us for a customized shipping quote for your order.",
+  "contact.faq.items.2.question": "Do you offer warranty on products?",
+  "contact.faq.items.2.answer": "Yes, all products come with full manufacturer warranty. We also provide importer warranty support for products purchased through our distribution network.",
+  "contact.faq.items.3.question": "What payment methods do you accept?",
+  "contact.faq.items.3.answer": "We accept bank transfers, credit cards, and other standard B2B payment methods. Payment terms can be arranged for established business partners.",
+
   "footer.description": "Global leader in electronics and gaming distribution, connecting innovation with markets worldwide.",
   "footer.contact": "Contact",
   "footer.email": "Email:",
