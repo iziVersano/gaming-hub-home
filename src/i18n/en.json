@@ -397,5 +397,11 @@
   "a11yMenu.animationsOff": "Animations: OFF",
 
   "products.keyFeatures": "Key Features",
-  "products.inquireNow": "Inquire Now"
+  "products.inquireNow": "Inquire Now",
+  "products.specifications": "Specifications",
+  "products.productNotFound": "Product not found",
+  "products.badges": "Badges",
+  "products.flags": "Flags",
+  "products.category.label": "Category",
+  "products.inquiryAria": "Inquiry about {title}"
 }

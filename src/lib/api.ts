@@ -90,6 +90,81 @@ export const FALLBACK_PRODUCTS: Product[] = [
   }
 ];
 
+export const FALLBACK_PRODUCTS_HE: Product[] = [
+  {
+    id: 8,
+    title: "Meta Quest 3",
+    description: "משקפי VR מהדור הבא עם מציאות מעורבת פורצת דרך, ביצועים חזקים וספרייה מתרחבת של חוויות סוחפות.",
+    category: "חדשים במלאי",
+    imageUrl: "/images/m3w.png",
+    price: 499.99
+  },
+  {
+    id: 9,
+    title: "מחשב גיימינג ASUS ROG",
+    description: "ביצועי גיימינג מושלמים עם גרפיקה מתקדמת, מסך בקצב רענון גבוה וטכנולוגיית קירור מתקדמת לגיימרים רציניים.",
+    category: "חדשים במלאי",
+    imageUrl: "/images/asus-new.png",
+    price: 1799.99
+  },
+  {
+    id: 10,
+    title: "Nintendo Switch 2",
+    description: "הדור הבא של משחקי Nintendo. חוו גרפיקה משופרת, ביצועים מהירים יותר וספריית משחקים מורחבת.",
+    category: "חדשים במלאי",
+    imageUrl: "/images/nin2.jpeg",
+    price: 449.99
+  },
+  {
+    id: 11,
+    title: "Xbox Series X – Galaxy Black 2TB",
+    description: "ה-Xbox החזק ביותר אי פעם עם 2TB אחסון, מהדורת Galaxy Black מיוחדת וביצועי גיימינג מהדור הבא.",
+    category: "חדשים במלאי",
+    imageUrl: "/images/xbox-series-x-galaxy.png",
+    price: 599.99
+  },
+  {
+    id: 3,
+    title: "רחפנים מקצועיים",
+    description: "רחפנים בעלי ביצועים גבוהים לצילום מסחרי, סקרים וטיסה פנאית עם ייצוב מתקדם.",
+    category: "רחפנים",
+    imageUrl: "/images/07ba8bc0-8d14-4d62-a534-659913ac5f99.png",
+    price: 1299.99
+  },
+  {
+    id: 4,
+    title: "אופניים חשמליים חכמים",
+    description: "אופניים חשמליים עם קישוריות חכמה, סוללות טווח ארוך ומערכות מנוע מתקדמות לניידות עירונית.",
+    category: "אופניים חשמליים",
+    imageUrl: "/images/a0bd3ab6-05d5-4312-b6ec-f0e256d7a63a.png",
+    price: 1899.99
+  },
+  {
+    id: 5,
+    title: "טלוויזיות חכמות 4K",
+    description: "טלוויזיות חכמות באיכות Ultra HD עם שדרוג AI, תמיכת HDR ופלטפורמות סטרימינג מובנות.",
+    category: "טלוויזיות",
+    imageUrl: "/images/6df37998-af04-426e-b749-365ffeb66787.png",
+    price: 799.99
+  },
+  {
+    id: 6,
+    title: "אביזרי גיימינג",
+    description: "אביזרי גיימינג פרימיום כולל בקרים, אוזניות והגאים ממותגים מובילים.",
+    category: "גיימינג",
+    imageUrl: "/images/bd80e124-a5e2-4d34-9c82-ebc0dbd6a697.png",
+    price: 149.99
+  },
+  {
+    id: 7,
+    title: "אלקטרוניקה לבית חכם",
+    description: "מכשירים מחוברים לבית כולל רמקולים חכמים, מצלמות אבטחה ומערכות אוטומציה.",
+    category: "אלקטרוניקה",
+    imageUrl: "/images/6df37998-af04-426e-b749-365ffeb66787.png",
+    price: 299.99
+  }
+];
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -181,12 +256,12 @@ export const getCurrentLocale = (): string => {
  * API returns already-localized products based on locale.
  */
 export const getProducts = async (locale?: string): Promise<Product[]> => {
+  const lang = locale || getCurrentLocale();
   try {
-    const lang = locale || getCurrentLocale();
     return await fetchApi(`/products?lang=${lang}`);
   } catch (error) {
     console.log('API unavailable or slow, using fallback products');
-    return FALLBACK_PRODUCTS;
+    return lang === 'he' ? FALLBACK_PRODUCTS_HE : FALLBACK_PRODUCTS;
   }
 };
 

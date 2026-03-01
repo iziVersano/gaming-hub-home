@@ -4,7 +4,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Phone, Loader2, Package, Tag, Info, ChevronRight } from 'lucide-react';
-import { getProduct, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS } from '@/lib/api';
+import { getProduct, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS, FALLBACK_PRODUCTS_HE } from '@/lib/api';
 import { useI18n } from '@/hooks/I18nContext';
 
 const ProductDetail = () => {
@@ -21,8 +21,9 @@ const ProductDetail = () => {
         const p = await getProduct(Number(id), lang);
         setProduct(p);
       } catch {
-        // Fallback: find from static list
-        const fallback = FALLBACK_PRODUCTS.find(p => p.id === Number(id));
+        // Fallback: find from static list (locale-aware)
+        const fallbackList = lang === 'he' ? FALLBACK_PRODUCTS_HE : FALLBACK_PRODUCTS;
+        const fallback = fallbackList.find(p => p.id === Number(id));
         setProduct(fallback || null);
       } finally {
         setIsLoading(false);
@@ -47,7 +48,7 @@ const ProductDetail = () => {
       <div className="min-h-screen flex flex-col">
         <Navigation />
         <div className="flex flex-col items-center justify-center flex-1 gap-4">
-          <h1 className="text-2xl font-semibold text-foreground">Product not found</h1>
+          <h1 className="text-2xl font-semibold text-foreground">{t('products.productNotFound')}</h1>
           <Button asChild variant="outline">
             <Link to="/products">
               <ArrowLeft className="h-4 w-4 me-2" />
@@ -66,10 +67,10 @@ const ProductDetail = () => {
     .filter(s => s.length > 0);
 
   const specs = [
-    { label: t('products.category.all') !== 'All' ? 'קטגוריה' : 'Category', value: product.category },
+    { label: t('products.category.label'), value: product.category },
     { label: 'SKU', value: product.sku || `${product.category.toUpperCase().replace(/\s/g, '-')}-${product.id}` },
-    ...(product.badges ? [{ label: 'Badges', value: product.badges }] : []),
-    ...(product.flags ? [{ label: 'Flags', value: product.flags }] : []),
+    ...(product.badges ? [{ label: t('products.badges'), value: product.badges }] : []),
+    ...(product.flags ? [{ label: t('products.flags'), value: product.flags }] : []),
   ];
 
   return (
@@ -121,7 +122,7 @@ const ProductDetail = () => {
               <div className="bg-muted/50 px-5 py-3 border-b border-border">
                 <h2 className="text-sm font-semibold text-foreground flex items-center gap-2">
                   <Info className="h-4 w-4 text-muted-foreground" />
-                  Specifications
+                  {t('products.specifications')}
                 </h2>
               </div>
               <table className="w-full">
@@ -164,7 +165,7 @@ const ProductDetail = () => {
             <div className="flex flex-wrap gap-3 pt-2">
               <button
                 className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
-                aria-label={`Inquiry about ${product.title}`}
+                aria-label={t('products.inquiryAria').replace('{title}', product.title)}
               >
                 <Phone className="h-5 w-5" />
                 {t('products.inquireNow')}

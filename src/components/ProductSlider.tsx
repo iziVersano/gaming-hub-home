@@ -6,7 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Gamepad2, Monitor, Plane, Bike, 
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { getProducts, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS } from '@/lib/api';
+import { getProducts, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS, FALLBACK_PRODUCTS_HE } from '@/lib/api';
 import { useI18n } from '@/hooks/I18nContext';
 
 // Import Swiper styles
@@ -54,7 +54,8 @@ const ProductSlider = () => {
     } catch (error) {
       console.error('Error loading products:', error);
       // Use fallback products when API fails
-      const transformedFallback: Product[] = FALLBACK_PRODUCTS.slice(0, 5).map((p: ApiProduct) => ({
+      const fallbackList = lang === 'he' ? FALLBACK_PRODUCTS_HE : FALLBACK_PRODUCTS;
+      const transformedFallback: Product[] = fallbackList.slice(0, 5).map((p: ApiProduct) => ({
         id: p.id,
         name: p.title,
         category: p.category,

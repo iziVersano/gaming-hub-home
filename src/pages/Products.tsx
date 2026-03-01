@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Filter, Search, Phone, RotateCcw, X, ChevronDown, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getProducts, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS } from '@/lib/api';
+import { getProducts, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS, FALLBACK_PRODUCTS_HE } from '@/lib/api';
 
 import { useI18n } from '@/hooks/I18nContext';
 
@@ -90,7 +90,8 @@ const Products = () => {
     } catch (error) {
       console.error('Error loading products:', error);
       // Use fallback products when API fails
-      const transformedFallback: Product[] = FALLBACK_PRODUCTS.map((p: ApiProduct) => ({
+      const fallbackList = lang === 'he' ? FALLBACK_PRODUCTS_HE : FALLBACK_PRODUCTS;
+      const transformedFallback: Product[] = fallbackList.map((p: ApiProduct) => ({
         id: p.id,
         name: p.title,
         category: p.category,
