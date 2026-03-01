@@ -134,9 +134,12 @@ const FeaturedProducts = () => {
                   </div>
                 )}
                 
-                <img 
-                  src={product.image} 
+                <img
+                  src={product.image}
                   alt={product.name}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  width={600}
+                  height={288}
                   className={cn(
                     "w-full h-72 transition-all duration-700",
                     product.name.toLowerCase().includes('bike')

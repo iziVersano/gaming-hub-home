@@ -229,6 +229,9 @@ const ProductSlider = () => {
                     <img
                       src={getImageUrl(product.image)}
                       alt={product.name}
+                      loading="lazy"
+                      width={600}
+                      height={256}
                       className={cn(
                         "w-full h-56 sm:h-56 md:h-64 transition-all duration-500",
                         "object-cover group-hover:scale-110",

@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Filter, Search, Phone, RotateCcw, Loader2, X, ChevronDown, Check } from 'lucide-react';
+import { ArrowRight, Filter, Search, Phone, RotateCcw, X, ChevronDown, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getProducts, getImageUrl, type Product as ApiProduct, FALLBACK_PRODUCTS } from '@/lib/api';
 
@@ -125,9 +125,31 @@ const Products = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Navigation />
-        <div className="flex items-center justify-center flex-1">
-          <Loader2 className="h-12 w-12 animate-spin text-primary" aria-label="Loading products" />
-        </div>
+        <main className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
+          <header className="max-w-4xl mx-auto text-center mb-10">
+            <div className="shimmer h-10 w-72 mx-auto rounded-lg" />
+          </header>
+          <div className="max-w-3xl mx-auto mb-12 shimmer h-14 rounded-xl" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="product-card p-0 overflow-hidden">
+                  <div className="shimmer-card h-48 w-full rounded-t-2xl" />
+                  <div className="p-4 space-y-3">
+                    <div className="shimmer h-4 w-1/3 rounded-full" />
+                    <div className="shimmer h-5 w-3/4 rounded-md" />
+                    <div className="shimmer h-4 w-full rounded-md" />
+                    <div className="shimmer h-4 w-2/3 rounded-md" />
+                    <div className="flex justify-between pt-2">
+                      <div className="shimmer h-5 w-20 rounded-md" />
+                      <div className="shimmer h-5 w-24 rounded-md" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -227,6 +249,9 @@ const Products = () => {
                     <img
                       src={getImageUrl(product.image)}
                       alt={product.name}
+                      loading="lazy"
+                      width={400}
+                      height={192}
                       className={cn(
                         "w-full h-48 transition-transform duration-500 object-contain bg-white group-hover:scale-110 p-2"
                       )}

@@ -30,6 +30,7 @@ const NewArrivalsSpotlight = () => {
   const { data: products = [] } = useQuery({
     queryKey: ['products', lang],
     queryFn: () => getProducts(lang),
+    staleTime: 5 * 60 * 1000,
   });
 
   // Filter only New Arrivals - match against English category name from API

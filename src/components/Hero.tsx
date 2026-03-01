@@ -79,11 +79,12 @@ const Hero = () => {
           }`}
         />
 
-        {/* Hero Background Image */}
+        {/* Hero Background Image — LCP element, load with high priority */}
         <img
           src={heroImage}
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
@@ -116,7 +117,8 @@ const Hero = () => {
                       {/* Shimmer placeholder */}
                       <div className="absolute inset-0 shimmer-card rounded-2xl z-0" />
 
-                      {/* Stacked videos with crossfade */}
+                      {/* Stacked videos with crossfade — only inject <source> for the active
+                          video so the browser never fetches inactive video files */}
                       {HERO_VIDEOS.map((video, index) => (
                         <video
                           key={video.src}
@@ -127,11 +129,14 @@ const Hero = () => {
                           autoPlay={index === 0}
                           muted
                           playsInline
+                          preload={index === 0 ? "auto" : "none"}
                           poster="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
                           onError={() => setVideoFailed(true)}
                           onEnded={() => handleVideoEnded(index)}
                         >
-                          <source src={video.src} type="video/mp4" />
+                          {index === currentVideoIndex && (
+                            <source src={video.src} type="video/mp4" />
+                          )}
                         </video>
                       ))}
 
@@ -206,6 +211,7 @@ const Hero = () => {
                 <img
                   src="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
                   alt="Gaming consoles, electronics, drones, smart TV and tech products showcase"
+                  loading="lazy"
                   className="w-full max-w-4xl mx-auto h-auto rounded-2xl shadow-xl"
                 />
               </div>

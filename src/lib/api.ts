@@ -129,10 +129,16 @@ const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000);
+
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
     headers,
+    signal: controller.signal,
   });
+
+  clearTimeout(timeoutId);
 
   if (!response.ok) {
     if (response.status === 401) {
@@ -179,7 +185,7 @@ export const getProducts = async (locale?: string): Promise<Product[]> => {
     const lang = locale || getCurrentLocale();
     return await fetchApi(`/products?lang=${lang}`);
   } catch (error) {
-    console.log('API unavailable, using fallback products');
+    console.log('API unavailable or slow, using fallback products');
     return FALLBACK_PRODUCTS;
   }
 };
