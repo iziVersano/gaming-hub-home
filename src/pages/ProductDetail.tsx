@@ -68,7 +68,6 @@ const ProductDetail = () => {
   const specs = [
     { label: t('products.category.all') !== 'All' ? 'קטגוריה' : 'Category', value: product.category },
     { label: 'SKU', value: product.sku || `${product.category.toUpperCase().replace(/\s/g, '-')}-${product.id}` },
-    { label: t('products.price'), value: product.price > 0 ? `$${product.price.toFixed(2)}` : t('products.contactForPricing') },
     ...(product.badges ? [{ label: 'Badges', value: product.badges }] : []),
     ...(product.flags ? [{ label: 'Flags', value: product.flags }] : []),
   ];
@@ -115,13 +114,6 @@ const ProductDetail = () => {
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{product.title}</h1>
               <p className="text-lg text-muted-foreground leading-relaxed">{product.description}</p>
-            </div>
-
-            {/* Price */}
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-bold text-primary">
-                {product.price > 0 ? `$${product.price.toFixed(2)}` : t('products.contactForPricing')}
-              </span>
             </div>
 
             {/* Specifications Table */}

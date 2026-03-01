@@ -20,7 +20,6 @@ interface Product {
   category: string;
   description: string;
   image: string;
-  price: string;
 }
 
 const ProductSlider = () => {
@@ -50,7 +49,6 @@ const ProductSlider = () => {
         category: p.category,
         description: p.description,
         image: p.imageUrl,
-        price: p.price > 0 ? `$${p.price.toFixed(2)}` : 'Contact for pricing'
       }));
       setProducts(transformedProducts);
     } catch (error) {
@@ -62,7 +60,6 @@ const ProductSlider = () => {
         category: p.category,
         description: p.description,
         image: p.imageUrl,
-        price: p.price > 0 ? `$${p.price.toFixed(2)}` : 'Contact for pricing'
       }));
       setProducts(transformedFallback);
     } finally {

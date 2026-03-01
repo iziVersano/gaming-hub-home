@@ -16,7 +16,6 @@ interface Product {
   description: string;
   image: string;
   features: string[];
-  price: string;
 }
 
 const categoryKeys = [
@@ -86,7 +85,6 @@ const Products = () => {
         description: p.description,
         image: p.imageUrl,
         features: extractFeatures(p.description),
-        price: p.price > 0 ? `$${p.price.toFixed(2)}` : 'Contact for pricing'
       }));
       setProducts(transformedProducts);
     } catch (error) {
@@ -99,7 +97,6 @@ const Products = () => {
         description: p.description,
         image: p.imageUrl,
         features: extractFeatures(p.description),
-        price: p.price > 0 ? `$${p.price.toFixed(2)}` : 'Contact for pricing'
       }));
       setProducts(transformedFallback);
     } finally {
@@ -273,8 +270,7 @@ const Products = () => {
                       {product.description}
                     </p>
                     
-                    <div className="flex items-center justify-between pt-2">
-                      <span className="text-lg font-bold text-primary">{product.price}</span>
+                    <div className="flex items-center justify-end pt-2">
                       <span className="text-sm text-muted-foreground group-hover:text-accent transition-colors flex items-center gap-1">
                         {t('products.viewDetails')} <ArrowRight className="h-3.5 w-3.5" />
                       </span>
