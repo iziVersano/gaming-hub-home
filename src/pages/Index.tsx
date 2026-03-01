@@ -75,14 +75,14 @@ const Index = () => {
       <Navigation />
 
       {/* Product Search Bar - desktop only (mobile search is in Navigation) */}
-      <div className="hidden md:block fixed md:top-16 w-full z-40 nav-glass border-b border-white/5">
+      <div className="hidden md:block fixed md:top-16 w-full z-40 nav-glass border-b border-white/5 overflow-hidden">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <form onSubmit={handleSearch} className="relative flex items-center gap-2">
-            <div className="relative flex-1">
+            <div className="relative flex-1 min-w-0">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
               <input
                 type="text"
-                value={searchTerm} 
+                value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={t('products.searchPlaceholder')}
                 className="w-full pl-10 pr-4 py-2.5 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset focus:border-transparent transition-all"
