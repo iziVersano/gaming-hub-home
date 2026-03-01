@@ -136,7 +136,7 @@ const Navigation = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder={t('products.searchPlaceholder')}
-                  className="flex-1 min-w-0 h-11 px-4 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset focus:border-transparent text-base leading-none"
+                  className="flex-1 min-w-0 h-11 px-4 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary text-base leading-none"
                 />
                 <button
                   type="submit"
