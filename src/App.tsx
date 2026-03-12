@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import SkipLink from "./components/SkipLink";
 import AccessibilityMenu from "./components/AccessibilityMenu";
 import { I18nProvider, useI18n } from '@/hooks/I18nContext';
+import { featureFlags } from '@/lib/featureFlags';
 
 // Lazy-load all non-home pages to reduce initial bundle size
 const About = lazy(() => import("./pages/About"));
@@ -79,7 +80,7 @@ const App = () => {
                 <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/health" element={<Health />} />
-                <Route path="/warranty" element={<Warranty />} />
+                {featureFlags.WARRANTY_ENABLED && <Route path="/warranty" element={<Warranty />} />}
                 <Route path="/nintendo-switch-2" element={<NintendoSwitch2Manual />} />
                 <Route path="/accessibility" element={<Accessibility />} />
                 {/* Admin Routes */}
@@ -88,7 +89,7 @@ const App = () => {
                 <Route path="/admin/products" element={<AdminProducts />} />
                 <Route path="/admin/products/new" element={<AdminProductForm />} />
                 <Route path="/admin/products/edit/:id" element={<AdminProductForm />} />
-                <Route path="/admin/warranty-records" element={<WarrantyRecords />} />
+                {featureFlags.WARRANTY_ENABLED && <Route path="/admin/warranty-records" element={<WarrantyRecords />} />}
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, AlertTriangle, Mail, Gamepad, CreditCard, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { featureFlags } from '@/lib/featureFlags';
 
 // Manual step data
 const steps = [
@@ -168,9 +169,11 @@ const NintendoSwitch2Manual = () => {
       {/* Main content is RTL Hebrew */}
       <main id="main-content" dir="rtl" className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
         {/* CTA Banner - Top */}
+        {featureFlags.WARRANTY_ENABLED && (
         <div className="mb-10">
           <WarrantyCTABanner />
         </div>
+        )}
 
         {/* Header */}
         <header className="max-w-4xl mx-auto text-center mb-10">
@@ -489,6 +492,7 @@ const NintendoSwitch2Manual = () => {
               </div>
             </div>
 
+            {featureFlags.WARRANTY_ENABLED && (
             <div className="mt-6 p-4 rounded-lg bg-accent/10 border border-accent/30">
               <p className="text-foreground mb-2">
                 📋 <strong>רישום אחריות:</strong> לצורך מימוש האחריות, יש לרשום את המוצר באתר שלנו.
@@ -497,6 +501,7 @@ const NintendoSwitch2Manual = () => {
                 לחצו כאן לטופס רישום אחריות ←
               </Link>
             </div>
+            )}
 
             <div className="mt-4 p-3 rounded-lg bg-primary/10 border border-primary/30">
               <p className="text-sm text-muted-foreground">
@@ -507,9 +512,11 @@ const NintendoSwitch2Manual = () => {
         </section>
 
         {/* CTA Banner - Bottom */}
+        {featureFlags.WARRANTY_ENABLED && (
         <div className="mt-12">
           <WarrantyCTABanner />
         </div>
+        )}
       </main>
       <Footer />
     </div>

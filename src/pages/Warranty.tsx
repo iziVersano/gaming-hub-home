@@ -176,10 +176,19 @@ const Warranty = () => {
       submitData.append('serialNumber', formData.serialNumber);
       submitData.append('invoice', file!);
 
-      const res = await fetch(WARRANTY_ENDPOINT, {
-        method: "POST",
-        body: submitData,
-      });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+      let res: Response;
+      try {
+        res = await fetch(WARRANTY_ENDPOINT, {
+          method: "POST",
+          body: submitData,
+          signal: controller.signal,
+        });
+      } finally {
+        clearTimeout(timeoutId);
+      }
 
       const data = await res.json();
 
@@ -195,7 +204,12 @@ const Warranty = () => {
       }
     } catch (error) {
       console.error('Warranty submission error:', error);
-      toast({ variant: "destructive", title: "אירעה שגיאה בשליחת הטופס", description: "אנא נסו שנית" });
+      const isTimeout = error instanceof Error && error.name === 'AbortError';
+      toast({
+        variant: "destructive",
+        title: isTimeout ? "השרת לא הגיב בזמן" : "אירעה שגיאה בשליחת הטופס",
+        description: isTimeout ? "השרת עמוס כרגע, אנא נסו שנית בעוד מספר דקות" : "אנא נסו שנית",
+      });
     } finally {
       setIsSubmitting(false);
     }

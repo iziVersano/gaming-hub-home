@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { LogOut, Package, LayoutDashboard, FileText } from 'lucide-react';
 import { removeAuthToken } from '@/lib/api';
 import { useI18n } from '@/hooks/I18nContext';
+import { featureFlags } from '@/lib/featureFlags';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -56,6 +57,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                     <span>{t('admin.layout.products')}</span>
                   </Link>
                 </Button>
+                {featureFlags.WARRANTY_ENABLED && (
                 <Button
                   asChild
                   variant={isActive('/admin/warranty-records') ? 'default' : 'ghost'}
@@ -66,6 +68,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                     <span>Warranties</span>
                   </Link>
                 </Button>
+                )}
               </div>
             </div>
 

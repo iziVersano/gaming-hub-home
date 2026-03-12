@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import AdminLayout from '@/components/AdminLayout';
 import { isAuthenticated } from '@/lib/api';
 import { USE_MOCK_DATA, getMockProducts, getMockWarrantyRecords } from '@/lib/mockData';
+import { featureFlags } from '@/lib/featureFlags';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -108,6 +109,7 @@ const Dashboard = () => {
           </div>
 
           {/* Warranties Card */}
+          {featureFlags.WARRANTY_ENABLED && (
           <div className="bg-card border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
             <div className="flex items-center justify-between mb-4">
               <div className="p-3 bg-green-500/10 rounded-lg">
@@ -128,6 +130,7 @@ const Dashboard = () => {
               </Link>
             </Button>
           </div>
+          )}
 
           {/* Quick Links Card */}
           <div className="bg-card border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
@@ -145,12 +148,14 @@ const Dashboard = () => {
                   <ArrowRight className="h-4 w-4 ml-auto" />
                 </Link>
               </Button>
+              {featureFlags.WARRANTY_ENABLED && (
               <Button asChild variant="ghost" size="sm" className="w-full justify-start">
                 <Link to="/warranty" target="_blank">
                   Warranty Form
                   <ArrowRight className="h-4 w-4 ml-auto" />
                 </Link>
               </Button>
+              )}
             </div>
           </div>
         </div>
@@ -180,6 +185,7 @@ const Dashboard = () => {
                 </li>
               </ul>
             </div>
+            {featureFlags.WARRANTY_ENABLED && (
             <div className="space-y-3">
               <h3 className="font-medium text-muted-foreground">Warranty Management</h3>
               <ul className="space-y-2 text-sm">
@@ -201,6 +207,7 @@ const Dashboard = () => {
                 </li>
               </ul>
             </div>
+            )}
           </div>
         </div>
       </div>
