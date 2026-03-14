@@ -14,7 +14,7 @@ const Footer = () => {
                 <Gamepad2 className="h-8 w-8 text-primary" aria-hidden="true" />
               </div>
               <span className="logo-text text-2xl md:text-3xl">
-                <span className="text-gray-900">CONSOL</span><span className="text-primary">TECH</span>
+                <span className="text-foreground">CONSOL</span><span className="text-primary">TECH</span>
               </span>
             </div>
             <p className="text-muted-foreground">

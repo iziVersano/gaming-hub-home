@@ -120,11 +120,12 @@ const Navigation = () => {
                     </Link>
                   );
                 })}
-                <Button className="btn-nav">
-                  <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                  <span>{t('menu.getQuote')}</span>
-                  <LanguageToggleInline />
-                </Button>
+                <Link to="/contact">
+                  <Button className="btn-nav">
+                    <MessageSquare className="h-4 w-4" aria-hidden="true" />
+                    <span>{t('menu.getQuote')}</span>
+                  </Button>
+                </Link>
               </div>
             </div>
 

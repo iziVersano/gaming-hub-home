@@ -69,7 +69,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-[12.5rem] pb-4 md:pt-24 md:pb-16">
+    <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-center pt-[10rem] pb-4 md:pt-24 md:pb-16">
       {/* Background Image with Professional Treatment */}
       <div className="absolute inset-0 z-0">
         {/* Loading placeholder */}
@@ -145,14 +145,14 @@ const Hero = () => {
                         <>
                           <button
                             onClick={goToPrev}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all duration-300 opacity-0 group-hover:opacity-100"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                             aria-label="Previous video"
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
                           <button
                             onClick={goToNext}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all duration-300 opacity-0 group-hover:opacity-100"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                             aria-label="Next video"
                           >
                             <ChevronRight className="w-5 h-5" />
@@ -182,7 +182,7 @@ const Hero = () => {
                       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 to-transparent z-[15] pointer-events-none" />
                     </div>
                   ) : (
-                    /* Animated fallback when no video file exists */
+                    /* Animated fallback when video fails to load */
                     <div className="relative overflow-hidden aspect-video">
                       <img
                         src="/images/41931538-f28c-4223-89e9-23b458ec78db.png"
@@ -190,11 +190,6 @@ const Hero = () => {
                         className="absolute inset-0 w-full h-full object-cover animate-ken-burns"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4 text-center">
-                        <span className="inline-block px-4 py-2 bg-black/60 backdrop-blur-sm rounded-full text-white/80 text-sm">
-                          Video mode active — drop hero videos in /videos
-                        </span>
-                      </div>
                     </div>
                   )}
                 </div>
@@ -233,17 +228,17 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-1 md:pt-4">
-            <Link to="/products">
+            <Link to="/contact">
               <Button size={null} className="btn-hero-square group">
-                <Grid3X3 className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8" />
-                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.explore', 'Explore Products')}</span>
+                <Send className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8 transition-transform group-hover:translate-x-1" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.contact', 'Request a Quote')}</span>
               </Button>
             </Link>
 
-            <Link to="/contact">
+            <Link to="/products">
               <Button size={null} className="btn-neon-square group">
-                <Send className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8 transition-transform group-hover:translate-x-1" />
-                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.contact', 'Contact Us')}</span>
+                <Grid3X3 className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.explore', 'View Catalog')}</span>
               </Button>
             </Link>
           </div>
@@ -263,7 +258,7 @@ const Hero = () => {
               <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.support', 'Support')}</div>
             </div>
             <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl text-bold-heading text-accent">15+</div>
+              <div className="text-3xl md:text-4xl text-bold-heading text-accent">20+</div>
               <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.years', 'Years Experience')}</div>
             </div>
           </div>

@@ -142,16 +142,16 @@ const ProductSlider = () => {
           {/* Category Icon Bar */}
           <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-border/40">
             {[
-              { icon: Gamepad2, label: t('featured.cat.gaming', 'Gaming Consoles') },
-              { icon: Monitor, label: t('featured.cat.displays', 'Smart Displays') },
-              { icon: Plane, label: t('featured.cat.drones', 'Drones') },
-              { icon: Bike, label: t('featured.cat.ebikes', 'E-Bikes') },
-              { icon: Cpu, label: t('featured.cat.electronics', 'Electronics') },
-              { icon: ShoppingBag, label: t('featured.cat.all', 'All Products') },
-            ].map(({ icon: Icon, label }) => (
+              { icon: Gamepad2, label: t('featured.cat.gaming', 'Gaming Consoles'), categoryKey: 'gaming' },
+              { icon: Monitor, label: t('featured.cat.displays', 'Smart Displays'), categoryKey: 'tvs' },
+              { icon: Plane, label: t('featured.cat.drones', 'Drones'), categoryKey: 'drones' },
+              { icon: Bike, label: t('featured.cat.ebikes', 'E-Bikes'), categoryKey: 'ebikes' },
+              { icon: Cpu, label: t('featured.cat.electronics', 'Electronics'), categoryKey: 'electronics' },
+              { icon: ShoppingBag, label: t('featured.cat.all', 'All Products'), categoryKey: '' },
+            ].map(({ icon: Icon, label, categoryKey }) => (
               <Link
                 key={label}
-                to="/products"
+                to={categoryKey ? `/products?category=${encodeURIComponent(t(`products.category.${categoryKey}`))}` : '/products'}
                 className="flex flex-col items-center gap-2 group/cat min-w-[72px]"
               >
                 <div className="w-12 h-12 rounded-xl bg-card border border-border/60 group-hover/cat:border-primary/50 group-hover/cat:bg-primary/10 flex items-center justify-center transition-all duration-300">
@@ -268,10 +268,10 @@ const ProductSlider = () => {
 
           {/* Navigation arrows - Desktop only */}
           <div className="hidden lg:block">
-            <button className="product-slider-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-accent hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            <button aria-label="Previous product" className="product-slider-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-accent hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button className="product-slider-next absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-accent hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            <button aria-label="Next product" className="product-slider-next absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-accent hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
