@@ -12,6 +12,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,14 +31,6 @@ const Navigation = () => {
     { name: t('menu.products'), href: '/products', icon: ShoppingBag },
     { name: t('menu.contact'), href: '/contact', icon: Mail },
     { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
-  ];
-
-  // Icons shown in the header bar on mobile (between logo and burger)
-  const mobileHeaderIcons = [
-    { href: '/', icon: House, label: t('menu.home') },
-    { href: '/about', icon: Building2, label: t('menu.about') },
-    { href: '/products', icon: ShoppingBag, label: t('menu.products') },
-    { href: '/contact', icon: Mail, label: t('menu.contact') },
   ];
 
   // Brand logos for the bottom of the full-screen menu
@@ -93,8 +86,11 @@ const Navigation = () => {
                   <span className="logo-text text-[min(8.5vw,2.6rem)] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.06em] sm:tracking-[0.2em] md:tracking-wider">
                     <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                   </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-xs tracking-[0.15em] sm:tracking-[0.2em] text-white/60 font-light uppercase -mt-0.5">
+                  <span className="text-[11px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-gray-300 font-medium uppercase -mt-0.5">
                     Global Import &amp; Distribution
+                  </span>
+                  <span dir="rtl" className="text-[10px] sm:text-[11px] md:text-xs text-white/50 font-light -mt-0.5">
+                    קונסולטק
                   </span>
                 </div>
               </Link>
@@ -129,65 +125,104 @@ const Navigation = () => {
               </div>
             </div>
 
-            {/* Mobile search bar - between logo and nav icons (Gamestation layout) */}
-            <div className="md:hidden px-2 pb-2">
-              <form onSubmit={handleSearch} className="flex items-center gap-2 h-11">
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder={t('products.searchPlaceholder')}
-                  className="flex-1 min-w-0 h-11 px-4 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary text-base leading-none"
-                />
-                <button
-                  type="submit"
-                  className="shrink-0 h-11 w-11 flex items-center justify-center rounded-lg bg-primary text-white hover:bg-primary/90 active:bg-primary/80 transition-colors"
-                  aria-label="Search"
-                >
-                  <Search className="h-5 w-5" />
-                </button>
-              </form>
-            </div>
-
-            {/* Row 2: Mobile nav icon shortcuts + burger - GameStation style with labels */}
-            <div className="flex md:hidden items-center justify-evenly py-1.5 nav-icon-bar">
-              {mobileHeaderIcons.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className={`flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg transition-all duration-300 ${
-                      isActive(item.href)
-                        ? 'text-primary nav-icon-active'
-                        : 'text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary'
-                    }`}
+            {/* Mobile search - expandable overlay */}
+            {searchOpen && (
+              <div className="md:hidden px-2 pb-2">
+                <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="flex items-center gap-2 h-11">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder={t('products.searchPlaceholder')}
+                    autoFocus
+                    className="flex-1 min-w-0 h-11 px-4 bg-card/80 rounded-lg border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary text-base leading-none"
+                  />
+                  <button
+                    type="submit"
+                    className="shrink-0 h-11 w-11 flex items-center justify-center rounded-lg bg-primary text-white hover:bg-primary/90 active:bg-primary/80 transition-colors"
+                    aria-label="Search"
                   >
-                    <Icon className="h-5 w-5" strokeWidth={2.8} aria-hidden="true" />
-                    <span className="text-[10px] font-medium leading-none">{item.label}</span>
-                  </Link>
-                );
-              })}
-              {/* WhatsApp button */}
+                    <Search className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSearchOpen(false)}
+                    className="shrink-0 h-11 w-11 flex items-center justify-center rounded-lg text-white/70 hover:text-white transition-colors"
+                    aria-label="Close search"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* Row 2: Mobile nav icon shortcuts - larger icons with distinct colors */}
+            <div className="flex md:hidden items-center justify-evenly py-1.5 nav-icon-bar">
+              <Link
+                to="/"
+                className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                  isActive('/') ? 'text-sky-400 nav-icon-active' : 'text-sky-400/80 hover:text-sky-400 hover:bg-white/[0.05]'
+                }`}
+              >
+                <House className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
+                <span className="text-[11px] font-semibold leading-none">{t('menu.home')}</span>
+              </Link>
+              <Link
+                to="/products"
+                className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                  isActive('/products') ? 'text-amber-400 nav-icon-active' : 'text-amber-400/80 hover:text-amber-400 hover:bg-white/[0.05]'
+                }`}
+              >
+                <ShoppingBag className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
+                <span className="text-[11px] font-semibold leading-none">{t('menu.products')}</span>
+              </Link>
+              <Link
+                to="/contact"
+                className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                  isActive('/contact') ? 'text-emerald-400 nav-icon-active' : 'text-emerald-400/80 hover:text-emerald-400 hover:bg-white/[0.05]'
+                }`}
+              >
+                <Mail className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
+                <span className="text-[11px] font-semibold leading-none">{t('menu.contact')}</span>
+              </Link>
+              <Link
+                to="/about"
+                className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                  isActive('/about') ? 'text-purple-400 nav-icon-active' : 'text-purple-400/80 hover:text-purple-400 hover:bg-white/[0.05]'
+                }`}
+              >
+                <Building2 className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
+                <span className="text-[11px] font-semibold leading-none">{t('menu.about')}</span>
+              </Link>
+              {/* WhatsApp */}
               <a
                 href="https://wa.me/972522768607?text=Hi%20Consoltech,%20I%27d%20like%20to%20inquire%20about%20your%20products."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-[#25D366] hover:text-[#128C7E] hover:bg-white/[0.05] active:text-[#128C7E] transition-all duration-300"
+                className="flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg text-[#25D366] hover:text-[#128C7E] hover:bg-white/[0.05] transition-all duration-300"
               >
-                <WhatsAppIcon className="h-5 w-5" />
-                <span className="text-[10px] font-medium leading-none">WhatsApp</span>
+                <WhatsAppIcon className="h-6 w-6" />
+                <span className="text-[11px] font-semibold leading-none">WhatsApp</span>
               </a>
-              {/* Burger button */}
+              {/* Search icon */}
               <button
-                className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg text-rose-400/80 hover:text-rose-400 hover:bg-white/[0.05] transition-all duration-300"
+                aria-label="Search"
+              >
+                <Search className="h-6 w-6" strokeWidth={2.5} aria-hidden="true" />
+                <span className="text-[11px] font-semibold leading-none">{t('products.search', 'חיפוש')}</span>
+              </button>
+              {/* Burger */}
+              <button
+                className="flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/[0.05] transition-all duration-300"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
                 <Menu className="h-7 w-7" strokeWidth={3} aria-hidden="true" />
-                <span className="text-[10px] font-medium leading-none">{t('menu.more', 'תפריט')}</span>
+                <span className="text-[11px] font-semibold leading-none">{t('menu.more', 'תפריט')}</span>
               </button>
             </div>
           </div>
