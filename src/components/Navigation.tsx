@@ -150,57 +150,57 @@ const Navigation = () => {
               <Link
                 to="/"
                 className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/') ? 'text-sky-400' : 'text-sky-400/70'
+                  isActive('/') ? 'text-white' : 'text-white/90'
                 }`}
               >
-                <House className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
-                <span className="text-[9px] font-semibold leading-none whitespace-nowrap">{t('menu.home')}</span>
+                <House className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.home')}</span>
               </Link>
               <Link
                 to="/products"
                 className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/products') ? 'text-amber-400' : 'text-amber-400/70'
+                  isActive('/products') ? 'text-white' : 'text-white/90'
                 }`}
               >
-                <ShoppingBag className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
-                <span className="text-[9px] font-semibold leading-none whitespace-nowrap">{t('menu.products')}</span>
+                <ShoppingBag className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.products')}</span>
               </Link>
               <Link
                 to="/contact"
                 className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/contact') ? 'text-emerald-400' : 'text-emerald-400/70'
+                  isActive('/contact') ? 'text-white' : 'text-white/90'
                 }`}
               >
-                <Mail className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
-                <span className="text-[9px] font-semibold leading-none whitespace-nowrap">{t('menu.contact')}</span>
+                <Mail className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.contact')}</span>
               </Link>
               <Link
                 to="/about"
                 className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/about') ? 'text-purple-400' : 'text-purple-400/70'
+                  isActive('/about') ? 'text-white' : 'text-white/90'
                 }`}
               >
-                <Building2 className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
-                <span className="text-[9px] font-semibold leading-none whitespace-nowrap">{t('menu.about')}</span>
+                <Building2 className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.about')}</span>
               </Link>
               <a
                 href="https://wa.me/972522768607?text=Hi%20Consoltech,%20I%27d%20like%20to%20inquire%20about%20your%20products."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center gap-0.5 py-1 text-[#25D366]/80 transition-colors duration-200"
+                className="flex flex-col items-center justify-center gap-0.5 py-1 text-white/90 transition-colors duration-200"
               >
-                <WhatsAppIcon className="h-5 w-5" />
-                <span className="text-[9px] font-semibold leading-none whitespace-nowrap">WhatsApp</span>
+                <WhatsAppIcon className="h-6 w-6" />
+                <span className="text-[10px] font-bold leading-none whitespace-nowrap">WhatsApp</span>
               </a>
               <button
-                className="flex flex-col items-center justify-center gap-0.5 py-1 text-white/70 transition-colors duration-200"
+                className="flex flex-col items-center justify-center gap-0.5 py-1 text-white/90 transition-colors duration-200"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
-                <span className="text-[9px] font-semibold leading-none whitespace-nowrap">{t('menu.more', 'עוד')}</span>
+                <Menu className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
+                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.more', 'עוד')}</span>
               </button>
             </div>
           </div>
