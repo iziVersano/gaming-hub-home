@@ -106,6 +106,11 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-2 md:space-y-4">
+          {/* Main Headline — above the carousel */}
+          <h1 className="text-center text-[clamp(1.1rem,5vw,2rem)] md:text-3xl lg:text-4xl text-hero-bold text-outline leading-tight text-foreground px-4 md:px-1 mb-2 md:mb-4">
+            {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span>
+          </h1>
+
           {/* Hero Visual - Video mode / Spotlight / Promotional Image */}
           <div className="relative mb-2 md:mb-6">
             {isFeatureEnabled('HERO_VIDEO_MODE') ? (
@@ -213,12 +218,11 @@ const Hero = () => {
             )}
           </div>
 
-          {/* Main Headline */}
-          <div className="space-y-2 md:space-y-6">
-            <h1 className="text-center text-[clamp(0.95rem,3.8vw,1.5rem)] md:text-3xl lg:text-4xl text-hero-bold text-outline leading-tight text-foreground px-4 md:px-1 md:whitespace-nowrap">
-              {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span> – {t('hero.headline2')} {t('hero.toys')}
-            </h1>
-
+          {/* Subtitle + Description — below the carousel */}
+          <div className="space-y-2 md:space-y-4">
+            <p className="text-center text-lg md:text-2xl lg:text-3xl text-hero-bold text-outline leading-tight text-foreground px-4">
+              {t('hero.headline2')} {t('hero.toys')}
+            </p>
             <div className="flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
               <p className="text-lg md:text-xl lg:text-2xl text-foreground text-desc-bold">
                 {t('hero.desc')}

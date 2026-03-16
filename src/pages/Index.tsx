@@ -6,22 +6,12 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowRight, Gamepad2, Headphones, Shield, BadgeDollarSign, UserPlus, Search, Check } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useI18n } from '@/hooks/I18nContext';
 
 const Index = () => {
   const { t } = useI18n();
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/products?q=${encodeURIComponent(searchTerm.trim())}`);
-    }
-  };
 
   const features = [
     {
@@ -74,27 +64,7 @@ const Index = () => {
       </Helmet>
       <Navigation />
 
-      {/* Product Search Bar - desktop only (mobile search is in Navigation) */}
-      <div className="hidden md:block fixed md:top-16 w-full z-40 nav-glass border-b border-white/5 overflow-hidden">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <form onSubmit={handleSearch} className="relative flex items-center gap-2">
-            <div className="relative flex-1 min-w-0">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder={t('products.searchPlaceholder')}
-                className="w-full pl-10 pr-4 py-2.5 bg-card/80 rounded-lg border-2 border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-              />
-            </div>
-            <Button type="submit" className="btn-hero shrink-0">
-              <Search className="h-4 w-4" />
-              <span className="hidden sm:inline">{t('index.cta.browseCatalog')}</span>
-            </Button>
-          </form>
-        </div>
-      </div>
+      {/* Desktop search is available on the Products page — no fixed bar here to avoid dead space above hero */}
 
       <main id="main-content" className="flex-1">
       <Hero />
