@@ -74,13 +74,13 @@ const Index = () => {
 
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
       <div className="relative md:contents">
-        {/* Mobile-only background image */}
-        <div className="absolute inset-0 md:hidden z-0">
+        {/* Mobile-only background image — pushed down so products show below nav */}
+        <div className="absolute inset-0 md:hidden z-0 pt-20">
           <img
             src="/images/sony+meta.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top rounded-t-2xl"
           />
           {/* Top gradient for nav text readability */}
           <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
