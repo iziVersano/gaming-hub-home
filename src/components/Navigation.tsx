@@ -12,6 +12,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -69,26 +70,84 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
-            {/* Row 1: Logo (full width on mobile) + Desktop nav */}
-            <div className="flex justify-center md:justify-between items-center py-3 md:h-16">
-              {/* Logo - full width centered on mobile, stretched edge to edge */}
+            {/* Row 1: Mobile compact header — [☰] [Logo] [🔍] */}
+            <div className="flex md:hidden items-center justify-between px-2 py-1.5">
+              {/* Burger */}
+              <button
+                className="p-1.5 text-white/90"
+                onClick={() => setIsOpen(true)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu-overlay"
+                aria-label="Open menu"
+              >
+                <Menu className="h-6 w-6" strokeWidth={2.5} />
+              </button>
+
+              {/* Compact logo */}
+              <Link to="/" className="flex items-center gap-1.5 group" aria-label="Consoltech - Home">
+                <Gamepad2 className="h-8 w-8 text-white" />
+                <div className="flex flex-col">
+                  <span className="logo-text text-lg tracking-wide leading-none">
+                    <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                  </span>
+                  <span className="text-[7px] tracking-[0.12em] text-gray-300/80 font-medium uppercase leading-none">
+                    Global Import &amp; Distribution
+                  </span>
+                </div>
+              </Link>
+
+              {/* Search toggle */}
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="p-1.5 text-white/90"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" strokeWidth={2.5} />
+              </button>
+            </div>
+
+            {/* Mobile search overlay — expands when search icon tapped */}
+            {searchOpen && (
+              <div className="md:hidden px-2 pb-1">
+                <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="flex items-center gap-1.5 h-8">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    autoFocus
+                    className={`flex-1 min-w-0 h-8 px-3 rounded-lg border text-sm leading-none focus:outline-none focus:border-primary ${transparent ? 'bg-black/30 border-white/20 text-white placeholder:text-white/50' : 'bg-card/80 border-border/50 text-foreground'}`}
+                    style={{ fontSize: '16px' }}
+                    aria-label={t('products.searchPlaceholder')}
+                  />
+                  <button type="submit" className="shrink-0 h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-white" aria-label="Search">
+                    <Search className="h-4 w-4" />
+                  </button>
+                  <button type="button" onClick={() => setSearchOpen(false)} className="shrink-0 h-8 w-8 flex items-center justify-center text-white/70" aria-label="Close">
+                    <X className="h-4 w-4" />
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* Row 1 Desktop: Logo + Desktop nav */}
+            <div className="hidden md:flex justify-between items-center md:h-16">
               <Link
                 to="/"
                 className="flex items-start justify-center gap-2 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset rounded-lg px-1"
                 aria-label="Consoltech - Home"
               >
                 <div className="relative shrink-0 mt-0.5">
-                  <Gamepad2 className="h-14 w-14 sm:h-16 sm:w-16 md:h-14 md:w-14 text-white group-hover:text-accent transition-colors duration-300" />
+                  <Gamepad2 className="h-14 w-14 text-white group-hover:text-accent transition-colors duration-300" />
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </div>
-                <div className="flex flex-col items-center sm:items-start">
-                  <span className="logo-text text-[min(8.5vw,2.6rem)] sm:text-[2.6rem] md:text-3xl lg:text-4xl tracking-[0.06em] sm:tracking-[0.2em] md:tracking-wider">
+                <div className="flex flex-col items-start">
+                  <span className="logo-text text-3xl lg:text-4xl tracking-wider">
                     <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                   </span>
-                  <span className="text-[11px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-gray-300 font-medium uppercase -mt-0.5">
+                  <span className="text-sm tracking-[0.2em] text-gray-300 font-medium uppercase -mt-0.5">
                     Global Import &amp; Distribution
                   </span>
-                  <span dir="rtl" className="text-[10px] sm:text-[11px] md:text-xs text-white/50 font-light -mt-0.5">
+                  <span dir="rtl" className="text-xs text-white/50 font-light -mt-0.5">
                     קונסולטק
                   </span>
                 </div>
@@ -124,84 +183,24 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </div>
             </div>
 
-            {/* Row 2: Mobile search bar — always visible, compact, no placeholder */}
-            <div className="md:hidden px-2 pb-1.5">
-              <form onSubmit={handleSearch} className="flex items-center gap-1.5 h-9">
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className={`flex-1 min-w-0 h-9 px-3 rounded-lg border text-sm leading-none focus:outline-none focus:border-primary ${transparent ? 'bg-black/30 border-white/20 text-white placeholder:text-white/50' : 'bg-card/80 border-border/50 text-foreground'}`}
-                  style={{ fontSize: '16px' }}
-                  aria-label={t('products.searchPlaceholder')}
-                />
-                <button
-                  type="submit"
-                  className="shrink-0 h-9 w-9 flex items-center justify-center rounded-lg bg-primary text-white"
-                  aria-label="Search"
-                >
-                  <Search className="h-4 w-4" />
-                </button>
-              </form>
-            </div>
-
-            {/* Row 3: Mobile nav icons — uniform grid, no wrapping */}
-            <div className={`grid grid-cols-6 md:hidden py-1.5 border-t border-white/10 ${transparent ? '' : 'nav-icon-bar'}`}>
-              <Link
-                to="/"
-                className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/') ? 'text-white' : 'text-white/90'
-                }`}
-              >
-                <House className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.home')}</span>
+            {/* Row 2: Mobile nav — 4 items, horizontal, compact */}
+            <div className={`flex md:hidden items-center justify-evenly py-1 ${transparent ? '' : 'nav-icon-bar'}`}>
+              <Link to="/" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/') ? 'text-white' : 'text-white/80'}`}>
+                <House className="h-4 w-4" strokeWidth={2.5} />
+                <span>{t('menu.home')}</span>
               </Link>
-              <Link
-                to="/products"
-                className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/products') ? 'text-white' : 'text-white/90'
-                }`}
-              >
-                <ShoppingBag className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.products')}</span>
+              <Link to="/products" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/products') ? 'text-white' : 'text-white/80'}`}>
+                <ShoppingBag className="h-4 w-4" strokeWidth={2.5} />
+                <span>{t('menu.products')}</span>
               </Link>
-              <Link
-                to="/contact"
-                className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/contact') ? 'text-white' : 'text-white/90'
-                }`}
-              >
-                <Mail className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.contact')}</span>
+              <Link to="/contact" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/contact') ? 'text-white' : 'text-white/80'}`}>
+                <Mail className="h-4 w-4" strokeWidth={2.5} />
+                <span>{t('menu.contact')}</span>
               </Link>
-              <Link
-                to="/about"
-                className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${
-                  isActive('/about') ? 'text-white' : 'text-white/90'
-                }`}
-              >
-                <Building2 className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.about')}</span>
+              <Link to="/about" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/about') ? 'text-white' : 'text-white/80'}`}>
+                <Building2 className="h-4 w-4" strokeWidth={2.5} />
+                <span>{t('menu.about')}</span>
               </Link>
-              <a
-                href="https://wa.me/972522768607?text=Hi%20Consoltech,%20I%27d%20like%20to%20inquire%20about%20your%20products."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center gap-0.5 py-1 text-white/90 transition-colors duration-200"
-              >
-                <WhatsAppIcon className="h-6 w-6" />
-                <span className="text-[10px] font-bold leading-none whitespace-nowrap">WhatsApp</span>
-              </a>
-              <button
-                className="flex flex-col items-center justify-center gap-0.5 py-1 text-white/90 transition-colors duration-200"
-                onClick={() => setIsOpen(true)}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu-overlay"
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" strokeWidth={2.8} aria-hidden="true" />
-                <span className="text-[10px] font-bold leading-none whitespace-nowrap">{t('menu.more', 'עוד')}</span>
-              </button>
             </div>
           </div>
         </div>

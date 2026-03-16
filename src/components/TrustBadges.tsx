@@ -12,15 +12,15 @@ const TrustBadges = () => {
   const { t } = useI18n();
 
   return (
-    <section className="py-4 px-4">
-      <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
+    <section className="py-2 px-3">
+      <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
         {badges.map(({ key, icon: Icon, color }) => (
           <div
             key={key}
-            className="flex items-center gap-2.5 p-3 rounded-xl bg-card/80 backdrop-blur-sm border border-border/50"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-card/90 border border-border/40"
           >
-            <Icon className={`h-6 w-6 shrink-0 ${color}`} strokeWidth={2.2} />
-            <span className="text-sm font-bold text-foreground leading-tight">{t(key)}</span>
+            <Icon className={`h-5 w-5 shrink-0 ${color}`} strokeWidth={2.2} />
+            <span className="text-xs font-bold text-foreground leading-tight">{t(key)}</span>
           </div>
         ))}
       </div>
