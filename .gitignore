@@ -109,4 +109,5 @@ public/videos/*.mp4
 !public/videos/hero.mp4
 !public/videos/hero-gls.mp4
 !public/videos/hero-cubism.mp4
+!public/videos/hero-final.mp4
 public/videos/*.webm
