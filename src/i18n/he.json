@@ -407,5 +407,9 @@
   "products.badges": "תגיות",
   "products.flags": "דגלים",
   "products.category.label": "קטגוריה",
-  "products.inquiryAria": "פנייה בנוגע ל-{title}"
+  "products.inquiryAria": "פנייה בנוגע ל-{title}",
+  "trustBadges.authorizedDistributor": "יבואן מורשה",
+  "trustBadges.fullWarranty": "אחריות מלאה",
+  "trustBadges.fastShipping": "משלוח מהיר",
+  "trustBadges.competitivePrices": "מחירים תחרותיים"
 }

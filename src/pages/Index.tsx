@@ -3,12 +3,15 @@ import Hero from '@/components/Hero';
 import ProductSlider from '@/components/ProductSlider';
 import PartnerBrands from '@/components/PartnerBrands';
 import Footer from '@/components/Footer';
+import TrustBadges from '@/components/TrustBadges';
+import VideoCarousel from '@/components/VideoCarousel';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowRight, Gamepad2, Headphones, Shield, BadgeDollarSign, UserPlus, Search, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useI18n } from '@/hooks/I18nContext';
+import { isFeatureEnabled } from '@/lib/featureFlags';
 
 const Index = () => {
   const { t } = useI18n();
@@ -62,17 +65,54 @@ const Index = () => {
           })}
         </script>
       </Helmet>
-      <Navigation />
-
-      {/* Desktop search is available on the Products page — no fixed bar here to avoid dead space above hero */}
+      {/* Desktop: normal fixed nav */}
+      <div className="hidden md:block">
+        <Navigation />
+      </div>
 
       <main id="main-content" className="flex-1">
-      <Hero />
+
+      {/* Mobile hero background wrapper — single bg image behind nav + hero */}
+      <div className="relative md:contents">
+        {/* Mobile-only background image */}
+        <div className="absolute inset-0 md:hidden z-0">
+          <img
+            src="/images/sony+meta.png"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover"
+          />
+          {/* Top gradient for nav text readability */}
+          <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
+          {/* Bottom gradient to blend into page */}
+          <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
+        </div>
+
+        {/* Mobile transparent nav — inside wrapper so bg shows through */}
+        <div className="md:hidden relative z-10">
+          <Navigation transparent />
+        </div>
+
+        <div className="relative z-10">
+          <Hero />
+        </div>
+      </div>
+
+      {/* Mobile-only trust badges */}
+      <div className="md:hidden">
+        <TrustBadges />
+      </div>
+
+      {/* Mobile-only video carousel (below trust badges) */}
+      <div className="md:hidden">
+        {isFeatureEnabled('HERO_VIDEO_MODE') && <VideoCarousel />}
+      </div>
+
       <ProductSlider />
       <PartnerBrands />
       
-      {/* Why Choose Us Section */}
-      <section className="pt-2 md:pt-6 pb-6 md:pb-20">
+      {/* Why Choose Us Section — desktop only (mobile uses TrustBadges) */}
+      <section className="hidden md:block pt-2 md:pt-6 pb-6 md:pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 md:mb-12">
             <h2 className="text-4xl md:text-5xl text-section-heading mb-4">

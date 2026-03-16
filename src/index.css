@@ -465,6 +465,19 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     box-shadow: 0 2px 24px rgba(0, 20, 60, 0.5);
   }
 
+  /* Transparent nav override for homepage hero (mobile only) */
+  @media (max-width: 767px) {
+    .nav-transparent-mobile {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+    }
+    .nav-transparent-mobile * {
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+  }
+
   /* Secondary nav bar - brighter gradient strip, clearly separate from header */
   .nav-icon-bar {
     background: linear-gradient(90deg, hsl(210 80% 30% / 0.85), hsl(240 60% 35% / 0.85), hsl(270 55% 32% / 0.85));

@@ -10,7 +10,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const Navigation = () => {
+const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
@@ -65,7 +65,7 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 nav-glass" role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+      <nav className={`fixed top-0 w-full z-50 ${transparent ? 'nav-transparent-mobile md:nav-glass' : 'nav-glass'}`} role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
@@ -131,7 +131,7 @@ const Navigation = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="flex-1 min-w-0 h-9 px-3 bg-card/80 rounded-lg border border-border/50 text-foreground text-sm leading-none focus:outline-none focus:border-primary"
+                  className={`flex-1 min-w-0 h-9 px-3 rounded-lg border text-sm leading-none focus:outline-none focus:border-primary ${transparent ? 'bg-black/30 border-white/20 text-white placeholder:text-white/50' : 'bg-card/80 border-border/50 text-foreground'}`}
                   style={{ fontSize: '16px' }}
                   aria-label={t('products.searchPlaceholder')}
                 />
@@ -146,7 +146,7 @@ const Navigation = () => {
             </div>
 
             {/* Row 3: Mobile nav icons — uniform grid, no wrapping */}
-            <div className="grid grid-cols-6 md:hidden py-1.5 nav-icon-bar border-t border-white/10">
+            <div className={`grid grid-cols-6 md:hidden py-1.5 border-t border-white/10 ${transparent ? '' : 'nav-icon-bar'}`}>
               <Link
                 to="/"
                 className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-colors duration-200 ${

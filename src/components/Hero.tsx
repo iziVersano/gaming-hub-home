@@ -70,9 +70,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-center pt-[13.5rem] pb-4 md:pt-24 md:pb-16">
-      {/* Background Image with Professional Treatment */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pt-[13.5rem] pb-8 md:pt-24 md:pb-16">
+      {/* Background Image with Professional Treatment — desktop only (mobile uses parent wrapper bg) */}
+      <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
         <div
           className={`absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 transition-opacity duration-700 ${
@@ -93,13 +93,13 @@ const Hero = () => {
 
         {/* Professional overlay - subtle gradient for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/90" />
-        
+
         {/* Accent color tint */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       </div>
 
-      {/* Subtle decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
+      {/* Subtle decorative elements — desktop only */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1] hidden md:block">
         {/* Soft ambient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/8 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full blur-[80px]" />
@@ -112,8 +112,8 @@ const Hero = () => {
             {t('hero.headline1')} <span className="text-primary">{t('hero.innovation')}</span>
           </h1>
 
-          {/* Hero Visual - Video mode / Spotlight / Promotional Image */}
-          <div className="relative mb-2 md:mb-6">
+          {/* Hero Visual - Video mode / Spotlight / Promotional Image — desktop only (mobile shows video below trust badges) */}
+          <div className="relative mb-2 md:mb-6 hidden md:block">
             {isFeatureEnabled('HERO_VIDEO_MODE') ? (
               /* Video Carousel Mode */
               <div className="flex justify-center">
@@ -224,15 +224,15 @@ const Hero = () => {
             <p className="text-center text-lg md:text-2xl lg:text-3xl text-hero-bold text-outline leading-tight text-foreground px-4">
               {t('hero.headline2')} {t('hero.toys')}
             </p>
-            <div className="flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
+            <div className="hidden md:flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
               <p className="text-lg md:text-xl lg:text-2xl text-foreground text-desc-bold">
                 {t('hero.desc')}
               </p>
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-1 md:pt-4">
+          {/* CTA Buttons — desktop only */}
+          <div className="hidden md:flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-1 md:pt-4">
             <Link to="/contact">
               <Button size={null} className="btn-hero-square group">
                 <Send className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8 transition-transform group-hover:translate-x-1" />
@@ -248,8 +248,8 @@ const Hero = () => {
             </Link>
           </div>
 
-          {/* Stats - Cleaner presentation */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
+          {/* Stats - desktop only (mobile has trust badges) */}
+          <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
             <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
               <div className="text-3xl md:text-4xl text-bold-heading text-primary">50+</div>
               <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.countries', 'Countries Served')}</div>
@@ -270,8 +270,8 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Subtle scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+      {/* Subtle scroll indicator — desktop only */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:block">
         <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-1">
           <div className="w-1.5 h-3 bg-primary rounded-full animate-bounce" />
         </div>

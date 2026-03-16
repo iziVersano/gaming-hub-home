@@ -403,5 +403,9 @@
   "products.badges": "Badges",
   "products.flags": "Flags",
   "products.category.label": "Category",
-  "products.inquiryAria": "Inquiry about {title}"
+  "products.inquiryAria": "Inquiry about {title}",
+  "trustBadges.authorizedDistributor": "Authorized Distributor",
+  "trustBadges.fullWarranty": "Full Warranty",
+  "trustBadges.fastShipping": "Fast Shipping",
+  "trustBadges.competitivePrices": "Competitive Prices"
 }
