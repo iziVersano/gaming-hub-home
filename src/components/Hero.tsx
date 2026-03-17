@@ -70,7 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pt-[18rem] pb-6 md:pt-24 md:pb-16">
+    <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pt-[8rem] pb-2 md:pt-24 md:pb-16">
       {/* Background Image with Professional Treatment — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -89,6 +89,7 @@ const Hero = () => {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{ objectPosition: 'center -15vh' }}
         />
 
         {/* Professional overlay - subtle gradient for readability */}

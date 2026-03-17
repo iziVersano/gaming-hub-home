@@ -73,19 +73,16 @@ const Index = () => {
       <main id="main-content" className="flex-1">
 
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
-      <div className="relative md:contents">
+      <div className="relative min-h-screen md:contents">
         {/* Mobile-only background image — covers from top of page */}
         <div className="absolute inset-0 md:hidden z-0">
           <img
-            src="/images/sony+meta.png"
+            src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-full object-cover object-[center_65%]"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center -15vh' }}
           />
-          {/* Top gradient for nav text readability */}
-          <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
-          {/* Bottom gradient to blend into page */}
-          <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
         </div>
 
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
@@ -96,16 +93,16 @@ const Index = () => {
         <div className="relative z-10">
           <Hero />
         </div>
-      </div>
 
-      {/* Mobile-only trust badges */}
-      <div className="md:hidden">
-        <TrustBadges />
-      </div>
+        {/* Mobile-only trust badges */}
+        <div className="md:hidden relative z-10">
+          <TrustBadges />
+        </div>
 
-      {/* Mobile-only video carousel (below trust badges) */}
-      <div className="md:hidden">
-        {isFeatureEnabled('HERO_VIDEO_MODE') && <VideoCarousel />}
+        {/* Mobile-only video carousel (below PlayStation, over background) */}
+        <div className="md:hidden relative z-10 mt-20">
+          {isFeatureEnabled('HERO_VIDEO_MODE') && <VideoCarousel />}
+        </div>
       </div>
 
       <ProductSlider />
