@@ -101,7 +101,7 @@ const Index = () => {
         </div>
 
         {/* Mobile-only video carousel (below PlayStation, over background) */}
-        <div className="md:hidden relative z-10 mt-3">
+        <div className="md:hidden relative z-10 mt-1">
           {isFeatureEnabled('HERO_VIDEO_MODE') && <VideoCarousel />}
         </div>
       </div>

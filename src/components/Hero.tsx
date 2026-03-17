@@ -109,7 +109,7 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-2 md:space-y-4">
           {/* Main Headline — above the carousel */}
-          <h1 className="text-right md:text-center text-[clamp(1.1rem,5vw,2rem)] md:text-3xl lg:text-4xl font-extrabold leading-tight pr-4 pl-28 md:px-1 mb-2 md:mb-4 -mt-56 md:mt-0 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)' }}>
+          <h1 className="text-right md:text-center text-[clamp(1.1rem,5vw,2rem)] md:text-3xl lg:text-4xl font-extrabold leading-tight pr-4 pl-28 md:px-1 mb-2 md:mb-4 -mt-64 md:mt-0 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)' }}>
             {t('hero.headline1')} <span className="text-white/90">{t('hero.innovation')}</span>
           </h1>
 
