@@ -81,7 +81,7 @@ const Index = () => {
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
-            style={{ objectPosition: 'center -20vh' }}
+            style={{ objectPosition: 'center -20vh', transform: 'scale(0.9)', transformOrigin: 'center top' }}
           />
         </div>
 
