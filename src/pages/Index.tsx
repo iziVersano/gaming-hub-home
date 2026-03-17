@@ -80,7 +80,7 @@ const Index = () => {
             src="/images/sony+meta.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-[center_65%]"
           />
           {/* Top gradient for nav text readability */}
           <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
