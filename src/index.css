@@ -459,10 +459,10 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   /* Navigation styling */
   /* Primary header - console dashboard glass with ocean blue tint */
   .nav-glass {
-    backdrop-filter: blur(20px) saturate(1.4);
-    background: linear-gradient(180deg, rgba(15, 30, 55, 0.95), rgba(10, 22, 45, 0.97));
-    border-bottom: 1px solid rgba(80, 140, 255, 0.12);
-    box-shadow: 0 2px 24px rgba(0, 20, 60, 0.5);
+    backdrop-filter: blur(16px) saturate(1.8);
+    background: linear-gradient(135deg, rgba(10, 30, 80, 0.55), rgba(40, 10, 80, 0.55));
+    border-bottom: 1px solid rgba(120, 100, 255, 0.3);
+    box-shadow: 0 2px 32px rgba(40, 10, 120, 0.35);
   }
 
   /* Transparent nav on mobile — only when explicitly transparent */
