@@ -130,3 +130,17 @@ jobs:
           fi
           
           echo "🎉 Post-deployment checks completed"
+
+      - name: Notify Telegram
+        if: always()
+        run: |
+          STATUS="${{ job.status }}"
+          if [ "$STATUS" = "success" ]; then
+            MESSAGE="✅ <b>Consoltech deployed successfully</b>%0A🌐 ${{ steps.deployment.outputs.page_url }}"
+          else
+            MESSAGE="❌ <b>Consoltech deployment failed</b>%0A🔗 https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d "text=${MESSAGE}" \
+            -d "parse_mode=HTML"
