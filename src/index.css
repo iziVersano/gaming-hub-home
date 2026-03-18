@@ -465,7 +465,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     box-shadow: 0 2px 24px rgba(0, 20, 60, 0.5);
   }
 
-  /* Transparent nav override for homepage hero (mobile only) */
+  /* Transparent nav on mobile — only when explicitly transparent */
   @media (max-width: 767px) {
     .nav-transparent-mobile {
       background: transparent !important;

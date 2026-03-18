@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -59,6 +59,33 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Hide nav on scroll down, show on scroll stop
+  const [navVisible, setNavVisible] = useState(true);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setNavVisible(false);
+      }
+      lastScrollY = currentScrollY;
+
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
+        setNavVisible(true);
+      }, 150);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, []);
+
   // TODO: Uncomment to re-enable language toggle
   function LanguageToggleInline() {
     return null;
@@ -66,24 +93,13 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 ${transparent ? 'nav-transparent-mobile md:nav-glass' : 'nav-glass'}`} role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+      <nav className={`fixed top-0 w-full z-50 transition-transform duration-300 ${navVisible ? 'translate-y-0' : '-translate-y-full'} ${transparent ? 'nav-transparent-mobile md:nav-glass' : 'nav-glass'}`} role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
-            {/* Row 1: Mobile compact header — [☰] [Logo] [🔍] */}
-            <div className="flex md:hidden items-center justify-between px-2 py-1.5">
-              {/* Burger */}
-              <button
-                className="p-1.5 text-white/90"
-                onClick={() => setIsOpen(true)}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu-overlay"
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" strokeWidth={2.5} />
-              </button>
-
-              {/* Compact logo */}
+            {/* Row 1: Mobile compact header — [Logo centered] [🔍 right] */}
+            <div className="flex md:hidden items-center justify-center relative px-2 py-1.5">
+              {/* Compact logo — centered */}
               <Link to="/" className="flex items-center gap-1.5 group" aria-label="Consoltech - Home">
                 <Gamepad2 className="h-8 w-8 text-white" />
                 <div className="flex flex-col">
@@ -96,10 +112,10 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 </div>
               </Link>
 
-              {/* Search toggle */}
+              {/* Search toggle — absolute right */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-1.5 text-white/90"
+                className="absolute right-2 p-1.5 text-white/90"
                 aria-label="Search"
               >
                 <Search className="h-5 w-5" strokeWidth={2.5} />
@@ -183,24 +199,36 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </div>
             </div>
 
-            {/* Row 2: Mobile nav — 4 items, horizontal, compact */}
-            <div className={`flex md:hidden items-center justify-evenly py-1 ${transparent ? '' : 'nav-icon-bar'}`}>
-              <Link to="/" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/') ? 'text-white' : 'text-white/80'}`}>
-                <House className="h-4 w-4" strokeWidth={2.5} />
-                <span>{t('menu.home')}</span>
-              </Link>
-              <Link to="/products" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/products') ? 'text-white' : 'text-white/80'}`}>
-                <ShoppingBag className="h-4 w-4" strokeWidth={2.5} />
-                <span>{t('menu.products')}</span>
-              </Link>
-              <Link to="/contact" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/contact') ? 'text-white' : 'text-white/80'}`}>
-                <Mail className="h-4 w-4" strokeWidth={2.5} />
-                <span>{t('menu.contact')}</span>
-              </Link>
-              <Link to="/about" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/about') ? 'text-white' : 'text-white/80'}`}>
-                <Building2 className="h-4 w-4" strokeWidth={2.5} />
-                <span>{t('menu.about')}</span>
-              </Link>
+            {/* Row 2: Mobile nav — 4 items + burger on right */}
+            <div className={`flex md:hidden items-center py-1 ${transparent ? '' : 'nav-icon-bar'}`}>
+              <div className="flex items-center justify-evenly flex-1">
+                <Link to="/" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/') ? 'text-white' : 'text-white/80'}`}>
+                  <House className="h-4 w-4" strokeWidth={2.5} />
+                  <span>{t('menu.home')}</span>
+                </Link>
+                <Link to="/products" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/products') ? 'text-white' : 'text-white/80'}`}>
+                  <ShoppingBag className="h-4 w-4" strokeWidth={2.5} />
+                  <span>{t('menu.products')}</span>
+                </Link>
+                <Link to="/contact" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/contact') ? 'text-white' : 'text-white/80'}`}>
+                  <Mail className="h-4 w-4" strokeWidth={2.5} />
+                  <span>{t('menu.contact')}</span>
+                </Link>
+                <Link to="/about" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/about') ? 'text-white' : 'text-white/80'}`}>
+                  <Building2 className="h-4 w-4" strokeWidth={2.5} />
+                  <span>{t('menu.about')}</span>
+                </Link>
+              </div>
+              {/* Burger menu */}
+              <button
+                className="p-1.5 text-white/90 mr-1"
+                onClick={() => setIsOpen(true)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu-overlay"
+                aria-label="Open menu"
+              >
+                <Menu className="h-5 w-5" strokeWidth={2.5} />
+              </button>
             </div>
           </div>
         </div>
