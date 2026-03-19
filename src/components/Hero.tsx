@@ -89,7 +89,7 @@ const Hero = () => {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ objectPosition: 'center -15vh' }}
+          style={{ objectPosition: 'center -5vh' }}
         />
 
         {/* Professional overlay - subtle gradient for readability */}
