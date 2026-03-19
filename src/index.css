@@ -460,7 +460,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   /* Primary header - console dashboard glass with ocean blue tint */
   .nav-glass {
     backdrop-filter: blur(16px) saturate(1.8);
-    background: linear-gradient(135deg, rgba(10, 30, 80, 0.55), rgba(40, 10, 80, 0.55));
+    background: linear-gradient(135deg, rgba(10, 30, 80, 0.35), rgba(40, 10, 80, 0.35));
     border-bottom: 1px solid rgba(120, 100, 255, 0.3);
     box-shadow: 0 2px 32px rgba(40, 10, 120, 0.35);
   }
@@ -468,7 +468,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   /* Semi-transparent nav on mobile — dark gradient so content is readable over hero */
   @media (max-width: 767px) {
     .nav-transparent-mobile {
-      background: linear-gradient(135deg, rgba(10, 30, 80, 0.75), rgba(40, 10, 80, 0.75)) !important;
+      background: linear-gradient(135deg, rgba(10, 30, 80, 0.55), rgba(40, 10, 80, 0.55)) !important;
       backdrop-filter: blur(12px) saturate(1.6) !important;
       border-bottom: 1px solid rgba(120, 100, 255, 0.2) !important;
       box-shadow: 0 2px 20px rgba(40, 10, 120, 0.3) !important;
