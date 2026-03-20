@@ -216,22 +216,24 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             {/* Row 2: Mobile nav — 4 items + burger on right */}
             <div className={`flex md:hidden items-center py-1.5 ${transparent ? '' : 'nav-icon-bar'}`}>
               <div className="flex items-center justify-evenly flex-1">
-                <Link to="/" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/') ? 'text-white' : 'text-white/80'}`}>
-                  <House className="h-[18px] w-[18px]" strokeWidth={2.5} />
-                  <span>{t('menu.home')}</span>
-                </Link>
-                <Link to="/products" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/products') ? 'text-white' : 'text-white/80'}`}>
-                  <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={2.5} />
-                  <span>{t('menu.products')}</span>
-                </Link>
-                <Link to="/contact" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/contact') ? 'text-white' : 'text-white/80'}`}>
-                  <Mail className="h-[18px] w-[18px]" strokeWidth={2.5} />
-                  <span>{t('menu.contact')}</span>
-                </Link>
-                <Link to="/about" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/about') ? 'text-white' : 'text-white/80'}`}>
-                  <Building2 className="h-[18px] w-[18px]" strokeWidth={2.5} />
-                  <span>{t('menu.about')}</span>
-                </Link>
+                {[
+                  { to: '/', icon: House, label: t('menu.home') },
+                  { to: '/products', icon: ShoppingBag, label: t('menu.products') },
+                  { to: '/contact', icon: Mail, label: t('menu.contact') },
+                  { to: '/about', icon: Building2, label: t('menu.about') },
+                ].map(({ to, icon: Icon, label }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={`relative flex flex-col items-center gap-0.5 px-2 pt-1 pb-1.5 text-[11px] font-bold whitespace-nowrap transition-colors duration-150 ${isActive(to) ? 'text-white' : 'text-white/70'}`}
+                  >
+                    <Icon className="h-[18px] w-[18px]" strokeWidth={isActive(to) ? 2.8 : 2} />
+                    <span>{label}</span>
+                    {isActive(to) && (
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-gradient-to-r from-primary to-cyan-400" />
+                    )}
+                  </Link>
+                ))}
               </div>
               {/* Burger menu */}
               <button

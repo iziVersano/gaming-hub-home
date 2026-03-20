@@ -10,11 +10,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative">
-                <Gamepad2 className="h-8 w-8 text-primary" aria-hidden="true" />
+              <div className="logo-icon-wrap p-2">
+                <Gamepad2 className="h-7 w-7 text-primary" aria-hidden="true" />
               </div>
               <span className="logo-text text-2xl md:text-3xl">
-                <span className="text-foreground">CONSOL</span><span className="text-primary">TECH</span>
+                <span className="text-foreground">CONSOL</span><span className="logo-tech">TECH</span>
               </span>
             </div>
             <p className="text-muted-foreground">

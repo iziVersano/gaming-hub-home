@@ -251,22 +251,17 @@ const Hero = () => {
 
           {/* Stats - desktop only (mobile has trust badges) */}
           <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
-            <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl text-bold-heading text-primary">50+</div>
-              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.countries', 'Countries Served')}</div>
-            </div>
-            <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl text-bold-heading text-accent">1000+</div>
-              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.products', 'Products')}</div>
-            </div>
-            <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl text-bold-heading text-primary">24/7</div>
-              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.support', 'Support')}</div>
-            </div>
-            <div className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="text-3xl md:text-4xl text-bold-heading text-accent">20+</div>
-              <div className="text-sm text-desc-bold text-muted-foreground mt-1">{t('hero.years', 'Years Experience')}</div>
-            </div>
+            {[
+              { value: '50+', label: t('hero.countries', 'Countries Served'), color: 'text-primary' },
+              { value: '1000+', label: t('hero.products', 'Products'), color: 'text-accent' },
+              { value: '24/7', label: t('hero.support', 'Support'), color: 'text-primary' },
+              { value: '20+', label: t('hero.years', 'Years Experience'), color: 'text-accent' },
+            ].map(({ value, label, color }) => (
+              <div key={value} className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:bg-card/70 hover:shadow-lg transition-all duration-300">
+                <div className={`text-3xl md:text-4xl text-bold-heading ${color}`}>{value}</div>
+                <div className="text-sm text-desc-bold text-muted-foreground mt-1">{label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
