@@ -116,15 +116,15 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
             {/* Row 1: Mobile compact header — [Logo centered] [🔍 right] */}
-            <div className="flex md:hidden items-center justify-center relative px-2 py-1.5">
+            <div className="flex md:hidden items-center justify-center relative px-2 py-2">
               {/* Compact logo — centered */}
-              <Link to="/" className="flex items-center gap-1.5 group" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-8 w-8 text-white" />
+              <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
+                <Gamepad2 className="h-10 w-10 text-white" />
                 <div className="flex flex-col">
-                  <span className="logo-text text-lg tracking-wide leading-none">
+                  <span className="logo-text text-xl tracking-wide leading-none">
                     <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                   </span>
-                  <span className="text-[7px] tracking-[0.12em] text-gray-300/80 font-medium uppercase leading-none">
+                  <span className="text-[8px] tracking-[0.12em] text-gray-300/80 font-medium uppercase leading-none mt-0.5">
                     Global Import &amp; Distribution
                   </span>
                 </div>
@@ -214,22 +214,22 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             </div>
 
             {/* Row 2: Mobile nav — 4 items + burger on right */}
-            <div className={`flex md:hidden items-center py-1 ${transparent ? '' : 'nav-icon-bar'}`}>
+            <div className={`flex md:hidden items-center py-1.5 ${transparent ? '' : 'nav-icon-bar'}`}>
               <div className="flex items-center justify-evenly flex-1">
-                <Link to="/" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/') ? 'text-white' : 'text-white/80'}`}>
-                  <House className="h-4 w-4" strokeWidth={2.5} />
+                <Link to="/" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/') ? 'text-white' : 'text-white/80'}`}>
+                  <House className="h-[18px] w-[18px]" strokeWidth={2.5} />
                   <span>{t('menu.home')}</span>
                 </Link>
-                <Link to="/products" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/products') ? 'text-white' : 'text-white/80'}`}>
-                  <ShoppingBag className="h-4 w-4" strokeWidth={2.5} />
+                <Link to="/products" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/products') ? 'text-white' : 'text-white/80'}`}>
+                  <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={2.5} />
                   <span>{t('menu.products')}</span>
                 </Link>
-                <Link to="/contact" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/contact') ? 'text-white' : 'text-white/80'}`}>
-                  <Mail className="h-4 w-4" strokeWidth={2.5} />
+                <Link to="/contact" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/contact') ? 'text-white' : 'text-white/80'}`}>
+                  <Mail className="h-[18px] w-[18px]" strokeWidth={2.5} />
                   <span>{t('menu.contact')}</span>
                 </Link>
-                <Link to="/about" className={`flex items-center gap-1 px-2 py-1 text-[13px] font-bold whitespace-nowrap ${isActive('/about') ? 'text-white' : 'text-white/80'}`}>
-                  <Building2 className="h-4 w-4" strokeWidth={2.5} />
+                <Link to="/about" className={`flex items-center gap-1.5 px-2 py-1 text-[15px] font-bold whitespace-nowrap ${isActive('/about') ? 'text-white' : 'text-white/80'}`}>
+                  <Building2 className="h-[18px] w-[18px]" strokeWidth={2.5} />
                   <span>{t('menu.about')}</span>
                 </Link>
               </div>

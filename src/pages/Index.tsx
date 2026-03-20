@@ -81,7 +81,7 @@ const Index = () => {
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
-            style={{ objectPosition: 'center -20vh' }}
+            style={{ objectPosition: 'center 8vh' }}
           />
           <div className="absolute bottom-0 left-0 right-0 h-[55%] bg-gradient-to-t from-background via-background/95 to-transparent" />
         </div>
