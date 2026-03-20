@@ -14,6 +14,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { lang, setLang, t } = useI18n();
@@ -24,6 +25,23 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
       navigate(`/products?q=${encodeURIComponent(searchTerm.trim())}`);
     }
   };
+
+  // Focus input after open animation starts
+  useEffect(() => {
+    if (searchOpen) {
+      const t = setTimeout(() => searchInputRef.current?.focus(), 50);
+      return () => clearTimeout(t);
+    } else {
+      setSearchTerm('');
+    }
+  }, [searchOpen]);
+
+  // Close search on Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const navigation = [
     { name: t('menu.home'), href: '/', icon: House },
@@ -115,35 +133,41 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               {/* Search toggle — absolute right */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="absolute right-2 p-1.5 text-white/90"
-                aria-label="Search"
+                className="absolute right-2 p-1.5 text-white/90 relative"
+                aria-label={searchOpen ? 'Close search' : 'Open search'}
+                aria-expanded={searchOpen}
               >
-                <Search className="h-5 w-5" strokeWidth={2.5} />
+                <Search className={`h-5 w-5 transition-all duration-200 ${searchOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`} strokeWidth={2.5} />
+                <X className={`h-5 w-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${searchOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} strokeWidth={2.5} />
               </button>
             </div>
 
-            {/* Mobile search overlay — expands when search icon tapped */}
-            {searchOpen && (
-              <div className="md:hidden px-2 pb-1">
+            {/* Mobile search — animated slide-down */}
+            <div
+              className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${searchOpen ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}
+              aria-hidden={!searchOpen}
+            >
+              <div className="px-2 pb-1.5">
                 <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="flex items-center gap-1.5 h-8">
                   <input
+                    ref={searchInputRef}
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    autoFocus
-                    className={`flex-1 min-w-0 h-8 px-3 rounded-lg border text-sm leading-none focus:outline-none focus:border-primary ${transparent ? 'bg-black/30 border-white/20 text-white placeholder:text-white/50' : 'bg-card/80 border-border/50 text-foreground'}`}
+                    tabIndex={searchOpen ? 0 : -1}
+                    className={`flex-1 min-w-0 h-8 px-3 rounded-lg border text-sm leading-none focus:outline-none focus:border-primary ${transparent ? 'bg-black/30 border-white/20 text-white placeholder:text-white/50' : 'bg-white/10 border-white/20 text-white placeholder:text-white/50'}`}
                     style={{ fontSize: '16px' }}
                     aria-label={t('products.searchPlaceholder')}
                   />
-                  <button type="submit" className="shrink-0 h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-white" aria-label="Search">
+                  <button type="submit" tabIndex={searchOpen ? 0 : -1} className="shrink-0 h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-white" aria-label="Search">
                     <Search className="h-4 w-4" />
                   </button>
-                  <button type="button" onClick={() => setSearchOpen(false)} className="shrink-0 h-8 w-8 flex items-center justify-center text-white/70" aria-label="Close">
+                  <button type="button" tabIndex={searchOpen ? 0 : -1} onClick={() => setSearchOpen(false)} className="shrink-0 h-8 w-8 flex items-center justify-center text-white/70" aria-label="Close">
                     <X className="h-4 w-4" />
                   </button>
                 </form>
               </div>
-            )}
+            </div>
 
             {/* Row 1 Desktop: Logo + Desktop nav */}
             <div className="hidden md:flex justify-between items-center md:h-16">
