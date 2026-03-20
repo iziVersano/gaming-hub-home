@@ -133,12 +133,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               {/* Search toggle — absolute right */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="absolute right-2 p-1.5 text-white/90 relative"
+                className="absolute right-2 p-1.5 text-white/90"
                 aria-label={searchOpen ? 'Close search' : 'Open search'}
                 aria-expanded={searchOpen}
               >
-                <Search className={`h-5 w-5 transition-all duration-200 ${searchOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`} strokeWidth={2.5} />
-                <X className={`h-5 w-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${searchOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} strokeWidth={2.5} />
+                <span className="relative block w-5 h-5">
+                  <Search className={`h-5 w-5 absolute inset-0 transition-all duration-200 ${searchOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`} strokeWidth={2.5} />
+                  <X className={`h-5 w-5 absolute inset-0 transition-all duration-200 ${searchOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} strokeWidth={2.5} />
+                </span>
               </button>
             </div>
 
