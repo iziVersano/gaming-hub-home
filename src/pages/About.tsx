@@ -39,10 +39,10 @@ const About = () => {
       </Helmet>
       <main id="main-content" className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
         <header className="max-w-4xl mx-auto text-center mb-10">
-          <h1 className="text-4xl md:text-5xl text-section-heading">{t('about.title')}</h1>
+          <h1 className="text-3xl md:text-5xl text-section-heading">{t('about.title')}</h1>
         </header>
         <section className="max-w-3xl mx-auto space-y-3 text-base leading-6 text-muted-foreground">
-          <div className="space-y-0">
+          <div className="space-y-2">
             <p>{t('about.founded')}</p>
             <p>{t('about.trusted')}</p>
           </div>
@@ -52,7 +52,7 @@ const About = () => {
             <li>{t('about.list.bikes')}</li>
             <li>{t('about.list.gadgets')}</li>
           </ul>
-          <div className="space-y-0">
+          <div className="space-y-2">
             <p>{t('about.experience')}</p>
             <p>{t('about.markets')}</p>
             <p>{t('about.focus')}</p>
@@ -76,7 +76,7 @@ const About = () => {
             <li>{t('about.list.me')}</li>
             <li>{t('about.list.asia')}</li>
           </ul>
-          <div className="space-y-0">
+          <div className="space-y-2">
             <p>{t('about.supply')}</p>
             <p>{t('about.needs')}</p>
             <p>{t('about.expanding')}</p>
@@ -99,10 +99,10 @@ const About = () => {
                   <span className="font-medium">{t('about.address')}</span> 47 Moshe Sneh St., Tel Aviv 6930243, Israel
                 </li>
                 <li>
-                  <span className="font-medium">{t('about.mobile')}</span> <a href="tel:+972522768607" className="underline">+972-52-2768607</a>
+                  <span className="font-medium">{t('about.mobile')}</span> <a href="tel:+972522768607" className="text-primary hover:underline font-medium">+972-52-2768607</a>
                 </li>
                 <li>
-                  <span className="font-medium">{t('about.email')}</span> <a href="mailto:sales@gamestation.co.il" className="underline">sales@gamestation.co.il</a>
+                  <span className="font-medium">{t('about.email')}</span> <a href="mailto:sales@gamestation.co.il" className="text-primary hover:underline font-medium">sales@gamestation.co.il</a>
                 </li>
                 <li>
                   <span className="font-medium">{t('about.vat')}</span> 032398497

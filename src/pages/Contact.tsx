@@ -162,7 +162,7 @@ const Contact = () => {
       <Navigation />
       <main className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
         <header className="max-w-4xl mx-auto text-center mb-10">
-          <h1 className="text-4xl md:text-5xl text-section-heading">{t('contact.title')}</h1>
+          <h1 className="text-3xl md:text-5xl text-section-heading">{t('contact.title')}</h1>
         </header>
         {/* Contact Form */}
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-6">
@@ -177,7 +177,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors"
                 placeholder={t('contact.placeholders.name')}
               />
             </div>
@@ -189,7 +189,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors"
                 placeholder={t('contact.placeholders.email')}
               />
             </div>
@@ -233,7 +233,7 @@ const Contact = () => {
               onChange={handleChange}
               required
               rows={6}
-              className="w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+              className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors resize-none"
               placeholder={t('contact.placeholders.message')}
             />
           </div>
@@ -266,8 +266,8 @@ const Contact = () => {
                         <WhatsAppIcon className="w-7 h-7 md:w-8 md:h-8 text-white" />
                       </div>
                     ) : (
-                      <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-                        {React.createElement(info.icon as any, { className: "h-6 w-6 text-white" })}
+                      <div className="w-12 h-12 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center">
+                        {React.createElement(info.icon as any, { className: "h-5 w-5 text-primary" })}
                       </div>
                     )}
                   </div>
