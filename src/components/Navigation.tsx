@@ -29,8 +29,8 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
   // Focus input after open animation starts
   useEffect(() => {
     if (searchOpen) {
-      const t = setTimeout(() => searchInputRef.current?.focus(), 50);
-      return () => clearTimeout(t);
+      const timer = setTimeout(() => searchInputRef.current?.focus(), 50);
+      return () => clearTimeout(timer);
     } else {
       setSearchTerm('');
     }
@@ -130,10 +130,11 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 </div>
               </Link>
 
-              {/* Search toggle — absolute right */}
+              {/* Search toggle — absolute right, large touch target */}
               <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="absolute right-2 p-1.5 text-white/90"
+                type="button"
+                onClick={() => setSearchOpen(prev => !prev)}
+                className="absolute right-1 flex items-center justify-center w-10 h-10 text-white"
                 aria-label={searchOpen ? 'Close search' : 'Open search'}
                 aria-expanded={searchOpen}
               >
