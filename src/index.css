@@ -490,12 +490,29 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   /* Search bar slide-down entrance */
   .search-slide-down {
-    animation: searchSlideDown 220ms ease-out;
+    animation: searchSlideDown 200ms ease-out;
   }
 
   @keyframes searchSlideDown {
-    from { opacity: 0; transform: translateY(-6px); }
+    from { opacity: 0; transform: translateY(-4px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Clean search input — no browser rings */
+  .search-input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 150ms ease, background 150ms ease;
+  }
+
+  .search-input:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(100, 160, 255, 0.55);
+    outline: none !important;
+    box-shadow: 0 0 0 1px rgba(100, 160, 255, 0.25) !important;
   }
 
   /* Navigation styling */

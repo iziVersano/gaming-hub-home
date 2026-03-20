@@ -146,22 +146,25 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
 
             {/* Mobile search — slide-down on open */}
             {searchOpen && (
-              <div className="md:hidden px-2 pb-1.5 search-slide-down">
-                <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="flex items-center gap-1.5 h-9">
+              <div className="md:hidden px-3 pb-2 search-slide-down">
+                <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="relative flex items-center">
+                  <Search className="absolute left-3 h-4 w-4 text-white/40 pointer-events-none shrink-0" strokeWidth={2} />
                   <input
                     ref={searchInputRef}
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-1 min-w-0 h-9 px-3 rounded-lg border border-white/25 bg-white/10 text-white placeholder:text-white/45 text-sm leading-none focus:outline-none focus:border-primary/70"
+                    placeholder={t('products.searchPlaceholder')}
+                    className="search-input w-full h-10 pl-9 pr-12 rounded-xl text-sm text-white placeholder:text-white/35"
                     style={{ fontSize: '16px' }}
                     aria-label={t('products.searchPlaceholder')}
                   />
-                  <button type="submit" className="shrink-0 h-9 w-9 flex items-center justify-center rounded-lg bg-primary text-white" aria-label="Search">
-                    <Search className="h-4 w-4" />
-                  </button>
-                  <button type="button" onClick={() => setSearchOpen(false)} className="shrink-0 h-9 w-9 flex items-center justify-center text-white/70" aria-label="Close">
-                    <X className="h-4 w-4" />
+                  <button
+                    type="submit"
+                    className="absolute right-1.5 h-7 px-3 rounded-lg bg-primary text-white text-xs font-semibold tracking-wide"
+                    aria-label="Search"
+                  >
+                    {t('products.search') || 'Go'}
                   </button>
                 </form>
               </div>
