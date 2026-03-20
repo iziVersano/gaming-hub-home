@@ -488,6 +488,16 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     @apply scale-x-100;
   }
 
+  /* Search bar slide-down entrance */
+  .search-slide-down {
+    animation: searchSlideDown 220ms ease-out;
+  }
+
+  @keyframes searchSlideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /* Navigation styling */
   /* Primary header - console dashboard glass with ocean blue tint */
   .nav-glass {

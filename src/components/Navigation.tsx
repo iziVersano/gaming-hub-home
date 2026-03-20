@@ -144,32 +144,28 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </button>
             </div>
 
-            {/* Mobile search — animated slide-down */}
-            <div
-              className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${searchOpen ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}
-              aria-hidden={!searchOpen}
-            >
-              <div className="px-2 pb-1.5">
-                <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="flex items-center gap-1.5 h-8">
+            {/* Mobile search — slide-down on open */}
+            {searchOpen && (
+              <div className="md:hidden px-2 pb-1.5 search-slide-down">
+                <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="flex items-center gap-1.5 h-9">
                   <input
                     ref={searchInputRef}
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    tabIndex={searchOpen ? 0 : -1}
-                    className={`flex-1 min-w-0 h-8 px-3 rounded-lg border text-sm leading-none focus:outline-none focus:border-primary ${transparent ? 'bg-black/30 border-white/20 text-white placeholder:text-white/50' : 'bg-white/10 border-white/20 text-white placeholder:text-white/50'}`}
+                    className="flex-1 min-w-0 h-9 px-3 rounded-lg border border-white/25 bg-white/10 text-white placeholder:text-white/45 text-sm leading-none focus:outline-none focus:border-primary/70"
                     style={{ fontSize: '16px' }}
                     aria-label={t('products.searchPlaceholder')}
                   />
-                  <button type="submit" tabIndex={searchOpen ? 0 : -1} className="shrink-0 h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-white" aria-label="Search">
+                  <button type="submit" className="shrink-0 h-9 w-9 flex items-center justify-center rounded-lg bg-primary text-white" aria-label="Search">
                     <Search className="h-4 w-4" />
                   </button>
-                  <button type="button" tabIndex={searchOpen ? 0 : -1} onClick={() => setSearchOpen(false)} className="shrink-0 h-8 w-8 flex items-center justify-center text-white/70" aria-label="Close">
+                  <button type="button" onClick={() => setSearchOpen(false)} className="shrink-0 h-9 w-9 flex items-center justify-center text-white/70" aria-label="Close">
                     <X className="h-4 w-4" />
                   </button>
                 </form>
               </div>
-            </div>
+            )}
 
             {/* Row 1 Desktop: Logo + Desktop nav */}
             <div className="hidden md:flex justify-between items-center md:h-16">
