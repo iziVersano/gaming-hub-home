@@ -329,15 +329,15 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   /* Professional Product Card */
   .product-card {
-    @apply bg-card rounded-2xl p-6 transition-all duration-300 relative overflow-hidden;
+    @apply bg-card rounded-2xl p-4 md:p-6 transition-all duration-300 relative overflow-hidden;
     box-shadow: var(--shadow-card);
     border: 1px solid hsl(var(--border));
   }
 
   .product-card:hover {
     box-shadow: var(--shadow-elevated);
-    border-color: hsl(var(--primary) / 0.2);
-    transform: translateY(-4px);
+    border-color: hsl(var(--primary) / 0.25);
+    transform: translateY(-3px);
   }
 
   /* Text glow - subtle */

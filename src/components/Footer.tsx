@@ -5,7 +5,7 @@ import { useI18n } from '@/hooks/I18nContext';
 const Footer = () => {
   const { t } = useI18n();
   return (
-    <footer className="py-16 bg-card border-t border-border" role="contentinfo">
+    <footer className="py-10 md:py-16 bg-card border-t border-border" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">

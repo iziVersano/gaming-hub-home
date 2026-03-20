@@ -135,29 +135,29 @@ const ProductSlider = () => {
         {/* Header */}
         <div className="text-center mb-6 md:mb-16">
           <div className="mb-4">
-            <span className="gradient-text text-4xl md:text-4xl text-section-heading block mb-2">{t('products.featuredTitle')}</span>
+            <span className="gradient-text text-2xl md:text-4xl text-section-heading block mb-2">{t('products.featuredTitle')}</span>
             <div className="text-lg md:text-2xl text-muted-foreground text-desc-bold">{t('products.featuredDescription')}</div>
           </div>
 
           {/* Category Icon Bar */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-border/40">
+          <div className="grid grid-cols-3 md:flex md:flex-wrap justify-center gap-3 md:gap-10 mt-6 pt-5 border-t border-border/40">
             {[
-              { icon: Gamepad2, label: t('featured.cat.gaming', 'Gaming Consoles'), categoryKey: 'gaming' },
-              { icon: Monitor, label: t('featured.cat.displays', 'Smart Displays'), categoryKey: 'tvs' },
+              { icon: Gamepad2, label: t('featured.cat.gaming', 'Gaming'), categoryKey: 'gaming' },
+              { icon: Monitor, label: t('featured.cat.displays', 'Displays'), categoryKey: 'tvs' },
               { icon: Plane, label: t('featured.cat.drones', 'Drones'), categoryKey: 'drones' },
               { icon: Bike, label: t('featured.cat.ebikes', 'E-Bikes'), categoryKey: 'ebikes' },
               { icon: Cpu, label: t('featured.cat.electronics', 'Electronics'), categoryKey: 'electronics' },
-              { icon: ShoppingBag, label: t('featured.cat.all', 'All Products'), categoryKey: '' },
+              { icon: ShoppingBag, label: t('featured.cat.all', 'All'), categoryKey: '' },
             ].map(({ icon: Icon, label, categoryKey }) => (
               <Link
                 key={label}
                 to={categoryKey ? `/products?category=${encodeURIComponent(t(`products.category.${categoryKey}`))}` : '/products'}
-                className="flex flex-col items-center gap-2 group/cat min-w-[72px]"
+                className="flex flex-col items-center gap-1.5 group/cat"
               >
-                <div className="w-12 h-12 rounded-xl bg-card border border-border/60 group-hover/cat:border-primary/50 group-hover/cat:bg-primary/10 flex items-center justify-center transition-all duration-300">
-                  <Icon className="w-6 h-6 text-muted-foreground group-hover/cat:text-primary transition-colors duration-300" />
+                <div className="w-11 h-11 rounded-xl bg-card border border-border/60 group-hover/cat:border-primary/50 group-hover/cat:bg-primary/10 flex items-center justify-center transition-all duration-300 shadow-sm">
+                  <Icon className="w-5 h-5 text-muted-foreground group-hover/cat:text-primary transition-colors duration-300" />
                 </div>
-                <span className="text-xs text-primary font-medium group-hover/cat:underline underline-offset-4 transition-all duration-200 text-center leading-tight">
+                <span className="text-[11px] md:text-xs text-primary font-medium group-hover/cat:underline underline-offset-4 transition-all duration-200 text-center leading-tight">
                   {label}
                 </span>
               </Link>
@@ -232,14 +232,14 @@ const ProductSlider = () => {
                       height={256}
                       className={cn(
                         "w-full h-56 sm:h-56 md:h-64 transition-all duration-500",
-                        "object-cover group-hover:scale-110",
+                        "object-cover group-hover:scale-105",
                         loadedImages.has(product.id) ? "opacity-100" : "opacity-0"
                       )}
                       onLoad={() => handleImageLoad(product.id)}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-black/55 backdrop-blur-sm text-white/90 px-2.5 py-1 rounded-full text-xs font-medium border border-white/10">
                         {product.category}
                       </span>
                     </div>
