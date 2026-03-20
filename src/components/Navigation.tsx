@@ -149,49 +149,37 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             <div className="hidden md:flex justify-between items-center md:h-16">
               <Link
                 to="/"
-                className="flex items-start justify-center gap-2 sm:gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset rounded-lg px-1"
+                className="flex items-center gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset rounded-lg px-1"
                 aria-label="Consoltech - Home"
               >
-                <div className="relative shrink-0 mt-0.5">
-                  <Gamepad2 className="h-14 w-14 text-white group-hover:text-accent transition-colors duration-300" />
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                <div className="logo-icon-wrap p-2.5 group-hover:border-accent/40 transition-colors duration-300">
+                  <Gamepad2 className="h-9 w-9 text-white group-hover:text-accent transition-colors duration-300" />
                 </div>
-                <div className="flex flex-col items-start">
-                  <span className="logo-text text-3xl lg:text-4xl tracking-wider">
+                <div className="flex flex-col items-start gap-px">
+                  <span className="logo-text text-3xl lg:text-[2.15rem] tracking-wider leading-none">
                     <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                   </span>
-                  <span className="text-sm tracking-[0.2em] text-gray-300 font-medium uppercase -mt-0.5">
+                  <span className="text-[10px] tracking-[0.22em] text-white/45 font-medium uppercase leading-none pt-0.5">
                     Global Import &amp; Distribution
-                  </span>
-                  <span dir="rtl" className="text-xs text-white/50 font-light -mt-0.5">
-                    קונסולטק
                   </span>
                 </div>
               </Link>
 
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-8" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
-                {navigation.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      role="menuitem"
-                      aria-current={isActive(item.href) ? 'page' : undefined}
-                      className={`flex items-center gap-2 py-1 font-semibold text-[15px] tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded ${
-                        isActive(item.href)
-                          ? 'text-accent border-b-2 border-accent'
-                          : 'text-white hover:text-accent'
-                      }`}
-                    >
-                      <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
-                      <span>{item.name}</span>
-                    </Link>
-                  );
-                })}
+              <div className="hidden md:flex items-center gap-7" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    role="menuitem"
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`nav-link${isActive(item.href) ? ' nav-link-active' : ''}`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
                 <Link to="/contact">
-                  <Button className="btn-nav">
+                  <Button className="btn-nav ml-1">
                     <MessageSquare className="h-4 w-4" aria-hidden="true" />
                     <span>{t('menu.getQuote')}</span>
                   </Button>

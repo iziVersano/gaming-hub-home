@@ -60,7 +60,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 14% 98%));
     --gradient-neon: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
     --gradient-tech: linear-gradient(135deg, hsl(var(--tech-blue)), hsl(var(--cyber-purple)));
-    --gradient-logo-blue: linear-gradient(90deg, hsl(210 100% 50%), hsl(210 100% 40%));
+    --gradient-logo-blue: linear-gradient(90deg, hsl(210 100% 62%), hsl(185 84% 60%));
     --gradient-subtle: linear-gradient(180deg, hsl(220 20% 97%), hsl(220 25% 94%));
 
     /* Professional Shadows - Soft and elegant */
@@ -447,6 +447,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   .logo-consol {
     @apply text-white;
+    text-shadow: 0 0 24px rgba(200, 220, 255, 0.18);
   }
 
   .logo-tech {
@@ -454,6 +455,37 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 0 8px hsl(185 84% 55% / 0.45));
+  }
+
+  .logo-icon-wrap {
+    @apply relative flex items-center justify-center rounded-xl shrink-0;
+    background: linear-gradient(135deg, rgba(20, 70, 200, 0.22), rgba(100, 50, 240, 0.18));
+    border: 1px solid rgba(100, 160, 255, 0.28);
+    box-shadow: 0 0 18px rgba(30, 100, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Desktop nav link with animated underline */
+  .nav-link {
+    @apply relative py-1 font-semibold text-[15px] tracking-wide transition-colors duration-200 text-white/75 hover:text-white focus:outline-none;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-px left-0 right-0 h-[2px] rounded-full origin-left scale-x-0 transition-transform duration-300;
+    background: var(--gradient-logo-blue);
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  .nav-link-active {
+    @apply text-white;
+  }
+
+  .nav-link-active::after {
+    @apply scale-x-100;
   }
 
   /* Navigation styling */
