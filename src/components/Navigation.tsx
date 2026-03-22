@@ -117,8 +117,8 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               {/* Compact logo — centered */}
               <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
                 <Gamepad2 className="h-10 w-10 text-white" />
-                <div className="flex flex-col">
-                  <span className="logo-text text-xl tracking-wide leading-none">
+                <div className="flex flex-col overflow-visible">
+                  <span className="logo-text text-xl tracking-wide leading-none scale-[1.35] origin-left translate-y-0.5">
                     {hebrewLogo
                       ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                       : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
