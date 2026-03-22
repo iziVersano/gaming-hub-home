@@ -47,9 +47,9 @@ const TrustBadges = () => {
             }}
           >
             <div className="shrink-0">
-              <Icon className={`h-7 w-7 ${iconColor} drop-shadow-[0_0_8px_currentColor]`} strokeWidth={2} />
+              <Icon className={`h-9 w-9 ${iconColor} drop-shadow-[0_0_12px_currentColor]`} strokeWidth={1.8} />
             </div>
-            <span className="text-[13px] font-extrabold text-white leading-tight tracking-wide">
+            <span className="text-[15px] font-extrabold text-white leading-tight tracking-widest uppercase" style={{ textShadow: '0 0 10px rgba(255,255,255,0.15)' }}>
               {t(key)}
             </span>
           </div>

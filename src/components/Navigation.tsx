@@ -116,15 +116,15 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             <div className="flex md:hidden items-center justify-center relative px-2 py-2">
               {/* Compact logo — centered */}
               <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-10 w-10 text-white" />
+                <Gamepad2 className="h-12 w-12 text-white" />
                 <div className="flex flex-col overflow-visible">
-                  <span className="logo-text text-xl tracking-wide leading-none scale-[1.35] origin-left translate-y-0.5">
+                  <span className="logo-text text-2xl tracking-widest leading-none scale-[1.5] origin-center">
                     {hebrewLogo
                       ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                       : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
                     }
                   </span>
-                  <span className="text-[8px] tracking-[0.12em] text-gray-300/80 font-medium uppercase leading-none mt-0.5">
+                  <span className="text-[9px] tracking-[0.15em] text-gray-300/80 font-medium uppercase leading-none mt-1.5">
                     {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
                   </span>
                 </div>
