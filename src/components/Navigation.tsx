@@ -104,7 +104,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
     };
   }, []);
 
-  const [hebrewLogo, setHebrewLogo] = useState(false);
+  const [hebrewLogo, setHebrewLogo] = useState(true);
 
   return (
     <>
