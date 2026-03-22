@@ -240,21 +240,21 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             <div className="flex md:hidden items-center px-2 py-2 gap-1.5" style={{ background: 'linear-gradient(180deg, rgba(60,40,120,0.5) 0%, rgba(100,60,180,0.35) 100%)' }}>
               <div className="flex items-center justify-evenly flex-1 gap-1">
                 {[
-                  { to: '/', icon: House, label: t('menu.home') },
-                  { to: '/products', icon: ShoppingBag, label: t('menu.products') },
-                  { to: '/contact', icon: Mail, label: t('menu.contact') },
-                  { to: '/about', icon: Building2, label: t('menu.about') },
-                ].map(({ to, icon: Icon, label }) => (
+                  { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_6px_rgba(96,165,250,0.6)]' },
+                  { to: '/products', icon: ShoppingBag, label: t('menu.products'), color: 'text-purple-400', glow: 'drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]' },
+                  { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_6px_rgba(52,211,153,0.6)]' },
+                  { to: '/about', icon: Building2, label: t('menu.about'), color: 'text-pink-400', glow: 'drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]' },
+                ].map(({ to, icon: Icon, label, color, glow }) => (
                   <Link
                     key={to}
                     to={to}
-                    className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-extrabold whitespace-nowrap tracking-wide transition-all duration-200 ${
+                    className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-[14px] font-extrabold whitespace-nowrap tracking-wide transition-all duration-200 ${
                       isActive(to)
                         ? 'text-white bg-white/10 border border-white/20 shadow-[0_0_10px_rgba(139,92,246,0.3)]'
                         : 'text-white/75 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <Icon className={`h-5 w-5 shrink-0 ${isActive(to) ? 'text-purple-300 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]' : ''}`} strokeWidth={isActive(to) ? 2.5 : 2} />
+                    <Icon className={`h-5 w-5 shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
                     <span>{label}</span>
                   </Link>
                 ))}
