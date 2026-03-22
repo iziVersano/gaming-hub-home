@@ -104,10 +104,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
     };
   }, []);
 
-  // TODO: Uncomment to re-enable language toggle
-  function LanguageToggleInline() {
-    return null;
-  }
+  const [hebrewLogo, setHebrewLogo] = useState(false);
 
   return (
     <>
@@ -122,13 +119,26 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 <Gamepad2 className="h-10 w-10 text-white" />
                 <div className="flex flex-col">
                   <span className="logo-text text-xl tracking-wide leading-none">
-                    <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                    {hebrewLogo
+                      ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
+                      : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
+                    }
                   </span>
                   <span className="text-[8px] tracking-[0.12em] text-gray-300/80 font-medium uppercase leading-none mt-0.5">
-                    Global Import &amp; Distribution
+                    {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
                   </span>
                 </div>
               </Link>
+
+              {/* Flag toggle — absolute left */}
+              <button
+                type="button"
+                onClick={() => setHebrewLogo(prev => !prev)}
+                className="absolute left-1 flex items-center justify-center w-10 h-10 text-lg"
+                aria-label="Toggle logo language"
+              >
+                {hebrewLogo ? '🇬🇧' : '🇮🇱'}
+              </button>
 
               {/* Search toggle — absolute right, large touch target */}
               <button
@@ -183,13 +193,26 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 </div>
                 <div className="flex flex-col items-start gap-px">
                   <span className="logo-text text-3xl lg:text-[2.15rem] tracking-wider leading-none">
-                    <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                    {hebrewLogo
+                      ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
+                      : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
+                    }
                   </span>
                   <span className="text-[10px] tracking-[0.22em] text-white/45 font-medium uppercase leading-none pt-0.5">
-                    Global Import &amp; Distribution
+                    {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
                   </span>
                 </div>
               </Link>
+
+              {/* Flag toggle button — desktop */}
+              <button
+                type="button"
+                onClick={() => setHebrewLogo(prev => !prev)}
+                className="text-xl ml-2 opacity-70 hover:opacity-100 transition-opacity"
+                aria-label="Toggle logo language"
+              >
+                {hebrewLogo ? '🇬🇧' : '🇮🇱'}
+              </button>
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center gap-7" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
