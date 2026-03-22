@@ -112,39 +112,39 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
-            {/* Row 1: Mobile compact header — [Logo centered] [🔍 right] */}
-            <div className="flex md:hidden items-center justify-center relative px-2 py-2">
-              {/* Compact logo — centered */}
-              <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-12 w-12 text-white" />
-                <div className="flex flex-col overflow-visible">
-                  <span className="logo-text text-2xl tracking-widest leading-none scale-[1.5] origin-center">
-                    {hebrewLogo
-                      ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
-                      : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
-                    }
-                  </span>
-                  <span className="text-[9px] tracking-[0.15em] text-gray-300/80 font-medium uppercase leading-none mt-1.5">
-                    {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
-                  </span>
-                </div>
-              </Link>
-
-              {/* Flag toggle — absolute left */}
+            {/* Row 1: Mobile compact header — [🏴flag] [Logo centered] [🔍] */}
+            <div className="flex md:hidden items-center justify-between px-3 py-2">
+              {/* Flag toggle — left */}
               <button
                 type="button"
                 onClick={() => setHebrewLogo(prev => !prev)}
-                className="absolute left-1 flex items-center justify-center w-10 h-10 text-lg"
+                className="flex items-center justify-center w-8 h-8 text-base shrink-0"
                 aria-label="Toggle logo language"
               >
                 {hebrewLogo ? '🇬🇧' : '🇮🇱'}
               </button>
 
-              {/* Search toggle — absolute right, large touch target */}
+              {/* Logo — centered */}
+              <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
+                <Gamepad2 className="h-10 w-10 text-white shrink-0" />
+                <div className="flex flex-col items-center">
+                  <span className="logo-text text-[1.7rem] tracking-wider leading-none whitespace-nowrap">
+                    {hebrewLogo
+                      ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
+                      : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
+                    }
+                  </span>
+                  <span className="text-[8px] tracking-[0.15em] text-gray-300/80 font-medium uppercase leading-none mt-0.5">
+                    {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
+                  </span>
+                </div>
+              </Link>
+
+              {/* Search toggle — right */}
               <button
                 type="button"
                 onClick={() => setSearchOpen(prev => !prev)}
-                className="absolute right-1 flex items-center justify-center w-10 h-10 text-white"
+                className="flex items-center justify-center w-8 h-8 text-white shrink-0"
                 aria-label={searchOpen ? 'Close search' : 'Open search'}
                 aria-expanded={searchOpen}
               >
