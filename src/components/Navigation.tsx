@@ -192,7 +192,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <Gamepad2 className="h-9 w-9 text-white group-hover:text-accent transition-colors duration-300" />
                 </div>
                 <div className="flex flex-col items-start gap-px">
-                  <span className="logo-text text-3xl lg:text-[2.15rem] tracking-wider leading-none">
+                  <span className="logo-text text-3xl lg:text-[2.15rem] tracking-wider leading-none scale-[1.4] origin-left inline-block">
                     {hebrewLogo
                       ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                       : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>

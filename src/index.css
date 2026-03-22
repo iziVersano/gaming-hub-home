@@ -467,7 +467,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   /* Desktop nav link with animated underline */
   .nav-link {
-    @apply relative py-1 font-semibold text-[15px] tracking-wide transition-colors duration-200 text-white/75 hover:text-white focus:outline-none;
+    @apply relative py-1 font-extrabold text-[18px] tracking-widest transition-colors duration-200 text-white/80 hover:text-white focus:outline-none leading-none;
   }
 
   .nav-link::after {
