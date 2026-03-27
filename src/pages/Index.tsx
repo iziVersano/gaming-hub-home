@@ -124,7 +124,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature) => (
-              <div key={feature.title} className="product-card text-center group">
+              <div key={feature.title} className="product-card text-center group bg-slate-800 border-slate-700">
                 <div className="w-20 h-20 md:w-16 md:h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                   <feature.icon className="h-10 w-10 md:h-8 md:w-8 text-white" />
                 </div>
