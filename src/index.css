@@ -241,9 +241,9 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   /* Hero Square Buttons - Glossy 3D Capsule Style */
   .btn-hero-square {
     @apply text-white
-           w-[92vw] py-6 md:w-auto md:py-8 md:px-20 lg:px-24 lg:py-9 flex flex-row items-center justify-center text-center
-           font-semibold text-2xl md:text-3xl lg:text-4xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
-           gap-4 rounded-2xl md:rounded-full;
+           w-full max-w-[340px] py-4 px-8 md:w-auto md:py-8 md:px-20 lg:px-24 lg:py-9 flex flex-row items-center justify-center text-center
+           font-semibold text-lg md:text-3xl lg:text-4xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
+           gap-3 rounded-xl md:rounded-full;
     background: linear-gradient(180deg, hsl(210 100% 55%) 0%, hsl(210 100% 42%) 50%, hsl(210 100% 35%) 100%);
     border: 1px solid hsl(210 100% 65% / 0.5);
     box-shadow:
@@ -285,9 +285,9 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   .btn-neon-square {
     @apply text-white
-           w-[92vw] py-6 md:w-auto md:py-8 md:px-20 lg:px-24 lg:py-9 flex flex-row items-center justify-center text-center
-           font-semibold text-2xl md:text-3xl lg:text-4xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
-           gap-4 rounded-2xl md:rounded-full;
+           w-full max-w-[340px] py-4 px-8 md:w-auto md:py-8 md:px-20 lg:px-24 lg:py-9 flex flex-row items-center justify-center text-center
+           font-semibold text-lg md:text-3xl lg:text-4xl transition-all duration-300 hover:scale-[1.03] relative overflow-hidden
+           gap-3 rounded-xl md:rounded-full;
     background: linear-gradient(180deg, hsl(255 72% 62%) 0%, hsl(255 72% 50%) 50%, hsl(255 72% 40%) 100%);
     border: 1px solid hsl(255 72% 70% / 0.5);
     box-shadow:

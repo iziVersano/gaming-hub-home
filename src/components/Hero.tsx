@@ -70,7 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pt-[24rem] pb-2 md:pt-24 md:pb-16">
+    <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pb-4 md:pt-24 md:pb-16" style={{ paddingTop: 'clamp(6.5rem, 38vw, 14rem)' }}>
       {/* Background Image with Professional Treatment — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -108,8 +108,8 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-2 md:space-y-4">
-          {/* Main Headline — above the carousel */}
-          <h1 className="text-right md:text-center text-[clamp(1.1rem,5vw,2rem)] md:text-3xl lg:text-4xl font-extrabold leading-tight pr-4 pl-28 md:px-1 mb-2 md:mb-4 -mt-56 md:mt-0 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)' }}>
+          {/* Main Headline */}
+          <h1 className="text-right md:text-center text-[clamp(1.25rem,5.5vw,2rem)] md:text-3xl lg:text-4xl font-extrabold leading-tight px-4 md:px-1 mb-2 md:mb-4 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)' }}>
             {t('hero.headline1')} <span className="text-white/90">{t('hero.innovation')}</span>
           </h1>
 
@@ -222,7 +222,7 @@ const Hero = () => {
 
           {/* Subtitle + Description — below the carousel */}
           <div className="space-y-2 md:space-y-4">
-            <p className="text-right md:text-center text-lg md:text-2xl lg:text-3xl font-bold leading-tight text-white/90 pr-4 pl-28 md:px-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" style={{ textShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.2)' }}>
+            <p className="text-right md:text-center text-[clamp(1rem,4.5vw,1.5rem)] md:text-2xl lg:text-3xl font-bold leading-tight text-white/90 px-4 md:px-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" style={{ textShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.2)' }}>
               {t('hero.headline2')}<br className="md:hidden" />{t('hero.toys')}
             </p>
             <div className="hidden md:flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
@@ -232,8 +232,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* CTA Buttons — desktop only */}
-          <div className="hidden md:flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-1 md:pt-4">
+          {/* CTA Buttons — all screens, stacked on mobile */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-3 md:pt-4 px-4 md:px-0">
             <Link to="/contact">
               <Button size={null} className="btn-hero-square group">
                 <Send className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8 transition-transform group-hover:translate-x-1" />

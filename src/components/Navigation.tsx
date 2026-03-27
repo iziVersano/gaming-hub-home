@@ -112,13 +112,13 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
-            {/* Row 1: Mobile compact header — [🏴flag] [Logo centered] [🔍] */}
-            <div className="flex md:hidden items-center justify-between px-3 py-2">
-              {/* Flag toggle — left */}
+            {/* Row 1: Mobile compact header — [🏴lang] [Logo centered] [🔍] */}
+            <div className="flex md:hidden items-center justify-between px-4 py-2.5">
+              {/* Language toggle — left */}
               <button
                 type="button"
                 onClick={() => setHebrewLogo(prev => !prev)}
-                className="flex items-center justify-center w-8 h-8 text-base shrink-0"
+                className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/8 hover:bg-white/15 border border-white/12 text-sm transition-colors shrink-0"
                 aria-label="Toggle logo language"
               >
                 {hebrewLogo ? '🇬🇧' : '🇮🇱'}
@@ -126,15 +126,15 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
 
               {/* Logo — centered */}
               <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-10 w-10 text-white shrink-0" />
+                <Gamepad2 className="h-8 w-8 text-white shrink-0 drop-shadow-[0_0_8px_rgba(100,160,255,0.5)]" />
                 <div className="flex flex-col items-center">
-                  <span className="logo-text text-[1.7rem] tracking-wider leading-none whitespace-nowrap">
+                  <span className="logo-text text-[1.45rem] tracking-wider leading-none whitespace-nowrap">
                     {hebrewLogo
                       ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                       : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
                     }
                   </span>
-                  <span className="text-[8px] tracking-[0.15em] text-gray-300/80 font-medium uppercase leading-none mt-0.5">
+                  <span className="text-[7.5px] tracking-[0.18em] text-white/50 font-medium uppercase leading-none mt-0.5">
                     {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
                   </span>
                 </div>
@@ -144,7 +144,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setSearchOpen(prev => !prev)}
-                className="flex items-center justify-center w-8 h-8 text-white shrink-0"
+                className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/8 hover:bg-white/15 border border-white/12 text-white transition-colors shrink-0"
                 aria-label={searchOpen ? 'Close search' : 'Open search'}
                 aria-expanded={searchOpen}
               >
@@ -236,38 +236,40 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </div>
             </div>
 
-            {/* Row 2: Mobile nav — styled items + burger chevron */}
-            <div className="flex md:hidden items-center px-2 py-2 gap-1.5" style={{ background: 'linear-gradient(180deg, rgba(60,40,120,0.5) 0%, rgba(100,60,180,0.35) 100%)' }}>
-              <div className="flex items-center justify-evenly flex-1 gap-1">
+            {/* Row 2: Mobile nav — icon + label tabs + burger */}
+            <div className="flex md:hidden items-center px-2 py-1.5 gap-1 nav-icon-bar">
+              <div className="flex items-center justify-evenly flex-1">
                 {[
-                  { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_6px_rgba(96,165,250,0.6)]' },
-                  { to: '/products', icon: ShoppingBag, label: t('menu.products'), color: 'text-purple-400', glow: 'drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]' },
-                  { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_6px_rgba(52,211,153,0.6)]' },
-                  { to: '/about', icon: Building2, label: t('menu.about'), color: 'text-pink-400', glow: 'drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]' },
+                  { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_8px_rgba(96,165,250,0.7)]' },
+                  { to: '/products', icon: ShoppingBag, label: t('menu.products'), color: 'text-purple-400', glow: 'drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]' },
+                  { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]' },
+                  { to: '/about', icon: Building2, label: t('menu.about'), color: 'text-pink-400', glow: 'drop-shadow-[0_0_8px_rgba(244,114,182,0.7)]' },
                 ].map(({ to, icon: Icon, label, color, glow }) => (
                   <Link
                     key={to}
                     to={to}
-                    className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-[14px] font-extrabold whitespace-nowrap tracking-wide transition-all duration-200 ${
+                    className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[56px] transition-all duration-200 ${
                       isActive(to)
-                        ? 'text-white bg-white/10 border border-white/20 shadow-[0_0_10px_rgba(139,92,246,0.3)]'
-                        : 'text-white/75 hover:text-white hover:bg-white/5'
+                        ? 'bg-white/12 shadow-[0_0_12px_rgba(139,92,246,0.35)]'
+                        : 'hover:bg-white/5'
                     }`}
                   >
                     <Icon className={`h-5 w-5 shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span>{label}</span>
+                    <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white/60'}`}>{label}</span>
+                    {isActive(to) && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-white/60" />}
                   </Link>
                 ))}
               </div>
-              {/* Burger menu — chevron style */}
+              {/* Burger menu */}
               <button
-                className="shrink-0 p-1.5 text-white/80 hover:text-white"
+                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white/60 hover:text-white transition-colors"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
                 <Menu className="h-5 w-5" strokeWidth={2.5} />
+                <span className="text-[10px] font-semibold tracking-wide leading-none">More</span>
               </button>
             </div>
           </div>
