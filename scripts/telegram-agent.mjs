@@ -99,9 +99,8 @@ function runClaude(prompt) {
   return new Promise((resolve) => {
     const args = [
       '--print',           // non-interactive, print output then exit
-      '--no-update-checks',
+      '--dangerously-skip-permissions',
       '--allowedTools', 'Read,Edit,Write,Bash,Glob,Grep',
-      prompt,
     ];
 
     let output = '';
@@ -110,7 +109,12 @@ function runClaude(prompt) {
     const child = spawn('claude', args, {
       cwd: PROJECT_DIR,
       env: { ...process.env, FORCE_COLOR: '0' },
+      stdio: ['pipe', 'pipe', 'pipe'],
     });
+
+    // Send prompt via stdin, then close it
+    child.stdin.write(prompt);
+    child.stdin.end();
 
     child.stdout.on('data', (d) => { output += d.toString(); });
     child.stderr.on('data', (d) => { error += d.toString(); });

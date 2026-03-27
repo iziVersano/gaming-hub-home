@@ -6,7 +6,10 @@
       "Bash(git push:*)",
       "Bash(gh run:*)",
       "Bash(git add:*)",
-      "Bash(git revert:*)"
+      "Bash(git revert:*)",
+      "Bash(claude --version)",
+      "Bash(npm list:*)",
+      "Bash(claude --print --dangerously-skip-permissions)"
     ]
   }
 }
