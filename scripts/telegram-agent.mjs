@@ -3,7 +3,7 @@
  * telegram-agent.mjs
  *
  * Polls Telegram for new messages from authorized users,
- * feeds each message to `claude --print` as a code-change request,
+ * feeds each message (including images) to `claude --print`,
  * and replies with the result.
  *
  * Usage:
@@ -15,8 +15,8 @@
  *   TELEGRAM_POLL_INTERVAL=5000               # ms between polls (default 5000)
  */
 
-import { execSync, spawn } from 'child_process';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { spawn } from 'child_process';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,6 +24,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_DIR = resolve(__dirname, '..');
 const STATE_FILE = resolve(__dirname, '.telegram-agent-state.json');
 const ENV_FILE = resolve(PROJECT_DIR, '.env.telegram');
+const TMP_DIR = resolve(__dirname, '.tmp-images');
 
 // ── Load .env.telegram if present ─────────────────────────────────────────────
 if (existsSync(ENV_FILE)) {
@@ -52,10 +53,9 @@ if (!BOT_TOKEN) {
 
 if (ALLOWED_IDS.length === 0) {
   console.warn('⚠️  TELEGRAM_ALLOWED_IDS not set — all senders will be allowed.');
-  console.warn('    Set it to your Telegram user/chat ID to restrict access.');
 }
 
-// ── Persistent state (last processed update_id) ───────────────────────────────
+// ── Persistent state ───────────────────────────────────────────────────────────
 function loadState() {
   if (existsSync(STATE_FILE)) {
     try { return JSON.parse(readFileSync(STATE_FILE, 'utf8')); } catch {}
@@ -69,6 +69,7 @@ function saveState(state) {
 
 // ── Telegram API helpers ───────────────────────────────────────────────────────
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+const FILE_API = `https://api.telegram.org/file/bot${BOT_TOKEN}`;
 
 async function tgFetch(method, body = {}) {
   const res = await fetch(`${API}/${method}`, {
@@ -82,7 +83,6 @@ async function tgFetch(method, body = {}) {
 }
 
 async function sendMessage(chatId, text) {
-  // Telegram max message length is 4096 chars
   const chunks = [];
   for (let i = 0; i < text.length; i += 4000) chunks.push(text.slice(i, i + 4000));
   for (const chunk of chunks) {
@@ -94,14 +94,37 @@ async function getUpdates(offset) {
   return tgFetch('getUpdates', { offset, timeout: 20, allowed_updates: ['message'] });
 }
 
+// ── Download a Telegram file to disk, return local path ───────────────────────
+async function downloadTelegramFile(fileId, ext = 'jpg') {
+  // Step 1: get the file path from Telegram
+  const fileInfo = await tgFetch('getFile', { file_id: fileId });
+  const remotePath = fileInfo.file_path;
+
+  // Step 2: download the bytes
+  const res = await fetch(`${FILE_API}/${remotePath}`);
+  if (!res.ok) throw new Error(`Failed to download file: ${res.status}`);
+  const buffer = Buffer.from(await res.arrayBuffer());
+
+  // Step 3: save to tmp dir
+  if (!existsSync(TMP_DIR)) mkdirSync(TMP_DIR, { recursive: true });
+  const localPath = resolve(TMP_DIR, `${fileId}.${ext}`);
+  writeFileSync(localPath, buffer);
+  return localPath;
+}
+
 // ── Run claude on a change request ────────────────────────────────────────────
-function runClaude(prompt) {
+function runClaude(prompt, imagePaths = []) {
   return new Promise((resolve) => {
     const args = [
-      '--print',           // non-interactive, print output then exit
+      '--print',
       '--dangerously-skip-permissions',
       '--allowedTools', 'Read,Edit,Write,Bash,Glob,Grep',
     ];
+
+    // Pass images via --file flag if present
+    for (const imgPath of imagePaths) {
+      args.push('--file', imgPath);
+    }
 
     let output = '';
     let error = '';
@@ -112,7 +135,6 @@ function runClaude(prompt) {
       stdio: ['pipe', 'pipe', 'pipe'],
     });
 
-    // Send prompt via stdin, then close it
     child.stdin.write(prompt);
     child.stdin.end();
 
@@ -120,6 +142,11 @@ function runClaude(prompt) {
     child.stderr.on('data', (d) => { error += d.toString(); });
 
     child.on('close', (code) => {
+      // Clean up temp images
+      for (const imgPath of imagePaths) {
+        try { unlinkSync(imgPath); } catch {}
+      }
+
       if (code !== 0 && !output) {
         resolve(`❌ Claude exited with code ${code}\n${error}`.trim());
       } else {
@@ -139,7 +166,9 @@ async function handleMessage(msg) {
   const senderId = String(msg.from?.id || chatId);
   const text = msg.text || msg.caption || '';
 
-  if (!text.trim()) return; // ignore non-text (stickers, etc.)
+  // Must have text or an image with caption
+  const hasPhoto = !!(msg.photo?.length);
+  if (!text.trim() && !hasPhoto) return;
 
   // Authorization check
   if (ALLOWED_IDS.length > 0 && !ALLOWED_IDS.includes(senderId)) {
@@ -148,18 +177,34 @@ async function handleMessage(msg) {
     return;
   }
 
-  console.log(`\n📨 Request from ${senderId}: ${text.slice(0, 120)}${text.length > 120 ? '…' : ''}`);
-  await sendMessage(chatId, '⏳ Processing your request — working on the code now…');
+  const hasImage = hasPhoto;
+  console.log(`\n📨 Request from ${senderId}${hasImage ? ' [+image]' : ''}: ${text.slice(0, 120)}${text.length > 120 ? '…' : ''}`);
+  await sendMessage(chatId, `⏳ Processing your request${hasImage ? ' (image received)' : ''} — working on the code now…`);
+
+  // Download images if present
+  const imagePaths = [];
+  if (hasPhoto) {
+    try {
+      // Telegram sends multiple sizes — pick the largest (last in array)
+      const photo = msg.photo[msg.photo.length - 1];
+      const localPath = await downloadTelegramFile(photo.file_id, 'jpg');
+      imagePaths.push(localPath);
+      console.log(`   📸 Image saved: ${localPath}`);
+    } catch (err) {
+      console.error(`   ⚠️  Failed to download image: ${err.message}`);
+      await sendMessage(chatId, '⚠️ Could not download the image, proceeding with text only.');
+    }
+  }
 
   const systemContext = `You are working on the Consoltech Nexus project at ${PROJECT_DIR}.
 It is a React + TypeScript + Vite frontend with a .NET backend.
-The client has sent you a change request via Telegram. Apply the change to the codebase.
-After making the change, commit it with git and respond with a brief summary of what you did.
+The client has sent you a change request via Telegram.${imagePaths.length ? ' They included a reference image — use it to understand the desired visual style or layout.' : ''}
+Apply the change to the codebase. After making the change, commit it with git and respond with a brief summary of what you did.
 `;
 
-  const fullPrompt = `${systemContext}\n\nClient request:\n${text}`;
+  const fullPrompt = `${systemContext}\n\nClient request:\n${text || '(see attached image)'}`;
 
-  const result = await runClaude(fullPrompt);
+  const result = await runClaude(fullPrompt, imagePaths);
   console.log(`✅ Done. Sending reply…`);
 
   await sendMessage(chatId, result || '✅ Done — no output returned.');
@@ -171,6 +216,7 @@ async function main() {
   console.log(`   Project: ${PROJECT_DIR}`);
   console.log(`   Allowed IDs: ${ALLOWED_IDS.length ? ALLOWED_IDS.join(', ') : '(everyone)'}`);
   console.log(`   Poll interval: ${POLL_INTERVAL}ms`);
+  console.log('   Supports: text requests + image attachments');
   console.log('   Waiting for messages…\n');
 
   const state = loadState();
