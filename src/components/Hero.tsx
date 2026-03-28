@@ -92,8 +92,8 @@ const Hero = () => {
           style={{ objectPosition: 'center -15vh' }}
         />
 
-        {/* Professional overlay - subtle gradient for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/90" />
+        {/* Professional overlay - gradient starts low, preserving hero image and text clarity */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 55%, hsl(var(--background) / 0.6) 75%, hsl(var(--background) / 0.95) 100%)' }} />
 
         {/* Accent color tint */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
