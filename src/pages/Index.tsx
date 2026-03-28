@@ -97,7 +97,7 @@ const Index = () => {
         </div>
 
         {/* Mobile-only trust badges */}
-        <div className="md:hidden relative z-10 mt-12">
+        <div className="md:hidden relative z-10 mt-32">
           <TrustBadges />
         </div>
 
