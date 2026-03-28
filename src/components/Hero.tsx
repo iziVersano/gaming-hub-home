@@ -87,7 +87,7 @@ const Hero = () => {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ objectPosition: 'center -15vh' }}
+          style={{ objectPosition: 'center 30%' }}
         />
 
         {/* Professional overlay - gradient starts low, preserving hero image and text clarity */}
