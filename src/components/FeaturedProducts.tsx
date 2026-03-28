@@ -125,15 +125,7 @@ const FeaturedProducts = () => {
               className="product-card group animate-scale-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative overflow-hidden rounded-2xl mb-6">
-                {product.featured && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-gradient-to-r from-primary to-accent text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide shadow-lg">
-                      {t('featured.badge')}
-                    </span>
-                  </div>
-                )}
-                
+              <div className="relative overflow-hidden rounded-2xl mb-4">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -147,14 +139,8 @@ const FeaturedProducts = () => {
                       : "object-cover group-hover:scale-110"
                   )}
                 />
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                <div className="absolute top-4 left-4">
-                  <span className="bg-card/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-xl text-sm font-medium border border-border/50">
-                    {product.category}
-                  </span>
-                </div>
 
                 {/* Specs overlay on hover */}
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
@@ -169,7 +155,18 @@ const FeaturedProducts = () => {
                   </div>
                 </div>
               </div>
-              
+
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-card/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-xl text-sm font-medium border border-border/50">
+                  {product.category}
+                </span>
+                {product.featured && (
+                  <span className="bg-gradient-to-r from-primary to-accent text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide shadow-lg">
+                    {t('featured.badge')}
+                  </span>
+                )}
+              </div>
+
               <div className="space-y-4 relative z-10">
                 <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
                   {product.name}
