@@ -69,7 +69,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pb-4 md:pt-24 md:pb-16" style={{ paddingTop: 'clamp(6.5rem, 38vw, 14rem)' }}>
-      {/* Background Image with Professional Treatment — desktop only (mobile uses parent wrapper bg) */}
+      {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
         <div
@@ -78,7 +78,7 @@ const Hero = () => {
           }`}
         />
 
-        {/* Hero Background Image — LCP element, load with high priority */}
+        {/* Atmospheric glow background — LCP element, focused on futuristic atmosphere (not console area) */}
         <img
           src={heroImage}
           alt=""
@@ -87,21 +87,31 @@ const Hero = () => {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ objectPosition: 'center 30%' }}
+          style={{ objectPosition: 'center top' }}
         />
 
-        {/* Professional overlay - gradient starts low, preserving hero image and text clarity */}
+        {/* Professional overlay - gradient starts low, preserving atmosphere and text clarity */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 55%, hsl(var(--background) / 0.6) 75%, hsl(var(--background) / 0.95) 100%)' }} />
 
         {/* Accent color tint */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       </div>
 
-      {/* Subtle decorative elements — desktop only */}
+      {/* Layer 2: Subtle decorative ambient glow — desktop only */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1] hidden md:block">
-        {/* Soft ambient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/8 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full blur-[80px]" />
+      </div>
+
+      {/* Layer 3: Console / VR artwork — independent element, separately positionable for responsive control */}
+      <div className="absolute z-[2] pointer-events-none hidden md:block bottom-0 left-1/2 -translate-x-1/2 w-[min(62%,740px)]">
+        <img
+          src="/images/sony+meta.png"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-auto object-contain"
+          style={{ filter: 'drop-shadow(0 16px 48px rgba(0,0,0,0.55))' }}
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
