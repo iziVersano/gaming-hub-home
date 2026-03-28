@@ -95,16 +95,16 @@ const Index = () => {
         <div className="relative z-10">
           <Hero />
         </div>
+      </div>
 
-        {/* Mobile-only trust badges */}
-        <div className="md:hidden relative z-10 mt-32">
-          <TrustBadges />
-        </div>
+      {/* Mobile-only trust badges — outside hero background wrapper so consoles image is fully visible */}
+      <div className="md:hidden relative z-10 -mt-10">
+        <TrustBadges />
+      </div>
 
-        {/* Mobile-only video carousel (below PlayStation, over background) */}
-        <div className="md:hidden relative z-10 mt-1">
-          {isFeatureEnabled('HERO_VIDEO_MODE') && <VideoCarousel />}
-        </div>
+      {/* Mobile-only video carousel */}
+      <div className="md:hidden relative z-10 mt-2">
+        {isFeatureEnabled('HERO_VIDEO_MODE') && <VideoCarousel />}
       </div>
 
       <ProductSlider />
