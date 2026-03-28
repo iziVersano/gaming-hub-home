@@ -103,29 +103,6 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full blur-[80px]" />
       </div>
 
-      {/* Layer 3: Console / VR artwork — split into two sub-layers for clean independent control */}
-      {/* Responsive: visible on all breakpoints, size controlled per viewport */}
-      <div className="absolute z-[2] pointer-events-none bottom-0 left-1/2 -translate-x-1/2 w-[min(72%,320px)] sm:w-[min(65%,420px)] md:w-[min(62%,740px)]">
-
-        {/* Sub-layer A: Console bloom glow — radial gradient sitting behind the device artwork */}
-        <div
-          aria-hidden="true"
-          className="absolute -inset-x-[12%] top-[15%] bottom-0 rounded-full blur-[40px] md:blur-[80px]"
-          style={{
-            background: 'radial-gradient(ellipse 80% 55% at 50% 65%, hsl(var(--primary) / 0.28) 0%, hsl(var(--accent) / 0.15) 55%, transparent 80%)',
-          }}
-        />
-
-        {/* Sub-layer B: Console / VR device foreground */}
-        <img
-          src="/images/sony+meta.png"
-          alt=""
-          aria-hidden="true"
-          className="relative w-full h-auto object-contain"
-          style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.50)) drop-shadow(0 4px 12px rgba(0,0,0,0.35))' }}
-        />
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-2 md:space-y-4">
           {/* Main Headline */}
@@ -252,10 +229,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Spacer — preserves vertical gap where CTA buttons were removed */}
-          <div className="h-36 sm:h-20 md:h-28 lg:h-32" />
 
-          {/* Stats - desktop only (mobile has trust badges) */}
+{/* Stats - desktop only (mobile has trust badges) */}
           <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
             {[
               { value: '50+', label: t('hero.countries', 'Countries Served'), color: 'text-primary' },
