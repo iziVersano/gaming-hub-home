@@ -232,6 +232,22 @@ const Hero = () => {
             </div>
           </div>
 
+          {/* CTA Buttons — all screens, stacked on mobile */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center pt-3 md:pt-4 px-4 md:px-0">
+            <Link to="/contact">
+              <Button size={null} className="btn-hero-square group">
+                <Send className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8 transition-transform group-hover:translate-x-1" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.contact', 'Request a Quote')}</span>
+              </Button>
+            </Link>
+
+            <Link to="/products">
+              <Button size={null} className="btn-neon-square group">
+                <Grid3X3 className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-semibold">{t('hero.explore', 'View Catalog')}</span>
+              </Button>
+            </Link>
+          </div>
 
           {/* Stats - desktop only (mobile has trust badges) */}
           <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
