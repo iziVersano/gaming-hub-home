@@ -73,7 +73,7 @@ const Index = () => {
       <main id="main-content" className="flex-1">
 
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
-      <div className="relative min-h-screen md:contents">
+      <div className="relative md:contents">
         {/* Mobile-only background image — covers from top of page */}
         <div className="absolute inset-0 md:hidden z-0">
           <img
@@ -98,7 +98,7 @@ const Index = () => {
       </div>
 
       {/* Mobile-only trust badges — outside hero background wrapper so consoles image is fully visible */}
-      <div className="md:hidden relative z-10 -mt-10">
+      <div className="md:hidden relative z-10 -mt-4">
         <TrustBadges />
       </div>
 
