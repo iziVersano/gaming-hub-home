@@ -103,14 +103,26 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full blur-[80px]" />
       </div>
 
-      {/* Layer 3: Console / VR artwork — independent element, separately positionable for responsive control */}
-      <div className="absolute z-[2] pointer-events-none hidden md:block bottom-0 left-1/2 -translate-x-1/2 w-[min(62%,740px)]">
+      {/* Layer 3: Console / VR artwork — split into two sub-layers for clean independent control */}
+      {/* Responsive: visible on all breakpoints, size controlled per viewport */}
+      <div className="absolute z-[2] pointer-events-none bottom-0 left-1/2 -translate-x-1/2 w-[min(72%,320px)] sm:w-[min(65%,420px)] md:w-[min(62%,740px)]">
+
+        {/* Sub-layer A: Console bloom glow — radial gradient sitting behind the device artwork */}
+        <div
+          aria-hidden="true"
+          className="absolute -inset-x-[12%] top-[15%] bottom-0 rounded-full blur-[40px] md:blur-[80px]"
+          style={{
+            background: 'radial-gradient(ellipse 80% 55% at 50% 65%, hsl(var(--primary) / 0.28) 0%, hsl(var(--accent) / 0.15) 55%, transparent 80%)',
+          }}
+        />
+
+        {/* Sub-layer B: Console / VR device foreground */}
         <img
           src="/images/sony+meta.png"
           alt=""
           aria-hidden="true"
-          className="w-full h-auto object-contain"
-          style={{ filter: 'drop-shadow(0 16px 48px rgba(0,0,0,0.55))' }}
+          className="relative w-full h-auto object-contain"
+          style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.50)) drop-shadow(0 4px 12px rgba(0,0,0,0.35))' }}
         />
       </div>
 
