@@ -83,8 +83,6 @@ const Index = () => {
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center -20vh' }}
           />
-          <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-background via-background/90 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
         </div>
 
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
