@@ -154,6 +154,25 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     letter-spacing: -0.015em;
   }
+
+  .dark body,
+  .dark html {
+    background:
+      radial-gradient(circle at 85% 30%, rgba(255, 0, 160, 0.45) 0%, rgba(255, 0, 160, 0.2) 25%, transparent 55%),
+      radial-gradient(circle at 70% 60%, rgba(180, 0, 255, 0.3) 0%, transparent 60%),
+      linear-gradient(180deg, #070b1f 0%, #0c0825 40%, #050814 100%);
+    background-attachment: fixed;
+  }
+
+  /* Allow the page background gradient to show through all content sections */
+  .dark section,
+  .dark .main,
+  .dark .wrapper,
+  .dark .content,
+  .dark .feature-section,
+  .dark .container {
+    background: transparent !important;
+  }
 }
 
 @layer components {
