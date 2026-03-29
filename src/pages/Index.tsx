@@ -7,7 +7,7 @@ import TrustBadges from '@/components/TrustBadges';
 import VideoCarousel from '@/components/VideoCarousel';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, Gamepad2, Headphones, Shield, BadgeDollarSign, UserPlus, Search, Check } from 'lucide-react';
+import { ArrowRight, Gamepad2, Headphones, Shield, BadgeDollarSign, UserPlus, Search, Check, Monitor, Plane, Bike, Cpu, Lightbulb, PhoneCall, FileText, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useI18n } from '@/hooks/I18nContext';
@@ -293,6 +293,128 @@ const Index = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+        </div>
+      </section>
+
+      {/* Category Showcase Section */}
+      <section className="py-10 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+              {t('index.categories.title')}
+            </h2>
+            <p className="text-xl text-muted-foreground text-desc-bold max-w-3xl mx-auto">
+              {t('index.categories.description')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {[
+              { icon: Gamepad2, key: 'gaming', color: 'from-violet-600 to-purple-700' },
+              { icon: Monitor,  key: 'displays', color: 'from-blue-600 to-cyan-600' },
+              { icon: Plane,    key: 'drones', color: 'from-sky-500 to-blue-600' },
+              { icon: Bike,     key: 'ebikes', color: 'from-emerald-500 to-green-600' },
+              { icon: Cpu,      key: 'electronics', color: 'from-orange-500 to-amber-500' },
+              { icon: Lightbulb, key: 'gadgets', color: 'from-pink-500 to-rose-600' },
+            ].map(({ icon: Icon, key, color }) => (
+              <Link key={key} to="/products" className="product-card group p-5 md:p-7 flex flex-col gap-4 hover:scale-[1.02] transition-transform bg-slate-800 border-slate-700">
+                <div className={`w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br ${color} rounded-xl flex items-center justify-center`}>
+                  <Icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl text-sub-bold mb-1">{t(`index.categories.${key}.title`)}</h3>
+                  <p className="text-sm text-muted-foreground">{t(`index.categories.${key}.description`)}</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity mt-auto" />
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link to="/products">
+              <Button className="btn-hero">
+                <Search className="h-5 w-5" />
+                <span>{t('index.categories.cta')}</span>
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How to Partner Section */}
+      <section className="py-10 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800/50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 md:mb-14">
+            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+              {t('index.howToPartner.title')}
+            </h2>
+            <p className="text-xl text-muted-foreground text-desc-bold max-w-2xl mx-auto">
+              {t('index.howToPartner.description')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
+            {/* connector line — desktop only */}
+            <div className="hidden md:block absolute top-10 left-[calc(16.66%+1rem)] right-[calc(16.66%+1rem)] h-px bg-gradient-to-r from-primary/40 via-accent/60 to-primary/40" />
+
+            {[
+              { icon: PhoneCall, stepKey: 'step1' },
+              { icon: FileText,  stepKey: 'step2' },
+              { icon: Package,   stepKey: 'step3' },
+            ].map(({ icon: Icon, stepKey }, idx) => (
+              <div key={stepKey} className="product-card p-6 md:p-8 text-center bg-slate-800 border-slate-700 relative z-10">
+                <div className="text-5xl font-bold gradient-text opacity-20 absolute top-4 right-5 select-none">
+                  {t(`index.howToPartner.${stepKey}.number`)}
+                </div>
+                <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Icon className="h-7 w-7 text-white" />
+                </div>
+                <h3 className="text-xl text-sub-bold mb-3">{t(`index.howToPartner.${stepKey}.title`)}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{t(`index.howToPartner.${stepKey}.description`)}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link to="/contact">
+              <Button className="btn-hero">
+                <UserPlus className="h-5 w-5" />
+                <span>{t('index.howToPartner.cta')}</span>
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Global Stats Section */}
+      <section className="py-10 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 md:mb-14">
+            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+              {t('index.globalStats.title')}
+            </h2>
+            <p className="text-xl text-muted-foreground text-desc-bold max-w-2xl mx-auto">
+              {t('index.globalStats.description')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            {[
+              { valueKey: 'stat1', labelKey: 'stat1', color: 'from-violet-500 to-purple-600' },
+              { valueKey: 'stat2', labelKey: 'stat2', color: 'from-blue-500 to-cyan-500' },
+              { valueKey: 'stat3', labelKey: 'stat3', color: 'from-emerald-500 to-green-500' },
+              { valueKey: 'stat4', labelKey: 'stat4', color: 'from-orange-500 to-amber-500' },
+              { valueKey: 'stat5', labelKey: 'stat5', color: 'from-pink-500 to-rose-500' },
+              { valueKey: 'stat6', labelKey: 'stat6', color: 'from-sky-500 to-blue-500' },
+            ].map(({ valueKey, labelKey, color }) => (
+              <div key={valueKey} className="product-card p-5 md:p-6 text-center bg-slate-800 border-slate-700">
+                <div className={`text-3xl md:text-4xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent mb-2`}>
+                  {t(`index.globalStats.${valueKey}.value`)}
+                </div>
+                <div className="text-sm text-muted-foreground">{t(`index.globalStats.${labelKey}.label`)}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
