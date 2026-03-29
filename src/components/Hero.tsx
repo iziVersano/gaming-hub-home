@@ -68,7 +68,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen h-auto flex items-center justify-center pb-48 md:pt-24 md:pb-40" style={{ paddingTop: 'clamp(6.5rem, 38vw, 14rem)' }}>
+    <section className="relative min-h-screen h-auto flex items-center justify-center pb-48 md:pt-24 md:pb-40 overflow-hidden" style={{ paddingTop: 'clamp(4rem, 18vw, 8rem)' }}>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -87,7 +87,7 @@ const Hero = () => {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ objectPosition: 'center 70%' }}
+          style={{ objectPosition: 'center 90%' }}
         />
       </div>
 
