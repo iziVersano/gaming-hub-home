@@ -68,7 +68,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen h-auto flex items-center justify-center pb-48 md:pb-40 overflow-hidden" style={{ paddingTop: '0.25rem' }}>
+    <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
