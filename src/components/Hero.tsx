@@ -68,7 +68,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[63vh] flex items-center justify-center overflow-hidden">
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -240,6 +240,15 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom gradient fade into next section */}
+      <div
+        className="absolute bottom-0 left-0 w-full pointer-events-none z-20"
+        style={{
+          height: '120px',
+          background: 'linear-gradient(to bottom, rgba(10,10,30,0) 0%, rgba(10,10,30,0.6) 60%, rgba(10,10,30,1) 100%)',
+        }}
+      />
 
       {/* Subtle scroll indicator — desktop only */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:block">
