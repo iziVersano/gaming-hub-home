@@ -42,7 +42,7 @@ const Index = () => {
   const canonicalUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ background: 'hsl(222.2, 84%, 4.9%)' }}>
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
