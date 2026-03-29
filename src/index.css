@@ -102,9 +102,9 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     --popover: 330 55% 7%;
     --popover-foreground: 330 30% 96%;
 
-    --primary: 330 90% 65%;
-    --primary-foreground: 330 60% 5%;
-    --primary-glow: 330 95% 72%;
+    --primary: 216 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 216 100% 58%;
 
     --secondary: 330 40% 14%;
     --secondary-foreground: 330 30% 96%;
@@ -112,30 +112,30 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     --muted: 330 35% 12%;
     --muted-foreground: 330 20% 65%;
 
-    --accent: 320 95% 60%;
-    --accent-foreground: 330 60% 5%;
-    --accent-glow: 320 95% 70%;
+    --accent: 255 72% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 255 72% 65%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 330 30% 96%;
 
     --border: 330 40% 18%;
     --input: 330 40% 18%;
-    --ring: 330 90% 65%;
+    --ring: 216 100% 45%;
     --sidebar-background: 330 55% 6%;
     --sidebar-foreground: 330 25% 92%;
-    --sidebar-primary: 330 90% 65%;
-    --sidebar-primary-foreground: 330 60% 5%;
+    --sidebar-primary: 216 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 330 40% 14%;
     --sidebar-accent-foreground: 330 25% 92%;
     --sidebar-border: 330 40% 16%;
-    --sidebar-ring: 330 90% 65%;
+    --sidebar-ring: 216 100% 45%;
 
-    /* Pink glow shadows */
-    --shadow-neon: 0 4px 20px hsl(320 95% 60% / 0.35);
-    --shadow-primary: 0 8px 30px hsl(330 90% 65% / 0.30);
-    --glow-accent: 0 0 40px hsl(320 95% 60% / 0.45);
-    --glow-primary: 0 0 30px hsl(330 90% 65% / 0.40);
+    /* Blue gaming glow shadows */
+    --shadow-neon: 0 4px 20px hsl(255 72% 55% / 0.35);
+    --shadow-primary: 0 8px 30px hsl(216 100% 45% / 0.30);
+    --glow-accent: 0 0 40px hsl(255 72% 55% / 0.45);
+    --glow-primary: 0 0 30px hsl(216 100% 45% / 0.40);
 
     /* Brand tile background (force light surface in dark mode) */
     --brand-tile-bg: 0 0% 100%;
