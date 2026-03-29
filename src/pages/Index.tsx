@@ -1,4 +1,3 @@
-import heroImage from '@/assets/hero-tech.jpg';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ProductSlider from '@/components/ProductSlider';
@@ -43,16 +42,7 @@ const Index = () => {
   const canonicalUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
   return (
-    <div
-      className="min-h-screen flex flex-col"
-      style={{
-        backgroundImage: `linear-gradient(rgba(10,10,30,0.82), rgba(10,10,30,0.82)), url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center 85%',
-        backgroundAttachment: 'fixed',
-        backgroundColor: 'hsl(222.2, 84%, 4.9%)',
-      }}
-    >
+    <div className="min-h-screen flex flex-col">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
