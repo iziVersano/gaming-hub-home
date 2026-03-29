@@ -81,7 +81,7 @@ const Index = () => {
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
-            style={{ objectPosition: 'center -20vh' }}
+            style={{ objectPosition: 'center 10vh' }}
           />
         </div>
 
@@ -96,7 +96,7 @@ const Index = () => {
       </div>
 
       {/* Mobile-only trust badges — outside hero background wrapper so consoles image is fully visible */}
-      <div className="md:hidden relative z-10 -mt-4">
+      <div className="md:hidden relative z-10 mt-4">
         <TrustBadges />
       </div>
 
