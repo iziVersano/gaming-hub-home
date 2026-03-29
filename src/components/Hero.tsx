@@ -68,7 +68,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-0 md:min-h-[85vh] flex items-center justify-center pb-4 md:pt-24 md:pb-16" style={{ paddingTop: 'clamp(6.5rem, 38vw, 14rem)' }}>
+    <section className="relative min-h-screen h-auto flex items-center justify-center pb-48 md:pt-24 md:pb-40" style={{ paddingTop: 'clamp(6.5rem, 38vw, 14rem)' }}>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
