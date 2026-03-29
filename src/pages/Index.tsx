@@ -1,4 +1,3 @@
-import heroImage from '@/assets/hero-tech.jpg';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ProductSlider from '@/components/ProductSlider';
@@ -46,10 +45,6 @@ const Index = () => {
     <div
       className="min-h-screen flex flex-col"
       style={{
-        backgroundImage: `linear-gradient(rgba(10,10,30,0.82), rgba(10,10,30,0.82)), url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center 85%',
-        backgroundAttachment: 'fixed',
         backgroundColor: 'hsl(222.2, 84%, 4.9%)',
       }}
     >
@@ -84,17 +79,6 @@ const Index = () => {
 
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
       <div className="relative md:contents">
-        {/* Mobile-only background image — covers from top of page */}
-        <div className="absolute inset-0 md:hidden z-0">
-          <img
-            src="/images/bckmobil.png"
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: 'center 10vh' }}
-          />
-        </div>
-
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
         <div className="md:hidden relative z-10">
           <Navigation transparent />
