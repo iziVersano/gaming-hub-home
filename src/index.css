@@ -155,13 +155,25 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     letter-spacing: -0.015em;
   }
 
-  .dark body,
-  .dark html {
+  html,
+  body {
     background:
-      radial-gradient(circle at 85% 30%, rgba(255, 0, 160, 0.45) 0%, rgba(255, 0, 160, 0.2) 25%, transparent 55%),
-      radial-gradient(circle at 70% 60%, rgba(180, 0, 255, 0.3) 0%, transparent 60%),
-      linear-gradient(180deg, #070b1f 0%, #0c0825 40%, #050814 100%);
+      radial-gradient(circle at 85% 25%, rgba(255, 0, 170, 0.75) 0%, rgba(255, 0, 170, 0.4) 20%, rgba(255, 0, 170, 0.15) 40%, transparent 65%),
+      radial-gradient(circle at 70% 55%, rgba(200, 0, 255, 0.5) 0%, rgba(200, 0, 255, 0.2) 35%, transparent 65%),
+      radial-gradient(circle at 30% 80%, rgba(80, 120, 255, 0.25) 0%, transparent 60%),
+      linear-gradient(180deg, #09051a 0%, #140a2e 40%, #0a0620 100%);
     background-attachment: fixed;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 90% 30%, rgba(255, 0, 180, 0.45), transparent 45%),
+      radial-gradient(circle at 75% 60%, rgba(180, 0, 255, 0.35), transparent 50%);
+    z-index: 0;
   }
 
   /* Allow the page background gradient to show through all content sections */
@@ -172,6 +184,14 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   .dark .feature-section,
   .dark .container {
     background: transparent !important;
+  }
+
+  /* Keep content readable over the vivid background */
+  .dark section,
+  .dark .card,
+  .dark .feature-box {
+    background: rgba(10, 10, 30, 0.65);
+    backdrop-filter: blur(6px);
   }
 }
 
