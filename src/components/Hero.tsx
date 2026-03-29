@@ -69,7 +69,34 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen h-auto flex items-center justify-center pb-48 md:pb-40 overflow-hidden" style={{ paddingTop: 'clamp(1rem, 6vw, 2.5rem)' }}>
-      {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
+      {/* Layer 1b: Mobile hero image — bottom-anchored viewport crop */}
+      <div className="absolute inset-0 z-0 block md:hidden">
+        {/* Loading placeholder */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 transition-opacity duration-700 ${
+            imageLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+        {/* Image is taller than the section — bottom is locked, top overflows and gets clipped */}
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className={`absolute bottom-0 left-0 w-full transition-opacity duration-700 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{
+            height: '130%',
+            objectFit: 'cover',
+            objectPosition: 'bottom center',
+          }}
+        />
+        {/* Top-heavy gradient so text stays readable without dimming the consoles */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-transparent" />
+      </div>
+
+      {/* Layer 1: Atmospheric background — desktop only (mobile uses dedicated layer above) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
         <div
