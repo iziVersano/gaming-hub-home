@@ -143,14 +143,14 @@ const Hero = () => {
                         <>
                           <button
                             onClick={goToPrev}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                             aria-label="Previous video"
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
                           <button
                             onClick={goToNext}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                             aria-label="Next video"
                           >
                             <ChevronRight className="w-5 h-5" />
@@ -216,7 +216,7 @@ const Hero = () => {
             <p className="text-right md:text-center text-[clamp(1rem,4.5vw,1.5rem)] md:text-2xl lg:text-3xl font-bold leading-tight text-white/90 px-4 md:px-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" style={{ textShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.2)' }}>
               {t('hero.headline2')}<br className="md:hidden" />{t('hero.toys')}
             </p>
-            <div className="hidden md:flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto w-full">
+            <div className="hidden md:flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 max-w-2xl mx-auto w-full">
               <p className="text-lg md:text-xl lg:text-2xl text-foreground text-desc-bold">
                 {t('hero.desc')}
               </p>
@@ -232,7 +232,7 @@ const Hero = () => {
               { value: '24/7', label: t('hero.support', 'Support'), color: 'text-primary' },
               { value: '20+', label: t('hero.years', 'Years Experience'), color: 'text-accent' },
             ].map(({ value, label, color }) => (
-              <div key={value} className="text-center p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:bg-card/70 hover:shadow-lg transition-all duration-300">
+              <div key={value} className="text-center p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 hover:bg-card/70 hover:shadow-lg transition-all duration-300">
                 <div className={`text-3xl md:text-4xl text-bold-heading ${color}`}>{value}</div>
                 <div className="text-sm text-desc-bold text-muted-foreground mt-1">{label}</div>
               </div>
