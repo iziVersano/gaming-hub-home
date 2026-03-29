@@ -165,15 +165,26 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     background-attachment: fixed;
   }
 
+  body {
+    position: relative;
+  }
+
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
+    z-index: -1; /* move BEHIND everything */
+
     background:
-      radial-gradient(circle at 90% 30%, rgba(255, 0, 180, 0.45), transparent 45%),
-      radial-gradient(circle at 75% 60%, rgba(180, 0, 255, 0.35), transparent 50%);
-    z-index: 0;
+      radial-gradient(circle at 90% 30%, rgba(255, 0, 180, 0.35), transparent 45%),
+      radial-gradient(circle at 75% 60%, rgba(180, 0, 255, 0.25), transparent 50%);
+  }
+
+  /* Ensure hero stays sharp above the glow overlay */
+  .hero {
+    position: relative;
+    z-index: 1;
   }
 
   /* Allow the page background gradient to show through all content sections */
