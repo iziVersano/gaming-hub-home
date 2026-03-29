@@ -139,54 +139,12 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   }
 
   body {
-    @apply text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
+    background: hsl(var(--background));
     min-height: 100vh;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     letter-spacing: -0.015em;
   }
-}
-
-/* ── Site-wide Gaming Background ──────────────────────────────────── */
-html,
-body {
-  background:
-    radial-gradient(circle at 20% 20%, rgba(60, 80, 255, 0.18) 0%, transparent 30%),
-    radial-gradient(circle at 80% 15%, rgba(255, 0, 140, 0.16) 0%, transparent 28%),
-    radial-gradient(circle at 50% 60%, rgba(140, 0, 255, 0.12) 0%, transparent 35%),
-    linear-gradient(180deg, #070b1f 0%, #0a1030 35%, #0b0820 65%, #050814 100%);
-  background-attachment: fixed;
-  color: white;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(90, 120, 255, 0.08), transparent 25%),
-    radial-gradient(circle at 75% 20%, rgba(255, 0, 180, 0.07), transparent 22%),
-    radial-gradient(circle at 60% 75%, rgba(170, 0, 255, 0.05), transparent 28%);
-  z-index: 0;
-}
-
-/* Transparent wrappers so the fixed background shows through */
-#root,
-.page,
-.site-wrapper,
-.main-content {
-  background: transparent;
-  position: relative;
-  z-index: 1;
-}
-
-/* Soften solid section/card backgrounds into translucent dark panels */
-section,
-.feature-box,
-.content-block {
-  background-color: rgba(8, 12, 30, 0.72);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 @layer components {
