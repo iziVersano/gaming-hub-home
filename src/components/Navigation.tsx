@@ -126,7 +126,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
 
               {/* Logo — centered */}
               <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-8 w-8 text-rose-600 shrink-0 drop-shadow-[0_0_8px_rgba(240,80,140,0.5)]" />
+                <Gamepad2 className="h-8 w-8 text-white shrink-0 drop-shadow-[0_0_8px_rgba(100,160,255,0.5)]" />
                 <div className="flex flex-col items-center">
                   <span className="logo-text text-[1.45rem] tracking-wider leading-none whitespace-nowrap">
                     {hebrewLogo
@@ -134,7 +134,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                       : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
                     }
                   </span>
-                  <span className="text-[7.5px] tracking-[0.18em] text-rose-600/60 font-medium uppercase leading-none mt-0.5">
+                  <span className="text-[7.5px] tracking-[0.18em] text-white/50 font-medium uppercase leading-none mt-0.5">
                     {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
                   </span>
                 </div>
@@ -159,14 +159,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             {searchOpen && (
               <div className="md:hidden px-3 pb-2 search-slide-down">
                 <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="relative flex items-center">
-                  <Search className="absolute left-3 h-4 w-4 text-rose-400 pointer-events-none shrink-0" strokeWidth={2} />
+                  <Search className="absolute left-3 h-4 w-4 text-white/40 pointer-events-none shrink-0" strokeWidth={2} />
                   <input
                     ref={searchInputRef}
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder={t('products.searchPlaceholder')}
-                    className="search-input w-full h-10 pl-9 pr-12 rounded-xl text-sm text-rose-900 placeholder:text-rose-400/60"
+                    className="search-input w-full h-10 pl-9 pr-12 rounded-xl text-sm text-white placeholder:text-white/35"
                     style={{ fontSize: '16px' }}
                     aria-label={t('products.searchPlaceholder')}
                   />
@@ -189,7 +189,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 aria-label="Consoltech - Home"
               >
                 <div className="logo-icon-wrap p-2.5 group-hover:border-accent/40 transition-colors duration-300">
-                  <Gamepad2 className="h-9 w-9 text-rose-600 group-hover:text-accent transition-colors duration-300" />
+                  <Gamepad2 className="h-9 w-9 text-white group-hover:text-accent transition-colors duration-300" />
                 </div>
                 <div className="flex flex-col items-start gap-px">
                   <span className="logo-text text-3xl lg:text-[2.15rem] tracking-wider leading-none scale-[1.4] origin-left inline-block">
@@ -198,7 +198,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                       : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
                     }
                   </span>
-                  <span className="text-[10px] tracking-[0.22em] text-rose-600/55 font-medium uppercase leading-none pt-0.5">
+                  <span className="text-[10px] tracking-[0.22em] text-white/45 font-medium uppercase leading-none pt-0.5">
                     {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
                   </span>
                 </div>
@@ -255,14 +255,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     }`}
                   >
                     <Icon className={`h-5 w-5 shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white/80'}`}>{label}</span>
-                    {isActive(to) && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-white/80" />}
+                    <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white/60'}`}>{label}</span>
+                    {isActive(to) && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-white/60" />}
                   </Link>
                 ))}
               </div>
               {/* Burger menu */}
               <button
-                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white/80 hover:text-white transition-colors"
+                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white/60 hover:text-white transition-colors"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
@@ -293,11 +293,11 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
           />
 
           {/* Menu panel - half width, right side */}
-          <div className="absolute top-0 right-0 h-full w-[55%] bg-[#fff0f5] border-l border-pink-200/60 flex flex-col shadow-2xl">
+          <div className="absolute top-0 right-0 h-full w-[55%] bg-[#0a0a0f] border-l border-white/10 flex flex-col shadow-2xl">
             {/* Close button */}
             <div className="flex justify-end items-center h-16 px-4">
               <button
-                className="p-2 rounded-full text-rose-700 hover:text-accent transition-colors"
+                className="p-2 rounded-full text-white hover:text-accent transition-colors"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
               >
@@ -315,10 +315,10 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     to={item.href}
                     role="menuitem"
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`flex items-center gap-3 py-3.5 text-lg font-semibold tracking-wide transition-colors duration-200 border-b border-pink-200/40 ${
+                    className={`flex items-center gap-3 py-3.5 text-lg font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${
                       isActive(item.href)
                         ? 'text-accent'
-                        : 'text-rose-800 hover:text-accent'
+                        : 'text-white hover:text-accent'
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -337,7 +337,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     key={brand.name}
                     src={brand.src}
                     alt={brand.name}
-                    className="h-6 w-auto brightness-0 opacity-60"
+                    className="h-6 w-auto brightness-0 invert opacity-90"
                   />
                 ))}
               </div>
@@ -347,7 +347,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 className="flex items-center justify-center gap-2"
                 onClick={() => setIsOpen(false)}
               >
-                <Gamepad2 className="h-5 w-5 text-rose-400/60" />
+                <Gamepad2 className="h-5 w-5 text-white/40" />
                 <span className="logo-text text-sm opacity-40">
                   <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
                 </span>
