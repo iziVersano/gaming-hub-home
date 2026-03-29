@@ -87,14 +87,8 @@ const Hero = () => {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ objectPosition: 'center top' }}
+          style={{ objectPosition: 'center 70%' }}
         />
-
-        {/* Professional overlay - gradient starts low, preserving atmosphere and text clarity */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 55%, hsl(var(--background) / 0.6) 75%, hsl(var(--background) / 0.95) 100%)' }} />
-
-        {/* Accent color tint */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       </div>
 
       {/* Layer 2: Subtle decorative ambient glow — desktop only */}
