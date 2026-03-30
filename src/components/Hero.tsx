@@ -245,8 +245,8 @@ const Hero = () => {
       <div
         className="absolute bottom-0 left-0 w-full pointer-events-none z-20"
         style={{
-          height: '60px',
-          background: 'linear-gradient(to bottom, rgba(10,10,30,0) 0%, rgba(10,10,30,0.2) 60%, rgba(10,10,30,0.4) 100%)',
+          height: '120px',
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(19,8,32,0.6) 50%, rgba(19,8,32,1) 100%)',
         }}
       />
 
