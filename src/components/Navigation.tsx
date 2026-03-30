@@ -148,17 +148,17 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             </div>
 
             {/* Row 1: Mobile compact header — [Logo] [🔍] */}
-            <div className="flex md:hidden items-center justify-between px-4 py-2.5">
+            <div className="flex md:hidden items-center justify-between px-4 py-2 max-h-[72px] overflow-hidden">
               {/* Logo — centered, takes up available space */}
               <Link to="/" className="flex items-center gap-3 group flex-1 justify-center" aria-label="Consoltech - Home">
                 <div className="flex flex-col items-center justify-center self-stretch">
-                  <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+                  <Gamepad2 className="h-14 w-14 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                  <span className="logo-text text-[2.6rem] tracking-wider leading-none whitespace-nowrap">
+                  <span className="logo-text text-[2rem] tracking-wider leading-none whitespace-nowrap">
                     <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                   </span>
-                  <span className="text-[11px] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+                  <span className="text-[10px] tracking-[0.02em] font-semibold leading-none mt-0.5 text-center block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                     אתר היבואן לקונסולות משחק & גיימינג
                   </span>
                 </div>
