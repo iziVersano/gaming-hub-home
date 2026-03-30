@@ -85,9 +85,9 @@ const FeaturedProducts = () => {
             </span>
           </div>
           <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight">
-            <span className="gradient-text text-balance">{t('featured.title')}</span>
+            <span className="text-white font-bold" style={{ textShadow: "0 0 20px rgba(255,255,255,0.3)" }}>{t('featured.title')}</span>
           </h2>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto font-light leading-relaxed text-balance">
+          <p className="text-xl md:text-2xl text-white/85 max-w-4xl mx-auto font-light leading-relaxed text-balance">
             {t('featured.description')}
           </p>
 
