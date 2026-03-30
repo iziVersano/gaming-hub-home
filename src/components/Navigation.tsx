@@ -123,7 +123,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <span className="logo-text text-[2.6rem] tracking-wider leading-none whitespace-nowrap">
                     <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                   </span>
-                  <span className="text-[15px] tracking-[0.04em] font-semibold leading-none mt-1.5 text-center block" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+                  <span className="text-[11px] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                     אתר היבואן לקונסולות משחק & גיימינג
                   </span>
                 </div>
@@ -223,14 +223,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <Link
                     key={to}
                     to={to}
-                    className={`relative flex flex-row items-center gap-1.5 px-4 py-2 rounded-xl transition-all duration-200 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
+                    className={`relative flex flex-row items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
                       isActive(to)
                         ? 'bg-white/12 shadow-[0_0_12px_rgba(139,92,246,0.35)]'
                         : 'hover:bg-white/5'
                     }`}
                   >
                     <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[19px] font-extrabold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
+                    <span className={`text-[14px] font-extrabold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
                     {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
                   </Link>
                 ))}
