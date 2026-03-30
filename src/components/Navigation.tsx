@@ -243,7 +243,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 aria-controls="mobile-menu-overlay"
                 aria-label="Open menu"
               >
-                <Menu className="h-5 w-5" strokeWidth={2.5} />
+                <Menu className="h-7 w-7" strokeWidth={2.5} />
               </button>
             </div>
           </div>
