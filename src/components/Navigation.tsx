@@ -230,14 +230,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     }`}
                   >
                     <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[15px] font-bold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white/65'}`}>{label}</span>
+                    <span className={`text-[15px] font-bold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
                     {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
                   </Link>
                 ))}
               </div>
               {/* Burger menu */}
               <button
-                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white/60 hover:text-white transition-colors"
+                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white transition-colors"
                 onClick={() => setIsOpen(true)}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu-overlay"
