@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Accessibility, Gamepad2 } from 'lucide-react';
+import { Accessibility, Gamepad2, Lock, ShieldCheck } from 'lucide-react';
 import { useI18n } from '@/hooks/I18nContext';
 
 const Footer = () => {
@@ -49,7 +49,24 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-border mt-12 pt-8">
+        {/* Security badges strip */}
+        <div className="border-t border-border mt-10 pt-8 mb-2">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl" style={{ background: 'linear-gradient(135deg, #b8860b, #ffd700, #b8860b)', boxShadow: '0 0 16px rgba(255,215,0,0.4)' }}>
+                <Lock className="h-6 w-6 text-yellow-900" strokeWidth={2} />
+              </div>
+              <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-yellow-500" style={{ background: 'linear-gradient(135deg, #8B6914, #DAA520)', boxShadow: '0 0 14px rgba(218,165,32,0.5)' }}>
+                <ShieldCheck className="h-6 w-6 text-yellow-100" strokeWidth={2} />
+              </div>
+            </div>
+            <p className="text-sm font-bold text-white/80 max-w-xs" style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.05em' }}>
+              מאובטח בתקן PCI המחמיר ביותר לרכישה מאובטחת וחיסיון מידע
+            </p>
+          </div>
+        </div>
+
+        <div className="border-t border-border mt-8 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-muted-foreground text-center sm:text-left">
               &copy; {new Date().getFullYear()} CONSOLTECH. {t('footer.copyright')}
