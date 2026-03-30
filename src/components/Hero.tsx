@@ -97,7 +97,7 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-10 w-full px-5 pt-2 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+      <div className="relative z-[1] w-full px-5 pt-2 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-1.5 md:space-y-3">
           {/* Main Headline */}
           <h1 className="font-display text-[clamp(2rem,8vw,3.2rem)] font-extrabold leading-tight text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)', letterSpacing: '-0.025em' }}>
