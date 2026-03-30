@@ -230,7 +230,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     }`}
                   >
                     <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[15px] font-bold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
+                    <span className={`text-[17px] font-extrabold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
                     {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
                   </Link>
                 ))}
@@ -244,7 +244,6 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                 aria-label="Open menu"
               >
                 <Menu className="h-5 w-5" strokeWidth={2.5} />
-                <span className="text-[10px] font-semibold tracking-wide leading-none">More</span>
               </button>
             </div>
           </div>
