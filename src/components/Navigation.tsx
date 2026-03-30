@@ -112,6 +112,41 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
+            {/* Row 2: Mobile nav — icon + label tabs + burger */}
+            <div className="flex md:hidden items-center px-2 py-1.5 gap-1 nav-icon-bar">
+              <div className="flex items-center justify-evenly flex-1">
+                {[
+                  { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_8px_rgba(96,165,250,0.7)]' },
+                  { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]' },
+                  { to: '/about', icon: Building2, label: t('menu.about'), color: 'text-pink-400', glow: 'drop-shadow-[0_0_8px_rgba(244,114,182,0.7)]' },
+                ].map(({ to, icon: Icon, label, color, glow }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={`relative flex flex-row items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
+                      isActive(to)
+                        ? 'bg-white/12 shadow-[0_0_12px_rgba(139,92,246,0.35)]'
+                        : 'hover:bg-white/5'
+                    }`}
+                  >
+                    <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
+                    <span className={`text-[14px] font-extrabold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
+                    {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
+                  </Link>
+                ))}
+              </div>
+              {/* Burger menu */}
+              <button
+                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white transition-colors"
+                onClick={() => setIsOpen(true)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu-overlay"
+                aria-label="Open menu"
+              >
+                <Menu className="h-9 w-9" strokeWidth={2.5} />
+              </button>
+            </div>
+
             {/* Row 1: Mobile compact header — [Logo] [🔍] */}
             <div className="flex md:hidden items-center justify-between px-4 py-2.5">
               {/* Logo — centered, takes up available space */}
@@ -170,82 +205,6 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </div>
             )}
 
-            {/* Row 1 Desktop: Logo + Desktop nav */}
-            <div className="hidden md:flex justify-between items-center md:h-16">
-              <Link
-                to="/"
-                className="flex items-center gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset rounded-lg px-1"
-                aria-label="Consoltech - Home"
-              >
-                <div className="logo-icon-wrap p-2.5 group-hover:border-accent/40 transition-colors duration-300">
-                  <Gamepad2 className="h-9 w-9 text-white group-hover:text-accent transition-colors duration-300" />
-                </div>
-                <div className="flex flex-col items-start gap-px">
-                  <span className="logo-text text-[2.6rem] lg:text-[3rem] tracking-wider leading-none origin-left inline-block">
-                    <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
-                  </span>
-                  <span className="text-[9px] tracking-[0.04em] font-semibold leading-none pt-0.5 text-center block" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 6px hsl(195 100% 75%), 0 0 16px hsl(195 100% 60%), 0 0 30px hsl(195 100% 50%)" }}>
-                    אתר היבואן לקונסולות משחק & גיימינג
-                  </span>
-                </div>
-              </Link>
-
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-7" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    role="menuitem"
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`nav-link${isActive(item.href) ? ' nav-link-active' : ''}`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <Link to="/contact">
-                  <Button className="btn-nav ml-1">
-                    <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                    <span>{t('menu.getQuote')}</span>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Row 2: Mobile nav — icon + label tabs + burger */}
-            <div className="flex md:hidden items-center px-2 py-1.5 gap-1 nav-icon-bar">
-              <div className="flex items-center justify-evenly flex-1">
-                {[
-                  { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_8px_rgba(96,165,250,0.7)]' },
-                  { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]' },
-                  { to: '/about', icon: Building2, label: t('menu.about'), color: 'text-pink-400', glow: 'drop-shadow-[0_0_8px_rgba(244,114,182,0.7)]' },
-                ].map(({ to, icon: Icon, label, color, glow }) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    className={`relative flex flex-row items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
-                      isActive(to)
-                        ? 'bg-white/12 shadow-[0_0_12px_rgba(139,92,246,0.35)]'
-                        : 'hover:bg-white/5'
-                    }`}
-                  >
-                    <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[14px] font-extrabold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
-                    {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
-                  </Link>
-                ))}
-              </div>
-              {/* Burger menu */}
-              <button
-                className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white transition-colors"
-                onClick={() => setIsOpen(true)}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu-overlay"
-                aria-label="Open menu"
-              >
-                <Menu className="h-9 w-9" strokeWidth={2.5} />
-              </button>
-            </div>
           </div>
         </div>
       </nav>
