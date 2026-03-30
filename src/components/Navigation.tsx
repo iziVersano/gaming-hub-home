@@ -104,38 +104,27 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
     };
   }, []);
 
-  const [hebrewLogo, setHebrewLogo] = useState(true);
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-[9999] transition-transform duration-300 ${navVisible ? 'translate-y-0' : '-translate-y-full'} ${transparent ? 'nav-transparent-mobile md:nav-glass' : 'nav-glass'}`} role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+      <div className="fixed top-0 w-full" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999 }}>
+      <nav className={`w-full transition-transform duration-300 ${navVisible ? 'translate-y-0' : '-translate-y-full'} ${transparent ? 'nav-transparent-mobile md:nav-glass' : 'nav-glass'}`} role="navigation" aria-label="Main navigation" dir={lang === 'he' ? 'rtl' : 'ltr'}>
         <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
-            {/* Row 1: Mobile compact header — [🏴lang] [Logo centered] [🔍] */}
+            {/* Row 1: Mobile compact header — [Logo] [🔍] */}
             <div className="flex md:hidden items-center justify-between px-4 py-2.5">
-              {/* Language toggle — left */}
-              <button
-                type="button"
-                onClick={() => setHebrewLogo(prev => !prev)}
-                className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/8 hover:bg-white/15 border border-white/12 text-sm transition-colors shrink-0"
-                aria-label="Toggle logo language"
-              >
-                {hebrewLogo ? '🇬🇧' : '🇮🇱'}
-              </button>
-
-              {/* Logo — centered */}
-              <Link to="/" className="flex items-center gap-2 group" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-8 w-8 text-white shrink-0 drop-shadow-[0_0_8px_rgba(100,160,255,0.5)]" />
-                <div className="flex flex-col items-center">
-                  <span className="logo-text text-[1.45rem] tracking-wider leading-none whitespace-nowrap">
-                    {hebrewLogo
-                      ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
-                      : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
-                    }
+              {/* Logo — centered, takes up available space */}
+              <Link to="/" className="flex items-center gap-3 group flex-1 justify-center" aria-label="Consoltech - Home">
+                <div className="flex flex-col items-center justify-center self-stretch">
+                  <Gamepad2 className="h-11 w-11 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="logo-text text-[2.6rem] tracking-wider leading-none whitespace-nowrap">
+                    <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                   </span>
-                  <span className="text-[7.5px] tracking-[0.18em] text-white/50 font-medium uppercase leading-none mt-0.5">
-                    {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
+                  <span className="text-[15px] tracking-[0.04em] font-semibold leading-none mt-1.5 text-center block" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+                    אתר היבואן לקונסולות משחק & גיימינג
                   </span>
                 </div>
               </Link>
@@ -192,27 +181,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <Gamepad2 className="h-9 w-9 text-white group-hover:text-accent transition-colors duration-300" />
                 </div>
                 <div className="flex flex-col items-start gap-px">
-                  <span className="logo-text text-3xl lg:text-[2.15rem] tracking-wider leading-none scale-[1.4] origin-left inline-block">
-                    {hebrewLogo
-                      ? <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
-                      : <><span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span></>
-                    }
+                  <span className="logo-text text-[2.6rem] lg:text-[3rem] tracking-wider leading-none origin-left inline-block">
+                    <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                   </span>
-                  <span className="text-[10px] tracking-[0.22em] text-white/45 font-medium uppercase leading-none pt-0.5">
-                    {hebrewLogo ? 'יבוא ויצוא גלובלי' : 'Global Import & Distribution'}
+                  <span className="text-[9px] tracking-[0.04em] font-semibold leading-none pt-0.5 text-center block" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 6px hsl(195 100% 75%), 0 0 16px hsl(195 100% 60%), 0 0 30px hsl(195 100% 50%)" }}>
+                    אתר היבואן לקונסולות משחק & גיימינג
                   </span>
                 </div>
               </Link>
-
-              {/* Flag toggle button — desktop */}
-              <button
-                type="button"
-                onClick={() => setHebrewLogo(prev => !prev)}
-                className="text-xl ml-2 opacity-70 hover:opacity-100 transition-opacity"
-                aria-label="Toggle logo language"
-              >
-                {hebrewLogo ? '🇬🇧' : '🇮🇱'}
-              </button>
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center gap-7" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
@@ -241,22 +217,21 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               <div className="flex items-center justify-evenly flex-1">
                 {[
                   { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_8px_rgba(96,165,250,0.7)]' },
-                  { to: '/products', icon: ShoppingBag, label: t('menu.products'), color: 'text-purple-400', glow: 'drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]' },
                   { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]' },
                   { to: '/about', icon: Building2, label: t('menu.about'), color: 'text-pink-400', glow: 'drop-shadow-[0_0_8px_rgba(244,114,182,0.7)]' },
                 ].map(({ to, icon: Icon, label, color, glow }) => (
                   <Link
                     key={to}
                     to={to}
-                    className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[56px] transition-all duration-200 ${
+                    className={`relative flex flex-row items-center gap-1.5 px-4 py-2 rounded-xl transition-all duration-200 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
                       isActive(to)
                         ? 'bg-white/12 shadow-[0_0_12px_rgba(139,92,246,0.35)]'
                         : 'hover:bg-white/5'
                     }`}
                   >
-                    <Icon className={`h-5 w-5 shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white/60'}`}>{label}</span>
-                    {isActive(to) && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-white/60" />}
+                    <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
+                    <span className={`text-[15px] font-bold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white/65'}`}>{label}</span>
+                    {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
                   </Link>
                 ))}
               </div>
@@ -275,6 +250,8 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
           </div>
         </div>
       </nav>
+
+      </div>
 
       {/* Half-width slide-in mobile menu */}
       {isOpen && (
@@ -349,7 +326,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               >
                 <Gamepad2 className="h-5 w-5 text-white/40" />
                 <span className="logo-text text-sm opacity-40">
-                  <span className="logo-consol">CONSOL</span><span className="logo-tech">TECH</span>
+                  <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
                 </span>
               </Link>
             </div>

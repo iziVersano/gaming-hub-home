@@ -152,16 +152,27 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     background: hsl(var(--background));
     min-height: 100vh;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    letter-spacing: -0.015em;
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', system-ui, sans-serif;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
   }
 
   html,
   body {
     background:
-      radial-gradient(circle at 85% 25%, rgba(255, 0, 170, 0.75) 0%, rgba(255, 0, 170, 0.4) 20%, rgba(255, 0, 170, 0.15) 40%, transparent 65%),
-      radial-gradient(circle at 70% 55%, rgba(200, 0, 255, 0.5) 0%, rgba(200, 0, 255, 0.2) 35%, transparent 65%),
-      radial-gradient(circle at 30% 80%, rgba(80, 120, 255, 0.25) 0%, transparent 60%),
-      linear-gradient(180deg, #09051a 0%, #140a2e 40%, #0a0620 100%);
+      radial-gradient(circle at 85% 20%, rgba(255, 0, 180, 1.0) 0%, rgba(255, 0, 180, 0.65) 18%, rgba(255, 0, 180, 0.25) 38%, transparent 60%),
+      radial-gradient(circle at 15% 30%, rgba(140, 0, 255, 0.7) 0%, rgba(140, 0, 255, 0.35) 25%, transparent 55%),
+      radial-gradient(circle at 70% 60%, rgba(220, 0, 255, 0.55) 0%, rgba(220, 0, 255, 0.25) 30%, transparent 60%),
+      radial-gradient(circle at 30% 75%, rgba(80, 120, 255, 0.45) 0%, transparent 55%),
+      radial-gradient(circle at 55% 45%, rgba(255, 50, 150, 0.2) 0%, transparent 50%),
+      linear-gradient(180deg, #160828 0%, #1e0d3e 35%, #130820 100%);
     background-attachment: fixed;
   }
 
@@ -177,8 +188,9 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     z-index: -1; /* move BEHIND everything */
 
     background:
-      radial-gradient(circle at 90% 30%, rgba(255, 0, 180, 0.35), transparent 45%),
-      radial-gradient(circle at 75% 60%, rgba(180, 0, 255, 0.25), transparent 50%);
+      radial-gradient(circle at 90% 25%, rgba(255, 0, 180, 0.55), transparent 42%),
+      radial-gradient(circle at 10% 50%, rgba(160, 0, 255, 0.45), transparent 48%),
+      radial-gradient(circle at 75% 65%, rgba(180, 0, 255, 0.35), transparent 45%);
   }
 
   /* Ensure hero and header stay sharp above the glow overlay */
@@ -226,7 +238,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     @apply bg-transparent border border-accent text-accent px-6 py-3 font-medium transition-all duration-300 hover:bg-accent hover:text-white relative gap-2 inline-flex items-center justify-center rounded-lg;
     box-shadow: none;
     font-weight: 500;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: 0.01em;
     line-height: 1.4;
   }
@@ -242,7 +254,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     box-shadow: var(--shadow-primary);
     font-weight: 500;
     letter-spacing: 0.01em;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     line-height: 1.4;
   }
 
@@ -266,7 +278,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     box-shadow: var(--shadow-primary);
     font-weight: 500;
     letter-spacing: 0.01em;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     line-height: 1.4;
   }
 
@@ -286,7 +298,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   .btn-accent-small {
     @apply bg-transparent border border-accent text-accent px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-accent hover:text-white relative gap-2 inline-flex items-center justify-center rounded-md;
     font-weight: 500;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: 0.01em;
     line-height: 1.4;
   }
@@ -301,7 +313,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     @apply bg-gradient-to-r from-primary to-primary-glow text-white px-4 py-2 font-medium transition-all duration-300 hover:scale-[1.02] relative gap-2 inline-flex items-center justify-center rounded-lg;
     box-shadow: var(--shadow-primary);
     font-weight: 500;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: 0.01em;
     line-height: 1.4;
   }
@@ -325,7 +337,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
       inset 0 -2px 6px hsl(210 100% 20% / 0.3);
     font-weight: 600;
     letter-spacing: 0.01em;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     line-height: 1.4;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
@@ -368,7 +380,7 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
       inset 0 1px 1px hsl(255 72% 85% / 0.4),
       inset 0 -2px 6px hsl(255 72% 25% / 0.3);
     font-weight: 600;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: 0.01em;
     line-height: 1.4;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -508,7 +520,9 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-family: 'Syne', system-ui, sans-serif;
     font-weight: 800;
+    letter-spacing: -0.025em;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 
@@ -539,7 +553,8 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
 
   /* Desktop nav link with animated underline */
   .nav-link {
-    @apply relative py-1 font-extrabold text-[18px] tracking-widest transition-colors duration-200 text-white/80 hover:text-white focus:outline-none leading-none;
+    @apply relative py-1 font-bold text-[15px] tracking-[0.08em] transition-colors duration-200 text-white/75 hover:text-white focus:outline-none leading-none uppercase;
+    font-family: 'Syne', system-ui, sans-serif;
   }
 
   .nav-link::after {

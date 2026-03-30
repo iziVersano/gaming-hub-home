@@ -68,7 +68,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative h-[63vh] flex items-center justify-center overflow-hidden">
+    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden pt-[148px] md:pt-[80px]">
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -100,7 +100,7 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-2 md:space-y-4">
           {/* Main Headline */}
-          <h1 className="text-right md:text-center text-[clamp(1.25rem,5.5vw,2rem)] md:text-3xl lg:text-4xl font-extrabold leading-tight px-4 md:px-1 mb-2 md:mb-4 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)' }}>
+          <h1 className="font-display text-right md:text-center text-[clamp(1.6rem,6vw,2.6rem)] md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight px-4 md:px-1 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)', letterSpacing: '-0.025em' }}>
             {t('hero.headline1')} <span className="text-white/90">{t('hero.innovation')}</span>
           </h1>
 
@@ -213,7 +213,7 @@ const Hero = () => {
 
           {/* Subtitle + Description — below the carousel */}
           <div className="space-y-2 md:space-y-4">
-            <p className="text-right md:text-center text-[clamp(1rem,4.5vw,1.5rem)] md:text-2xl lg:text-3xl font-bold leading-tight text-white/90 px-4 md:px-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" style={{ textShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.2)' }}>
+            <p className="font-display text-right md:text-center text-[clamp(0.95rem,3.5vw,1.3rem)] md:text-xl lg:text-2xl font-semibold leading-snug text-white/80 px-4 md:px-4" style={{ textShadow: '0 0 12px rgba(255,255,255,0.4)', letterSpacing: '-0.01em' }}>
               {t('hero.headline2')}<br className="md:hidden" />{t('hero.toys')}
             </p>
             <div className="hidden md:flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 max-w-2xl mx-auto w-full">
