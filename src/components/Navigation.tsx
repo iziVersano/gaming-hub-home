@@ -147,28 +147,26 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </button>
             </div>
 
-            {/* Row 1: Mobile compact header — [Logo] [🔍] */}
-            <div className="flex md:hidden items-center justify-between px-4 py-2 max-h-[72px] overflow-hidden">
-              {/* Logo — centered, takes up available space */}
-              <Link to="/" className="flex items-center gap-3 group flex-1 justify-center" aria-label="Consoltech - Home">
-                <div className="flex flex-col items-center justify-center self-stretch">
-                  <Gamepad2 className="h-14 w-14 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-                </div>
+            {/* Row 1: Mobile compact header — Logo full width + search overlaid */}
+            <div className="flex md:hidden items-center justify-center px-4 py-3 relative w-full">
+              {/* Logo — takes full width */}
+              <Link to="/" className="flex items-center gap-3 group w-full justify-center" aria-label="Consoltech - Home">
+                <Gamepad2 className="h-16 w-16 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
                 <div className="flex flex-col items-center justify-center">
-                  <span className="logo-text text-[2rem] tracking-wider leading-none whitespace-nowrap">
+                  <span className="logo-text text-[2.4rem] tracking-wider leading-none whitespace-nowrap">
                     <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                   </span>
-                  <span className="text-[10px] tracking-[0.02em] font-semibold leading-none mt-0.5 text-center block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+                  <span className="text-[12px] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                     אתר היבואן לקונסולות משחק & גיימינג
                   </span>
                 </div>
               </Link>
 
-              {/* Search toggle — right */}
+              {/* Search toggle — absolute top-right */}
               <button
                 type="button"
                 onClick={() => setSearchOpen(prev => !prev)}
-                className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/8 hover:bg-white/15 border border-white/12 text-white transition-colors shrink-0"
+                className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-lg bg-white/8 hover:bg-white/15 border border-white/12 text-white transition-colors"
                 aria-label={searchOpen ? 'Close search' : 'Open search'}
                 aria-expanded={searchOpen}
               >
