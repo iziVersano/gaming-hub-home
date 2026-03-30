@@ -97,11 +97,11 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="space-y-2 md:space-y-4">
+      <div className="relative z-10 w-full px-5 pt-2 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+        <div className="space-y-1.5 md:space-y-3">
           {/* Main Headline */}
-          <h1 className="font-display text-right md:text-center text-[clamp(1.6rem,6vw,2.6rem)] md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight px-4 md:px-1 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)', letterSpacing: '-0.025em' }}>
-            {t('hero.headline1')} <span className="text-white/90">{t('hero.innovation')}</span>
+          <h1 className="font-display text-[clamp(2rem,8vw,3.2rem)] font-extrabold leading-tight text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)', letterSpacing: '-0.025em' }}>
+            {t('hero.headline1')} <span className="text-white">{t('hero.innovation')}</span>
           </h1>
 
           {/* Hero Visual - Video mode / Spotlight / Promotional Image — desktop only (mobile shows video below trust badges) */}
