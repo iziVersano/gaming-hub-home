@@ -21,6 +21,7 @@ export default {
 			fontFamily: {
 				sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
 				display: ['Syne', 'system-ui', 'sans-serif'],
+				rajdhani: ['Rajdhani', 'system-ui', 'sans-serif'],
 				mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'monospace'],
 				orbitron: ['Orbitron', 'system-ui', 'sans-serif'],
 			},
