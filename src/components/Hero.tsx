@@ -70,7 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden mt-[52px] md:mt-0">
+    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden">
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
