@@ -147,34 +147,19 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </button>
             </div>
 
-            {/* Row 1: Mobile compact header — Logo full width + search overlaid */}
-            <div className="flex md:hidden items-center justify-center px-4 py-3 relative w-full">
-              {/* Logo — takes full width */}
-              <Link to="/" className="flex items-center gap-3 group w-full justify-center px-10" aria-label="Consoltech - Home">
+            {/* Row 1: Mobile compact header — Logo full width */}
+            <div className="flex md:hidden items-center justify-center px-4 py-3 w-full">
+              <Link to="/" className="flex items-center gap-3 group w-full justify-center" aria-label="Consoltech - Home">
                 <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
                 <div className="flex flex-col items-center justify-center flex-1">
-                  <span className="logo-text text-[clamp(2.2rem,9vw,3rem)] tracking-wider leading-none whitespace-nowrap w-full text-center">
+                  <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap w-full text-center">
                     <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
                   </span>
-                  <span className="text-[clamp(11px,3vw,14px)] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap w-full" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+                  <span className="text-[clamp(12px,3.5vw,15px)] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap w-full" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                     אתר היבואן לקונסולות משחק & גיימינג
                   </span>
                 </div>
               </Link>
-
-              {/* Search toggle — absolute top-right */}
-              <button
-                type="button"
-                onClick={() => setSearchOpen(prev => !prev)}
-                className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-lg bg-white/8 hover:bg-white/15 border border-white/12 text-white transition-colors"
-                aria-label={searchOpen ? 'Close search' : 'Open search'}
-                aria-expanded={searchOpen}
-              >
-                <span className="relative block w-5 h-5">
-                  <Search className={`h-5 w-5 absolute inset-0 transition-all duration-200 ${searchOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`} strokeWidth={2.5} />
-                  <X className={`h-5 w-5 absolute inset-0 transition-all duration-200 ${searchOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} strokeWidth={2.5} />
-                </span>
-              </button>
             </div>
 
             {/* Mobile search — slide-down on open */}
