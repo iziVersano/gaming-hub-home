@@ -99,13 +99,13 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-[1] w-full px-5 pt-[52px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+      <div className="relative z-[1] w-full px-5 pt-[70px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-2 items-end w-full">
 
           {/* Logo — mobile only, part of hero. LTR so icon is always left */}
           <div className="flex md:hidden items-center gap-3 mb-2" style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>
             <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-            <div className="flex flex-col items-start justify-center" style={{ direction: 'rtl' }}>
+            <div className="flex flex-col items-end justify-center" style={{ direction: 'rtl' }}>
               <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
