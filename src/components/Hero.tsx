@@ -117,7 +117,7 @@ const Hero = () => {
 
           {/* Main Headline */}
           <h1 className="font-display text-[clamp(2rem,8vw,3.2rem)] font-extrabold leading-tight text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)', letterSpacing: '-0.025em' }}>
-            {t('hero.headline1')} <span className="text-white">{t('hero.innovation')}</span>
+            הבית של הגיימינג בישראל
           </h1>
 
           {/* Hero Visual - Video mode / Spotlight / Promotional Image — desktop only (mobile shows video below trust badges) */}
