@@ -147,21 +147,6 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </button>
             </div>
 
-            {/* Row 1: Mobile compact header — Logo full width */}
-            <div className="flex md:hidden items-center justify-center px-4 py-3 w-full">
-              <Link to="/" className="flex items-center gap-3 group w-full justify-center" aria-label="Consoltech - Home">
-                <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-                <div className="flex flex-col items-center justify-center flex-1">
-                  <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap w-full text-center">
-                    <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
-                  </span>
-                  <span className="text-[clamp(12px,3.5vw,15px)] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap w-full" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
-                    אתר היבואן לקונסולות משחק & גיימינג
-                  </span>
-                </div>
-              </Link>
-            </div>
-
             {/* Mobile search — slide-down on open */}
             {searchOpen && (
               <div className="md:hidden px-3 pb-2 search-slide-down">
@@ -192,6 +177,21 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
         </div>
       </nav>
 
+      </div>
+
+      {/* Mobile logo overlay — sits over hero, transparent background */}
+      <div className="fixed md:hidden w-full z-[9990]" style={{ top: 'var(--nav-bar-height, 52px)' }}>
+        <Link to="/" className="flex items-center gap-3 px-4 py-2 w-full justify-center" aria-label="Consoltech - Home">
+          <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+          <div className="flex flex-col items-center justify-center flex-1">
+            <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap w-full text-center">
+              <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
+            </span>
+            <span className="text-[clamp(12px,3.5vw,15px)] tracking-[0.02em] font-semibold leading-none mt-1 text-center block whitespace-nowrap w-full" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+              אתר היבואן לקונסולות משחק & גיימינג
+            </span>
+          </div>
+        </Link>
       </div>
 
       {/* Half-width slide-in mobile menu */}

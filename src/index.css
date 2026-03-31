@@ -606,6 +606,10 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   /* Primary header - console dashboard glass with ocean blue tint */
   .nav-glass {
     background: rgba(10, 20, 60, 1);
+  }
+
+  .nav-logo-row {
+    background: transparent !important;
     border-bottom: 1px solid rgba(120, 100, 255, 0.3);
     box-shadow: 0 2px 32px rgba(40, 10, 120, 0.35);
   }
