@@ -70,7 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden pt-[52px] sm:pt-[52px] md:pt-[80px] lg:pt-[70px]">
+    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden pt-[60px] sm:pt-[58px] md:pt-[80px] lg:pt-[70px]">
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -104,7 +104,7 @@ const Hero = () => {
 
           {/* Logo — mobile only, part of hero */}
           <div className="flex md:hidden items-center gap-3 mb-2">
-            <Gamepad2 className="h-28 w-28 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+            <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
             <div className="flex flex-col items-start justify-center">
               <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
