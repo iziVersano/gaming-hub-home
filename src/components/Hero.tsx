@@ -100,7 +100,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-[1] w-full px-5 pt-[52px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
-        <div className="space-y-2">
+        <div className="space-y-2 items-end w-full">
 
           {/* Logo — mobile only, part of hero. LTR so icon is always left */}
           <div className="flex md:hidden items-center gap-3 mb-2" style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>
@@ -117,13 +117,13 @@ const Hero = () => {
 
           {/* Main Headline — reference text */}
           <div className="space-y-0.5 md:space-y-1">
-            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
               קונסולות משחקי טלוויזיה ומולטימדיה
             </p>
-            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
               מחשבים & אבזרי גיימינג
             </p>
-            <p className="font-display text-[clamp(0.85rem,3.5vw,1.1rem)] font-medium leading-snug text-white/85" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
+            <p className="font-display text-[clamp(0.85rem,3.5vw,1.1rem)] font-medium leading-snug text-white/85 text-right w-full" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
               מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
             </p>
           </div>
