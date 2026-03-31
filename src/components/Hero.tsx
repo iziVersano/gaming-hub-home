@@ -70,7 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden pt-0 md:pt-[80px] lg:pt-[70px]">
+    <section className="hero relative h-[63vh] flex items-start justify-center overflow-hidden mt-[52px] md:mt-0">
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -99,7 +99,7 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-[1] w-full px-5 pt-2 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+      <div className="relative z-[1] w-full px-5 pt-[52px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-1.5 md:space-y-3">
 
           {/* Logo — mobile only, part of hero. LTR so icon is always left */}
