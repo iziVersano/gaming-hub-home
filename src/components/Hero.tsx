@@ -105,7 +105,7 @@ const Hero = () => {
           {/* Logo — mobile only, part of hero. LTR so icon is always left */}
           <div className="flex md:hidden items-center gap-3 mb-2 justify-end w-full" style={{ direction: 'ltr' }}>
             <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-            <div className="flex flex-col items-end justify-center" style={{ direction: 'rtl' }}>
+            <div className="flex flex-col items-end justify-center">
               <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
