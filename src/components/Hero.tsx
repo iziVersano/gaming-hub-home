@@ -123,7 +123,7 @@ const Hero = () => {
             <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
               מחשבים & אבזרי גיימינג
             </p>
-            <p className="font-display text-[clamp(0.85rem,3.5vw,1.1rem)] font-medium leading-snug text-white/85 text-right w-full" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
+            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white/85 text-right w-full" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
               מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
             </p>
           </div>
