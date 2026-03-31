@@ -103,7 +103,7 @@ const Hero = () => {
         <div className="space-y-1.5 md:space-y-3">
 
           {/* Logo — mobile only, part of hero */}
-          <div className="flex md:hidden items-center gap-3 mb-2">
+          <div className="flex md:hidden items-center gap-3 mb-2" dir="ltr">
             <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
             <div className="flex flex-col items-start justify-center">
               <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap">
