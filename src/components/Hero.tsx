@@ -109,16 +109,24 @@ const Hero = () => {
               <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
-              <span className="text-[clamp(12px,3.5vw,15px)] tracking-[0.02em] font-semibold leading-none mt-1 block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+              <span className="text-[clamp(18px,5vw,22px)] tracking-[0.02em] font-bold leading-none mt-1 block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
             </div>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="font-display text-[clamp(2rem,8vw,3.2rem)] font-extrabold leading-tight text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3)', letterSpacing: '-0.025em' }}>
-            הבית של הגיימינג בישראל
-          </h1>
+          {/* Main Headline — reference text */}
+          <div className="space-y-0.5 md:space-y-1">
+            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+              קונסולות משחקי טלוויזיה ומולטימדיה
+            </p>
+            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+              מחשבים & אבזרי גיימינג
+            </p>
+            <p className="font-display text-[clamp(0.85rem,3.5vw,1.1rem)] font-medium leading-snug text-white/85" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
+              מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
+            </p>
+          </div>
 
           {/* Hero Visual - Video mode / Spotlight / Promotional Image — desktop only (mobile shows video below trust badges) */}
           <div className="relative mb-2 md:mb-6 hidden md:block">
