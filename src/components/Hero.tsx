@@ -100,7 +100,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-[1] w-full px-5 pt-[52px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
-        <div className="space-y-1.5 md:space-y-3">
+        <div className="space-y-2">
 
           {/* Logo — mobile only, part of hero. LTR so icon is always left */}
           <div className="flex md:hidden items-center gap-3 mb-2" style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>
@@ -235,17 +235,7 @@ const Hero = () => {
             )}
           </div>
 
-          {/* Subtitle + Description — below the carousel */}
-          <div className="space-y-2 md:space-y-4">
-            <p className="font-display text-right md:text-center text-[clamp(0.95rem,3.5vw,1.3rem)] md:text-xl lg:text-2xl font-semibold leading-snug text-white/80 px-4 md:px-4" style={{ textShadow: '0 0 12px rgba(255,255,255,0.4)', letterSpacing: '-0.01em' }}>
-              {t('hero.headline2')}<br className="md:hidden" />{t('hero.toys')}
-            </p>
-            <div className="hidden md:flex items-center justify-center px-4 sm:px-8 py-4 rounded-full bg-primary/10 border border-primary/20 max-w-2xl mx-auto w-full">
-              <p className="text-lg md:text-xl lg:text-2xl text-foreground text-desc-bold">
-                {t('hero.desc')}
-              </p>
-            </div>
-          </div>
+
 
 
 {/* Stats - desktop only (mobile has trust badges) */}
