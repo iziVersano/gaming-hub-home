@@ -110,7 +110,7 @@ const Hero = () => {
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
               <span className="text-[clamp(12px,3.5vw,15px)] tracking-[0.02em] font-semibold leading-none mt-1 block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
-                אתר היבואן לקונסולות משחק & גיימינג
+                אתר היבואן
               </span>
             </div>
           </div>
