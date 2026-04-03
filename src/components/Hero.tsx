@@ -115,17 +115,19 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Main Headline — reference text */}
-          <div className="space-y-0 md:space-y-1">
-            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+          {/* Main Headline — dark backdrop for readability over busy hero bg */}
+          <div className="inline-block rounded-2xl px-3 py-2 mb-0 bg-black/45 backdrop-blur-[2px]">
+            <div className="space-y-0 md:space-y-1">
+            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
               קונסולות משחקי טלוויזיה ומולטימדיה
             </p>
-            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
               מחשבים & אבזרי גיימינג
             </p>
-            <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/85 text-right w-full" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
+            <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/90 text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
               מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
             </p>
+          </div>
           </div>
 
           {/* Hero Visual - Video mode / Spotlight / Promotional Image — desktop only (mobile shows video below trust badges) */}
