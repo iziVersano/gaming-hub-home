@@ -103,27 +103,27 @@ const Hero = () => {
         <div className="space-y-2 items-end w-full">
 
           {/* Logo — mobile only, part of hero. LTR so icon is always left */}
-          <div className="flex md:hidden items-center gap-3 mb-2 justify-end w-full" style={{ direction: 'ltr' }}>
-            <Gamepad2 className="h-20 w-20 shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+          <div className="flex md:hidden items-center gap-2 mb-2 justify-end w-full" style={{ direction: 'ltr' }}>
+            <Gamepad2 className="h-[5.5rem] w-[5.5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
             <div className="flex flex-col items-end justify-center">
-              <span className="logo-text text-[clamp(2.4rem,10vw,3.2rem)] tracking-wider leading-none whitespace-nowrap">
+              <span className="logo-text text-[clamp(3rem,13vw,4.2rem)] tracking-wider leading-[1.0] whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
-              <span className="text-[clamp(18px,5vw,22px)] tracking-[0.02em] font-bold leading-none mt-1 block whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+              <span className="font-display text-[clamp(1.9rem,9vw,2.8rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
             </div>
           </div>
 
           {/* Main Headline — reference text */}
-          <div className="space-y-0.5 md:space-y-1">
-            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+          <div className="space-y-0 md:space-y-1">
+            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
               קונסולות משחקי טלוויזיה ומולטימדיה
             </p>
-            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
+            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 0 12px rgba(255,255,255,0.5)' }}>
               מחשבים & אבזרי גיימינג
             </p>
-            <p className="font-display text-[clamp(1.1rem,4.5vw,1.6rem)] font-bold leading-snug text-white/85 text-right w-full" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
+            <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/85 text-right w-full" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>
               מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
             </p>
           </div>
