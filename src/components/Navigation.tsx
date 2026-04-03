@@ -134,6 +134,17 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
                   </Link>
                 ))}
+                {/* WhatsApp direct message */}
+                <a
+                  href="https://wa.me/972522768607"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative flex flex-row items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 hover:bg-white/5"
+                  aria-label="WhatsApp"
+                >
+                  <WhatsAppIcon className="h-[18px] w-[18px] shrink-0 text-[#25D366] drop-shadow-[0_0_8px_rgba(37,211,102,0.8)]" />
+                  <span className="text-[14px] font-extrabold tracking-wide leading-none text-white">{lang === 'he' ? 'וואטסאפ' : 'WhatsApp'}</span>
+                </a>
               </div>
               {/* Burger menu */}
               <button
