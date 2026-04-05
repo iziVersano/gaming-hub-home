@@ -113,8 +113,8 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
           {/* Force LTR so layout is always: [Logo] [Burger] */}
           <div className="flex flex-col" dir="ltr">
             {/* Row 2: Mobile nav — icon + label tabs + burger */}
-            <div className="flex md:hidden items-center px-2 py-1.5 gap-1 nav-icon-bar">
-              <div className="flex items-center justify-evenly flex-1">
+            <div className="flex md:hidden items-center px-1 py-1.5 gap-0 nav-icon-bar">
+              <div className="flex items-center justify-evenly flex-1 min-w-0">
                 {[
                   { to: '/', icon: House, label: t('menu.home'), color: 'text-blue-400', glow: 'drop-shadow-[0_0_8px_rgba(96,165,250,0.7)]' },
                   { to: '/contact', icon: Mail, label: t('menu.contact'), color: 'text-emerald-400', glow: 'drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]' },
@@ -123,27 +123,26 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <Link
                     key={to}
                     to={to}
-                    className={`relative flex flex-row items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
+                    className={`relative flex flex-row items-center gap-1 px-1.5 py-2 rounded-xl transition-all duration-200 shrink-0 ${lang === 'he' ? 'flex-row-reverse' : 'flex-row'} ${
                       isActive(to)
                         ? 'bg-white/12 shadow-[0_0_12px_rgba(139,92,246,0.35)]'
                         : 'hover:bg-white/5'
                     }`}
                   >
                     <Icon className={`h-[18px] w-[18px] shrink-0 ${color} ${glow}`} strokeWidth={isActive(to) ? 2.5 : 2} />
-                    <span className={`text-[14px] font-extrabold tracking-wide leading-none ${isActive(to) ? 'text-white' : 'text-white'}`}>{label}</span>
+                    <span className="text-[clamp(11px,3.2vw,14px)] font-extrabold tracking-wide leading-none text-white whitespace-nowrap">{label}</span>
                     {isActive(to) && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />}
                   </Link>
                 ))}
-                {/* WhatsApp direct message */}
+                {/* WhatsApp — icon only, no label */}
                 <a
                   href="https://wa.me/972522768607"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative flex flex-row items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 hover:bg-white/5"
+                  className="relative flex items-center justify-center px-2 py-2 rounded-xl transition-all duration-200 hover:bg-white/5 shrink-0"
                   aria-label="WhatsApp"
                 >
-                  <WhatsAppIcon className="h-[18px] w-[18px] shrink-0 text-[#25D366] drop-shadow-[0_0_8px_rgba(37,211,102,0.8)]" />
-                  <span className="text-[14px] font-extrabold tracking-wide leading-none text-white">{lang === 'he' ? 'וואטסאפ' : 'WhatsApp'}</span>
+                  <WhatsAppIcon className="h-[22px] w-[22px] shrink-0 text-[#25D366] drop-shadow-[0_0_8px_rgba(37,211,102,0.8)]" />
                 </a>
               </div>
               {/* Burger menu */}
