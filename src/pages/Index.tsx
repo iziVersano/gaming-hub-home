@@ -80,8 +80,7 @@ const Index = () => {
             src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
-            className="absolute w-full object-cover object-top"
-            style={{ top: '340px', height: '120vw' }}
+            style={{ position: 'absolute', top: '340px', left: 0, width: '100%', height: 'auto' }}
           />
         </div>
 
