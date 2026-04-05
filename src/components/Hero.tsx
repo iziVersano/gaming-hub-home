@@ -70,49 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <>
-    {/* ── MOBILE HERO: stacked — text above, image below, no overlap ── */}
-    <section className="md:hidden flex flex-col w-full" dir="rtl">
-      {/* Text block */}
-      <div className="px-4 pt-4 pb-2 text-right w-full">
-        {/* Logo row */}
-        <div className="flex items-center gap-2 mb-1 justify-end w-full" style={{ direction: 'ltr' }}>
-          <Gamepad2 className="h-[5.5rem] w-[5.5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-          <div className="flex flex-col items-end justify-center">
-            <span className="logo-text text-[clamp(3rem,13vw,4.2rem)] tracking-wider leading-[1.0] whitespace-nowrap">
-              <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
-            </span>
-            <span className="font-display text-[clamp(1.9rem,9vw,2.8rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
-              אתר היבואן
-            </span>
-          </div>
-        </div>
-        {/* Headline lines — plain, no backdrop needed since no bg image behind */}
-        <div className="space-y-0 text-right w-full">
-          <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
-            קונסולות משחקי טלוויזיה ומולטימדיה
-          </p>
-          <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
-            מחשבים & אבזרי גיימינג
-          </p>
-          <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/90" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
-            מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
-          </p>
-        </div>
-      </div>
-      {/* Console image — below text, full width */}
-      <div className="w-full">
-        <img
-          src="/images/bckmobil.png"
-          alt="Gaming consoles showcase"
-          fetchPriority="high"
-          className="w-full h-auto object-cover object-center"
-        />
-      </div>
-    </section>
-
-    {/* ── DESKTOP HERO: original layout with bg image overlay ── */}
-    <section className="hero relative hidden md:flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px" }}>
+    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px" }}>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -141,8 +99,36 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-[1] w-full px-5 pt-[52px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+      <div className="relative z-[1] w-full px-5 pt-[70px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-2 items-end w-full">
+
+          {/* Logo — mobile only, part of hero. LTR so icon is always left */}
+          <div className="flex md:hidden items-center gap-2 mb-2 justify-end w-full" style={{ direction: 'ltr' }}>
+            <Gamepad2 className="h-[5.5rem] w-[5.5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+            <div className="flex flex-col items-end justify-center">
+              <span className="logo-text text-[clamp(3rem,13vw,4.2rem)] tracking-wider leading-[1.0] whitespace-nowrap">
+                <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
+              </span>
+              <span className="font-display text-[clamp(1.9rem,9vw,2.8rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+                אתר היבואן
+              </span>
+            </div>
+          </div>
+
+          {/* Main Headline — dark backdrop for readability over busy hero bg */}
+          <div className="inline-block rounded-2xl px-3 py-2 mb-0 bg-black/45 backdrop-blur-[2px]">
+            <div className="space-y-0 md:space-y-1">
+            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
+              קונסולות משחקי טלוויזיה ומולטימדיה
+            </p>
+            <p className="font-display text-[clamp(1.35rem,6.5vw,2rem)] font-bold leading-snug text-white text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
+              מחשבים & אבזרי גיימינג
+            </p>
+            <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/90 text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
+              מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
+            </p>
+          </div>
+          </div>
 
           {/* Hero Visual - Video mode / Spotlight / Promotional Image — desktop only (mobile shows video below trust badges) */}
           <div className="relative mb-2 md:mb-6 hidden md:block">
@@ -287,7 +273,6 @@ const Hero = () => {
         </div>
       </div>
     </section>
-    </>
   );
 };
 

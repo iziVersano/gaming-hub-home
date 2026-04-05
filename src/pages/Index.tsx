@@ -72,9 +72,20 @@ const Index = () => {
 
       <main id="main-content" className="flex-1">
 
-      {/* Hero wrapper */}
+      {/* Mobile hero background wrapper — single bg image behind nav + hero */}
       <div className="relative md:contents">
-        {/* Mobile transparent nav — sits above the stacked mobile hero */}
+        {/* Mobile-only background image — covers from top of page */}
+        <div className="absolute inset-0 md:hidden z-0">
+          <img
+            src="/images/bckmobil.png"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 10vh' }}
+          />
+        </div>
+
+        {/* Mobile transparent nav — inside wrapper so bg shows through */}
         <div className="md:hidden relative z-10">
           <Navigation transparent />
         </div>
