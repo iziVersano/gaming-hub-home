@@ -74,14 +74,14 @@ const Index = () => {
 
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
       <div className="relative md:contents">
-        {/* Mobile-only background image — covers from top of page */}
-        <div className="absolute inset-0 md:hidden z-0">
+        {/* Mobile-only background image — starts below the text block (~340px from top) */}
+        <div className="absolute inset-0 md:hidden z-0 overflow-hidden">
           <img
             src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: 'center bottom' }}
+            className="absolute w-full object-cover object-top"
+            style={{ top: '340px', height: 'calc(100% - 340px)' }}
           />
         </div>
 
