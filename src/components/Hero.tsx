@@ -83,7 +83,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px" }}>
+    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px" }} data-section="hero">
+      <style>{`@media (max-width: 767px) { [data-section="hero"] { height: calc(105vw + 230px) !important; } }`}</style>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -112,7 +113,7 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-[1] w-full px-4 pt-[58px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+      <div className="relative z-[1] w-full px-4 pt-[74px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-2 items-end w-full">
 
           {/* Logo — mobile only */}
