@@ -75,15 +75,15 @@ const Index = () => {
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
       <div className="relative md:contents">
         {/* Mobile-only background image — starts below the text block */}
-        <div className="absolute inset-0 md:hidden z-0 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #1a0a3a 0%, #2d0f5e 8%, transparent 20%)' }}>
+        <div className="absolute inset-0 md:hidden z-0 overflow-hidden" style={{ backgroundColor: '#210144' }}>
           <img
             src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
             style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: 'auto' }}
           />
-          {/* Gradient fade at top of image so it blends into the bg above */}
-          <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '80px', background: 'linear-gradient(to bottom, #1a0a3a, transparent)', zIndex: 1 }} />
+          {/* Gradient fade: exact image top color → transparent, blends seam */}
+          <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '100px', background: 'linear-gradient(to bottom, #210144 0%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
         </div>
 
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
