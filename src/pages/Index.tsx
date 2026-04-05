@@ -80,7 +80,7 @@ const Index = () => {
             src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
-            style={{ position: 'absolute', top: '255px', left: 0, width: '100%', height: 'auto' }}
+            style={{ position: 'absolute', top: '210px', left: 0, width: '100%', height: 'auto' }}
           />
         </div>
 
