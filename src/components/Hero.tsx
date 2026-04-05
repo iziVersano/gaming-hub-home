@@ -21,6 +21,7 @@ const Hero = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const transitionTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const mobileTextRef = useRef<HTMLDivElement>(null);
 
   const goToVideo = useCallback((index: number) => {
     if (index === currentVideoIndex || isTransitioning) return;
@@ -67,6 +68,18 @@ const Hero = () => {
     const img = new Image();
     img.onload = () => setImageLoaded(true);
     img.src = heroImage;
+  }, []);
+
+  useEffect(() => {
+    const updateTextHeight = () => {
+      if (mobileTextRef.current) {
+        const h = mobileTextRef.current.getBoundingClientRect().bottom;
+        document.documentElement.style.setProperty('--hero-text-bottom', `${h}px`);
+      }
+    };
+    updateTextHeight();
+    window.addEventListener('resize', updateTextHeight);
+    return () => window.removeEventListener('resize', updateTextHeight);
   }, []);
 
   return (
