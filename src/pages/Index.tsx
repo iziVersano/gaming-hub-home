@@ -81,7 +81,7 @@ const Index = () => {
             alt=""
             aria-hidden="true"
             className="absolute w-full object-cover object-top"
-            style={{ top: '340px', height: 'calc(100% - 340px)' }}
+            style={{ top: '340px', height: '120vw' }}
           />
         </div>
 
