@@ -8,7 +8,7 @@
   "hero.headline2": "קונסולות משחקי טלוויזיה ומולטימדיה",
   "hero.toys": "מחשבים & אבזרי גיימינג",
   "hero.headline2b": "",
-  "hero.desc": "מוצרי חשמל מתקדמים - אבזרי גיימינג ואלקטרוניקה",
+  "hero.desc": "מוצרי חשמל מתקדמים - ואלקטרוניקה",
   "hero.explore": "צפה במוצרים",
   "hero.contact": "צור קשר",
   "hero.countries": "מדינות בהן אנו פועלים",
@@ -80,7 +80,6 @@
   "products.trustedTitle": "מותגים עולמיים סומכים עלינו",
   "products.trustedDescription": "אנו משתפים פעולה עם חברות הטכנולוגיה המובילות בעולם כדי להביא לכם את המוצרים החדשים והטובים ביותר",
   "products.newArrivalsHeader": "חדשים במלאי",
-
   "products.titles.metaQuest3": "Meta Quest 3",
   "products.titles.asusRog": "מחשב גיימינג ASUS ROG",
   "products.titles.nintendoSwitch2": "Nintendo Switch 2",
@@ -89,7 +88,6 @@
   "products.descriptions.asusRog": "ביצועי גיימינג מושלמים עם גרפיקה מתקדמת, מסך בקצב רענון גבוה וטכנולוגיית קירור מתקדמת לגיימרים רציניים.",
   "products.descriptions.nintendoSwitch2": "הדור הבא של משחקי Nintendo. חוו גרפיקה משופרת, ביצועים מהירים יותר וספריית משחקים מורחבת.",
   "products.descriptions.xboxSeriesX": "ה-Xbox החזק ביותר אי פעם עם 2TB אחסון, מהדורת Galaxy Black מיוחדת וביצועי גיימינג מהדור הבא.",
-
   "contact.title": "צור קשר",
   "contact.name": "שם",
   "contact.email": "אימייל",
@@ -131,10 +129,8 @@
   "contact.errors.invalidEmail": "אנא הזן כתובת אימייל תקינה",
   "contact.errors.incompleteFields": "אנא מלא את כל השדות הנדרשים",
   "contact.errors.submissionFailed": "שליחת ההודעה נכשלה",
-
   "contact.offices.title": "המשרדים שלנו",
   "contact.offices.subtitle": "בקרו אותנו במטה שלנו",
-
   "contact.faq.title": "שאלות נפוצות",
   "contact.faq.items.0.question": "איך אפשר לבצע הזמנה סיטונאית?",
   "contact.faq.items.0.answer": "צרו קשר באימייל או בוואטסאפ עם פרטי החברה שלכם והמוצרים שמעניינים אתכם. הצוות שלנו יחזור אליכם עם מחירים וזמינות תוך 24 שעות.",
@@ -144,7 +140,6 @@
   "contact.faq.items.2.answer": "כן, כל המוצרים מגיעים עם אחריות יצרן מלאה. אנו גם מספקים תמיכת אחריות יבואן למוצרים שנרכשו דרך רשת ההפצה שלנו.",
   "contact.faq.items.3.question": "באילו אמצעי תשלום אתם מקבלים?",
   "contact.faq.items.3.answer": "אנו מקבלים העברות בנקאיות, כרטיסי אשראי ואמצעי תשלום B2B סטנדרטיים נוספים. ניתן לסכם תנאי תשלום לשותפים עסקיים קבועים.",
-
   "footer.description": "מובילה עולמית בהפצת אלקטרוניקה וגיימינג, מחברת חדשנות עם שווקים ברחבי העולם.",
   "footer.contact": "צור קשר",
   "footer.email": "אימייל:",
@@ -153,7 +148,6 @@
   "footer.copyright": "כל הזכויות שמורות. | מצוינות בייבוא והפצה עולמית",
   "footer.accessibility": "נגישות",
   "footer.admin": "מנהל",
-
   "admin.layout.admin": "מנהל",
   "admin.layout.products": "מוצרים",
   "admin.layout.logout": "התנתק",
@@ -182,7 +176,6 @@
   "admin.productForm.success.updated": "המוצר עודכן בהצלחה",
   "admin.productForm.error.create": "נכשל ביצירת המוצר",
   "admin.productForm.error.update": "נכשל בעדכון המוצר",
-
   "warranty.title": "טופס רישום אחריות",
   "warranty.subtitle": "Nintendo Switch 2",
   "warranty.description": "אנא מלאו את הפרטים הבאים וצרפו חשבונית רכישה לצורך הפעלת האחריות.",
@@ -216,7 +209,6 @@
   "warranty.errors.serialTooShort": "מספר סידורי חייב להכיל לפחות 4 תווים",
   "warranty.errors.futureDateNotAllowed": "תאריך הרכישה לא יכול להיות בעתיד",
   "warranty.fileInfo": "גודל מקסימלי: 10MB | פורמטים: PDF, JPG, PNG",
-
   "warrantyRecords.title": "רישומי אחריות",
   "warrantyRecords.success": "הגשת האחריות הצליחה!",
   "warrantyRecords.loading": "טוען רישומים...",
@@ -229,7 +221,6 @@
   "warrantyRecords.date": "תאריך",
   "warrantyRecords.viewInvoice": "צפה בחשבונית",
   "warrantyRecords.close": "סגור",
-
   "accessibility.title": "הצהרת נגישות",
   "accessibility.lastUpdated": "עודכן לאחרונה:",
   "accessibility.commitment.title": "המחויבות שלנו",
@@ -262,11 +253,9 @@
   "accessibility.assessment.selfEvaluation": "הערכה עצמית באמצעות כלי בדיקת נגישות",
   "accessibility.assessment.userTesting": "בדיקה עם טכנולוגיות מסייעות",
   "accessibility.assessment.guidelines": "סקירה מול הנחיות WCAG 2.1 רמה AA",
-
   "notFound.title": "404",
   "notFound.message": "אופס! הדף לא נמצא",
   "notFound.return": "חזור לדף הבית",
-
   "health.title": "בדיקת בריאות המערכת",
   "health.statusHealthy": "✅ בריא",
   "health.statusIssues": "❌ זוהו בעיות",
@@ -286,14 +275,12 @@
   "health.label.status": "סטטוס:",
   "health.label.contentType": "Content-Type:",
   "health.noManifest": "לא נמצא מניפסט (נורמלי במצב פיתוח)",
-
   "menu.home": "בית",
   "menu.about": "אודות",
   "menu.products": "מוצרים",
   "menu.contact": "צור קשר",
   "menu.accessibility": "נגישות",
   "menu.getQuote": "קבל הצעת מחיר",
-
   "index.features.globalDistribution.title": "קונסולות משחק",
   "index.features.globalDistribution.description": "מגוון רחב של קונסולות מהמותגים המובילים בעולם",
   "index.features.qualityAssurance.title": "אביזרים נלווים",
@@ -346,7 +333,6 @@
   "index.moreAbout.contact.addressLabel": "כתובת:",
   "index.moreAbout.contact.mobileLabel": "נייד / וואטסאפ:",
   "index.moreAbout.contact.emailLabel": "אימייל:",
-
   "featured.collection": "קולקציה נבחרת",
   "featured.title": "טכנולוגיה של הדור הבא",
   "featured.description": "גלו מוצרים מהפכניים שמגדירים את עתיד הטכנולוגיה. מגיימינג ועד ניידות, אנו מביאים לכם את החידושים המתקדמים ביותר.",
@@ -369,12 +355,9 @@
   "featured.stats.countries": "50+ מדינות",
   "featured.stats.support": "תמיכה 24/7",
   "featured.stats.shipping": "משלוח מהיר",
-
   "slider.learnMore": "למידע נוסף",
   "slider.exploreAll": "גלו את כל המוצרים",
-
   "brands.morePartners": "+200 שותפים אמינים נוספים ברחבי העולם",
-
   "a11y.skipToContent": "דלג לתוכן הראשי",
   "a11yMenu.title": "נגישות",
   "a11yMenu.closeMenu": "סגור תפריט נגישות",
@@ -399,7 +382,6 @@
   "a11yMenu.otherOptions": "אפשרויות נוספות",
   "a11yMenu.animationsOn": "אנימציות: פעיל",
   "a11yMenu.animationsOff": "אנימציות: כבוי",
-
   "products.keyFeatures": "תכונות עיקריות",
   "products.inquireNow": "שלח פנייה",
   "products.specifications": "מפרט טכני",
@@ -412,7 +394,6 @@
   "trustBadges.fullWarranty": "אחריות מלאה",
   "trustBadges.fastShipping": "משלוח מהיר",
   "trustBadges.competitivePrices": "מחירים תחרותיים",
-
   "index.categories.title": "קטגוריות מוצרים",
   "index.categories.description": "ממשחקים ועד ניידות ירוקה — אנחנו מפיצים את המוצרים שהלקוחות שלך באמת רוצים.",
   "index.categories.gaming.title": "קונסולות גיימינג",
@@ -428,7 +409,6 @@
   "index.categories.gadgets.title": "גאדג'טים וחדשנות",
   "index.categories.gadgets.description": "גאדג'טים טכנולוגיים ומכשירי בית חכם",
   "index.categories.cta": "לכל המוצרים",
-
   "index.howToPartner.title": "איך מתחילים",
   "index.howToPartner.description": "שיתוף פעולה עם Consoltech פשוט ומהיר. שלושה שלבים ואתה בפנים.",
   "index.howToPartner.step1.number": "01",
@@ -441,7 +421,6 @@
   "index.howToPartner.step3.title": "משלוח מהיר",
   "index.howToPartner.step3.description": "אנחנו מטפלים בלוגיסטיקה, מכס ומשלוח. המוצרים מגיעים בזמן, כל פעם.",
   "index.howToPartner.cta": "צור קשר עכשיו",
-
   "index.globalStats.title": "Consoltech במספרים",
   "index.globalStats.description": "יותר משני עשורים של הפצה גלובלית הבנויה על אמון, מהירות ותוצאות.",
   "index.globalStats.stat1.value": "+20",

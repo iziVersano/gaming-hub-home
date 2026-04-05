@@ -140,7 +140,7 @@ const Hero = () => {
               מחשבים & אבזרי גיימינג
             </p>
             <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/90 text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
-              מוצרי חשמל מתקדמים -אבזרי גיימינג ואלקטרוניקה
+              מוצרי חשמל מתקדמים - ואלקטרוניקה
             </p>
           </div>
           </div>
