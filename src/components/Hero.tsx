@@ -99,17 +99,18 @@ const Hero = () => {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
       </div>
 
-      <div className="relative z-[1] w-full px-5 pt-[70px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
+      <div className="relative z-[1] w-full px-4 pt-[58px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-2 items-end w-full">
 
-          {/* Logo — mobile only, part of hero. LTR so icon is always left */}
-          <div className="flex md:hidden items-center gap-2 mb-2 justify-end w-full" style={{ direction: 'ltr' }}>
-            <Gamepad2 className="h-[5.5rem] w-[5.5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+          {/* Logo — mobile only */}
+          <div className="flex md:hidden items-center gap-2 mb-1 justify-end w-full" style={{ direction: 'ltr' }}>
+            <Gamepad2 className="h-[5rem] w-[5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
             <div className="flex flex-col items-end justify-center">
-              <span className="logo-text text-[clamp(3rem,13vw,4.2rem)] tracking-wider leading-[1.0] whitespace-nowrap">
+              <span className="logo-text text-[clamp(2.8rem,12vw,4rem)] tracking-wider leading-[1.0] whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
-              <span className="font-display text-[clamp(1.9rem,9vw,2.8rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+              {/* אתר היבואן — whitespace-nowrap + smaller clamp so it never breaks on any phone */}
+              <span className="font-display text-[clamp(1.5rem,7.5vw,2.4rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
             </div>
