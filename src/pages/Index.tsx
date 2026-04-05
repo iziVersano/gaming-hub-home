@@ -80,10 +80,10 @@ const Index = () => {
             src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
-            style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: 'auto' }}
+            style={{ position: 'absolute', top: '200px', left: 0, width: '100%', height: 'auto' }}
           />
-          {/* Gradient fade: exact image top color → transparent, blends seam */}
-          <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '100px', background: 'linear-gradient(to bottom, #210144 0%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
+          {/* Tall gradient fade: covers the full seam between bg color and image */}
+          <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '150px', background: 'linear-gradient(to bottom, #210144 0%, #210144 30%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
         </div>
 
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
