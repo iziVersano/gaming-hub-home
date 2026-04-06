@@ -119,7 +119,7 @@ const Hero = () => {
           {/* Logo — mobile only, brand lockup */}
           <div className="flex md:hidden flex-col items-stretch w-full mb-1">
             {/* Icon + קונסולטק on same row, same baseline */}
-            <div className="flex items-center justify-between w-full" style={{ direction: 'ltr' }}>
+            <div className="flex items-start justify-between w-full" style={{ direction: 'ltr' }}>
               <Gamepad2 className="h-[4.5rem] w-[4.5rem] shrink-0 self-center" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
               <span className="logo-text text-[clamp(3rem,14vw,4.5rem)] tracking-wider leading-[1.0] whitespace-nowrap self-center" style={{ direction: 'rtl' }}>
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
