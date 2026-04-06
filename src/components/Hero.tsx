@@ -116,19 +116,23 @@ const Hero = () => {
       <div className="relative z-[1] w-full px-4 pt-[74px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-2 items-end w-full">
 
-          {/* Logo — mobile only */}
-          <div className="flex md:hidden items-center gap-2 mb-1 justify-end w-full" style={{ direction: 'ltr' }}>
+          {/* Logo — mobile only, full width */}
+          <div className="flex md:hidden items-center justify-between w-full mb-1" style={{ direction: 'ltr' }}>
             <Gamepad2 className="h-[5rem] w-[5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-            <div className="flex flex-col items-end justify-center">
-              <span className="logo-text text-[clamp(2.8rem,12vw,4rem)] tracking-wider leading-[1.0] whitespace-nowrap">
+            <div className="flex flex-col items-end justify-center" style={{ direction: 'rtl' }}>
+              <span className="logo-text text-[clamp(2.8rem,13vw,4.2rem)] tracking-wider leading-[1.0] whitespace-nowrap">
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
-              {/* אתר היבואן — whitespace-nowrap + smaller clamp so it never breaks on any phone */}
               <span className="font-display text-[clamp(1.5rem,7.5vw,2.4rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
             </div>
           </div>
+
+          {/* משנת 2001 — mobile only, between logo and headlines */}
+          <p className="md:hidden font-display text-[clamp(1.1rem,5.5vw,1.6rem)] font-bold leading-tight text-right w-full whitespace-nowrap mb-1" style={{ color: "hsl(216 100% 70%)", textShadow: "0 0 10px hsl(216 100% 55%), 0 0 25px hsl(216 100% 45%)" }}>
+            משנת 2001 יבוא ושיווק
+          </p>
 
           {/* Main Headline — subtle backdrop */}
           <div className="inline-block rounded-2xl px-3 py-2 mb-0 bg-black/25 backdrop-blur-[1px]">
