@@ -126,7 +126,7 @@ const Hero = () => {
               </span>
             </div>
             {/* אתר היבואן + משנת 2001 — pinned to far right */}
-            <div className="flex flex-col items-end w-full mt-0.5 text-right">
+            <div className="flex flex-col w-full mt-0.5" style={{ alignItems: 'flex-end', direction: 'ltr' }}>
               <span className="font-display text-[clamp(1.5rem,7.5vw,2.4rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
