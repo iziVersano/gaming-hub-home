@@ -118,19 +118,19 @@ const Hero = () => {
 
           {/* Logo — mobile only, brand lockup */}
           <div className="flex md:hidden flex-col items-stretch w-full mb-1">
-            {/* Icon + קונסולטק on same row, same baseline */}
-            <div className="flex items-start justify-between w-full" style={{ direction: 'ltr' }}>
-              <Gamepad2 className="h-[4.5rem] w-[4.5rem] shrink-0 self-center" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-              <span className="logo-text text-[clamp(3rem,14vw,4.5rem)] tracking-wider leading-[1.0] whitespace-nowrap self-center" style={{ direction: 'rtl' }}>
+            {/* Icon + קונסולטק: both inline, top-aligned, fill full width */}
+            <div className="flex justify-between w-full" style={{ direction: 'ltr', alignItems: 'flex-start' }}>
+              <Gamepad2 style={{ width: '4.5rem', height: '4.5rem', flexShrink: 0, marginTop: '0.3rem', color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+              <span className="logo-text whitespace-nowrap" style={{ direction: 'rtl', fontSize: 'clamp(3rem,14vw,4.5rem)', lineHeight: 1.0, letterSpacing: '0.05em' }}>
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
             </div>
-            {/* אתר היבואן + משנת 2001 — pinned to far right, same color family */}
-            <div className="flex flex-col w-full mt-0.5" style={{ alignItems: 'flex-end', direction: 'ltr' }}>
-              <span className="font-display text-[clamp(1.5rem,7.5vw,2.4rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
+            {/* אתר היבואן + משנת 2001 — pinned to far right */}
+            <div className="flex flex-col w-full mt-0.5" style={{ alignItems: 'flex-end' }}>
+              <span className="font-display whitespace-nowrap font-bold" style={{ fontSize: 'clamp(1.5rem,7.5vw,2.4rem)', lineHeight: 1.2, color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
-              <span className="font-display text-[clamp(1rem,5vw,1.4rem)] font-semibold leading-tight whitespace-nowrap tracking-wide" style={{ color: "hsl(195 100% 80%)", textShadow: "0 0 8px hsl(195 100% 65%), 0 0 20px hsl(195 100% 50%)" }}>
+              <span className="font-display whitespace-nowrap font-semibold" style={{ fontSize: 'clamp(1.2rem,6vw,1.8rem)', lineHeight: 1.2, color: "hsl(195 100% 80%)", textShadow: "0 0 8px hsl(195 100% 65%), 0 0 20px hsl(195 100% 50%)" }}>
                 משנת 2001 יבוא ושיווק
               </span>
             </div>
