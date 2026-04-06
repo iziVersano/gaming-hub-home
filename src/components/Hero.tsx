@@ -118,19 +118,19 @@ const Hero = () => {
 
           {/* Logo — mobile only, brand lockup */}
           <div className="flex md:hidden flex-col items-stretch w-full mb-1">
-            {/* Icon + קונסולטק on same row, justified to fill full width */}
+            {/* Icon + קונסולטק on same row, same baseline */}
             <div className="flex items-center justify-between w-full" style={{ direction: 'ltr' }}>
-              <Gamepad2 className="h-[4.5rem] w-[4.5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
-              <span className="logo-text text-[clamp(3rem,14vw,4.5rem)] tracking-wider leading-[1.0] whitespace-nowrap" style={{ direction: 'rtl' }}>
+              <Gamepad2 className="h-[4.5rem] w-[4.5rem] shrink-0 self-center" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+              <span className="logo-text text-[clamp(3rem,14vw,4.5rem)] tracking-wider leading-[1.0] whitespace-nowrap self-center" style={{ direction: 'rtl' }}>
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
             </div>
-            {/* אתר היבואן + משנת 2001 — pinned to far right */}
+            {/* אתר היבואן + משנת 2001 — pinned to far right, same color family */}
             <div className="flex flex-col w-full mt-0.5" style={{ alignItems: 'flex-end', direction: 'ltr' }}>
               <span className="font-display text-[clamp(1.5rem,7.5vw,2.4rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
-              <span className="font-display text-[clamp(1rem,5vw,1.4rem)] font-semibold leading-tight whitespace-nowrap tracking-wide" style={{ color: "hsl(216 100% 72%)", textShadow: "0 0 8px hsl(216 100% 55%), 0 0 20px hsl(216 100% 45%)" }}>
+              <span className="font-display text-[clamp(1rem,5vw,1.4rem)] font-semibold leading-tight whitespace-nowrap tracking-wide" style={{ color: "hsl(195 100% 80%)", textShadow: "0 0 8px hsl(195 100% 65%), 0 0 20px hsl(195 100% 50%)" }}>
                 משנת 2001 יבוא ושיווק
               </span>
             </div>
