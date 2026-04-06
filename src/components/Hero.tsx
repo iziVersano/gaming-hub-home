@@ -117,7 +117,7 @@ const Hero = () => {
         <div className="space-y-2 items-end w-full">
 
           {/* Logo — mobile only, brand lockup */}
-          <div className="flex md:hidden flex-col items-center w-full mb-1">
+          <div className="flex md:hidden flex-col items-stretch w-full mb-1">
             {/* Icon + קונסולטק on same row, justified to fill full width */}
             <div className="flex items-center justify-between w-full" style={{ direction: 'ltr' }}>
               <Gamepad2 className="h-[4.5rem] w-[4.5rem] shrink-0" style={{ color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
@@ -125,8 +125,8 @@ const Hero = () => {
                 <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
               </span>
             </div>
-            {/* אתר היבואן + משנת 2001 — right-aligned sub-block */}
-            <div className="flex flex-col items-end w-full mt-0.5" style={{ direction: 'rtl' }}>
+            {/* אתר היבואן + משנת 2001 — pinned to far right */}
+            <div className="flex flex-col items-end w-full mt-0.5 pr-0" style={{ direction: 'rtl' }}>
               <span className="font-display text-[clamp(1.5rem,7.5vw,2.4rem)] font-bold leading-tight whitespace-nowrap" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
