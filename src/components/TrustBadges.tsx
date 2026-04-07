@@ -1,27 +1,20 @@
-import { Shield, Award, Truck, Tag } from 'lucide-react';
+import { BadgeCheck, Trophy, Truck, Tag } from 'lucide-react';
 import { useI18n } from '@/hooks/I18nContext';
 
 const badges = [
   {
-    key: 'trustBadges.authorizedDistributor',
-    icon: Shield,
-    iconColor: 'text-emerald-400',
-    glowColor: 'shadow-[0_0_12px_rgba(52,211,153,0.3)]',
-    borderColor: 'border-emerald-500/30',
-  },
-  {
     key: 'trustBadges.fastShipping',
     icon: Truck,
-    iconColor: 'text-blue-400',
-    glowColor: 'shadow-[0_0_12px_rgba(96,165,250,0.3)]',
-    borderColor: 'border-blue-500/30',
-  },
-  {
-    key: 'trustBadges.fullWarranty',
-    icon: Award,
     iconColor: 'text-cyan-400',
     glowColor: 'shadow-[0_0_12px_rgba(34,211,238,0.3)]',
     borderColor: 'border-cyan-500/30',
+  },
+  {
+    key: 'trustBadges.authorizedDistributor',
+    icon: BadgeCheck,
+    iconColor: 'text-emerald-400',
+    glowColor: 'shadow-[0_0_12px_rgba(52,211,153,0.3)]',
+    borderColor: 'border-emerald-500/30',
   },
   {
     key: 'trustBadges.competitivePrices',
@@ -29,6 +22,13 @@ const badges = [
     iconColor: 'text-orange-400',
     glowColor: 'shadow-[0_0_12px_rgba(251,146,60,0.3)]',
     borderColor: 'border-orange-500/30',
+  },
+  {
+    key: 'trustBadges.fullWarranty',
+    icon: Trophy,
+    iconColor: 'text-cyan-400',
+    glowColor: 'shadow-[0_0_12px_rgba(34,211,238,0.3)]',
+    borderColor: 'border-cyan-500/30',
   },
 ];
 
