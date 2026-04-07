@@ -148,10 +148,8 @@
   "contact.errors.invalidEmail": "Please enter a valid email address",
   "contact.errors.incompleteFields": "Please fill in all required fields",
   "contact.errors.submissionFailed": "Failed to send message",
-
   "contact.offices.title": "Our Offices",
   "contact.offices.subtitle": "Visit us at our headquarters",
-
   "contact.faq.title": "Frequently Asked Questions",
   "contact.faq.items.0.question": "How can I place a wholesale order?",
   "contact.faq.items.0.answer": "Contact us via email or WhatsApp with your company details and the products you're interested in. Our team will get back to you with pricing and availability within 24 hours.",
@@ -161,7 +159,6 @@
   "contact.faq.items.2.answer": "Yes, all products come with full manufacturer warranty. We also provide importer warranty support for products purchased through our distribution network.",
   "contact.faq.items.3.question": "What payment methods do you accept?",
   "contact.faq.items.3.answer": "We accept bank transfers, credit cards, and other standard B2B payment methods. Payment terms can be arranged for established business partners.",
-
   "footer.description": "Global leader in electronics and gaming distribution, connecting innovation with markets worldwide.",
   "footer.contact": "Contact",
   "footer.email": "Email:",
@@ -170,7 +167,6 @@
   "footer.copyright": "All rights reserved. | Global Import & Distribution Excellence",
   "footer.accessibility": "Accessibility",
   "footer.admin": "Admin",
-
   "admin.layout.admin": "Admin",
   "admin.layout.products": "Products",
   "admin.layout.logout": "Logout",
@@ -199,7 +195,6 @@
   "admin.productForm.success.updated": "Product updated successfully",
   "admin.productForm.error.create": "Failed to create product",
   "admin.productForm.error.update": "Failed to update product",
-
   "warranty.title": "Warranty Registration Form",
   "warranty.subtitle": "Nintendo Switch 2",
   "warranty.description": "Please fill in the following details and attach a purchase invoice to activate the warranty.",
@@ -233,7 +228,6 @@
   "warranty.errors.serialTooShort": "Serial number must be at least 4 characters",
   "warranty.errors.futureDateNotAllowed": "Purchase date cannot be in the future",
   "warranty.fileInfo": "Max size: 10MB | Formats: PDF, JPG, PNG",
-
   "warrantyRecords.title": "Warranty Records",
   "warrantyRecords.success": "Warranty submission successful!",
   "warrantyRecords.loading": "Loading records...",
@@ -246,7 +240,6 @@
   "warrantyRecords.date": "Date",
   "warrantyRecords.viewInvoice": "View Invoice",
   "warrantyRecords.close": "Close",
-
   "accessibility.title": "Accessibility Statement",
   "accessibility.lastUpdated": "Last updated:",
   "accessibility.commitment.title": "Our Commitment",
@@ -279,7 +272,6 @@
   "accessibility.assessment.selfEvaluation": "Self-evaluation using accessibility testing tools",
   "accessibility.assessment.userTesting": "Testing with assistive technologies",
   "accessibility.assessment.guidelines": "Review against WCAG 2.1 Level AA guidelines",
-
   "notFound.title": "404",
   "notFound.message": "Oops! Page not found",
   "notFound.return": "Return to Home",
@@ -289,7 +281,6 @@
   "menu.contact": "Contact",
   "menu.accessibility": "Accessibility",
   "menu.getQuote": "Get Quote",
-
   "index.features.globalDistribution.title": "Global Distribution",
   "index.features.globalDistribution.description": "Worldwide shipping to 50+ countries with local support and fast delivery",
   "index.features.qualityAssurance.title": "Quality Assurance",
@@ -342,7 +333,6 @@
   "index.moreAbout.contact.addressLabel": "Address:",
   "index.moreAbout.contact.mobileLabel": "Mobile / WhatsApp:",
   "index.moreAbout.contact.emailLabel": "Email:",
-
   "featured.collection": "Featured Collection",
   "featured.title": "Next-Gen Technology",
   "featured.description": "Discover revolutionary products that define the future of technology. From gaming to mobility, we bring you the most advanced innovations.",
@@ -365,12 +355,9 @@
   "featured.stats.countries": "50+ Countries",
   "featured.stats.support": "24/7 Support",
   "featured.stats.shipping": "Fast Shipping",
-
   "slider.learnMore": "Learn More",
   "slider.exploreAll": "Explore All Products",
-
   "brands.morePartners": "+200 more trusted partners worldwide",
-
   "a11y.skipToContent": "Skip to main content",
   "a11yMenu.title": "Accessibility",
   "a11yMenu.closeMenu": "Close accessibility menu",
@@ -395,7 +382,6 @@
   "a11yMenu.otherOptions": "Other Options",
   "a11yMenu.animationsOn": "Animations: ON",
   "a11yMenu.animationsOff": "Animations: OFF",
-
   "products.keyFeatures": "Key Features",
   "products.inquireNow": "Inquire Now",
   "products.specifications": "Specifications",
@@ -404,11 +390,10 @@
   "products.flags": "Flags",
   "products.category.label": "Category",
   "products.inquiryAria": "Inquiry about {title}",
-  "trustBadges.authorizedDistributor": "Authorized Distributor",
+  "trustBadges.authorizedDistributor": "Authorized Importer",
   "trustBadges.fullWarranty": "Full Warranty",
-  "trustBadges.fastShipping": "Fast Shipping",
+  "trustBadges.fastShipping": "30+ Years Experience",
   "trustBadges.competitivePrices": "Competitive Prices",
-
   "index.categories.title": "Product Categories",
   "index.categories.description": "From gaming gear to green mobility — we distribute the products your customers actually want.",
   "index.categories.gaming.title": "Gaming Consoles",
@@ -424,7 +409,6 @@
   "index.categories.gadgets.title": "Gadgets & Innovations",
   "index.categories.gadgets.description": "Latest tech gadgets and smart home devices",
   "index.categories.cta": "Browse All Products",
-
   "index.howToPartner.title": "How to Start",
   "index.howToPartner.description": "Partnering with Consoltech is straightforward. Three steps and you're in.",
   "index.howToPartner.step1.number": "01",
@@ -437,7 +421,6 @@
   "index.howToPartner.step3.title": "Fast Delivery",
   "index.howToPartner.step3.description": "We handle logistics, customs, and shipping. Products arrive on time, every time.",
   "index.howToPartner.cta": "Contact Us Now",
-
   "index.globalStats.title": "Consoltech by the Numbers",
   "index.globalStats.description": "Over two decades of global distribution built on trust, speed, and results.",
   "index.globalStats.stat1.value": "20+",
