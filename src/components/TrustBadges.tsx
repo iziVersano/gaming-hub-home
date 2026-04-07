@@ -1,10 +1,10 @@
-import { BadgeCheck, Trophy, Truck, Tag } from 'lucide-react';
+import { BadgeCheck, Shield, Tag, Clock } from 'lucide-react';
 import { useI18n } from '@/hooks/I18nContext';
 
 const badges = [
   {
     key: 'trustBadges.fastShipping',
-    icon: Truck,
+    icon: Clock,
     iconColor: 'text-cyan-400',
     glowColor: 'shadow-[0_0_12px_rgba(34,211,238,0.3)]',
     borderColor: 'border-cyan-500/30',
@@ -25,7 +25,7 @@ const badges = [
   },
   {
     key: 'trustBadges.fullWarranty',
-    icon: Trophy,
+    icon: Shield,
     iconColor: 'text-cyan-400',
     glowColor: 'shadow-[0_0_12px_rgba(34,211,238,0.3)]',
     borderColor: 'border-cyan-500/30',
