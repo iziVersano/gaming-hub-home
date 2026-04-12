@@ -80,7 +80,7 @@ const App = () => {
                 <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/health" element={<Health />} />
-                {featureFlags.WARRANTY_ENABLED && <Route path="/warranty" element={<Warranty />} />}
+                {featureFlags.WARRANTY_ENABLED && <Route path="/הוראותאחריות" element={<Warranty />} />}
                 <Route path="/nintendo-switch-2" element={<NintendoSwitch2Manual />} />
                 <Route path="/accessibility" element={<Accessibility />} />
                 {/* Admin Routes */}

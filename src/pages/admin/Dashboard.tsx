@@ -150,7 +150,7 @@ const Dashboard = () => {
               </Button>
               {featureFlags.WARRANTY_ENABLED && (
               <Button asChild variant="ghost" size="sm" className="w-full justify-start">
-                <Link to="/warranty" target="_blank">
+                <Link to="/הוראותאחריות" target="_blank">
                   Warranty Form
                   <ArrowRight className="h-4 w-4 ml-auto" />
                 </Link>

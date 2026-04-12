@@ -139,7 +139,7 @@ const WarrantyCTABanner = () => (
         <h2 className="text-lg font-semibold mb-1">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
         <p className="text-muted-foreground text-sm">הפעילו את האחריות שלכם עכשיו</p>
       </div>
-      <Link to="/warranty" className="flex-shrink-0">
+      <Link to="/הוראותאחריות" className="flex-shrink-0">
         <Button className="btn-hero px-4 py-2 text-sm">
           <span>רישום אחריות</span>
           <ArrowRight className="h-4 w-4 rotate-180" />
@@ -497,7 +497,7 @@ const NintendoSwitch2Manual = () => {
               <p className="text-foreground mb-2">
                 📋 <strong>רישום אחריות:</strong> לצורך מימוש האחריות, יש לרשום את המוצר באתר שלנו.
               </p>
-              <Link to="/warranty" className="text-accent hover:underline font-medium">
+              <Link to="/הוראותאחריות" className="text-accent hover:underline font-medium">
                 לחצו כאן לטופס רישום אחריות ←
               </Link>
             </div>
