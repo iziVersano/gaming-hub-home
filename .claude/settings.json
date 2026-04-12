@@ -9,7 +9,9 @@
       "Bash(git revert:*)",
       "Bash(claude --version)",
       "Bash(npm list:*)",
-      "Bash(claude --print --dangerously-skip-permissions)"
+      "Bash(claude --print --dangerously-skip-permissions)",
+      "Bash(git stash:*)",
+      "Bash(git pull:*)"
     ]
   }
 }

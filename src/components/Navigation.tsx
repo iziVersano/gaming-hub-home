@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search } from 'lucide-react';
+import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search, BookOpen, Shield, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
 
@@ -14,10 +14,12 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [guidesOpen, setGuidesOpen] = useState(false);
+  const guidesRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const { lang, setLang, t } = useI18n();
+  const { lang, t } = useI18n();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,10 +40,21 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
 
   // Close search on Escape
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setSearchOpen(false); setGuidesOpen(false); } };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
+
+  // Close guides dropdown on outside click
+  useEffect(() => {
+    const handleOutside = (e: MouseEvent) => {
+      if (guidesRef.current && !guidesRef.current.contains(e.target as Node)) {
+        setGuidesOpen(false);
+      }
+    };
+    if (guidesOpen) document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, [guidesOpen]);
 
   const navigation = [
     { name: t('menu.home'), href: '/', icon: House },
@@ -183,6 +196,72 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               </div>
             )}
 
+            {/* Desktop: Logo + nav */}
+            <div className="hidden md:flex justify-between items-center md:h-16">
+              <Link
+                to="/"
+                className="flex items-center gap-3 group w-full md:w-auto shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset rounded-lg px-1"
+                aria-label="Consoltech - Home"
+              >
+                <div className="logo-icon-wrap p-2.5 group-hover:border-accent/40 transition-colors duration-300">
+                  <Gamepad2 className="h-9 w-9 text-white group-hover:text-accent transition-colors duration-300" />
+                </div>
+                <div className="flex flex-col items-start gap-px">
+                  <span className="logo-text text-[2.6rem] lg:text-[3rem] tracking-wider leading-none origin-left inline-block">
+                    <><span className="logo-consol">קונסול</span><span className="logo-tech">טק</span></>
+                  </span>
+                  <span className="text-[9px] tracking-[0.04em] font-semibold leading-none pt-0.5 text-center block" style={{ color: "hsl(195 100% 85%)", textShadow: "0 0 6px hsl(195 100% 75%), 0 0 16px hsl(195 100% 60%), 0 0 30px hsl(195 100% 50%)" }}>
+                    אתר היבואן לקונסולות משחק & גיימינג
+                  </span>
+                </div>
+              </Link>
+
+              <div className="hidden md:flex items-center gap-7" role="menubar" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    role="menuitem"
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`nav-link${isActive(item.href) ? ' nav-link-active' : ''}`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+
+                {/* מדריכים / אחריות dropdown */}
+                <div ref={guidesRef} className="relative">
+                  <button
+                    onClick={() => setGuidesOpen(prev => !prev)}
+                    className={`nav-link flex items-center gap-1.5 ${(isActive('/nintendo-switch-2') || isActive('/warranty')) ? 'nav-link-active' : ''}`}
+                    aria-expanded={guidesOpen}
+                    aria-haspopup="true"
+                  >
+                    <span>מדריכים / אחריות</span>
+                    <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${guidesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {guidesOpen && (
+                    <div className="absolute top-full mt-2 w-52 bg-[#0d0d14] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50" dir="rtl" style={{ right: 0 }}>
+                      <Link to="/nintendo-switch-2" onClick={() => setGuidesOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-white/8 border-b border-white/6 ${isActive('/nintendo-switch-2') ? 'text-accent' : 'text-white'}`}>
+                        <BookOpen className="h-4 w-4 shrink-0 text-blue-400" />
+                        <span>מדריכים הוראות הפעלה</span>
+                      </Link>
+                      <Link to="/warranty" onClick={() => setGuidesOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-white/8 ${isActive('/warranty') ? 'text-accent' : 'text-white'}`}>
+                        <Shield className="h-4 w-4 shrink-0 text-green-400" />
+                        <span>הפעלת אחריות</span>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                <Link to="/contact">
+                  <Button className="btn-nav ml-1">
+                    <MessageSquare className="h-4 w-4" aria-hidden="true" />
+                    <span>{t('menu.getQuote')}</span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -240,6 +319,31 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   </Link>
                 );
               })}
+
+              {/* מדריכים / אחריות section */}
+              <div className="pt-2 pb-1">
+                <p className="text-xs font-semibold tracking-widest text-white/35 uppercase mb-1 pr-1">מדריכים / אחריות</p>
+                <Link
+                  to="/nintendo-switch-2"
+                  role="menuitem"
+                  aria-current={isActive('/nintendo-switch-2') ? 'page' : undefined}
+                  className={`flex items-center gap-3 py-3 text-base font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${isActive('/nintendo-switch-2') ? 'text-accent' : 'text-white hover:text-accent'}`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <BookOpen className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
+                  <span>מדריכים הוראות הפעלה</span>
+                </Link>
+                <Link
+                  to="/warranty"
+                  role="menuitem"
+                  aria-current={isActive('/warranty') ? 'page' : undefined}
+                  className={`flex items-center gap-3 py-3 text-base font-semibold tracking-wide transition-colors duration-200 ${isActive('/warranty') ? 'text-accent' : 'text-white hover:text-accent'}`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Shield className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
+                  <span>הפעלת אחריות</span>
+                </Link>
+              </div>
             </div>
 
             {/* Brand logos */}

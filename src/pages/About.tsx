@@ -104,9 +104,7 @@ const About = () => {
                 <li>
                   <span className="font-medium">{t('about.email')}</span> <a href="mailto:sales@gamestation.co.il" className="text-primary hover:underline font-medium">sales@gamestation.co.il</a>
                 </li>
-                <li>
-                  <span className="font-medium">{t('about.vat')}</span> 032398497
-                </li>
+
               </ul>
               <p className="mt-6 text-muted-foreground">
                 {t('about.thanks')}

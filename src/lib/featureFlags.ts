@@ -8,7 +8,7 @@ export const featureFlags = {
   HERO_VIDEO_MODE: true,  // When true: show video in hero instead of carousel/image
 
   // Warranty Feature
-  WARRANTY_ENABLED: false,  // Public warranty form, admin warranty records, and warranty CTAs
+  WARRANTY_ENABLED: true,  // Public warranty form, admin warranty records, and warranty CTAs
 } as const;
 
 // Helper function to check if a feature is enabled
