@@ -216,10 +216,10 @@ const Warranty = () => {
     }
   };
 
-  const inputClass = "w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none text-right box-border";
-  const inputErrorClass = "w-full px-4 py-3 bg-input rounded-lg border border-red-500 focus:outline-none text-right box-border";
-  const labelClass = "block text-sm font-medium mb-2 text-right";
-  const errorClass = "text-sm text-red-500 mt-1.5 text-right break-words";
+  const inputClass = "w-full px-4 py-3 bg-muted/30 rounded-lg border border-border focus:outline-none focus:border-primary text-foreground text-right box-border transition-colors";
+  const inputErrorClass = "w-full px-4 py-3 bg-muted/30 rounded-lg border border-red-500 focus:outline-none text-foreground text-right box-border transition-colors";
+  const labelClass = "block text-sm font-semibold mb-2 text-right text-foreground";
+  const errorClass = "text-sm text-red-400 mt-1.5 text-right break-words";
 
   return (
     <div dir="rtl" className="min-h-screen bg-background flex flex-col">
@@ -452,7 +452,7 @@ const Warranty = () => {
                   />
                   <label
                     htmlFor="invoice-upload"
-                    className={`flex items-center justify-center gap-3 w-full px-4 py-4 bg-input rounded-lg border-2 border-dashed cursor-pointer transition-colors box-border ${
+                    className={`flex items-center justify-center gap-3 w-full px-4 py-4 bg-muted/30 rounded-lg border-2 border-dashed cursor-pointer transition-colors box-border ${
                       touched.file && errors.file
                         ? 'border-red-500 hover:border-red-400'
                         : 'border-border hover:border-primary'
