@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Upload, CheckCircle, Info } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { translations } from '@/i18n';
 
@@ -215,46 +216,44 @@ const Warranty = () => {
     }
   };
 
-  const inputClass = "w-full px-4 py-3 rounded-lg border border-white/15 bg-white/6 text-white placeholder:text-white/35 focus:outline-none focus:border-blue-400/60 focus:bg-white/10 transition-colors text-right box-border";
-  const inputErrorClass = "w-full px-4 py-3 rounded-lg border border-red-500/70 bg-white/6 text-white placeholder:text-white/35 focus:outline-none transition-colors text-right box-border";
-  const labelClass = "block text-sm font-semibold mb-2 text-right text-white/80";
-  const errorClass = "text-sm text-red-400 mt-1.5 text-right break-words";
+  const inputClass = "w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none text-right box-border";
+  const inputErrorClass = "w-full px-4 py-3 bg-input rounded-lg border border-red-500 focus:outline-none text-right box-border";
+  const labelClass = "block text-sm font-medium mb-2 text-right";
+  const errorClass = "text-sm text-red-500 mt-1.5 text-right break-words";
 
   return (
-    <div dir="rtl" className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(160deg, #0d0620 0%, #0a0a1a 50%, #0d1a2e 100%)' }}>
+    <div dir="rtl" className="min-h-screen bg-background flex flex-col">
       <Helmet>
         <title>{t('warranty.title')} - {t('warranty.subtitle')} | Consoltech</title>
         <meta name="description" content={t('warranty.description')} />
         <html lang="he" />
       </Helmet>
 
-      <main id="main-content" className="flex-1 pt-24 md:pt-24">
-      <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 gradient-text leading-tight">
-            {t('warranty.title')}
+      <Navigation />
+
+      <main id="main-content" className="flex-1 pt-40 md:pt-24 container px-4 md:px-6 pb-16">
+      <div className="max-w-3xl mx-auto py-8 sm:py-12">
+        {/* Header — matches NintendoSwitch2Manual header style */}
+        <header className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <span className="gradient-text">{t('warranty.title')}</span>
           </h1>
-          <h2 className="text-xl sm:text-2xl font-semibold text-white/80 mb-4">
-            {t('warranty.subtitle')}
-          </h2>
-          <p className="text-white/50 text-base sm:text-lg px-2">
-            {t('warranty.description')}
-          </p>
-        </div>
+          <p className="text-xl text-muted-foreground">{t('warranty.subtitle')}</p>
+          <p className="text-muted-foreground text-base mt-2 px-2">{t('warranty.description')}</p>
+        </header>
 
         {/* Success Message */}
         {isSuccess ? (
-          <div className="text-center py-12 rounded-2xl border border-green-500/20 bg-green-500/5">
-            <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-6" />
-            <h2 className="text-2xl font-bold mb-4 text-green-400">{t('warranty.success.title')}</h2>
-            <p className="text-white/60 text-lg">
+          <div className="product-card text-center py-12">
+            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
+            <h2 className="text-2xl font-bold mb-4 text-green-500">{t('warranty.success.title')}</h2>
+            <p className="text-muted-foreground text-lg">
               {t('warranty.success.description')}
             </p>
           </div>
         ) : (
-          /* Form */
-          <div className="rounded-2xl border border-white/10 bg-white/4 backdrop-blur-sm p-6 sm:p-8">
+          /* Form — matches NintendoSwitch2Manual card style */
+          <div className="max-w-2xl mx-auto p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border">
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               {/* Full Name */}
               <div>
@@ -453,14 +452,14 @@ const Warranty = () => {
                   />
                   <label
                     htmlFor="invoice-upload"
-                    className={`flex items-center justify-center gap-3 w-full px-4 py-4 rounded-lg border-2 border-dashed cursor-pointer transition-colors box-border ${
+                    className={`flex items-center justify-center gap-3 w-full px-4 py-4 bg-input rounded-lg border-2 border-dashed cursor-pointer transition-colors box-border ${
                       touched.file && errors.file
-                        ? 'border-red-500/70 bg-red-500/5 hover:border-red-400'
-                        : 'border-white/20 bg-white/4 hover:border-blue-400/60 hover:bg-white/8'
+                        ? 'border-red-500 hover:border-red-400'
+                        : 'border-border hover:border-primary'
                     }`}
                   >
-                    <Upload className={`h-5 w-5 flex-shrink-0 ${file ? 'text-green-400' : 'text-white/40'}`} />
-                    <span className={`${file ? 'text-white' : 'text-white/40'} break-all text-center text-sm`}>
+                    <Upload className={`h-5 w-5 flex-shrink-0 ${file ? 'text-green-500' : 'text-muted-foreground'}`} />
+                    <span className={`${file ? 'text-foreground' : 'text-muted-foreground'} break-all text-center`}>
                       {file ? file.name : t('warranty.chooseFile') + ' (PDF, JPG, PNG)'}
                     </span>
                   </label>
