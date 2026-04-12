@@ -87,7 +87,7 @@ const Index = () => {
         </div>
 
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
-        <div className="md:hidden relative z-10">
+        <div className="md:hidden relative z-[9999]">
           <Navigation transparent />
         </div>
 

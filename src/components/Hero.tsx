@@ -83,7 +83,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px" }} data-section="hero">
+    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px", zIndex: 1 }} data-section="hero">
       <style>{`@media (max-width: 767px) { [data-section="hero"] { height: calc(105vw + 230px) !important; } }`}</style>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
