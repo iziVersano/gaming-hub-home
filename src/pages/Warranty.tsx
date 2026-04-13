@@ -234,21 +234,14 @@ const Warranty = () => {
       <main id="main-content" className="flex-1 pt-16 md:pt-24 container px-4 md:px-6 pb-16">
       <div className="max-w-3xl mx-auto py-4 sm:py-8">
         {/* Header */}
-        <header className="text-center mb-6">
+        <header className="text-center mb-4">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             <span className="gradient-text">{t('warranty.title')}</span>
           </h1>
-          <img
-            src="/images/nintendo-switch-2-logo.png"
-            alt="Nintendo Switch 2"
-            className="mx-auto mt-2 mb-3"
-            style={{ height: '100px', width: 'auto' }}
-          />
-          <p className="text-muted-foreground text-base mt-2 px-2">{t('warranty.description')}</p>
         </header>
 
-        {/* Mobile hero banner */}
-        <div className="md:hidden w-full rounded-2xl overflow-hidden mb-6 relative" style={{ height: '200px' }}>
+        {/* Mobile hero banner — replaces logo */}
+        <div className="md:hidden w-full rounded-2xl overflow-hidden mb-4 relative" style={{ height: '220px' }}>
           <img
             src="/images/nintendo-switch-2-banner-1.jpg"
             alt="Nintendo Switch 2"
@@ -256,6 +249,18 @@ const Warranty = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
+
+        {/* Desktop logo — only on desktop */}
+        <div className="hidden md:block text-center mb-6">
+          <img
+            src="/images/nintendo-switch-2-logo.png"
+            alt="Nintendo Switch 2"
+            className="mx-auto"
+            style={{ height: '100px', width: 'auto' }}
+          />
+        </div>
+
+        <p className="text-muted-foreground text-base mb-6 px-2 text-center">{t('warranty.description')}</p>
 
         {/* Success Message */}
         {isSuccess ? (
