@@ -1,12 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" width="480" height="120">
-  <!-- Nintendo red background pill - left -->
-  <rect x="0" y="10" width="100" height="100" rx="50" ry="50" fill="#E4000F"/>
-  <!-- Nintendo Switch icon white -->
-  <text x="50" y="72" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">⊕</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <!-- Red background -->
+  <rect width="320" height="320" rx="32" fill="#E4000F"/>
+
+  <!-- Joy-Con icon: left controller (rounded rect with circle button) -->
+  <rect x="30" y="60" width="72" height="130" rx="36" fill="white"/>
+  <circle cx="66" cy="108" r="18" fill="#E4000F"/>
+  <rect x="54" y="155" width="24" height="8" rx="4" fill="#E4000F"/>
+
+  <!-- Joy-Con icon: right controller -->
+  <rect x="118" y="60" width="72" height="130" rx="36" fill="white"/>
+  <circle cx="154" cy="108" r="18" fill="#E4000F"/>
+  <rect x="142" y="155" width="24" height="8" rx="4" fill="#E4000F"/>
+
+  <!-- "2" number -->
+  <text x="224" y="190" font-family="Arial Black, Impact, sans-serif" font-size="140" font-weight="900" fill="white">2</text>
+
   <!-- NINTENDO text -->
-  <text x="130" y="48" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="white" letter-spacing="2">NINTENDO</text>
-  <!-- SWITCH text red -->
-  <text x="130" y="88" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#E4000F" letter-spacing="-1">SWITCH</text>
-  <!-- 2 text -->
-  <text x="420" y="95" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="white">2</text>
+  <text x="26" y="240" font-family="Arial Black, Impact, sans-serif" font-size="28" font-weight="900" fill="white" letter-spacing="4">NINTENDO</text>
+
+  <!-- SWITCH text -->
+  <text x="26" y="288" font-family="Arial Black, Impact, sans-serif" font-size="44" font-weight="900" fill="white" letter-spacing="2">SWITCH.</text>
 </svg>
