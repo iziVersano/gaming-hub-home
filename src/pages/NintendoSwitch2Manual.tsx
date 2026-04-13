@@ -133,16 +133,16 @@ const additionalTocItems = [
 
 // Reusable CTA Banner Component
 const WarrantyCTABanner = () => (
-  <section className="max-w-3xl mx-auto py-4 px-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-border/50">
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-right">
-      <div className="flex-1">
-        <h2 className="text-lg font-semibold mb-1">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
-        <p className="text-muted-foreground text-sm">הפעילו את האחריות שלכם עכשיו</p>
+  <section className="max-w-3xl mx-auto py-6 px-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-border/50">
+    <div className="flex flex-col items-center gap-4 text-center">
+      <div>
+        <h2 className="text-2xl font-bold mb-2">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
+        <p className="text-muted-foreground text-base">הפעילו את האחריות שלכם עכשיו</p>
       </div>
-      <Link to="/הוראותאחריות" className="flex-shrink-0">
-        <Button className="btn-hero px-4 py-2 text-sm">
+      <Link to="/הוראותאחריות" className="w-full sm:w-auto">
+        <Button className="btn-hero w-full sm:w-auto px-8 py-4 text-lg font-bold">
+          <ArrowRight className="h-5 w-5 rotate-180" />
           <span>רישום אחריות</span>
-          <ArrowRight className="h-4 w-4 rotate-180" />
         </Button>
       </Link>
     </div>
