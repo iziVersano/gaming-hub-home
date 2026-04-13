@@ -136,15 +136,15 @@ const WarrantyCTABanner = () => (
   <section className="max-w-3xl mx-auto rounded-xl border border-border/50 overflow-hidden">
     <div className="flex items-stretch" style={{ direction: 'ltr', minHeight: '140px' }}>
       {/* Logo — fills left, blends red into dark */}
-      <div className="relative flex-shrink-0" style={{ width: '130px' }}>
+      <div className="relative flex-shrink-0" style={{ width: '110px', background: '#E4000F' }}>
         <img
           src="/images/nintendo-switch-2-logo.png"
           alt="Nintendo Switch 2"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', padding: '12px' }}
         />
         {/* Gradient fade from right edge into dark */}
         <div style={{
-          position: 'absolute', top: 0, right: 0, width: '60px', height: '100%',
+          position: 'absolute', top: 0, right: 0, width: '50px', height: '100%',
           background: 'linear-gradient(to right, transparent, #0f1730)'
         }} />
       </div>
