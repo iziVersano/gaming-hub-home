@@ -233,12 +233,17 @@ const Warranty = () => {
 
       <main id="main-content" className="flex-1 pt-24 md:pt-24 container px-4 md:px-6 pb-16">
       <div className="max-w-3xl mx-auto py-4 sm:py-8">
-        {/* Header — matches NintendoSwitch2Manual header style */}
+        {/* Header */}
         <header className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             <span className="gradient-text">{t('warranty.title')}</span>
           </h1>
-          <p className="text-2xl md:text-3xl font-bold mt-2 mb-4"><span className="gradient-text">{t('warranty.subtitle')}</span></p>
+          <img
+            src="/images/nintendo-switch-2-logo.svg"
+            alt="Nintendo Switch 2"
+            className="mx-auto mt-2 mb-3"
+            style={{ height: '100px', width: 'auto' }}
+          />
           <p className="text-muted-foreground text-base mt-2 px-2">{t('warranty.description')}</p>
         </header>
 
