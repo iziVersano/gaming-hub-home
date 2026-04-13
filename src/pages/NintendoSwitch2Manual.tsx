@@ -144,7 +144,7 @@ const WarrantyCTABanner = () => (
         />
         {/* Gradient fade from right edge into dark */}
         <div style={{
-          position: 'absolute', top: 0, right: 0, width: '20px', height: '100%',
+          position: 'absolute', top: 0, right: 0, width: '12px', height: '100%',
           background: 'linear-gradient(to right, transparent, #0f1730)'
         }} />
       </div>
