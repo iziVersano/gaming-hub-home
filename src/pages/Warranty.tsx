@@ -231,7 +231,7 @@ const Warranty = () => {
 
       <Navigation />
 
-      <main id="main-content" className="flex-1 pt-24 md:pt-24 container px-4 md:px-6 pb-16">
+      <main id="main-content" className="flex-1 pt-16 md:pt-24 container px-4 md:px-6 pb-16">
       <div className="max-w-3xl mx-auto py-4 sm:py-8">
         {/* Header */}
         <header className="text-center mb-6">
