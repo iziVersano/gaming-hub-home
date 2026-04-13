@@ -167,19 +167,22 @@ const NintendoSwitch2Manual = () => {
       <Navigation />
 
       {/* Main content is RTL Hebrew */}
-      <main id="main-content" dir="rtl" className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
+      <main id="main-content" dir="rtl" className="container px-4 md:px-6 pt-28 md:pt-20 pb-16 flex-1">
         {/* CTA Banner - Top */}
         {featureFlags.WARRANTY_ENABLED && (
-        <div className="mb-10">
+        <div className="mb-4">
           <WarrantyCTABanner />
         </div>
         )}
 
         {/* Header */}
-        <header className="max-w-4xl mx-auto text-center mb-10">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="gradient-text">Nintendo Switch 2</span>
-          </h1>
+        <header className="max-w-4xl mx-auto text-center mb-6">
+          <img
+            src="/images/nintendo-switch-2-logo.svg"
+            alt="Nintendo Switch 2"
+            className="mx-auto mb-3"
+            style={{ height: '80px', width: 'auto' }}
+          />
           <p className="text-xl text-muted-foreground">מדריך התקנה (שלב אחר שלב)</p>
         </header>
 
