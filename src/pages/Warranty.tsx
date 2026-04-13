@@ -231,14 +231,14 @@ const Warranty = () => {
 
       <Navigation />
 
-      <main id="main-content" className="flex-1 pt-40 md:pt-24 container px-4 md:px-6 pb-16">
-      <div className="max-w-3xl mx-auto py-8 sm:py-12">
+      <main id="main-content" className="flex-1 pt-24 md:pt-24 container px-4 md:px-6 pb-16">
+      <div className="max-w-3xl mx-auto py-4 sm:py-8">
         {/* Header — matches NintendoSwitch2Manual header style */}
         <header className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             <span className="gradient-text">{t('warranty.title')}</span>
           </h1>
-          <p className="text-xl text-muted-foreground">{t('warranty.subtitle')}</p>
+          <p className="text-2xl md:text-3xl font-bold mt-2 mb-4"><span className="gradient-text">{t('warranty.subtitle')}</span></p>
           <p className="text-muted-foreground text-base mt-2 px-2">{t('warranty.description')}</p>
         </header>
 
