@@ -134,15 +134,15 @@ const additionalTocItems = [
 // Reusable CTA Banner Component
 const WarrantyCTABanner = () => (
   <section className="max-w-3xl mx-auto py-6 px-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-border/50">
-    <div className="flex items-center gap-4">
-      {/* Logo on the left */}
+    <div className="flex items-center gap-4" style={{ direction: 'ltr' }}>
+      {/* Logo on the true left */}
       <img
         src="/images/nintendo-switch-2-logo.png"
         alt="Nintendo Switch 2"
         style={{ width: '80px', height: '80px', objectFit: 'contain', flexShrink: 0 }}
       />
-      {/* Text + button on the right */}
-      <div className="flex flex-col flex-1 text-right gap-3">
+      {/* Text + button */}
+      <div className="flex flex-col flex-1 gap-3" style={{ direction: 'rtl' }}>
         <div>
           <h2 className="text-2xl font-bold mb-1">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
           <p className="text-muted-foreground text-base">הפעילו את האחריות שלכם עכשיו</p>
@@ -186,12 +186,6 @@ const NintendoSwitch2Manual = () => {
 
         {/* Header */}
         <header className="max-w-4xl mx-auto text-center mb-4">
-          <img
-            src="/images/nintendo-switch-2-logo.png"
-            alt="Nintendo Switch 2"
-            className="mx-auto mb-3"
-            style={{ height: '80px', width: 'auto' }}
-          />
           <p className="text-xl text-muted-foreground">מדריך התקנה (שלב אחר שלב)</p>
         </header>
 
