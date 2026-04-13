@@ -134,17 +134,26 @@ const additionalTocItems = [
 // Reusable CTA Banner Component
 const WarrantyCTABanner = () => (
   <section className="max-w-3xl mx-auto py-6 px-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-border/50">
-    <div className="flex flex-col items-center gap-4 text-center">
-      <div>
-        <h2 className="text-2xl font-bold mb-2">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
-        <p className="text-muted-foreground text-base">הפעילו את האחריות שלכם עכשיו</p>
+    <div className="flex items-center gap-4">
+      {/* Logo on the left */}
+      <img
+        src="/images/nintendo-switch-2-logo.png"
+        alt="Nintendo Switch 2"
+        style={{ width: '80px', height: '80px', objectFit: 'contain', flexShrink: 0 }}
+      />
+      {/* Text + button on the right */}
+      <div className="flex flex-col flex-1 text-right gap-3">
+        <div>
+          <h2 className="text-2xl font-bold mb-1">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
+          <p className="text-muted-foreground text-base">הפעילו את האחריות שלכם עכשיו</p>
+        </div>
+        <Link to="/הוראותאחריות">
+          <Button className="btn-hero w-full px-8 py-4 text-lg font-bold">
+            <ArrowRight className="h-5 w-5 rotate-180" />
+            <span>רישום אחריות</span>
+          </Button>
+        </Link>
       </div>
-      <Link to="/הוראותאחריות" className="w-full sm:w-auto">
-        <Button className="btn-hero w-full sm:w-auto px-8 py-4 text-lg font-bold">
-          <ArrowRight className="h-5 w-5 rotate-180" />
-          <span>רישום אחריות</span>
-        </Button>
-      </Link>
     </div>
   </section>
 );
