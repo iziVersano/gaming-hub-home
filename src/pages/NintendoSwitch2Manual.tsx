@@ -133,16 +133,23 @@ const additionalTocItems = [
 
 // Reusable CTA Banner Component
 const WarrantyCTABanner = () => (
-  <section className="max-w-3xl mx-auto py-6 px-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-border/50">
-    <div className="flex items-center gap-4" style={{ direction: 'ltr' }}>
-      {/* Logo on the true left */}
-      <img
-        src="/images/nintendo-switch-2-logo.png"
-        alt="Nintendo Switch 2"
-        style={{ width: '80px', height: '80px', objectFit: 'contain', flexShrink: 0 }}
-      />
+  <section className="max-w-3xl mx-auto rounded-xl border border-border/50 overflow-hidden">
+    <div className="flex items-stretch" style={{ direction: 'ltr', minHeight: '140px' }}>
+      {/* Logo — fills left, blends red into dark */}
+      <div className="relative flex-shrink-0" style={{ width: '130px' }}>
+        <img
+          src="/images/nintendo-switch-2-logo.png"
+          alt="Nintendo Switch 2"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
+        {/* Gradient fade from right edge into dark */}
+        <div style={{
+          position: 'absolute', top: 0, right: 0, width: '60px', height: '100%',
+          background: 'linear-gradient(to right, transparent, #0f1730)'
+        }} />
+      </div>
       {/* Text + button */}
-      <div className="flex flex-col flex-1 gap-3" style={{ direction: 'rtl' }}>
+      <div className="flex flex-col justify-center flex-1 gap-3 px-4 py-5 bg-gradient-to-r from-[#0f1730] to-primary/10" style={{ direction: 'rtl' }}>
         <div>
           <h2 className="text-2xl font-bold mb-1">רכשתם <span dir="ltr">Nintendo Switch 2</span>?</h2>
           <p className="text-muted-foreground text-base">הפעילו את האחריות שלכם עכשיו</p>
