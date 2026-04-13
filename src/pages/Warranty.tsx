@@ -476,7 +476,8 @@ const Warranty = () => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="btn-hero w-full"
+                className="w-full font-bold text-lg py-6 rounded-xl text-white transition-all duration-300 hover:opacity-90"
+                style={{ background: 'linear-gradient(135deg, #dc2626, #ef4444)', boxShadow: '0 0 24px rgba(220,38,38,0.5)' }}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
