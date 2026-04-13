@@ -176,7 +176,7 @@ const NintendoSwitch2Manual = () => {
         )}
 
         {/* Header */}
-        <header className="max-w-4xl mx-auto text-center mb-6">
+        <header className="max-w-4xl mx-auto text-center mb-4">
           <img
             src="/images/nintendo-switch-2-logo.png"
             alt="Nintendo Switch 2"
@@ -185,6 +185,16 @@ const NintendoSwitch2Manual = () => {
           />
           <p className="text-xl text-muted-foreground">מדריך התקנה (שלב אחר שלב)</p>
         </header>
+
+        {/* Mobile hero banner */}
+        <div className="md:hidden w-full rounded-2xl overflow-hidden mb-6 relative" style={{ height: '200px' }}>
+          <img
+            src="/images/nintendo-switch-2-banner-2.jpg"
+            alt="Nintendo Switch 2"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
 
         {/* Table of Contents */}
         <nav className="max-w-3xl mx-auto mb-12 p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border">
