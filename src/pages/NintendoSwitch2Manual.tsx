@@ -178,7 +178,7 @@ const NintendoSwitch2Manual = () => {
         {/* Header */}
         <header className="max-w-4xl mx-auto text-center mb-6">
           <img
-            src="/images/nintendo-switch-2-logo.svg"
+            src="/images/nintendo-switch-2-logo.png"
             alt="Nintendo Switch 2"
             className="mx-auto mb-3"
             style={{ height: '80px', width: 'auto' }}

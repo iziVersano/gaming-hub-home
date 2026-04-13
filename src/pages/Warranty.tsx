@@ -239,7 +239,7 @@ const Warranty = () => {
             <span className="gradient-text">{t('warranty.title')}</span>
           </h1>
           <img
-            src="/images/nintendo-switch-2-logo.svg"
+            src="/images/nintendo-switch-2-logo.png"
             alt="Nintendo Switch 2"
             className="mx-auto mt-2 mb-3"
             style={{ height: '100px', width: 'auto' }}
