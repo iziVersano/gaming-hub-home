@@ -8,10 +8,7 @@ import { Loader2, Upload, CheckCircle, Info } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { translations } from '@/i18n';
-
-// Use Azure backend API
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const WARRANTY_ENDPOINT = `${API_BASE_URL}/warranty`;
+import { supabase } from '@/integrations/supabase/client';
 
 // Field error type
 interface FieldErrors {
@@ -170,46 +167,45 @@ const Warranty = () => {
     setIsSubmitting(true);
 
     try {
-      const submitData = new FormData();
-      submitData.append('customerName', formData.fullName);
-      submitData.append('email', formData.email);
-      submitData.append('product', formData.productModel);
-      submitData.append('serialNumber', formData.serialNumber);
-      submitData.append('invoice', file!);
+      // 1. Upload invoice file to Supabase Storage
+      let invoiceUrl = null;
+      if (file) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('warranty-invoices')
+          .upload(fileName, file);
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000);
+        if (uploadError) throw new Error('שגיאה בהעלאת הקובץ');
+        invoiceUrl = uploadData.path;
+      }
 
-      let res: Response;
-      try {
-        res = await fetch(WARRANTY_ENDPOINT, {
-          method: "POST",
-          body: submitData,
-          signal: controller.signal,
+      // 2. Save registration to Supabase table
+      const { error: insertError } = await supabase
+        .from('warranty_registrations' as any)
+        .insert({
+          customer_name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          product_model: formData.productModel,
+          serial_number: formData.serialNumber,
+          purchase_date: formData.purchaseDate,
+          store_name: formData.storeName,
+          invoice_url: invoiceUrl,
+          status: 'pending'
         });
-      } finally {
-        clearTimeout(timeoutId);
-      }
 
-      const data = await res.json();
+      if (insertError) throw new Error(insertError.message);
 
-      if (res.ok && data.success) {
-        // Show success message and redirect to home after 3 seconds
-        setIsSuccess(true);
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
-        return;
-      } else {
-        throw new Error(data.message || "Submission failed");
-      }
+      setIsSuccess(true);
+      setTimeout(() => navigate('/'), 3000);
+
     } catch (error) {
       console.error('Warranty submission error:', error);
-      const isTimeout = error instanceof Error && error.name === 'AbortError';
       toast({
         variant: "destructive",
-        title: isTimeout ? "השרת לא הגיב בזמן" : "אירעה שגיאה בשליחת הטופס",
-        description: isTimeout ? "השרת עמוס כרגע, אנא נסו שנית בעוד מספר דקות" : "אנא נסו שנית",
+        title: "אירעה שגיאה בשליחת הטופס",
+        description: error instanceof Error ? error.message : "אנא נסו שנית",
       });
     } finally {
       setIsSubmitting(false);
