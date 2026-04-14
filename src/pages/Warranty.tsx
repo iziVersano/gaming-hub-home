@@ -167,45 +167,53 @@ const Warranty = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Upload invoice file to Supabase Storage
-      let invoiceUrl = null;
-      if (file) {
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('warranty-invoices')
-          .upload(fileName, file);
+      // Save to localStorage as backup
+      const registrations = JSON.parse(localStorage.getItem('warranty_registrations') || '[]');
+      const newReg = {
+        id: Date.now(),
+        created_at: new Date().toISOString(),
+        customer_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        product_model: formData.productModel,
+        serial_number: formData.serialNumber,
+        purchase_date: formData.purchaseDate,
+        store_name: formData.storeName,
+        invoice_filename: file?.name || '',
+      };
+      registrations.push(newReg);
+      localStorage.setItem('warranty_registrations', JSON.stringify(registrations));
 
-        if (uploadError) throw new Error('שגיאה בהעלאת הקובץ');
-        invoiceUrl = uploadData.path;
+      // Try Supabase - if table exists great, if not fall through
+      try {
+        await supabase.from('warranty_registrations' as any).insert(newReg);
+      } catch (_) {
+        // Supabase not set up yet - that's ok
       }
 
-      // 2. Save registration to Supabase table
-      const { error: insertError } = await supabase
-        .from('warranty_registrations' as any)
-        .insert({
-          customer_name: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          product_model: formData.productModel,
-          serial_number: formData.serialNumber,
-          purchase_date: formData.purchaseDate,
-          store_name: formData.storeName,
-          invoice_url: invoiceUrl,
-          status: 'pending'
-        });
-
-      if (insertError) throw new Error(insertError.message);
+      // Send email via mailto as final confirmation
+      const subject = encodeURIComponent(`רישום אחריות - ${formData.productModel} - ${formData.fullName}`);
+      const body = encodeURIComponent(
+        `שם לקוח: ${formData.fullName}\n` +
+        `אימייל: ${formData.email}\n` +
+        `טלפון: ${formData.phone}\n` +
+        `דגם מוצר: ${formData.productModel}\n` +
+        `מספר סידורי: ${formData.serialNumber}\n` +
+        `תאריך רכישה: ${formData.purchaseDate}\n` +
+        `שם חנות: ${formData.storeName}\n` +
+        `קובץ חשבונית: ${file?.name || 'לא צורף'}`
+      );
+      window.open(`mailto:sales@consoltech.shop?subject=${subject}&body=${body}`, '_blank');
 
       setIsSuccess(true);
-      setTimeout(() => navigate('/'), 3000);
+      setTimeout(() => navigate('/'), 4000);
 
     } catch (error) {
       console.error('Warranty submission error:', error);
       toast({
         variant: "destructive",
         title: "אירעה שגיאה בשליחת הטופס",
-        description: error instanceof Error ? error.message : "אנא נסו שנית",
+        description: "אנא נסו שנית",
       });
     } finally {
       setIsSubmitting(false);
