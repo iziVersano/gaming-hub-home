@@ -165,7 +165,7 @@ const Contact = () => {
           <h1 className="text-3xl md:text-5xl text-section-heading">{t('contact.title')}</h1>
         </header>
         {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-6">
+        <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
           {/* Honeypot field */}
           <input type="text" name="_gotcha" style={{display:'none'}} tabIndex={-1} autoComplete="off" aria-hidden="true" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -254,8 +254,8 @@ const Contact = () => {
         </form>
 
         {/* Contact Information */}
-        <div className="mt-8">
-          <h2 className="text-2xl text-sub-bold mb-6">{t('contact.info.title')}</h2>
+        <div className="mt-4">
+          <h2 className="text-2xl text-sub-bold mb-3">{t('contact.info.title')}</h2>
           <div className="grid grid-cols-1 gap-6">
             {contactInfo.map((info, index) => (
               <div key={index} className="product-card p-6">
@@ -330,10 +330,10 @@ const Contact = () => {
         </div>
 
         {/* Global Offices */}
-        <section className="pt-8 pb-8 md:pt-12 md:pb-10 bg-card/30">
+        <section className="pt-4 pb-4 md:pt-8 md:pb-6 bg-card/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 md:mb-6">
-              <h2 className="text-3xl md:text-4xl text-section-heading mb-6">
+            <div className="text-center mb-4">
+              <h2 className="text-3xl md:text-4xl text-section-heading mb-3">
                 {t('contact.offices.title')}
               </h2>
               <p className="text-xl text-muted-foreground text-desc-bold">
@@ -373,15 +373,15 @@ const Contact = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="pt-6 md:pt-8 pb-16">
+        <section className="pt-4 md:pt-6 pb-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl text-section-heading mb-6">
+            <div className="text-center mb-3">
+              <h2 className="text-3xl md:text-4xl text-section-heading mb-3">
                 {t('contact.faq.title')}
               </h2>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[
                 {
                   question: t('contact.faq.items.0.question'),
