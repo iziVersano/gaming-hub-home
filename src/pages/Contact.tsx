@@ -373,7 +373,7 @@ const Contact = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="pt-4 md:pt-6 pb-4">
+        <section className="pt-4 md:pt-6 pb-0">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-3">
               <h2 className="text-3xl md:text-4xl text-section-heading mb-3">
