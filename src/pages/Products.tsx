@@ -123,11 +123,11 @@ const Products = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Navigation />
-        <main className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
-          <header className="max-w-4xl mx-auto text-center mb-10">
+        <main className="container px-4 md:px-6 pt-20 md:pt-24 pb-16 flex-1">
+          <header className="max-w-4xl mx-auto text-center mb-5">
             <div className="shimmer h-10 w-72 mx-auto rounded-lg" />
           </header>
-          <div className="max-w-3xl mx-auto mb-12 shimmer h-14 rounded-xl" />
+          <div className="max-w-3xl mx-auto mb-6 shimmer h-14 rounded-xl" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {Array.from({ length: 8 }).map((_, i) => (
@@ -155,13 +155,13 @@ const Products = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <main className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
-        <header className="max-w-4xl mx-auto text-center mb-10">
+      <main className="container px-4 md:px-6 pt-20 md:pt-24 pb-16 flex-1">
+        <header className="max-w-4xl mx-auto text-center mb-5">
           <h1 className="text-4xl md:text-5xl text-section-heading">{t('products.title')}</h1>
         </header>
 
         {/* GoDaddy-style Search Bar with Filter Dropdown */}
-        <div className="max-w-3xl mx-auto mb-12">
+        <div className="max-w-3xl mx-auto mb-6">
           <div className="flex items-center bg-card rounded-xl border border-border shadow-lg overflow-visible relative">
             {/* Filter Dropdown */}
             <div ref={filterRef} className="relative shrink-0">

@@ -37,8 +37,8 @@ const About = () => {
           })}
         </script>
       </Helmet>
-      <main id="main-content" className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
-        <header className="max-w-4xl mx-auto text-center mb-10">
+      <main id="main-content" className="container px-4 md:px-6 pt-20 md:pt-24 pb-16 flex-1">
+        <header className="max-w-4xl mx-auto text-center mb-5">
           <h1 className="text-3xl md:text-5xl text-section-heading">{t('about.title')}</h1>
         </header>
         <section className="max-w-3xl mx-auto space-y-3 text-base leading-6 text-muted-foreground">
@@ -84,7 +84,7 @@ const About = () => {
             <p>{t('about.cooperation')}</p>
           </div>
         </section>
-        <section className="max-w-4xl mx-auto mt-12" aria-labelledby="connect-heading">
+        <section className="max-w-4xl mx-auto mt-6" aria-labelledby="connect-heading">
           <h2 id="connect-heading" className="text-2xl md:text-3xl text-sub-bold mb-4">
             {t('about.connect')}
           </h2>

@@ -76,7 +76,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <main className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
+      <main className="container px-4 md:px-6 pt-20 md:pt-24 pb-16 flex-1">
         {/* Breadcrumb */}
         <nav className="max-w-6xl mx-auto mb-8" aria-label="Breadcrumb">
           <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">

@@ -136,7 +136,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-8 md:py-20 bg-gradient-to-r from-primary/10 to-accent/10">
+      <section className="py-4 md:py-12 bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl text-section-heading mb-6">
             {t('index.cta.title')}
@@ -298,9 +298,9 @@ const Index = () => {
       </section>
 
       {/* Category Showcase Section */}
-      <section className="py-10 md:py-20">
+      <section className="py-5 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-4 md:mb-8">
             <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
               {t('index.categories.title')}
             </h2>
@@ -343,7 +343,7 @@ const Index = () => {
       </section>
 
       {/* How to Partner Section */}
-      <section className="py-10 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800/50">
+      <section className="py-5 md:py-12 bg-gradient-to-b from-slate-900 to-slate-800/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-14">
             <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
@@ -388,7 +388,7 @@ const Index = () => {
       </section>
 
       {/* Global Stats Section */}
-      <section className="py-10 md:py-20">
+      <section className="py-5 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-14">
             <h2 className="text-4xl md:text-5xl text-section-heading mb-4">

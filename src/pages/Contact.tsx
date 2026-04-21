@@ -160,8 +160,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <main className="container px-4 md:px-6 pt-40 md:pt-24 pb-16 flex-1">
-        <header className="max-w-4xl mx-auto text-center mb-10">
+      <main className="container px-4 md:px-6 pt-20 md:pt-24 pb-16 flex-1">
+        <header className="max-w-4xl mx-auto text-center mb-5">
           <h1 className="text-3xl md:text-5xl text-section-heading">{t('contact.title')}</h1>
         </header>
         {/* Contact Form */}
@@ -254,7 +254,7 @@ const Contact = () => {
         </form>
 
         {/* Contact Information */}
-        <div className="mt-16">
+        <div className="mt-8">
           <h2 className="text-2xl text-sub-bold mb-6">{t('contact.info.title')}</h2>
           <div className="grid grid-cols-1 gap-6">
             {contactInfo.map((info, index) => (
@@ -332,7 +332,7 @@ const Contact = () => {
         {/* Global Offices */}
         <section className="pt-8 pb-8 md:pt-12 md:pb-10 bg-card/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 md:mb-12">
+            <div className="text-center mb-8 md:mb-6">
               <h2 className="text-3xl md:text-4xl text-section-heading mb-6">
                 {t('contact.offices.title')}
               </h2>
@@ -375,7 +375,7 @@ const Contact = () => {
         {/* FAQ Section */}
         <section className="pt-6 md:pt-8 pb-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6">
               <h2 className="text-3xl md:text-4xl text-section-heading mb-6">
                 {t('contact.faq.title')}
               </h2>
