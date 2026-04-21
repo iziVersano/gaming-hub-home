@@ -160,7 +160,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <main className="container px-4 md:px-6 pt-20 md:pt-24 pb-16 flex-1">
+      <main className="container px-4 md:px-6 pt-20 md:pt-24 pb-4 flex-1">
         <header className="max-w-4xl mx-auto text-center mb-5">
           <h1 className="text-3xl md:text-5xl text-section-heading">{t('contact.title')}</h1>
         </header>
@@ -373,7 +373,7 @@ const Contact = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="pt-4 md:pt-6 pb-8">
+        <section className="pt-4 md:pt-6 pb-4">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-3">
               <h2 className="text-3xl md:text-4xl text-section-heading mb-3">
