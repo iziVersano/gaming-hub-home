@@ -26,10 +26,10 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-foreground">{t('footer.contact')}</h3>
             <div className="space-y-2 text-muted-foreground">
               <a
-                href="mailto:sales@consoltech.shop"
+                href="mailto:sales@consoltech.co.il"
                 className="block hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-card rounded"
               >
-                <span className="text-accent font-semibold">{t('footer.email')}</span> sales@consoltech.shop
+                <span className="text-accent font-semibold">{t('footer.email')}</span> sales@consoltech.co.il
               </a>
               <a
                 href="tel:+972522768607"

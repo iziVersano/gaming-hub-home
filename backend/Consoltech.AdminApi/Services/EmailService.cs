@@ -218,7 +218,7 @@ namespace Consoltech.AdminApi.Services
                 Consoltech Ltd. | Tel Aviv, Israel
             </p>
             <p style='color: #888; margin: 10px 0 0 0; font-size: 12px;'>
-                <a href='mailto:warranty@consoltech.co.il' style='color: #c40000;'>warranty@consoltech.co.il</a>
+                <a href='mailto:sales@consoltech.co.il' style='color: #c40000;'>sales@consoltech.co.il</a>
             </p>
         </div>
     </div>

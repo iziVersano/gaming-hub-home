@@ -509,8 +509,8 @@ const NintendoSwitch2Manual = () => {
             <div className="flex flex-col items-center gap-4">
               <div className="p-4 rounded-lg bg-card/50 border border-border/50 w-full max-w-md text-center">
                 <p className="text-sm text-muted-foreground mb-1">שירות לקוחות</p>
-                <a href="mailto:sales@consoltech.shop" className="font-medium text-accent hover:underline text-lg">
-                  sales@consoltech.shop
+                <a href="mailto:sales@consoltech.co.il" className="font-medium text-accent hover:underline text-lg">
+                  sales@consoltech.co.il
                 </a>
               </div>
             </div>

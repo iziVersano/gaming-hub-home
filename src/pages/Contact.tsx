@@ -116,7 +116,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: t('contact.info.emailUs'),
-      details: ['info@consoltech.shop', 'sales@consoltech.shop'],
+      details: ['info@consoltech.co.il', 'sales@consoltech.co.il'],
       description: t('contact.info.emailDescription')
     },
     {

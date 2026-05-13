@@ -111,11 +111,11 @@ const Accessibility = () => {
                     נגישות או שיש לכם הצעות לשיפור, אנא צרו איתנו קשר:
                   </p>
                   <a
-                    href="mailto:sales@consoltech.shop"
+                    href="mailto:sales@consoltech.co.il"
                     className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded px-1"
                   >
                     <Mail className="h-5 w-5" aria-hidden="true" />
-                    sales@consoltech.shop
+                    sales@consoltech.co.il
                   </a>
                   <p className="text-muted-foreground mt-4 text-sm">
                     אנו שואפים להשיב למשוב בנושא נגישות תוך 5 ימי עסקים.
