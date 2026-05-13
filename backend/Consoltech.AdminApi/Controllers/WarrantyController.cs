@@ -16,11 +16,13 @@ namespace Consoltech.AdminApi.Controllers
     {
         private readonly ProductsDbContext _dbContext;
         private readonly LocalStorageService _localStorageService;
+        private readonly EmailService _emailService;
 
-        public WarrantyController(ProductsDbContext dbContext, LocalStorageService localStorageService)
+        public WarrantyController(ProductsDbContext dbContext, LocalStorageService localStorageService, EmailService emailService)
         {
             _dbContext = dbContext;
             _localStorageService = localStorageService;
+            _emailService = emailService;
         }
 
         [HttpPost]
@@ -36,12 +38,20 @@ namespace Consoltech.AdminApi.Controllers
             {
                 string? invoiceUrl = null;
                 string? invoiceFileName = null;
+                byte[]? invoiceBytes = null;
 
                 if (invoice != null)
                 {
                     invoiceFileName = invoice.FileName;
-                    using var stream = invoice.OpenReadStream();
-                    invoiceUrl = await _localStorageService.SaveInvoiceAsync(stream, invoice.FileName);
+                    using (var ms = new MemoryStream())
+                    {
+                        await invoice.CopyToAsync(ms);
+                        invoiceBytes = ms.ToArray();
+                    }
+                    using (var saveStream = new MemoryStream(invoiceBytes))
+                    {
+                        invoiceUrl = await _localStorageService.SaveInvoiceAsync(saveStream, invoice.FileName);
+                    }
                 }
 
                 var entity = new WarrantySubmissionEntity
@@ -56,6 +66,23 @@ namespace Consoltech.AdminApi.Controllers
 
                 _dbContext.WarrantySubmissions.Add(entity);
                 await _dbContext.SaveChangesAsync();
+
+                // Forward submission to sales (non-blocking failure — submission already saved)
+                try
+                {
+                    using var emailStream = invoiceBytes != null ? new MemoryStream(invoiceBytes) : null;
+                    await _emailService.SendWarrantyToSalesAsync(
+                        customerName,
+                        email,
+                        product,
+                        serialNumber,
+                        emailStream,
+                        invoiceFileName);
+                }
+                catch (Exception emailEx)
+                {
+                    Console.WriteLine($"Warranty saved but email to sales failed: {emailEx.Message}");
+                }
 
                 return Ok(new { success = true, message = "Warranty registration submitted successfully" });
             }

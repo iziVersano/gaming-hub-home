@@ -42,6 +42,9 @@ else
 // Register Local Storage service (for warranty uploads)
 builder.Services.AddSingleton<LocalStorageService>();
 
+// Register Email service (forwards warranty submissions to sales)
+builder.Services.AddSingleton<EmailService>();
+
 // Configure JWT Authentication
 var jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY")
     ?? builder.Configuration["JwtSettings:SecretKey"]

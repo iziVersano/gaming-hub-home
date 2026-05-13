@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -15,21 +16,107 @@ namespace Consoltech.AdminApi.Services
         private readonly string? _smtpPassword;
         private readonly string? _fromEmail;
         private readonly string? _fromName;
+        private readonly string _salesEmail;
         private readonly bool _isConfigured;
 
         public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _smtpHost = configuration["Email:SmtpHost"];
-            _smtpPort = int.TryParse(configuration["Email:SmtpPort"], out var port) ? port : 587;
-            _smtpUser = configuration["Email:SmtpUser"];
-            _smtpPassword = configuration["Email:SmtpPassword"];
-            _fromEmail = configuration["Email:FromEmail"] ?? "noreply@consoltech.co.il";
-            _fromName = configuration["Email:FromName"] ?? "Consoltech";
+            _smtpHost = configuration["Email:SmtpHost"] ?? Environment.GetEnvironmentVariable("SMTP_HOST");
+            _smtpPort = int.TryParse(configuration["Email:SmtpPort"] ?? Environment.GetEnvironmentVariable("SMTP_PORT"), out var port) ? port : 587;
+            _smtpUser = configuration["Email:SmtpUser"] ?? Environment.GetEnvironmentVariable("SMTP_USER");
+            _smtpPassword = configuration["Email:SmtpPassword"] ?? Environment.GetEnvironmentVariable("SMTP_PASSWORD");
+            _fromEmail = configuration["Email:FromEmail"] ?? Environment.GetEnvironmentVariable("SMTP_FROM_EMAIL") ?? "noreply@consoltech.co.il";
+            _fromName = configuration["Email:FromName"] ?? Environment.GetEnvironmentVariable("SMTP_FROM_NAME") ?? "Consoltech";
+            _salesEmail = configuration["Email:SalesEmail"] ?? Environment.GetEnvironmentVariable("SALES_EMAIL") ?? "sales@consoltech.co.il";
 
             _isConfigured = !string.IsNullOrEmpty(_smtpHost) &&
                            !string.IsNullOrEmpty(_smtpUser) &&
                            !string.IsNullOrEmpty(_smtpPassword);
+        }
+
+        public async Task<bool> SendWarrantyToSalesAsync(
+            string customerName,
+            string customerEmail,
+            string product,
+            string serialNumber,
+            Stream? invoiceStream,
+            string? invoiceFileName)
+        {
+            if (!_isConfigured)
+            {
+                Console.WriteLine("Email service not configured. Skipping sales notification.");
+                return false;
+            }
+
+            try
+            {
+                using var client = new SmtpClient(_smtpHost, _smtpPort)
+                {
+                    Credentials = new NetworkCredential(_smtpUser, _smtpPassword),
+                    EnableSsl = true
+                };
+
+                using var mailMessage = new MailMessage
+                {
+                    From = new MailAddress(_fromEmail!, _fromName),
+                    Subject = $"רישום אחריות חדש - {product} ({serialNumber})",
+                    IsBodyHtml = true,
+                    Body = GenerateSalesEmailBody(customerName, customerEmail, product, serialNumber, invoiceFileName)
+                };
+
+                mailMessage.To.Add(_salesEmail);
+                mailMessage.ReplyToList.Add(new MailAddress(customerEmail));
+
+                if (invoiceStream != null && !string.IsNullOrEmpty(invoiceFileName))
+                {
+                    var attachment = new Attachment(invoiceStream, invoiceFileName);
+                    mailMessage.Attachments.Add(attachment);
+                    await client.SendMailAsync(mailMessage);
+                    attachment.Dispose();
+                }
+                else
+                {
+                    await client.SendMailAsync(mailMessage);
+                }
+
+                Console.WriteLine($"Warranty submission forwarded to sales: {_salesEmail}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to send sales email: {ex.Message}");
+                return false;
+            }
+        }
+
+        private string GenerateSalesEmailBody(string customerName, string customerEmail, string product, string serialNumber, string? invoiceFileName)
+        {
+            var invoiceLine = string.IsNullOrEmpty(invoiceFileName)
+                ? "<tr><td style='padding: 8px 0; color: #777;'>חשבונית:</td><td style='padding: 8px 0; color: #333;'>לא צורפה</td></tr>"
+                : $"<tr><td style='padding: 8px 0; color: #777;'>חשבונית:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>{invoiceFileName} (מצורף)</td></tr>";
+
+            return $@"
+<!DOCTYPE html>
+<html dir='rtl' lang='he'>
+<head><meta charset='UTF-8'></head>
+<body style='font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: #f5f5f5; margin: 0; padding: 20px;'>
+    <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden;'>
+        <div style='background: linear-gradient(135deg, #c40000, #a80000); padding: 24px; text-align: center;'>
+            <h1 style='color: #ffffff; margin: 0; font-size: 22px;'>רישום אחריות חדש</h1>
+        </div>
+        <div style='padding: 24px;'>
+            <table style='width: 100%; border-collapse: collapse;'>
+                <tr><td style='padding: 8px 0; color: #777;'>שם הלקוח:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>{customerName}</td></tr>
+                <tr><td style='padding: 8px 0; color: #777;'>אימייל:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'><a href='mailto:{customerEmail}'>{customerEmail}</a></td></tr>
+                <tr><td style='padding: 8px 0; color: #777;'>מוצר:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>{product}</td></tr>
+                <tr><td style='padding: 8px 0; color: #777;'>מספר סידורי:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>{serialNumber}</td></tr>
+                {invoiceLine}
+            </table>
+        </div>
+    </div>
+</body>
+</html>";
         }
 
         public async Task<bool> SendWarrantyConfirmationAsync(
