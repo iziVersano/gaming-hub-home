@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://consoltech-api.vercel.app/api/$1" }
+    { "source": "/api/(.*)", "destination": "https://api-olive-delta-84.vercel.app/api/$1" }
   ],
   "routes": [
     { "src": "/((?!assets/|images/|.*\\..*).*)", "dest": "/index.html" }
