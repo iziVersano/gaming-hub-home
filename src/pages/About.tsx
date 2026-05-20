@@ -23,7 +23,7 @@ const About = () => {
             url: canonicalUrl.replace('/about', ''),
             description:
               "Global import, export, and distribution of consumer electronics and gaming since 2001.",
-            email: "sales@gamestation.co.il",
+            email: "sales@consoltech.co.il",
             telephone: "+972-52-2768607",
             address: {
               "@type": "PostalAddress",
@@ -102,7 +102,7 @@ const About = () => {
                   <span className="font-medium">{t('about.mobile')}</span> <a href="tel:+972522768607" className="text-primary hover:underline font-medium">+972-52-2768607</a>
                 </li>
                 <li>
-                  <span className="font-medium">{t('about.email')}</span> <a href="mailto:sales@gamestation.co.il" className="text-primary hover:underline font-medium">sales@gamestation.co.il</a>
+                  <span className="font-medium">{t('about.email')}</span> <a href="mailto:sales@consoltech.co.il" className="text-primary hover:underline font-medium">sales@consoltech.co.il</a>
                 </li>
 
               </ul>

@@ -51,7 +51,7 @@ const Index = () => {
             name: "Consoltech",
             url: canonicalUrl,
             description: "Global import, export, and distribution of consumer electronics and gaming since 2001.",
-            email: "sales@gamestation.co.il",
+            email: "sales@consoltech.co.il",
             telephone: "+972-52-2768607",
             address: {
               "@type": "PostalAddress",
@@ -287,7 +287,7 @@ const Index = () => {
                     <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
                       <li><strong>{t('index.moreAbout.contact.addressLabel')}</strong> 47 Moshe Sneh St., Tel Aviv 6930243, Israel</li>
                       <li><strong>{t('index.moreAbout.contact.mobileLabel')}</strong> +972-52-2768607</li>
-                      <li><strong>{t('index.moreAbout.contact.emailLabel')}</strong> sales@gamestation.co.il</li>
+                      <li><strong>{t('index.moreAbout.contact.emailLabel')}</strong> sales@consoltech.co.il</li>
                     </ul>
                   </div>
                 </div>

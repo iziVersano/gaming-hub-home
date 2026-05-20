@@ -151,7 +151,7 @@ const Contact = () => {
       country: 'Israel',
       address: '47 Moshe Sneh St., Tel Aviv 6930243',
       phone: '+972-52-2768607',
-      email: 'sales@gamestation.co.il'
+      email: 'sales@consoltech.co.il'
     }
   ];
 
