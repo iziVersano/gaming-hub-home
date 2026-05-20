@@ -1,18 +1,9 @@
 {
   "buildCommand": "npm ci && npm run build",
-  "framework": "nest",
+  "framework": "nestjs",
   "outputDirectory": "dist",
   "env": {
-    "NODE_ENV": "production",
-    "PORT": "3000"
+    "NODE_ENV": "production"
   },
-  "public": false,
-  "regions": ["fra1"],
-  "functions": {
-    "dist/main.js": {
-      "memory": 1024,
-      "maxDuration": 300,
-      "runtime": "nodejs20.x"
-    }
-  }
+  "regions": ["fra1"]
 }
