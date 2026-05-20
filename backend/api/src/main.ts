@@ -1,0 +1,28 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import express from 'express';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  app.use(express.json({ limit: '10mb' }));
+  app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
+  app.enableCors({
+    origin: [
+      'https://www.consoltech.co.il',
+      'https://consoltech.co.il',
+      'https://consoltech.shop',
+      'https://www.consoltech.shop',
+      'http://localhost:5173',
+      'http://localhost:8080',
+    ],
+    credentials: true,
+  });
+
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log(`✓ API listening on port ${port}`);
+}
+
+bootstrap();
