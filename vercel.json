@@ -1,6 +1,8 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "http://localhost:3000/api/$1" },
-    { "source": "/((?!assets/|images/|.*\\..*).*)", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "https://consoltech-api.vercel.app/api/$1" }
+  ],
+  "routes": [
+    { "src": "/((?!assets/|images/|.*\\..*).*)", "dest": "/index.html" }
   ]
 }
