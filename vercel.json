@@ -1,11 +1,6 @@
 {
   "buildCommand": "npm run build",
   "rewrites": [
-    { "source": "/api/products", "destination": "/api/src/products" },
-    { "source": "/api/products/:id", "destination": "/api/src/products?id=:id" },
-    { "source": "/api/auth/login", "destination": "/api/src/auth" },
-    { "source": "/api/warranty", "destination": "/api/src/warranty" },
-    { "source": "/api/warranty/:id", "destination": "/api/src/warranty?id=:id" },
     { "source": "/((?!api|assets|images|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
