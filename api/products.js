@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GET = GET;
-exports.POST = POST;
-exports.PUT = PUT;
-exports.DELETE = DELETE;
+exports.default = handler;
 const SEED_PRODUCTS = [
     {
         id: 'ns2',
@@ -197,67 +194,68 @@ async function getProducts() {
 async function saveProducts(products) {
     productsCache = products;
 }
-async function GET(req, res) {
+async function handler(req, res) {
     try {
         res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.setHeader('Content-Type', 'application/json');
+        if (req.method === 'OPTIONS') {
+            return res.status(200).end();
+        }
         const { id } = req.query;
-        if (id) {
+        if (req.method === 'GET') {
+            if (id) {
+                const products = await getProducts();
+                const product = products.find(p => p.id === id);
+                if (!product) {
+                    return res.status(404).json({ error: 'Product not found' });
+                }
+                return res.status(200).json(product);
+            }
             const products = await getProducts();
-            const product = products.find(p => p.id === id);
-            if (!product) {
+            return res.status(200).json(products);
+        }
+        if (req.method === 'POST') {
+            const products = await getProducts();
+            const newProduct = {
+                id: `prod_${Date.now()}`,
+                ...req.body,
+            };
+            products.push(newProduct);
+            await saveProducts(products);
+            return res.status(201).json(newProduct);
+        }
+        if (req.method === 'PUT') {
+            if (!id) {
+                return res.status(400).json({ error: 'Product ID is required' });
+            }
+            const products = await getProducts();
+            const index = products.findIndex(p => p.id === id);
+            if (index === -1) {
                 return res.status(404).json({ error: 'Product not found' });
             }
-            return res.status(200).json(product);
+            products[index] = { ...products[index], ...req.body, id: products[index].id };
+            await saveProducts(products);
+            return res.status(200).json(products[index]);
         }
-        const products = await getProducts();
-        return res.status(200).json(products);
+        if (req.method === 'DELETE') {
+            if (!id) {
+                return res.status(400).json({ error: 'Product ID is required' });
+            }
+            let products = await getProducts();
+            const initialLength = products.length;
+            products = products.filter(p => p.id !== id);
+            if (products.length === initialLength) {
+                return res.status(404).json({ error: 'Product not found' });
+            }
+            await saveProducts(products);
+            return res.status(200).json({ success: true });
+        }
+        res.status(405).json({ error: 'Method not allowed' });
     }
     catch (error) {
         console.error('GET /api/products error:', error);
         return res.status(500).json({ error: 'Internal server error' });
     }
-}
-async function POST(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-    // TODO: Add JWT auth verification here
-    const products = await getProducts();
-    const newProduct = {
-        id: `prod_${Date.now()}`,
-        ...req.body,
-    };
-    products.push(newProduct);
-    await saveProducts(products);
-    return res.status(201).json(newProduct);
-}
-async function PUT(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-    const { id } = req.query;
-    if (!id) {
-        return res.status(400).json({ error: 'Product ID is required' });
-    }
-    const products = await getProducts();
-    const index = products.findIndex(p => p.id === id);
-    if (index === -1) {
-        return res.status(404).json({ error: 'Product not found' });
-    }
-    products[index] = { ...products[index], ...req.body, id: products[index].id };
-    await saveProducts(products);
-    return res.status(200).json(products[index]);
-}
-async function DELETE(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-    const { id } = req.query;
-    if (!id) {
-        return res.status(400).json({ error: 'Product ID is required' });
-    }
-    let products = await getProducts();
-    const initialLength = products.length;
-    products = products.filter(p => p.id !== id);
-    if (products.length === initialLength) {
-        return res.status(404).json({ error: 'Product not found' });
-    }
-    await saveProducts(products);
-    return res.status(200).json({ success: true });
 }

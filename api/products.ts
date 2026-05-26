@@ -214,80 +214,81 @@ async function saveProducts(products: Product[]) {
   productsCache = products;
 }
 
-export async function GET(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Content-Type', 'application/json');
+
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
 
     const { id } = req.query;
 
-    if (id) {
-      const products = await getProducts();
-      const product = products.find(p => p.id === id);
-      if (!product) {
-        return res.status(404).json({ error: 'Product not found' });
+    if (req.method === 'GET') {
+      if (id) {
+        const products = await getProducts();
+        const product = products.find(p => p.id === id);
+        if (!product) {
+          return res.status(404).json({ error: 'Product not found' });
+        }
+        return res.status(200).json(product);
       }
-      return res.status(200).json(product);
+
+      const products = await getProducts();
+      return res.status(200).json(products);
     }
 
-    const products = await getProducts();
-    return res.status(200).json(products);
+    if (req.method === 'POST') {
+      const products = await getProducts();
+      const newProduct: Product = {
+        id: `prod_${Date.now()}`,
+        ...req.body,
+      };
+      products.push(newProduct);
+      await saveProducts(products);
+      return res.status(201).json(newProduct);
+    }
+
+    if (req.method === 'PUT') {
+      if (!id) {
+        return res.status(400).json({ error: 'Product ID is required' });
+      }
+
+      const products = await getProducts();
+      const index = products.findIndex(p => p.id === id);
+      if (index === -1) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+
+      products[index] = { ...products[index], ...req.body, id: products[index].id };
+      await saveProducts(products);
+      return res.status(200).json(products[index]);
+    }
+
+    if (req.method === 'DELETE') {
+      if (!id) {
+        return res.status(400).json({ error: 'Product ID is required' });
+      }
+
+      let products = await getProducts();
+      const initialLength = products.length;
+      products = products.filter(p => p.id !== id);
+
+      if (products.length === initialLength) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+
+      await saveProducts(products);
+      return res.status(200).json({ success: true });
+    }
+
+    res.status(405).json({ error: 'Method not allowed' });
   } catch (error) {
     console.error('GET /api/products error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 }
 
-export async function POST(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-
-  // TODO: Add JWT auth verification here
-  const products = await getProducts();
-  const newProduct: Product = {
-    id: `prod_${Date.now()}`,
-    ...req.body,
-  };
-  products.push(newProduct);
-  await saveProducts(products);
-  return res.status(201).json(newProduct);
-}
-
-export async function PUT(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-
-  const { id } = req.query;
-  if (!id) {
-    return res.status(400).json({ error: 'Product ID is required' });
-  }
-
-  const products = await getProducts();
-  const index = products.findIndex(p => p.id === id);
-  if (index === -1) {
-    return res.status(404).json({ error: 'Product not found' });
-  }
-
-  products[index] = { ...products[index], ...req.body, id: products[index].id };
-  await saveProducts(products);
-  return res.status(200).json(products[index]);
-}
-
-export async function DELETE(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-
-  const { id } = req.query;
-  if (!id) {
-    return res.status(400).json({ error: 'Product ID is required' });
-  }
-
-  let products = await getProducts();
-  const initialLength = products.length;
-  products = products.filter(p => p.id !== id);
-
-  if (products.length === initialLength) {
-    return res.status(404).json({ error: 'Product not found' });
-  }
-
-  await saveProducts(products);
-  return res.status(200).json({ success: true });
-}
