@@ -1,3 +1,8 @@
 {
-  "framework": "nextjs"
+  "framework": "vite",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/((?!api|assets|images|.*\\..*).*)", "destination": "/index.html" }
+  ]
 }
