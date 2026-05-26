@@ -1,7 +1,4 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { put, getDownloadUrl } from '@vercel/blob';
-
-const PRODUCTS_BLOB_NAME = 'products.json';
 
 interface ProductTranslation {
   locale: 'en' | 'he';
@@ -207,40 +204,39 @@ const SEED_PRODUCTS: Product[] = [
   },
 ];
 
+let productsCache: Product[] = SEED_PRODUCTS;
+
 async function getProducts(): Promise<Product[]> {
-  try {
-    const url = await getDownloadUrl(PRODUCTS_BLOB_NAME);
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Not found');
-    return (await response.json()) as Product[];
-  } catch {
-    await put(PRODUCTS_BLOB_NAME, JSON.stringify(SEED_PRODUCTS));
-    return SEED_PRODUCTS;
-  }
+  return productsCache;
 }
 
 async function saveProducts(products: Product[]) {
-  await put(PRODUCTS_BLOB_NAME, JSON.stringify(products));
+  productsCache = products;
 }
 
 export async function GET(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  try {
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.consoltech.co.il');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  const { id } = req.query;
+    const { id } = req.query;
 
-  if (id) {
-    const products = await getProducts();
-    const product = products.find(p => p.id === id);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+    if (id) {
+      const products = await getProducts();
+      const product = products.find(p => p.id === id);
+      if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+      return res.status(200).json(product);
     }
-    return res.status(200).json(product);
-  }
 
-  const products = await getProducts();
-  return res.status(200).json(products);
+    const products = await getProducts();
+    return res.status(200).json(products);
+  } catch (error) {
+    console.error('GET /api/products error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 export async function POST(req: VercelRequest, res: VercelResponse) {

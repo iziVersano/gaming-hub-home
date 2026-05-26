@@ -1,8 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import * as nodemailer from 'nodemailer';
-import { put, getDownloadUrl } from '@vercel/blob';
 
-const WARRANTY_BLOB_NAME = 'warranty-records.json';
 const SALES_EMAIL = process.env.SALES_EMAIL || 'sales@consoltech.co.il';
 
 interface WarrantyRecord {
@@ -25,27 +23,18 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+let warrantyRecordsCache: WarrantyRecord[] = [];
+
 async function getWarrantyRecords(): Promise<WarrantyRecord[]> {
-  try {
-    const url = await getDownloadUrl(WARRANTY_BLOB_NAME);
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Not found');
-    return (await response.json()) as WarrantyRecord[];
-  } catch {
-    return [];
-  }
+  return warrantyRecordsCache;
 }
 
 async function saveWarrantyRecord(record: WarrantyRecord) {
-  const records = await getWarrantyRecords();
-  records.push(record);
-  await put(WARRANTY_BLOB_NAME, JSON.stringify(records));
+  warrantyRecordsCache.push(record);
 }
 
 async function deleteWarrantyRecord(id: string) {
-  let records = await getWarrantyRecords();
-  records = records.filter(r => r.id !== id);
-  await put(WARRANTY_BLOB_NAME, JSON.stringify(records));
+  warrantyRecordsCache = warrantyRecordsCache.filter(r => r.id !== id);
 }
 
 async function sendEmail(to: string, subject: string, html: string) {
