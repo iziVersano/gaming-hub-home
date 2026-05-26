@@ -1,5 +1,10 @@
 {
   "buildCommand": "npm run build",
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "rewrites": [
     { "source": "/((?!api|assets|images|.*\\..*).*)", "destination": "/index.html" }
   ]
