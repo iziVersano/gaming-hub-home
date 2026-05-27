@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search, BookOpen, Shield, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
@@ -254,6 +255,8 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   )}
                 </div>
 
+                <ThemeToggle />
+                
                 <Link to="/contact">
                   <Button className="btn-nav ml-1">
                     <MessageSquare className="h-4 w-4" aria-hidden="true" />
@@ -343,6 +346,11 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <Shield className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
                   <span>הפעלת אחריות</span>
                 </Link>
+              </div>
+
+              {/* Theme Toggle */}
+              <div className="pt-2">
+                <ThemeToggle variant="mobile" />
               </div>
             </div>
 

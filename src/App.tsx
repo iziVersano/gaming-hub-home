@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import SkipLink from "./components/SkipLink";
 import AccessibilityMenu from "./components/AccessibilityMenu";
 import { I18nProvider, useI18n } from '@/hooks/I18nContext';
+import { ThemeProvider } from '@/hooks/ThemeContext';
 import { featureFlags } from '@/lib/featureFlags';
 
 // Lazy-load all non-home pages to reduce initial bundle size
@@ -61,44 +62,46 @@ const HtmlDirectionSetter = () => {
 
 const App = () => {
   return (
-  <I18nProvider>
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <SkipLink />
-            <AccessibilityMenu />
-            <ScrollToTop />
-            <HtmlDirectionSetter />
-            <Suspense fallback={null}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/products/:id" element={<ProductDetail />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/health" element={<Health />} />
-                {featureFlags.WARRANTY_ENABLED && <Route path="/הוראותאחריות" element={<Warranty />} />}
-                <Route path="/nintendo-switch-2" element={<NintendoSwitch2Manual />} />
-                <Route path="/accessibility" element={<Accessibility />} />
-                {/* Admin Routes */}
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/products" element={<AdminProducts />} />
-                <Route path="/admin/products/new" element={<AdminProductForm />} />
-                <Route path="/admin/products/edit/:id" element={<AdminProductForm />} />
-                {featureFlags.WARRANTY_ENABLED && <Route path="/admin/warranty-records" element={<WarrantyRecords />} />}
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
-  </I18nProvider>
+  <ThemeProvider>
+    <I18nProvider>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <SkipLink />
+              <AccessibilityMenu />
+              <ScrollToTop />
+              <HtmlDirectionSetter />
+              <Suspense fallback={null}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/products" element={<Products />} />
+                  <Route path="/products/:id" element={<ProductDetail />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/health" element={<Health />} />
+                  {featureFlags.WARRANTY_ENABLED && <Route path="/הוראותאחריות" element={<Warranty />} />}
+                  <Route path="/nintendo-switch-2" element={<NintendoSwitch2Manual />} />
+                  <Route path="/accessibility" element={<Accessibility />} />
+                  {/* Admin Routes */}
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/products" element={<AdminProducts />} />
+                  <Route path="/admin/products/new" element={<AdminProductForm />} />
+                  <Route path="/admin/products/edit/:id" element={<AdminProductForm />} />
+                  {featureFlags.WARRANTY_ENABLED && <Route path="/admin/warranty-records" element={<WarrantyRecords />} />}
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
+    </I18nProvider>
+  </ThemeProvider>
   );
 };
 
