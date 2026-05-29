@@ -171,6 +171,24 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     letter-spacing: -0.01em;
   }
 
+  /* Form inputs don't inherit color from the page in many mobile webviews
+   * (WhatsApp in-app browser, iOS Safari with mismatched system theme).
+   * Force the design-system foreground so typed text is always visible. */
+  input,
+  textarea,
+  select {
+    color: hsl(var(--foreground));
+    caret-color: hsl(var(--foreground));
+    -webkit-text-fill-color: hsl(var(--foreground));
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: hsl(var(--muted-foreground));
+    -webkit-text-fill-color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Syne', system-ui, sans-serif;
     line-height: 1.15;

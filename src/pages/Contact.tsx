@@ -76,29 +76,38 @@ const Contact = () => {
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
-        headers: { 
-          "Accept": "application/json", 
-          "Content-Type": "application/json" 
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
       });
 
-      // MIME/type guard to prevent parsing errors
+      // Formspree always returns JSON for AJAX submissions. Parse defensively.
       const ct = res.headers.get("Content-Type") || "";
-      if (!res.ok || !ct.includes("application/json")) {
-        throw new Error("Invalid response");
-      }
+      const json = ct.includes("application/json")
+        ? await res.json().catch(() => ({}))
+        : {};
 
-      const json = await res.json();
-      if (json.ok === true || json.success === true) {
+      if (res.ok && json.ok !== false) {
         toast({ title: t('contact.success.title'), description: t('contact.success.description') });
         form.reset();
         setFormData({ name: '', email: '', company: '', subject: '', message: '' });
       } else {
-        throw new Error(json.error || t('contact.errors.submissionFailed'));
+        // Surface Formspree's actual error so we can distinguish unverified
+        // destination email vs plan limit vs validation failures.
+        const detail = Array.isArray(json.errors)
+          ? json.errors.map((e: { message?: string }) => e.message).filter(Boolean).join("; ")
+          : json.error;
+        console.error("Form submission failed", { status: res.status, body: json });
+        toast({
+          variant: "destructive",
+          title: t('contact.errors.submissionFailed'),
+          description: detail || `HTTP ${res.status}`
+        });
       }
     } catch (err) {
-      console.error(err);
+      console.error("Network error submitting form", err);
       toast({ variant: "destructive", title: t('contact.errors.networkError'), description: t('contact.errors.tryAgain') });
     } finally {
       btn?.removeAttribute("disabled");
@@ -202,7 +211,7 @@ const Contact = () => {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors"
               placeholder={t('contact.placeholders.company')}
             />
           </div>
