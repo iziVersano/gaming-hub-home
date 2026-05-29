@@ -116,3 +116,4 @@ public/videos/*.mp4
 !public/videos/hero-cubism.mp4
 !public/videos/final.mp4
 public/videos/*.webm
+.vercel

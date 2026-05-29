@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search, BookOpen, Shield, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
+import { ThemeToggle } from './ThemeToggle';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
@@ -174,14 +175,14 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
             {searchOpen && (
               <div className="md:hidden px-3 pb-2 search-slide-down">
                 <form onSubmit={(e) => { handleSearch(e); setSearchOpen(false); }} className="relative flex items-center">
-                  <Search className="absolute left-3 h-4 w-4 text-white/40 pointer-events-none shrink-0" strokeWidth={2} />
+                  <Search className="absolute left-3 h-4 w-4 text-muted-foreground/60 dark:text-white/40 pointer-events-none shrink-0" strokeWidth={2} />
                   <input
                     ref={searchInputRef}
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder={t('products.searchPlaceholder')}
-                    className="search-input w-full h-10 pl-9 pr-12 rounded-xl text-sm text-white placeholder:text-white/35"
+                    className="search-input w-full h-10 pl-9 pr-12 rounded-xl text-sm text-foreground dark:text-white placeholder:text-muted-foreground/40 dark:placeholder:text-white/35"
                     style={{ fontSize: '16px' }}
                     aria-label={t('products.searchPlaceholder')}
                   />
@@ -241,17 +242,21 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${guidesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {guidesOpen && (
-                    <div className="absolute top-full mt-2 w-52 bg-[#0d0d14] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50" dir="rtl" style={{ right: 0 }}>
-                      <Link to="/nintendo-switch-2" onClick={() => setGuidesOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-white/8 border-b border-white/6 ${isActive('/nintendo-switch-2') ? 'text-accent' : 'text-white'}`}>
+                    <div className="absolute top-full mt-2 w-52 bg-background dark:bg-[#0d0d14] border border-border dark:border-white/10 rounded-xl shadow-2xl overflow-hidden z-50" dir="rtl" style={{ right: 0 }}>
+                      <Link to="/nintendo-switch-2" onClick={() => setGuidesOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-white/8 border-b border-border dark:border-white/6 ${isActive('/nintendo-switch-2') ? 'text-accent' : 'text-foreground dark:text-white'}`}>
                         <BookOpen className="h-4 w-4 shrink-0 text-blue-400" />
                         <span>מדריכים הוראות הפעלה</span>
                       </Link>
-                      <Link to="/warranty" onClick={() => setGuidesOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-white/8 ${isActive('/warranty') ? 'text-accent' : 'text-white'}`}>
+                      <Link to="/warranty" onClick={() => setGuidesOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-white/8 ${isActive('/warranty') ? 'text-accent' : 'text-foreground dark:text-white'}`}>
                         <Shield className="h-4 w-4 shrink-0 text-green-400" />
                         <span>הפעלת אחריות</span>
                       </Link>
                     </div>
                   )}
+                </div>
+
+                <div className="flex items-center">
+                  <ThemeToggle />
                 </div>
 
                 <Link to="/contact">
@@ -285,11 +290,11 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
           />
 
           {/* Menu panel - half width, right side */}
-          <div className="absolute top-0 right-0 h-full w-[55%] bg-[#0a0a0f] border-l border-white/10 flex flex-col shadow-2xl">
+          <div className="absolute top-0 right-0 h-full w-[55%] bg-background dark:bg-[#0a0a0f] border-l border-border dark:border-white/10 flex flex-col shadow-2xl">
             {/* Close button */}
             <div className="flex justify-end items-center h-16 px-4">
               <button
-                className="p-2 rounded-full text-white hover:text-accent transition-colors"
+                className="p-2 rounded-full text-foreground dark:text-white hover:text-accent transition-colors"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
               >
@@ -307,10 +312,10 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                     to={item.href}
                     role="menuitem"
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`flex items-center gap-3 py-3.5 text-lg font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${
+                    className={`flex items-center gap-3 py-3.5 text-lg font-semibold tracking-wide transition-colors duration-200 border-b border-border/40 dark:border-white/5 ${
                       isActive(item.href)
                         ? 'text-accent'
-                        : 'text-white hover:text-accent'
+                        : 'text-foreground dark:text-white hover:text-accent'
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -321,13 +326,13 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
               })}
 
               {/* מדריכים / אחריות section */}
-              <div className="pt-2 pb-1">
-                <p className="text-xs font-semibold tracking-widest text-white/35 uppercase mb-1 pr-1">מדריכים / אחריות</p>
+              <div className="pt-2 pb-1 border-b border-border/40 dark:border-white/5">
+                <p className="text-xs font-semibold tracking-widest text-muted-foreground/60 dark:text-white/35 uppercase mb-1 pr-1">מדריכים / אחריות</p>
                 <Link
                   to="/nintendo-switch-2"
                   role="menuitem"
                   aria-current={isActive('/nintendo-switch-2') ? 'page' : undefined}
-                  className={`flex items-center gap-3 py-3 text-base font-semibold tracking-wide transition-colors duration-200 border-b border-white/5 ${isActive('/nintendo-switch-2') ? 'text-accent' : 'text-white hover:text-accent'}`}
+                  className={`flex items-center gap-3 py-3 text-base font-semibold tracking-wide transition-colors duration-200 border-b border-border/40 dark:border-white/5 ${isActive('/nintendo-switch-2') ? 'text-accent' : 'text-foreground dark:text-white hover:text-accent'}`}
                   onClick={() => setIsOpen(false)}
                 >
                   <BookOpen className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
@@ -337,12 +342,20 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   to="/warranty"
                   role="menuitem"
                   aria-current={isActive('/warranty') ? 'page' : undefined}
-                  className={`flex items-center gap-3 py-3 text-base font-semibold tracking-wide transition-colors duration-200 ${isActive('/warranty') ? 'text-accent' : 'text-white hover:text-accent'}`}
+                  className={`flex items-center gap-3 py-3 text-base font-semibold tracking-wide transition-colors duration-200 ${isActive('/warranty') ? 'text-accent' : 'text-foreground dark:text-white hover:text-accent'}`}
                   onClick={() => setIsOpen(false)}
                 >
                   <Shield className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
                   <span>הפעלת אחריות</span>
                 </Link>
+              </div>
+
+              {/* Theme Switcher for mobile */}
+              <div className="flex items-center justify-between py-4 pr-1 border-b border-border/40 dark:border-white/5">
+                <span className="text-base font-semibold text-foreground dark:text-white">
+                  {lang === 'he' ? 'מצב כהה / בהיר' : 'Theme (Light/Dark)'}
+                </span>
+                <ThemeToggle />
               </div>
             </div>
 
