@@ -21,6 +21,12 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const FORM_ENDPOINT = "https://formspree.io/f/xyzpvaeg";
 
+// Inset focus ring + text-base prevents iOS auto-zoom and keeps the field
+// from growing its outer box on focus, which broke RTL mobile layouts.
+const INPUT_CLASS =
+  "w-full px-4 py-3 text-base bg-background rounded-lg border border-border/70 " +
+  "focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary/60 focus:border-primary/60";
+
 const Contact = () => {
   const { t } = useI18n();
   const [formData, setFormData] = useState({
@@ -186,7 +192,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors"
+                className={INPUT_CLASS}
                 placeholder={t('contact.placeholders.name')}
               />
             </div>
@@ -198,7 +204,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors"
+                className={INPUT_CLASS}
                 placeholder={t('contact.placeholders.email')}
               />
             </div>
@@ -211,7 +217,7 @@ const Contact = () => {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors"
+              className={INPUT_CLASS}
               placeholder={t('contact.placeholders.company')}
             />
           </div>
@@ -223,7 +229,7 @@ const Contact = () => {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-input rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className={INPUT_CLASS}
             >
               <option value="">{t('contact.placeholders.selectSubject')}</option>
               <option value="partnership">{t('contact.subjects.partnership')}</option>
@@ -242,7 +248,7 @@ const Contact = () => {
               onChange={handleChange}
               required
               rows={6}
-              className="w-full px-4 py-3 bg-background rounded-lg border border-border/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-colors resize-none"
+              className={`${INPUT_CLASS} resize-none`}
               placeholder={t('contact.placeholders.message')}
             />
           </div>
