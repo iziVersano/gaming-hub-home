@@ -317,6 +317,18 @@ const Contact = () => {
                               </a>
                            );
                          }
+                         if (info.title === t('contact.info.emailUs')) {
+                           return (
+                             <a
+                               key={idx}
+                               href={`mailto:${detail}`}
+                               className="text-accent font-medium underline"
+                               aria-label={`Email us at ${detail}`}
+                             >
+                               {detail}
+                             </a>
+                           );
+                         }
                          if (info.title === t('contact.info.visitUs')) {
                            const mapsQuery = encodeURIComponent(detail);
                            return (
