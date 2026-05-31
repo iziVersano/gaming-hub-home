@@ -11,7 +11,12 @@
       "Bash(npm list:*)",
       "Bash(claude --print --dangerously-skip-permissions)",
       "Bash(git stash:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Read(//home/dci-student/work/**)",
+      "Bash(git checkout:*)"
+    ],
+    "additionalDirectories": [
+      "/home/dci-student/work/consoltech-nexus/src/pages"
     ]
   }
 }
