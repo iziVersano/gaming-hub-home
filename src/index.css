@@ -520,13 +520,14 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     @apply font-orbitron font-bold tracking-wider transition-all duration-300;
   }
 
+  /* The logo always sits on the dark hero background, so it must be white
+   * in both light and dark themes. Previously it used text-foreground,
+   * which is near-black in light mode — on iPhones rendering the site in
+   * light mode this made "קונסול" appear black against the dark hero. */
   .logo-consol {
-    @apply text-foreground;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     text-shadow: 0 0 24px rgba(200, 220, 255, 0.18);
-  }
-
-  .dark .logo-consol {
-    @apply text-white;
   }
 
   .logo-tech {
