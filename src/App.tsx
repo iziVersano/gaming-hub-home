@@ -63,7 +63,7 @@ const HtmlDirectionSetter = () => {
 const App = () => {
   return (
   <I18nProvider>
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
           <TooltipProvider>
