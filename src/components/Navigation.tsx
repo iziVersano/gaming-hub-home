@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search } from 'lucide-react';
+import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
+import { useTheme } from '@/hooks/ThemeContext';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
@@ -16,6 +17,7 @@ const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { lang, setLang, t } = useI18n();
+  const { theme, toggleTheme } = useTheme();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,6 +122,13 @@ const Navigation = () => {
                     </Link>
                   );
                 })}
+                <button
+                  onClick={toggleTheme}
+                  aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                  className="p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                </button>
                 <Button className="btn-nav">
                   <MessageSquare className="h-4 w-4" aria-hidden="true" />
                   <span>{t('menu.getQuote')}</span>
@@ -167,6 +176,15 @@ const Navigation = () => {
                   </Link>
                 );
               })}
+              {/* Theme toggle */}
+              <button
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-white/80 hover:text-white hover:bg-white/[0.05] active:text-primary transition-all duration-300"
+              >
+                {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                <span className="text-[10px] font-medium leading-none">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+              </button>
               {/* WhatsApp button */}
               <a
                 href="https://wa.me/972522768607?text=Hi%20Consoltech,%20I%27d%20like%20to%20inquire%20about%20your%20products."

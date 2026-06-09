@@ -21,6 +21,7 @@ import WarrantyRecords from "./pages/admin/WarrantyRecords";
 import SkipLink from "./components/SkipLink";
 import AccessibilityMenu from "./components/AccessibilityMenu";
 import { I18nProvider, useI18n } from './hooks/I18nContext';
+import { ThemeProvider } from './hooks/ThemeContext';
 
 import { useEffect } from "react";
 
@@ -50,6 +51,7 @@ const HtmlDirectionSetter = () => {
 };
 
 const App = () => (
+  <ThemeProvider>
   <I18nProvider>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
@@ -85,6 +87,7 @@ const App = () => (
       </HelmetProvider>
     </QueryClientProvider>
   </I18nProvider>
+  </ThemeProvider>
 );
 
 export default App;
