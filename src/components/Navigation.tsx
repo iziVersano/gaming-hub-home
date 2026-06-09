@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search, BookOpen, Shield, ChevronDown } from 'lucide-react';
+import { Menu, X, MessageSquare, Gamepad2, House, Building2, ShoppingBag, Mail, Accessibility, Search, BookOpen, Shield, ChevronDown, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/I18nContext';
 import { ThemeToggle } from './ThemeToggle';
@@ -63,6 +63,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
     { name: t('menu.products'), href: '/products', icon: ShoppingBag },
     { name: t('menu.contact'), href: '/contact', icon: Mail },
     { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
+    { name: t('menu.goodDeeds'), href: '/games', icon: Heart },
   ];
 
   // Brand logos for the bottom of the full-screen menu

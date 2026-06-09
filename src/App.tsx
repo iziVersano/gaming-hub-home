@@ -21,6 +21,7 @@ const Health = lazy(() => import("./pages/Health"));
 const Warranty = lazy(() => import("./pages/Warranty"));
 const NintendoSwitch2Manual = lazy(() => import("./pages/NintendoSwitch2Manual"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
+const GoodDeeds = lazy(() => import("./pages/GoodDeeds"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 // Admin pages — split into a separate chunk, loaded only when needed
 const AdminLogin = lazy(() => import("./pages/admin/Login"));
@@ -85,6 +86,7 @@ const App = () => {
                   {featureFlags.WARRANTY_ENABLED && <Route path="/הוראותאחריות" element={<Warranty />} />}
                   <Route path="/nintendo-switch-2" element={<NintendoSwitch2Manual />} />
                   <Route path="/accessibility" element={<Accessibility />} />
+                  <Route path="/games" element={<GoodDeeds />} />
                   {/* Admin Routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin" element={<AdminDashboard />} />
