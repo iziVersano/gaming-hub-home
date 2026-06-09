@@ -31,16 +31,26 @@ export interface WarrantySubmissionEntity {
   createdAt: string;
 }
 
+export interface GoodDeedEntity {
+  id: number;
+  name: string;
+  deed: string;
+  points: number;
+  createdAt: string;
+}
+
 @Injectable()
 export class JsonStorageService {
   private productsPath: string;
   private warrantyPath: string;
+  private goodDeedsPath: string;
   private dataDir: string;
 
   constructor() {
     this.dataDir = join(process.cwd(), 'data');
     this.productsPath = join(this.dataDir, 'products.json');
     this.warrantyPath = join(this.dataDir, 'warranty.json');
+    this.goodDeedsPath = join(this.dataDir, 'good-deeds.json');
 
     // Ensure data directory exists
     if (!existsSync(this.dataDir)) {
@@ -53,6 +63,9 @@ export class JsonStorageService {
     }
     if (!existsSync(this.warrantyPath)) {
       writeFileSync(this.warrantyPath, JSON.stringify([], null, 2));
+    }
+    if (!existsSync(this.goodDeedsPath)) {
+      writeFileSync(this.goodDeedsPath, JSON.stringify([], null, 2));
     }
   }
 
@@ -120,6 +133,44 @@ export class JsonStorageService {
     );
     if (filtered.length === records.length) return false;
     writeFileSync(this.warrantyPath, JSON.stringify(filtered, null, 2));
+    return true;
+  }
+
+  // Good Deeds
+  async getGoodDeeds(): Promise<GoodDeedEntity[]> {
+    const data = readFileSync(this.goodDeedsPath, 'utf-8');
+    return JSON.parse(data);
+  }
+
+  async createGoodDeed(deed: Pick<GoodDeedEntity, 'name' | 'deed'>): Promise<GoodDeedEntity> {
+    const deeds = await this.getGoodDeeds();
+    const maxId = deeds.length > 0 ? Math.max(...deeds.map((d) => d.id)) : 0;
+    const entity: GoodDeedEntity = {
+      id: maxId + 1,
+      name: deed.name,
+      deed: deed.deed,
+      points: 1,
+      createdAt: new Date().toISOString(),
+    };
+    deeds.push(entity);
+    writeFileSync(this.goodDeedsPath, JSON.stringify(deeds, null, 2));
+    return entity;
+  }
+
+  async updateGoodDeedPoints(id: number, points: number): Promise<GoodDeedEntity | null> {
+    const deeds = await this.getGoodDeeds();
+    const index = deeds.findIndex((d) => d.id === id);
+    if (index === -1) return null;
+    deeds[index].points = points;
+    writeFileSync(this.goodDeedsPath, JSON.stringify(deeds, null, 2));
+    return deeds[index];
+  }
+
+  async deleteGoodDeed(id: number): Promise<boolean> {
+    const deeds = await this.getGoodDeeds();
+    const filtered = deeds.filter((d) => d.id !== id);
+    if (filtered.length === deeds.length) return false;
+    writeFileSync(this.goodDeedsPath, JSON.stringify(filtered, null, 2));
     return true;
   }
 
