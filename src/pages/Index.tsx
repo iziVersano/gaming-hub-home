@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import TrustBadges from '@/components/TrustBadges';
 import VideoCarousel from '@/components/VideoCarousel';
 import Reveal from '@/components/Reveal';
-import IntroSplash from '@/components/IntroSplash';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowRight, Gamepad2, Headphones, Shield, BadgeDollarSign, UserPlus, Search, Check, Monitor, Plane, Bike, Cpu, Lightbulb, PhoneCall, FileText, Package } from 'lucide-react';
@@ -67,7 +66,6 @@ const Index = () => {
           })}
         </script>
       </Helmet>
-      <IntroSplash />
       {/* Desktop: normal fixed nav */}
       <div className="hidden md:block">
         <Navigation />

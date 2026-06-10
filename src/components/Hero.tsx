@@ -13,10 +13,21 @@ const HERO_VIDEOS = [
   { src: '/videos/hero-gls.mp4', label: 'Gaming Luxury Screens' },
 ];
 
+/* Looping hero background. Drop the Western Wall (Jerusalem) footage at
+ * public/videos/western-wall.mp4 and it plays automatically; until that
+ * file exists, the stand-in below plays so the effect is previewable. */
+const HERO_BG_VIDEO = '/videos/western-wall.mp4';
+const HERO_BG_VIDEO_STAND_IN = '/videos/hero.mp4';
+
 const Hero = () => {
   const { t } = useI18n();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
+  const [bgVideoSrc, setBgVideoSrc] = useState(HERO_BG_VIDEO);
+  const [bgVideoReady, setBgVideoReady] = useState(false);
+  const [bgVideoOff, setBgVideoOff] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -83,7 +94,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px", zIndex: 1 }} data-section="hero">
+    <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(70vh + 52px)", marginTop: "-52px", paddingTop: "52px", zIndex: 1 }} data-section="hero">
       <style>{`@media (max-width: 767px) { [data-section="hero"] { height: calc(82vw + 210px) !important; max-height: 640px; } }`}</style>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
@@ -105,6 +116,35 @@ const Hero = () => {
           }`}
           style={{ objectPosition: 'center 85%' }}
         />
+
+        {/* Looping background video — fades in over the LCP image once playable */}
+        {!bgVideoOff && (
+          <video
+            src={bgVideoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              bgVideoReady ? 'opacity-100' : 'opacity-0'
+            }`}
+            onCanPlay={() => setBgVideoReady(true)}
+            onError={() => {
+              if (bgVideoSrc === HERO_BG_VIDEO) {
+                setBgVideoSrc(HERO_BG_VIDEO_STAND_IN);
+              } else {
+                setBgVideoOff(true);
+              }
+            }}
+          />
+        )}
+
+        {/* Readability scrim over the moving footage */}
+        {!bgVideoOff && bgVideoReady && (
+          <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/25 to-background/55" />
+        )}
       </div>
 
       {/* Layer 2: Subtle decorative ambient glow — desktop only */}
@@ -118,8 +158,17 @@ const Hero = () => {
       <div className="relative z-[1] w-full px-4 pt-[74px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
         <div className="space-y-2 items-end w-full">
 
+          {/* Logo — desktop, animates in over the background video */}
+          <div className="hidden md:flex hero-logo-in items-center justify-center gap-4 w-full mb-2" style={{ direction: 'ltr' }}>
+            <Gamepad2 style={{ width: '3rem', height: '3rem', flexShrink: 0, color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+            <span className="logo-text whitespace-nowrap" style={{ direction: 'rtl', fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: '1', letterSpacing: '0.04em' }}>
+              <span className="logo-consol">קונסול</span><span className="logo-tech">טק</span>
+            </span>
+            <Gamepad2 style={{ width: '3rem', height: '3rem', flexShrink: 0, color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
+          </div>
+
           {/* Logo — mobile only, brand lockup */}
-          <div className="flex md:hidden flex-col items-stretch w-full mb-1">
+          <div className="flex md:hidden hero-logo-in flex-col items-stretch w-full mb-1">
             {/* Single line: icon left, קונסולטק center, icon right */}
             <div className="w-full flex items-center justify-between gap-1 min-w-0" style={{ direction: 'ltr' }}>
               <Gamepad2 style={{ width: 'min(3.5rem, 14vw)', height: 'min(3.5rem, 14vw)', flexShrink: 0, color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
@@ -129,7 +178,7 @@ const Hero = () => {
               <Gamepad2 style={{ width: 'min(3.5rem, 14vw)', height: 'min(3.5rem, 14vw)', flexShrink: 0, color: "hsl(195 100% 88%)", filter: "drop-shadow(0 0 6px hsl(195 100% 70%)) drop-shadow(0 0 16px hsl(195 100% 55%)) drop-shadow(0 0 30px hsl(195 100% 45%))" }} />
             </div>
             {/* אתר היבואן + משנת 2001 — right edge */}
-            <div className="flex flex-col w-full" style={{ alignItems: 'flex-start', marginTop: '2px', direction: 'rtl' }}>
+            <div className="flex flex-col w-full hero-tagline-in" style={{ alignItems: 'flex-start', marginTop: '2px', direction: 'rtl' }}>
               <span className="font-display whitespace-nowrap font-bold" style={{ fontSize: 'clamp(1.25rem, 6vw, 2rem)', lineHeight: '1.2', color: "hsl(195 100% 85%)", textShadow: "0 0 8px hsl(195 100% 75%), 0 0 20px hsl(195 100% 60%), 0 0 40px hsl(195 100% 50%)" }}>
                 אתר היבואן
               </span>
