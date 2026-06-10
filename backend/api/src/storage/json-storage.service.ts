@@ -31,16 +31,31 @@ export interface WarrantySubmissionEntity {
   createdAt: string;
 }
 
+export interface GoodDeedEntity {
+  id: number;
+  name: string;
+  city: string;
+  deed: string;
+  category: string;
+  proofUrl?: string;
+  points: number;
+  vouches: number;
+  createdAt: string;
+}
+
 @Injectable()
 export class JsonStorageService {
   private productsPath: string;
   private warrantyPath: string;
   private dataDir: string;
 
+  private goodDeedsPath: string;
+
   constructor() {
     this.dataDir = join(process.cwd(), 'data');
     this.productsPath = join(this.dataDir, 'products.json');
     this.warrantyPath = join(this.dataDir, 'warranty.json');
+    this.goodDeedsPath = join(this.dataDir, 'gooddeeds.json');
 
     // Ensure data directory exists
     if (!existsSync(this.dataDir)) {
@@ -53,6 +68,9 @@ export class JsonStorageService {
     }
     if (!existsSync(this.warrantyPath)) {
       writeFileSync(this.warrantyPath, JSON.stringify([], null, 2));
+    }
+    if (!existsSync(this.goodDeedsPath)) {
+      writeFileSync(this.goodDeedsPath, JSON.stringify([], null, 2));
     }
   }
 
@@ -121,6 +139,36 @@ export class JsonStorageService {
     if (filtered.length === records.length) return false;
     writeFileSync(this.warrantyPath, JSON.stringify(filtered, null, 2));
     return true;
+  }
+
+  // Good Deeds
+  async getGoodDeeds(): Promise<GoodDeedEntity[]> {
+    const data = readFileSync(this.goodDeedsPath, 'utf-8');
+    return JSON.parse(data);
+  }
+
+  async saveGoodDeed(deed: Omit<GoodDeedEntity, 'id' | 'points' | 'vouches' | 'createdAt'>): Promise<GoodDeedEntity> {
+    const deeds = await this.getGoodDeeds();
+    const maxId = deeds.length > 0 ? Math.max(...deeds.map((d) => d.id)) : 0;
+    const entity: GoodDeedEntity = {
+      id: maxId + 1,
+      points: 1,
+      vouches: 0,
+      createdAt: new Date().toISOString(),
+      ...deed,
+    };
+    deeds.unshift(entity);
+    writeFileSync(this.goodDeedsPath, JSON.stringify(deeds, null, 2));
+    return entity;
+  }
+
+  async vouchGoodDeed(id: number): Promise<GoodDeedEntity | null> {
+    const deeds = await this.getGoodDeeds();
+    const index = deeds.findIndex((d) => d.id === id);
+    if (index === -1) return null;
+    deeds[index].vouches += 1;
+    writeFileSync(this.goodDeedsPath, JSON.stringify(deeds, null, 2));
+    return deeds[index];
   }
 
   private seedProducts(): void {

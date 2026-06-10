@@ -1,49 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
-import { Heart, Sparkles, Send, Trophy, Star, Globe, Award, Users } from 'lucide-react';
+import { Heart, Sparkles, Send, Trophy, Star, Globe, Award, Users, ThumbsUp, Link, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const VOUCHED_KEY = 'ug_vouched_deeds';
+
 interface GoodDeed {
-  id: string;
+  id: number;
   name: string;
   city: string;
   deed: string;
   category: string;
+  proofUrl?: string;
   points: number;
-  timestamp: number;
+  vouches: number;
+  createdAt: string;
 }
-
-const STORAGE_KEY = 'goodDeeds_v2';
 
 const CITIES = ['ישראל', 'New York', 'Paris', 'Buenos Aires', 'London', 'Moscow'];
 
 const CATEGORIES = [
-  { label: 'עזרה לשכן', emoji: '🏠', en: 'Helping Neighbor' },
-  { label: 'צדקה', emoji: '💛', en: 'Charity' },
-  { label: 'שירות קהילתי', emoji: '🤝', en: 'Community Service' },
-  { label: 'חינוך', emoji: '📚', en: 'Education' },
-  { label: 'סביבה', emoji: '🌱', en: 'Environment' },
-  { label: 'אחר', emoji: '✨', en: 'Other' },
+  { label: 'עזרה לשכן', emoji: '🏠' },
+  { label: 'צדקה', emoji: '💛' },
+  { label: 'שירות קהילתי', emoji: '🤝' },
+  { label: 'חינוך', emoji: '📚' },
+  { label: 'סביבה', emoji: '🌱' },
+  { label: 'אחר', emoji: '✨' },
 ];
 
-function loadDeeds(): GoodDeed[] {
+function getVouchedSet(): Set<number> {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
+    const raw = sessionStorage.getItem(VOUCHED_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
   } catch {
-    return [];
+    return new Set();
   }
 }
 
-function saveDeeds(deeds: GoodDeed[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(deeds));
+function addVouched(id: number) {
+  const set = getVouchedSet();
+  set.add(id);
+  sessionStorage.setItem(VOUCHED_KEY, JSON.stringify([...set]));
 }
 
-function formatTime(ts: number): string {
-  return new Date(ts).toLocaleDateString('he-IL', {
+function formatTime(iso: string): string {
+  return new Date(iso).toLocaleDateString('he-IL', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -61,43 +66,25 @@ function UGCard({ name, points, city }: { name: string; points: number; city: st
       }}
       aria-label="UG card"
     >
-      {/* Gold shimmer strip */}
-      <div
-        className="absolute inset-x-0 top-0 h-1"
-        style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }}
-      />
+      <div className="absolute inset-x-0 top-0 h-1" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 text-8xl opacity-[0.06] select-none pointer-events-none" aria-hidden="true">✡️</div>
 
-      {/* Background Star of David watermark */}
-      <div
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-8xl opacity-[0.06] select-none pointer-events-none"
-        aria-hidden="true"
-      >
-        ✡️
-      </div>
-
-      <div className="relative z-10 p-5 flex flex-col justify-between h-full" style={{ minHeight: 180 }}>
+      <div className="relative z-10 p-5 flex flex-col justify-between" style={{ minHeight: 180 }}>
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2 mb-0.5">
               <Globe className="h-3.5 w-3.5" style={{ color: '#d4af37' }} aria-hidden="true" />
-              <span className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#d4af37' }}>
-                Universal Good
-              </span>
+              <span className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#d4af37' }}>Universal Good</span>
             </div>
             <span className="text-[10px] text-slate-400 tracking-widest uppercase">UG Community Card</span>
           </div>
-          <div
-            className="rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wide"
-            style={{ background: 'rgba(212, 175, 55, 0.15)', color: '#d4af37', border: '1px solid rgba(212,175,55,0.3)' }}
-          >
+          <div className="rounded-full px-2 py-0.5 text-[10px] font-bold" style={{ background: 'rgba(212,175,55,0.15)', color: '#d4af37', border: '1px solid rgba(212,175,55,0.3)' }}>
             {city || '—'}
           </div>
         </div>
 
         <div>
-          <p className="text-white text-lg font-bold truncate mb-0.5" dir="rtl">
-            {name || 'שמך כאן'}
-          </p>
+          <p className="text-white text-lg font-bold truncate mb-0.5" dir="rtl">{name || 'שמך כאן'}</p>
           <p className="text-slate-400 text-xs">{name ? 'UG Member' : 'Enter your name to claim your card'}</p>
         </div>
 
@@ -109,18 +96,11 @@ function UGCard({ name, points, city }: { name: string; points: number; city: st
               <span className="text-3xl font-black text-white">{points}</span>
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-[10px] text-slate-500 mb-0.5">Good Points</p>
-            <Award className="h-8 w-8 ml-auto" style={{ color: 'rgba(212,175,55,0.5)' }} aria-hidden="true" />
-          </div>
+          <Award className="h-8 w-8" style={{ color: 'rgba(212,175,55,0.5)' }} aria-hidden="true" />
         </div>
       </div>
 
-      {/* Gold bottom strip */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-1"
-        style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }}
-      />
+      <div className="absolute inset-x-0 bottom-0 h-1" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
     </div>
   );
 }
@@ -130,44 +110,76 @@ const rankColor = (i: number) =>
 
 const GoodDeeds = () => {
   const [deeds, setDeeds] = useState<GoodDeed[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [vouchedIds, setVouchedIds] = useState<Set<number>>(new Set());
+
   const [name, setName] = useState('');
   const [city, setCity] = useState(CITIES[0]);
   const [deed, setDeed] = useState('');
   const [category, setCategory] = useState(CATEGORIES[0].label);
-  const [submitting, setSubmitting] = useState(false);
+  const [proofUrl, setProofUrl] = useState('');
+
   const { toast } = useToast();
 
-  useEffect(() => {
-    setDeeds(loadDeeds());
+  const fetchDeeds = useCallback(async () => {
+    try {
+      const res = await fetch(`${API_BASE}/gooddeeds`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data: GoodDeed[] = await res.json();
+      setDeeds(data);
+      setError(null);
+    } catch {
+      setError('Could not load deeds. Check your connection.');
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchDeeds();
+    setVouchedIds(getVouchedSet());
+  }, [fetchDeeds]);
 
   const myPoints = deeds.filter(d => d.name === name.trim()).reduce((sum, d) => sum + d.points, 0);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !deed.trim()) return;
     setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/gooddeeds`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), city, deed: deed.trim(), category, proofUrl: proofUrl.trim() || undefined }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const created: GoodDeed = await res.json();
+      setDeeds(prev => [created, ...prev]);
+      setDeed('');
+      setProofUrl('');
+      toast({ title: '✨ נקודת UG נרשמה!', description: `תודה ${created.name}! קיבלת נקודת טוב על הכרטיס שלך.` });
+    } catch {
+      toast({ title: 'שגיאה', description: 'לא ניתן לשלוח כרגע. נסה שוב.', variant: 'destructive' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-    const newDeed: GoodDeed = {
-      id: Date.now().toString(),
-      name: name.trim(),
-      city,
-      deed: deed.trim(),
-      category,
-      points: 1,
-      timestamp: Date.now(),
-    };
-
-    const updated = [newDeed, ...deeds];
-    setDeeds(updated);
-    saveDeeds(updated);
-    setDeed('');
-    setSubmitting(false);
-
-    toast({
-      title: '✨ נקודת UG נרשמה!',
-      description: `תודה ${newDeed.name}! קיבלת נקודת טוב אחת על הכרטיס שלך.`,
-    });
+  const handleVouch = async (id: number) => {
+    if (vouchedIds.has(id)) return;
+    try {
+      const res = await fetch(`${API_BASE}/gooddeeds/${id}/vouch`, { method: 'POST' });
+      if (!res.ok) throw new Error();
+      const updated: GoodDeed = await res.json();
+      setDeeds(prev => prev.map(d => d.id === id ? updated : d));
+      addVouched(id);
+      setVouchedIds(getVouchedSet());
+      toast({ title: '👍 אישרת את המעשה!', description: 'תודה על האישור.' });
+    } catch {
+      toast({ title: 'שגיאה', description: 'לא ניתן לאשר כרגע.', variant: 'destructive' });
+    }
   };
 
   const topUsers = Object.values(
@@ -176,11 +188,7 @@ const GoodDeeds = () => {
       acc[d.name].points += d.points;
       return acc;
     }, {})
-  )
-    .sort((a, b) => b.points - a.points)
-    .slice(0, 5);
-
-  const selectedCategory = CATEGORIES.find(c => c.label === category) ?? CATEGORIES[0];
+  ).sort((a, b) => b.points - a.points).slice(0, 5);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -190,29 +198,17 @@ const GoodDeeds = () => {
         <meta name="description" content="הפלטפורמה לגיימינג ערכי – צבר נקודות טוב על מעשים טובים" />
       </Helmet>
 
-      {/* Hero banner */}
+      {/* Hero */}
       <section
         className="relative pt-24 pb-16 px-4 text-center overflow-hidden"
-        style={{
-          background: 'linear-gradient(180deg, #0d1b2a 0%, #112240 60%, transparent 100%)',
-        }}
+        style={{ background: 'linear-gradient(180deg, #0d1b2a 0%, #112240 60%, transparent 100%)' }}
         aria-labelledby="ug-heading"
       >
-        {/* Decorative glows */}
-        <div
-          className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
-          aria-hidden="true"
-        />
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }} aria-hidden="true" />
 
         <div className="relative z-10 max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div
-              className="text-4xl font-black tracking-tight"
-              style={{ color: '#d4af37', fontFamily: 'serif', letterSpacing: '-0.02em' }}
-            >
-              UG
-            </div>
+            <div className="text-4xl font-black" style={{ color: '#d4af37', fontFamily: 'serif' }}>UG</div>
             <div className="w-px h-8 bg-amber-500/30" aria-hidden="true" />
             <div className="text-left">
               <div className="text-sm font-bold tracking-widest uppercase text-amber-400">Universal</div>
@@ -220,26 +216,15 @@ const GoodDeeds = () => {
             </div>
           </div>
 
-          <h1
-            id="ug-heading"
-            className="text-3xl md:text-5xl font-black mb-3"
-            style={{ color: '#fff', textShadow: '0 0 40px rgba(212,175,55,0.3)' }}
-          >
+          <h1 id="ug-heading" className="text-3xl md:text-5xl font-black mb-3" style={{ color: '#fff', textShadow: '0 0 40px rgba(212,175,55,0.3)' }}>
             מעשים טובים
           </h1>
           <p className="text-slate-400 text-lg mb-2">Good Deeds → Real Points on Your UG Card</p>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
-            פלטפורמת הגיימינג הערכי — שתף מעשה טוב, צבר נקודות UG, והפוך להיות חלק מקהילה עולמית
-          </p>
+          <p className="text-xs text-slate-500 max-w-md mx-auto">שתף מעשה טוב, הוסף הוכחה, וקבל אישור מהקהילה</p>
 
-          {/* City dots */}
           <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
             <Globe className="h-4 w-4 text-amber-500/60" aria-hidden="true" />
-            {CITIES.map(c => (
-              <span key={c} className="text-xs text-slate-500 font-medium">
-                {c}
-              </span>
-            ))}
+            {CITIES.map(c => <span key={c} className="text-xs text-slate-500 font-medium">{c}</span>)}
           </div>
         </div>
       </section>
@@ -260,10 +245,7 @@ const GoodDeeds = () => {
             </div>
 
             {/* Submit form */}
-            <div
-              className="rounded-2xl p-6 shadow-sm"
-              style={{ border: '1px solid rgba(212,175,55,0.15)', background: 'var(--card)' }}
-            >
+            <div className="rounded-2xl p-6 shadow-sm" style={{ border: '1px solid rgba(212,175,55,0.15)', background: 'var(--card)' }}>
               <h2 className="text-base font-bold mb-4 flex items-center gap-2">
                 <Heart className="h-5 w-5 text-rose-400" aria-hidden="true" />
                 שתף מעשה טוב
@@ -272,9 +254,7 @@ const GoodDeeds = () => {
               <form onSubmit={handleSubmit} className="space-y-4" dir="rtl">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="gd-name" className="text-sm font-medium mb-1 block">
-                      שמך
-                    </label>
+                    <label htmlFor="gd-name" className="text-sm font-medium mb-1 block">שמך</label>
                     <input
                       id="gd-name"
                       type="text"
@@ -287,23 +267,19 @@ const GoodDeeds = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="gd-city" className="text-sm font-medium mb-1 block">
-                      עיר / City
-                    </label>
+                    <label htmlFor="gd-city" className="text-sm font-medium mb-1 block">עיר / City</label>
                     <select
                       id="gd-city"
                       value={city}
                       onChange={e => setCity(e.target.value)}
                       className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
                     >
-                      {CITIES.map(c => (
-                        <option key={c} value={c}>{c}</option>
-                      ))}
+                      {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
                 </div>
 
-                {/* Category picker */}
+                {/* Category */}
                 <div>
                   <p className="text-sm font-medium mb-2">קטגוריה</p>
                   <div className="flex flex-wrap gap-2">
@@ -313,10 +289,9 @@ const GoodDeeds = () => {
                         type="button"
                         onClick={() => setCategory(cat.label)}
                         className="rounded-full px-3 py-1 text-xs font-medium transition-all"
-                        style={
-                          category === cat.label
-                            ? { background: 'rgba(212,175,55,0.2)', color: '#d4af37', border: '1px solid #d4af37' }
-                            : { background: 'transparent', color: 'var(--muted-foreground)', border: '1px solid var(--border)' }
+                        style={category === cat.label
+                          ? { background: 'rgba(212,175,55,0.2)', color: '#d4af37', border: '1px solid #d4af37' }
+                          : { background: 'transparent', color: 'var(--muted-foreground)', border: '1px solid var(--border)' }
                         }
                       >
                         {cat.emoji} {cat.label}
@@ -326,9 +301,7 @@ const GoodDeeds = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="gd-deed" className="text-sm font-medium mb-1 block">
-                    מה המעשה הטוב?
-                  </label>
+                  <label htmlFor="gd-deed" className="text-sm font-medium mb-1 block">מה המעשה הטוב?</label>
                   <textarea
                     id="gd-deed"
                     value={deed}
@@ -342,13 +315,34 @@ const GoodDeeds = () => {
                   <p className="text-xs text-muted-foreground text-left mt-0.5">{deed.length}/300</p>
                 </div>
 
+                {/* Proof URL */}
+                <div>
+                  <label htmlFor="gd-proof" className="text-sm font-medium mb-1 flex items-center gap-1.5 block">
+                    <Link className="h-3.5 w-3.5 text-amber-500" aria-hidden="true" />
+                    הוכחה (אופציונלי) — קישור לתמונה, פוסט או מאמר
+                  </label>
+                  <input
+                    id="gd-proof"
+                    type="url"
+                    value={proofUrl}
+                    onChange={e => setProofUrl(e.target.value)}
+                    placeholder="https://..."
+                    dir="ltr"
+                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                  />
+                  <p className="text-xs text-muted-foreground mt-0.5">הוכחה מזכה אותך בתג ✓ מאומת על הכרטיס</p>
+                </div>
+
                 <Button
                   type="submit"
                   disabled={submitting || !name.trim() || !deed.trim()}
                   className="w-full font-bold"
                   style={{ background: 'linear-gradient(135deg, #b8860b, #d4af37)', color: '#000' }}
                 >
-                  <Send className="h-4 w-4 ml-2" aria-hidden="true" />
+                  {submitting
+                    ? <Loader2 className="h-4 w-4 ml-2 animate-spin" aria-hidden="true" />
+                    : <Send className="h-4 w-4 ml-2" aria-hidden="true" />
+                  }
                   שלח ✨ קבל נקודת UG
                 </Button>
               </form>
@@ -358,10 +352,20 @@ const GoodDeeds = () => {
             <div className="space-y-3">
               <h2 className="text-base font-bold flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-amber-400" aria-hidden="true" />
-                מעשים טובים ({deeds.length})
+                מעשים טובים ({loading ? '…' : deeds.length})
               </h2>
 
-              {deeds.length === 0 ? (
+              {loading ? (
+                <div className="rounded-2xl border border-border bg-card p-10 text-center text-muted-foreground">
+                  <Loader2 className="h-8 w-8 mx-auto mb-3 animate-spin text-amber-500" aria-hidden="true" />
+                  <p className="text-sm">טוען מעשים טובים...</p>
+                </div>
+              ) : error ? (
+                <div className="rounded-2xl border border-destructive/30 bg-card p-6 text-center text-muted-foreground">
+                  <p className="font-medium text-destructive">{error}</p>
+                  <button onClick={fetchDeeds} className="mt-3 text-xs text-amber-500 underline">נסה שוב</button>
+                </div>
+              ) : deeds.length === 0 ? (
                 <div className="rounded-2xl border border-border bg-card p-10 text-center text-muted-foreground">
                   <div className="text-4xl mb-3" aria-hidden="true">✡️</div>
                   <p className="font-medium">היה הראשון לשתף מעשה טוב!</p>
@@ -370,6 +374,7 @@ const GoodDeeds = () => {
               ) : (
                 deeds.map(d => {
                   const cat = CATEGORIES.find(c => c.label === d.category);
+                  const hasVouched = vouchedIds.has(d.id);
                   return (
                     <article
                       key={d.id}
@@ -382,28 +387,46 @@ const GoodDeeds = () => {
                           <div className="flex items-center gap-2 mb-1 flex-wrap">
                             <span className="font-semibold text-sm">{d.name}</span>
                             {d.city && (
-                              <span
-                                className="text-[10px] rounded-full px-2 py-0.5 font-medium"
-                                style={{ background: 'rgba(212,175,55,0.1)', color: '#d4af37' }}
-                              >
+                              <span className="text-[10px] rounded-full px-2 py-0.5 font-medium" style={{ background: 'rgba(212,175,55,0.1)', color: '#d4af37' }}>
                                 📍 {d.city}
                               </span>
                             )}
-                            {cat && (
-                              <span className="text-[10px] text-muted-foreground">
-                                {cat.emoji} {cat.label}
-                              </span>
+                            {cat && <span className="text-[10px] text-muted-foreground">{cat.emoji} {cat.label}</span>}
+                            {d.proofUrl && (
+                              <a
+                                href={d.proofUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] rounded-full px-2 py-0.5 font-bold flex items-center gap-1"
+                                style={{ background: 'rgba(34,197,94,0.1)', color: '#22c55e', border: '1px solid rgba(34,197,94,0.3)' }}
+                                aria-label="הוכחה מאומתת"
+                              >
+                                <Link className="h-2.5 w-2.5" aria-hidden="true" />
+                                ✓ מאומת
+                              </a>
                             )}
-                            <span className="text-xs text-muted-foreground">{formatTime(d.timestamp)}</span>
+                            <span className="text-xs text-muted-foreground">{formatTime(d.createdAt)}</span>
                           </div>
                           <p className="text-sm text-foreground/90 leading-relaxed">{d.deed}</p>
                         </div>
-                        <div
-                          className="shrink-0 flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold"
-                          style={{ background: 'rgba(212,175,55,0.1)', color: '#d4af37' }}
-                        >
-                          <Star className="h-3 w-3" fill="currentColor" aria-hidden="true" />
-                          <span>{d.points}</span>
+                        <div className="shrink-0 flex flex-col items-end gap-2">
+                          <div className="flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold" style={{ background: 'rgba(212,175,55,0.1)', color: '#d4af37' }}>
+                            <Star className="h-3 w-3" fill="currentColor" aria-hidden="true" />
+                            <span>{d.points}</span>
+                          </div>
+                          <button
+                            onClick={() => handleVouch(d.id)}
+                            disabled={hasVouched}
+                            className="flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition-all"
+                            style={hasVouched
+                              ? { background: 'rgba(99,102,241,0.15)', color: '#818cf8', cursor: 'default' }
+                              : { background: 'transparent', color: 'var(--muted-foreground)', border: '1px solid var(--border)' }
+                            }
+                            aria-label={hasVouched ? 'אישרת' : 'אני מאשר'}
+                          >
+                            <ThumbsUp className="h-3 w-3" aria-hidden="true" />
+                            <span>{d.vouches > 0 ? d.vouches : ''}{hasVouched ? ' ✓' : ' אשר'}</span>
+                          </button>
                         </div>
                       </div>
                     </article>
@@ -415,10 +438,7 @@ const GoodDeeds = () => {
 
           {/* Right: leaderboard */}
           <aside className="lg:col-span-1">
-            <div
-              className="rounded-2xl p-5 sticky top-24 shadow-sm space-y-4"
-              style={{ border: '1px solid rgba(212,175,55,0.15)', background: 'var(--card)' }}
-            >
+            <div className="rounded-2xl p-5 sticky top-24 shadow-sm space-y-4" style={{ border: '1px solid rgba(212,175,55,0.15)', background: 'var(--card)' }}>
               <h2 className="text-base font-bold flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-amber-400" aria-hidden="true" />
                 לוח מובילים
@@ -429,26 +449,13 @@ const GoodDeeds = () => {
               ) : (
                 <ol className="space-y-1" dir="rtl">
                   {topUsers.map((u, i) => (
-                    <li
-                      key={u.name}
-                      className="flex items-center gap-3 py-2.5 border-b border-border/40 last:border-0"
-                    >
-                      <span
-                        className="text-sm font-black w-5 shrink-0 text-center"
-                        style={{ color: rankColor(i) }}
-                      >
-                        {i + 1}
-                      </span>
+                    <li key={u.name} className="flex items-center gap-3 py-2.5 border-b border-border/40 last:border-0">
+                      <span className="text-sm font-black w-5 shrink-0 text-center" style={{ color: rankColor(i) }}>{i + 1}</span>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">{u.name}</p>
-                        {u.city && (
-                          <p className="text-[10px] text-muted-foreground">{u.city}</p>
-                        )}
+                        {u.city && <p className="text-[10px] text-muted-foreground">{u.city}</p>}
                       </div>
-                      <span
-                        className="shrink-0 flex items-center gap-1 font-bold text-sm"
-                        style={{ color: '#d4af37' }}
-                      >
+                      <span className="shrink-0 flex items-center gap-1 font-bold text-sm" style={{ color: '#d4af37' }}>
                         <Star className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true" />
                         {u.points}
                       </span>
@@ -457,11 +464,7 @@ const GoodDeeds = () => {
                 </ol>
               )}
 
-              {/* Community stats */}
-              <div
-                className="rounded-xl p-3 text-center"
-                style={{ background: 'rgba(212,175,55,0.05)', border: '1px solid rgba(212,175,55,0.1)' }}
-              >
+              <div className="rounded-xl p-3 text-center" style={{ background: 'rgba(212,175,55,0.05)', border: '1px solid rgba(212,175,55,0.1)' }}>
                 <Users className="h-4 w-4 mx-auto mb-1 text-amber-500/60" aria-hidden="true" />
                 <p className="text-xs font-bold text-amber-400">{deeds.length} מעשים טובים</p>
                 <p className="text-[10px] text-slate-500">good deeds worldwide</p>
