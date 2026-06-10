@@ -439,5 +439,6 @@
   "index.globalStats.stat5.value": "24/7",
   "index.globalStats.stat5.label": "Customer Support",
   "index.globalStats.stat6.value": "VIP+",
-  "index.globalStats.stat6.label": "Handelot Member"
+  "index.globalStats.stat6.label": "Handelot Member",
+  "intro.skip": "Skip"
 }

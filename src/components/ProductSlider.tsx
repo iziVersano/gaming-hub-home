@@ -98,7 +98,7 @@ const ProductSlider = () => {
 
   if (isLoading) {
     return (
-      <section className="pt-6 pb-4 md:pt-16 md:pb-8 relative">
+      <section className="section-shell relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 md:mb-16">
             <div className="shimmer h-10 w-64 mx-auto rounded-lg mb-4" />
@@ -130,13 +130,13 @@ const ProductSlider = () => {
   }
 
   return (
-    <section className="pt-6 pb-4 md:pt-16 md:pb-8 relative">
+    <section className="section-shell relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-6 md:mb-16">
           <div className="mb-4">
-            <span className="text-white text-2xl md:text-4xl text-section-heading block mb-2" style={{ textShadow: '0 0 20px rgba(255,255,255,0.3)' }}>{t('products.featuredTitle')}</span>
-            <div className="text-lg md:text-2xl text-muted-foreground text-desc-bold">{t('products.featuredDescription')}</div>
+            <span className="text-white text-3xl md:text-5xl text-section-heading block mb-2" style={{ textShadow: '0 0 20px rgba(255,255,255,0.3)' }}>{t('products.featuredTitle')}</span>
+            <div className="section-subtitle">{t('products.featuredDescription')}</div>
           </div>
 
           {/* Category Icon Bar */}

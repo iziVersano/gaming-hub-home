@@ -43,13 +43,13 @@ const TrustBadges = () => {
             key={key}
             className={`flex items-center gap-3 px-3.5 py-4 rounded-xl border ${borderColor} ${glowColor} backdrop-blur-sm`}
             style={{
-              background: 'linear-gradient(135deg, rgba(15, 23, 60, 0.85), rgba(20, 30, 70, 0.75))',
+              background: 'hsl(var(--surface-2) / 0.85)',
             }}
           >
             <div className="shrink-0">
               <Icon className={`h-9 w-9 ${iconColor} drop-shadow-[0_0_12px_currentColor]`} strokeWidth={1.5} fill="currentColor" fillOpacity={0.25} />
             </div>
-            <span className="text-[17px] font-bold text-white leading-tight uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.06em', textShadow: '0 0 10px rgba(255,255,255,0.15)' }}>
+            <span className="text-[15px] font-bold text-white leading-tight uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.06em', textShadow: '0 0 10px rgba(255,255,255,0.15)' }}>
               {t(key)}
             </span>
           </div>

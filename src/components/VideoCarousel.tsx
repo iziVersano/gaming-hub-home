@@ -70,7 +70,7 @@ const VideoCarousel = () => {
 
   return (
     <section className="py-6 px-4">
-      <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl relative group">
+      <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden relative group border border-white/10 shadow-[0_0_40px_hsl(var(--primary)/0.15)]">
         <div className="relative aspect-video">
           <div className="absolute inset-0 shimmer-card rounded-2xl z-0" />
 
@@ -99,14 +99,14 @@ const VideoCarousel = () => {
             <>
               <button
                 onClick={goToPrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                 aria-label="Previous video"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={goToNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/30 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                 aria-label="Next video"
               >
                 <ChevronRight className="w-5 h-5" />

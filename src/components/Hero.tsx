@@ -84,7 +84,7 @@ const Hero = () => {
 
   return (
     <section className="hero relative flex items-start justify-center overflow-hidden" style={{ height: "calc(63vh + 52px)", marginTop: "-52px", paddingTop: "52px", zIndex: 1 }} data-section="hero">
-      <style>{`@media (max-width: 767px) { [data-section="hero"] { height: calc(105vw + 230px) !important; } }`}</style>
+      <style>{`@media (max-width: 767px) { [data-section="hero"] { height: calc(82vw + 210px) !important; max-height: 640px; } }`}</style>
       {/* Layer 1: Atmospheric background — desktop only (mobile uses parent wrapper bg) */}
       <div className="absolute inset-0 z-0 hidden md:block">
         {/* Loading placeholder */}
@@ -109,8 +109,10 @@ const Hero = () => {
 
       {/* Layer 2: Subtle decorative ambient glow — desktop only */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1] hidden md:block">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/8 rounded-full" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/6 rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
+        {/* Soft vignette so the edges settle into the page background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,hsl(220_15%_6%/0.55)_100%)]" />
       </div>
 
       <div className="relative z-[1] w-full px-4 pt-[74px] md:pt-0 md:max-w-7xl md:mx-auto md:px-8 text-right" dir="rtl">
@@ -138,17 +140,19 @@ const Hero = () => {
           </div>
 
           {/* Main Headline — subtle backdrop */}
-          <div className="inline-block rounded-2xl px-3 py-2 mb-0 bg-black/25 backdrop-blur-[1px]">
+          <div className="inline-block rounded-2xl px-3 py-2 mb-0 bg-black/25 backdrop-blur-[1px] border border-white/5">
             <div className="space-y-0 md:space-y-1">
-            <p className="font-display text-[clamp(1.05rem,5.2vw,2rem)] font-bold leading-snug text-white text-right w-full break-words" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
+            <p className="font-display text-[clamp(1.05rem,5.2vw,2rem)] font-bold leading-snug tracking-tight text-white text-right w-full break-words" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
               קונסולות משחקי טלוויזיה ומולטימדיה
             </p>
-            <p className="font-display text-[clamp(1.05rem,5.2vw,2rem)] font-bold leading-snug text-white text-right w-full break-words mt-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
+            <p className="font-display text-[clamp(1.05rem,5.2vw,2rem)] font-bold leading-snug tracking-tight text-white text-right w-full break-words mt-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
               מחשבים & אבזרי גיימינג
             </p>
             <p className="font-display text-[clamp(0.95rem,4.5vw,1.3rem)] font-medium leading-snug text-white/90 text-right w-full" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)' }}>
               מוצרי חשמל מתקדמים - ואלקטרוניקה
             </p>
+            {/* Decorative brand accent under the headline */}
+            <div aria-hidden="true" className="h-0.5 w-16 rounded-full bg-gradient-to-r from-primary to-accent mt-2 mr-0.5" />
           </div>
           </div>
 
@@ -157,7 +161,7 @@ const Hero = () => {
             {isFeatureEnabled('HERO_VIDEO_MODE') ? (
               /* Video Carousel Mode */
               <div className="flex justify-center">
-                <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl relative group">
+                <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden relative group border border-white/10 shadow-[0_0_40px_hsl(var(--primary)/0.15)]">
                   {!videoFailed ? (
                     <div className="relative aspect-video">
                       {/* Shimmer placeholder */}
@@ -191,14 +195,14 @@ const Hero = () => {
                         <>
                           <button
                             onClick={goToPrev}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/30 hover:bg-black/60 border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                             aria-label="Previous video"
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
                           <button
                             onClick={goToNext}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/60 border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/30 hover:bg-black/60 border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300"
                             aria-label="Next video"
                           >
                             <ChevronRight className="w-5 h-5" />
@@ -270,7 +274,7 @@ const Hero = () => {
               { value: '24/7', label: t('hero.support', 'Support'), color: 'text-primary' },
               { value: '20+', label: t('hero.years', 'Years Experience'), color: 'text-accent' },
             ].map(({ value, label, color }) => (
-              <div key={value} className="text-center p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 hover:bg-card/70 hover:shadow-lg transition-all duration-300">
+              <div key={value} className="stat-chip">
                 <div className={`text-3xl md:text-4xl text-bold-heading ${color}`}>{value}</div>
                 <div className="text-sm text-desc-bold text-muted-foreground mt-1">{label}</div>
               </div>
@@ -281,17 +285,17 @@ const Hero = () => {
 
       {/* Bottom gradient fade into next section */}
       <div
-        className="absolute bottom-0 left-0 w-full pointer-events-none z-20"
+        className="absolute bottom-0 left-0 w-full pointer-events-none z-20 hidden md:block"
         style={{
-          height: '60px',
-          background: 'linear-gradient(to bottom, rgba(10,10,30,0) 0%, rgba(10,10,30,0.2) 60%, rgba(10,10,30,0.4) 100%)',
+          height: '120px',
+          background: 'linear-gradient(to bottom, transparent 0%, hsl(var(--background)) 100%)',
         }}
       />
 
       {/* Subtle scroll indicator — desktop only */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:block">
-        <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-1">
-          <div className="w-1.5 h-3 bg-primary rounded-full animate-bounce" />
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:block z-30">
+        <div className="w-6 h-10 border-2 border-primary/40 rounded-full flex items-start justify-center p-1">
+          <div className="w-1.5 h-3 bg-gradient-to-b from-primary to-accent rounded-full animate-bounce-gentle" />
         </div>
       </div>
     </section>

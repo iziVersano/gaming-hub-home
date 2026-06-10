@@ -439,5 +439,6 @@
   "index.globalStats.stat5.value": "24/7",
   "index.globalStats.stat5.label": "תמיכת לקוחות",
   "index.globalStats.stat6.value": "VIP+",
-  "index.globalStats.stat6.label": "חבר Handelot"
+  "index.globalStats.stat6.label": "חבר Handelot",
+  "intro.skip": "דלג"
 }

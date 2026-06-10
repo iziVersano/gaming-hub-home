@@ -74,6 +74,19 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     /* Brand tile background */
     --brand-tile-bg: 0 0% 100%;
 
+    /* Section rhythm */
+    --section-pad-y: 2.5rem;
+    --section-pad-y-lg: 5rem;
+
+    /* Surface layering + unified card chrome */
+    --surface-1: 220 14% 97%;
+    --surface-2: 220 14% 95%;
+    --card-border: 220 13% 88%;
+    --glow-card-hover: 0 0 0 1px hsl(var(--primary) / 0.18), 0 12px 40px hsl(220 14% 10% / 0.1);
+
+    /* Mobile hero backdrop (deep violet behind the consoles image) */
+    --hero-mobile-bg: 271 97% 14%;
+
     /* Smooth transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-glow: all 0.4s ease-out;
@@ -151,8 +164,13 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     --sidebar-border: 220 15% 20%;
     --sidebar-ring: 200 100% 55%;
 
-    /* Brand tile background (force light surface in dark mode) */
-    --brand-tile-bg: 0 0% 100%;
+    /* Brand tile background — dark glass tile; logos are inverted to white */
+    --brand-tile-bg: 222 18% 11%;
+
+    --surface-1: 220 15% 8%;
+    --surface-2: 222 18% 10%;
+    --card-border: 220 18% 22%;
+    --glow-card-hover: 0 0 0 1px hsl(var(--primary) / 0.25), 0 8px 32px hsl(222 84% 3% / 0.5), 0 0 24px hsl(var(--primary) / 0.12);
   }
 }
 
@@ -403,13 +421,14 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
   /* Professional Product Card */
   .product-card {
     @apply bg-card rounded-2xl p-4 md:p-6 transition-all duration-300 relative overflow-hidden;
-    box-shadow: var(--shadow-card);
-    border: 1px solid hsl(var(--border));
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card), inset 0 1px 0 hsl(220 90% 98% / 0.04);
+    border: 1px solid hsl(var(--card-border) / 0.7);
   }
 
   .product-card:hover {
-    box-shadow: var(--shadow-elevated);
-    border-color: hsl(var(--primary) / 0.25);
+    box-shadow: var(--glow-card-hover);
+    border-color: hsl(var(--primary) / 0.35);
     transform: translateY(-3px);
   }
 
@@ -446,12 +465,13 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
       0 1px 0 rgba(0, 0, 0, 0.1);
   }
 
-  /* Section heading - strong but slightly less than hero */
+  /* Section heading - strong but slightly less than hero, with a faint neon halo */
   .text-section-heading {
     font-weight: 800;
     text-shadow:
       0 1px 3px rgba(0, 0, 0, 0.2),
-      0 3px 10px rgba(0, 0, 0, 0.1);
+      0 3px 10px rgba(0, 0, 0, 0.1),
+      0 0 32px hsl(var(--primary) / 0.12);
     letter-spacing: -0.015em;
   }
 
@@ -956,6 +976,13 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     place-items: center;
     background: hsl(var(--brand-tile-bg));
     border-radius: var(--radius);
+    border: 1px solid hsl(var(--card-border) / 0.5);
+    transition: var(--transition-smooth);
+  }
+
+  .brand-card:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.1);
   }
 
   .brand-card img {
@@ -964,6 +991,209 @@ All colors MUST be HSL. Premium blue gradients with neon accents.
     object-fit: contain;
     filter: none;
     mix-blend-mode: normal;
+  }
+
+  /* Dark theme: normalize black-fill and colored wordmarks to white on the glass tile */
+  .dark .brand-card img {
+    filter: brightness(0) invert(1) opacity(0.75);
+  }
+
+  .dark .brand-card:hover img {
+    filter: brightness(0) invert(1) opacity(1);
+  }
+
+  /* ===== Homepage rhythm: shared section + card language ===== */
+
+  /* Consistent vertical padding for homepage sections */
+  .section-shell {
+    position: relative;
+    padding-block: var(--section-pad-y);
+  }
+
+  .section-shell--compact {
+    padding-block: calc(var(--section-pad-y) * 0.6);
+  }
+
+  @media (min-width: 768px) {
+    .section-shell {
+      padding-block: var(--section-pad-y-lg);
+    }
+
+    .section-shell--compact {
+      padding-block: calc(var(--section-pad-y-lg) * 0.5);
+    }
+  }
+
+  /* Hairline neon divider at a section's top edge */
+  .section-shell--divided::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(640px, 80%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.35), hsl(var(--accent) / 0.35), transparent);
+  }
+
+  /* Subtle ambient wash for alternating sections */
+  .section-shell--tinted {
+    background:
+      radial-gradient(60% 50% at 50% 0%, hsl(var(--accent) / 0.06), transparent 70%),
+      linear-gradient(180deg, hsl(var(--surface-1) / 0.5), transparent);
+  }
+
+  /* Unified section subtitle */
+  .section-subtitle {
+    @apply text-base md:text-xl text-muted-foreground font-medium max-w-3xl mx-auto;
+    text-wrap: balance;
+  }
+
+  /* Compact stat chip (hero stats, global stats) */
+  .stat-chip {
+    @apply rounded-xl p-4 text-center transition-all duration-300;
+    background: hsl(var(--surface-2) / 0.6);
+    border: 1px solid hsl(var(--card-border) / 0.5);
+  }
+
+  .stat-chip:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.08);
+  }
+
+  /* Scroll-entrance reveal (class toggled by the Reveal component) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ===== Intro splash: Western Wall video + animated logo ===== */
+  .intro-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(220 15% 4%);
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.7s ease;
+  }
+
+  .intro-splash--closing {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .intro-splash__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: intro-media-zoom 8s ease-out forwards;
+  }
+
+  /* Ambient fallback shown until the video plays (or if it's missing) */
+  .intro-splash__fallback {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(70% 60% at 50% 35%, hsl(var(--accent) / 0.18), transparent 70%),
+      radial-gradient(60% 50% at 50% 80%, hsl(var(--primary) / 0.14), transparent 70%),
+      hsl(220 15% 4%);
+  }
+
+  /* Vignette + bottom scrim so the logo stays readable over any footage */
+  .intro-splash__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 30%, hsl(220 15% 4% / 0.7) 100%),
+      linear-gradient(to top, hsl(220 15% 4% / 0.55), transparent 40%);
+  }
+
+  .intro-splash__logo {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 1.5rem;
+    animation: intro-logo-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+  }
+
+  .intro-splash__tagline {
+    animation: intro-tagline-in 1s ease-out 1.3s both;
+  }
+
+  .intro-splash__skip {
+    position: absolute;
+    bottom: max(1.5rem, env(safe-area-inset-bottom));
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: fit-content;
+    z-index: 2;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid hsl(0 0% 100% / 0.25);
+    background: hsl(220 15% 4% / 0.5);
+    backdrop-filter: blur(8px);
+    color: hsl(0 0% 100% / 0.8);
+    font-size: 0.875rem;
+    transition: var(--transition-smooth);
+    animation: intro-tagline-in 0.8s ease-out 1.8s both;
+  }
+
+  .intro-splash__skip:hover {
+    border-color: hsl(var(--primary) / 0.6);
+    color: hsl(0 0% 100%);
+  }
+
+  @keyframes intro-media-zoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+
+  @keyframes intro-logo-in {
+    0% {
+      opacity: 0;
+      transform: translateY(16px) scale(0.92);
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes intro-tagline-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   /* Mobile optimization for tech elements */

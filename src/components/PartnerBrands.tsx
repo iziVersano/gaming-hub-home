@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useI18n } from '@/hooks/I18nContext';
+import Reveal from '@/components/Reveal';
 
 const PartnerBrands = () => {
   const { t } = useI18n();
@@ -21,19 +22,19 @@ const PartnerBrands = () => {
   ];
 
   return (
-    <section className="pt-6 pb-2 md:pt-8 md:pb-4 bg-card/30">
+    <section className="section-shell section-shell--compact section-shell--tinted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6 md:mb-12">
-          <h2 className="text-2xl md:text-4xl text-section-heading mb-4">
+        <Reveal className="text-center mb-6 md:mb-12">
+          <h2 className="text-3xl md:text-5xl text-section-heading mb-4">
             {t('products.trustedTitle')}
           </h2>
-          <p className="text-xl text-muted-foreground text-desc-bold max-w-2xl mx-auto">
+          <p className="section-subtitle max-w-2xl">
             {t('products.trustedDescription')}
           </p>
-        </div>
+        </Reveal>
 
         {/* Brand logos grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-4 p-4 sm:p-4 bg-card/20 rounded-2xl border border-border/20">
+        <Reveal delay={100} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-4 p-4 sm:p-4 rounded-2xl">
           {brands.map((name, index) => {
             const label = name.charAt(0).toUpperCase() + name.slice(1);
             return (
@@ -72,7 +73,7 @@ const PartnerBrands = () => {
               </div>
             );
           })}
-        </div>
+        </Reveal>
 
         {/* Partnership CTA */}
         <div className="text-center mt-4 md:mt-12">

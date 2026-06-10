@@ -5,6 +5,8 @@ import PartnerBrands from '@/components/PartnerBrands';
 import Footer from '@/components/Footer';
 import TrustBadges from '@/components/TrustBadges';
 import VideoCarousel from '@/components/VideoCarousel';
+import Reveal from '@/components/Reveal';
+import IntroSplash from '@/components/IntroSplash';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowRight, Gamepad2, Headphones, Shield, BadgeDollarSign, UserPlus, Search, Check, Monitor, Plane, Bike, Cpu, Lightbulb, PhoneCall, FileText, Package } from 'lucide-react';
@@ -65,6 +67,7 @@ const Index = () => {
           })}
         </script>
       </Helmet>
+      <IntroSplash />
       {/* Desktop: normal fixed nav */}
       <div className="hidden md:block">
         <Navigation />
@@ -75,15 +78,17 @@ const Index = () => {
       {/* Mobile hero background wrapper — single bg image behind nav + hero */}
       <div className="relative md:contents">
         {/* Mobile-only background image — starts below the text block */}
-        <div className="absolute inset-0 md:hidden z-0 overflow-hidden" style={{ backgroundColor: '#210144' }}>
+        <div className="absolute inset-0 md:hidden z-0 overflow-hidden" style={{ backgroundColor: 'hsl(var(--hero-mobile-bg))' }}>
           <img
             src="/images/bckmobil.png"
             alt=""
             aria-hidden="true"
-            style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: 'auto' }}
+            style={{ position: 'absolute', top: '210px', left: 0, width: '100%', height: 'calc(100% - 210px)', objectFit: 'cover', objectPosition: 'top center' }}
           />
           {/* Tall gradient fade: covers the full seam between bg color and image */}
-          <div style={{ position: 'absolute', top: '200px', left: 0, width: '100%', height: '150px', background: 'linear-gradient(to bottom, #210144 0%, #210144 30%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', top: '180px', left: 0, width: '100%', height: '150px', background: 'linear-gradient(to bottom, hsl(var(--hero-mobile-bg)) 0%, hsl(var(--hero-mobile-bg)) 30%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
+          {/* Bottom fade: hands the hero off smoothly into the trust badges */}
+          <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '80px', background: 'linear-gradient(to bottom, transparent, hsl(var(--background)))', zIndex: 2, pointerEvents: 'none' }} />
         </div>
 
         {/* Mobile transparent nav — inside wrapper so bg shows through */}
@@ -110,38 +115,38 @@ const Index = () => {
       <PartnerBrands />
       
       {/* Why Choose Us Section — desktop only (mobile uses TrustBadges) */}
-      <section className="hidden md:block pt-2 md:pt-6 pb-6 md:pb-20">
+      <section className="hidden md:block section-shell section-shell--divided">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 md:mb-12">
-            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+          <Reveal className="text-center mb-6 md:mb-12">
+            <h2 className="text-3xl md:text-5xl text-section-heading mb-4">
               {t('index.whyChoose.title')}
             </h2>
-            <p className="text-xl text-muted-foreground text-desc-bold max-w-3xl mx-auto">
+            <p className="section-subtitle">
               {t('index.whyChoose.description')}
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature) => (
-              <div key={feature.title} className="product-card text-center group bg-slate-800 border-slate-700">
+            {features.map((feature, idx) => (
+              <Reveal key={feature.title} delay={Math.min(idx * 60, 240)} className="product-card text-center group">
                 <div className="w-20 h-20 md:w-16 md:h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                   <feature.icon className="h-10 w-10 md:h-8 md:w-8 text-white" />
                 </div>
                 <h3 className="text-2xl md:text-xl text-sub-bold mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground text-desc-bold">{feature.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-4 md:py-12 bg-gradient-to-r from-primary/10 to-accent/10">
+      <section className="section-shell section-shell--compact bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl text-section-heading mb-6">
+          <h2 className="text-3xl md:text-5xl text-section-heading mb-6">
             {t('index.cta.title')}
           </h2>
-          <p className="text-xl text-muted-foreground text-desc-bold mb-6 md:mb-8">
+          <p className="section-subtitle mb-6 md:mb-8">
             {t('index.cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -162,14 +167,14 @@ const Index = () => {
       </section>
 
       {/* About Consoltech Section */}
-      <section id="about-home" className="block w-full py-6 px-4 sm:px-6 mt-4 md:mt-12 mb-4 md:mb-8">
+      <section id="about-home" className="block w-full section-shell section-shell--divided px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* About Card */}
           <div className="product-card p-8 mb-8">
             <div className="flex flex-col gap-6 md:grid md:grid-cols-12 md:gap-8">
               {/* Left Column */}
               <div className="md:col-span-7 space-y-6">
-                <h2 className="text-4xl md:text-5xl text-section-heading">
+                <h2 className="text-3xl md:text-5xl text-section-heading">
                   {t('index.aboutSection.title')}
                 </h2>
                 <p className="text-lg text-muted-foreground text-desc-bold leading-relaxed">
@@ -298,16 +303,16 @@ const Index = () => {
       </section>
 
       {/* Category Showcase Section */}
-      <section className="py-5 md:py-12">
+      <section className="section-shell">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-4 md:mb-8">
-            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+          <Reveal className="text-center mb-4 md:mb-8">
+            <h2 className="text-3xl md:text-5xl text-section-heading mb-4">
               {t('index.categories.title')}
             </h2>
-            <p className="text-xl text-muted-foreground text-desc-bold max-w-3xl mx-auto">
+            <p className="section-subtitle">
               {t('index.categories.description')}
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
@@ -317,17 +322,19 @@ const Index = () => {
               { icon: Bike,     key: 'ebikes', color: 'from-emerald-500 to-green-600' },
               { icon: Cpu,      key: 'electronics', color: 'from-orange-500 to-amber-500' },
               { icon: Lightbulb, key: 'gadgets', color: 'from-pink-500 to-rose-600' },
-            ].map(({ icon: Icon, key, color }) => (
-              <Link key={key} to="/products" className="product-card group p-5 md:p-7 flex flex-col gap-4 hover:scale-[1.02] transition-transform bg-slate-800 border-slate-700">
-                <div className={`w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br ${color} rounded-xl flex items-center justify-center`}>
-                  <Icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-lg md:text-xl text-sub-bold mb-1">{t(`index.categories.${key}.title`)}</h3>
-                  <p className="text-sm text-muted-foreground">{t(`index.categories.${key}.description`)}</p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity mt-auto" />
-              </Link>
+            ].map(({ icon: Icon, key, color }, idx) => (
+              <Reveal key={key} delay={Math.min(idx * 60, 240)}>
+                <Link to="/products" className="product-card group p-5 md:p-7 flex flex-col gap-4 h-full">
+                  <div className={`w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br ${color} rounded-xl flex items-center justify-center`}>
+                    <Icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl text-sub-bold mb-1">{t(`index.categories.${key}.title`)}</h3>
+                    <p className="text-sm text-muted-foreground">{t(`index.categories.${key}.description`)}</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity mt-auto rtl:rotate-180" />
+                </Link>
+              </Reveal>
             ))}
           </div>
 
@@ -343,16 +350,16 @@ const Index = () => {
       </section>
 
       {/* How to Partner Section */}
-      <section className="py-5 md:py-12 bg-gradient-to-b from-slate-900 to-slate-800/50">
+      <section className="section-shell section-shell--tinted section-shell--divided">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-14">
-            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+          <Reveal className="text-center mb-8 md:mb-14">
+            <h2 className="text-3xl md:text-5xl text-section-heading mb-4">
               {t('index.howToPartner.title')}
             </h2>
-            <p className="text-xl text-muted-foreground text-desc-bold max-w-2xl mx-auto">
+            <p className="section-subtitle max-w-2xl">
               {t('index.howToPartner.description')}
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
             {/* connector line — desktop only */}
@@ -363,7 +370,7 @@ const Index = () => {
               { icon: FileText,  stepKey: 'step2' },
               { icon: Package,   stepKey: 'step3' },
             ].map(({ icon: Icon, stepKey }, idx) => (
-              <div key={stepKey} className="product-card p-6 md:p-8 text-center bg-slate-800 border-slate-700 relative z-10">
+              <Reveal key={stepKey} delay={Math.min(idx * 60, 240)} className="product-card p-6 md:p-8 text-center relative z-10">
                 <div className="text-5xl font-bold gradient-text opacity-20 absolute top-4 right-5 select-none">
                   {t(`index.howToPartner.${stepKey}.number`)}
                 </div>
@@ -372,7 +379,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl text-sub-bold mb-3">{t(`index.howToPartner.${stepKey}.title`)}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{t(`index.howToPartner.${stepKey}.description`)}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
@@ -388,16 +395,16 @@ const Index = () => {
       </section>
 
       {/* Global Stats Section */}
-      <section className="py-5 md:py-12">
+      <section className="section-shell section-shell--divided">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-14">
-            <h2 className="text-4xl md:text-5xl text-section-heading mb-4">
+          <Reveal className="text-center mb-8 md:mb-14">
+            <h2 className="text-3xl md:text-5xl text-section-heading mb-4">
               {t('index.globalStats.title')}
             </h2>
-            <p className="text-xl text-muted-foreground text-desc-bold max-w-2xl mx-auto">
+            <p className="section-subtitle max-w-2xl">
               {t('index.globalStats.description')}
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
             {[
@@ -407,13 +414,13 @@ const Index = () => {
               { valueKey: 'stat4', labelKey: 'stat4', color: 'from-orange-500 to-amber-500' },
               { valueKey: 'stat5', labelKey: 'stat5', color: 'from-pink-500 to-rose-500' },
               { valueKey: 'stat6', labelKey: 'stat6', color: 'from-sky-500 to-blue-500' },
-            ].map(({ valueKey, labelKey, color }) => (
-              <div key={valueKey} className="product-card p-5 md:p-6 text-center bg-slate-800 border-slate-700">
+            ].map(({ valueKey, labelKey, color }, idx) => (
+              <Reveal key={valueKey} delay={Math.min(idx * 60, 240)} className="stat-chip p-5 md:p-6">
                 <div className={`text-3xl md:text-4xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent mb-2`}>
                   {t(`index.globalStats.${valueKey}.value`)}
                 </div>
                 <div className="text-sm text-muted-foreground">{t(`index.globalStats.${labelKey}.label`)}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
