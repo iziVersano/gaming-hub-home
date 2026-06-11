@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, ParseIntPipe, Query } from '@nestjs/common';
 import { WishesService, PlaceWishDto } from './wishes.service';
 
 @Controller('api/wishes')
@@ -18,5 +18,10 @@ export class WishesController {
   @Post(':id/light')
   light(@Param('id', ParseIntPipe) id: number) {
     return this.service.light(id);
+  }
+
+  @Get('streak')
+  getStreak(@Query('name') name: string) {
+    return this.service.getStreak(name || '');
   }
 }

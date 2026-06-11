@@ -51,7 +51,14 @@ export interface WishEntity {
   category: string;
   forWhom?: string;
   candles: number;
+  points: number;
   createdAt: string;
+}
+
+export interface StreakRecord {
+  name: string;
+  lastDate: string;
+  streak: number;
 }
 
 @Injectable()
@@ -62,6 +69,7 @@ export class JsonStorageService {
 
   private goodDeedsPath: string;
   private wishesPath: string;
+  private streaksPath: string;
 
   constructor() {
     this.dataDir = join(process.cwd(), 'data');
@@ -69,6 +77,7 @@ export class JsonStorageService {
     this.warrantyPath = join(this.dataDir, 'warranty.json');
     this.goodDeedsPath = join(this.dataDir, 'gooddeeds.json');
     this.wishesPath = join(this.dataDir, 'wishes.json');
+    this.streaksPath = join(this.dataDir, 'streaks.json');
 
     // Ensure data directory exists
     if (!existsSync(this.dataDir)) {
@@ -87,6 +96,9 @@ export class JsonStorageService {
     }
     if (!existsSync(this.wishesPath)) {
       writeFileSync(this.wishesPath, JSON.stringify([], null, 2));
+    }
+    if (!existsSync(this.streaksPath)) {
+      writeFileSync(this.streaksPath, JSON.stringify([], null, 2));
     }
   }
 
@@ -212,8 +224,37 @@ export class JsonStorageService {
     const index = wishes.findIndex((w) => w.id === id);
     if (index === -1) return null;
     wishes[index].candles += 1;
+    wishes[index].points += 1;
     writeFileSync(this.wishesPath, JSON.stringify(wishes, null, 2));
     return wishes[index];
+  }
+
+  // Streaks
+  async getStreaks(): Promise<StreakRecord[]> {
+    const data = readFileSync(this.streaksPath, 'utf-8');
+    return JSON.parse(data);
+  }
+
+  async updateStreak(name: string): Promise<number> {
+    const streaks = await this.getStreaks();
+    const today = new Date().toISOString().split('T')[0];
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    const existing = streaks.find((s) => s.name === name);
+    if (!existing) {
+      streaks.push({ name, lastDate: today, streak: 1 });
+      writeFileSync(this.streaksPath, JSON.stringify(streaks, null, 2));
+      return 1;
+    }
+    if (existing.lastDate === today) return existing.streak;
+    existing.streak = existing.lastDate === yesterday ? existing.streak + 1 : 1;
+    existing.lastDate = today;
+    writeFileSync(this.streaksPath, JSON.stringify(streaks, null, 2));
+    return existing.streak;
+  }
+
+  async getStreak(name: string): Promise<number> {
+    const streaks = await this.getStreaks();
+    return streaks.find((s) => s.name === name)?.streak ?? 0;
   }
 
   private seedProducts(): void {
