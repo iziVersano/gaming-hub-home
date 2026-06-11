@@ -1,5 +1,8 @@
 # Secrets — never commit these
+.env
+.env.local
 .env.telegram
+backend/api/.env
 scripts/.telegram-agent-state.json
 scripts/.tmp-images/
 
