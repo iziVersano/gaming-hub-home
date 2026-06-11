@@ -17,7 +17,8 @@ export interface PlaceWishResult {
   streakBonus: boolean;
 }
 
-const DAILY_THEMES = ['שלום', 'בריאות', 'משפחה', 'אהבה', 'פרנסה', 'קהילה', 'שלום'];
+// Sun=gmilut Mon=tzedakah Tue=bikur Wed=orchim Thu=olam Fri=horim Sat=chesed
+const DAILY_THEMES = ['גמילות חסדים', 'צדקה', 'ביקור חולים', 'הכנסת אורחים', 'תיקון עולם', 'כיבוד הורים', 'חסד'];
 
 @Injectable()
 export class WishesService {
