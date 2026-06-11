@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { GoodDeedsModule } from './gooddeeds/gooddeeds.module';
 import { WishesModule } from './wishes/wishes.module';
+import { PlacesModule } from './places/places.module';
 import { JsonStorageService } from './storage/json-storage.service';
 import { EmailService } from './email/email.service';
 
@@ -25,6 +26,7 @@ const jwtSecret = process.env.JWT_SECRET_KEY || 'ConsolTech-SuperSecret-JWT-Key-
     UploadModule,
     GoodDeedsModule,
     WishesModule,
+    PlacesModule,
   ],
   providers: [JsonStorageService, EmailService],
   exports: [JsonStorageService, EmailService, JwtModule],

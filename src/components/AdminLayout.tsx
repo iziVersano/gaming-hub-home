@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LogOut, Package, LayoutDashboard, FileText } from 'lucide-react';
+import { LogOut, Package, LayoutDashboard, FileText, MapPin } from 'lucide-react';
 import { removeAuthToken } from '@/lib/api';
 import { useI18n } from '@/hooks/I18nContext';
 import { featureFlags } from '@/lib/featureFlags';
@@ -69,6 +69,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   </Link>
                 </Button>
                 )}
+                <Button
+                  asChild
+                  variant={isActive('/admin/places') ? 'default' : 'ghost'}
+                  size="sm"
+                >
+                  <Link to="/admin/places">
+                    <MapPin className="h-4 w-4" />
+                    <span>Places</span>
+                  </Link>
+                </Button>
               </div>
             </div>
 

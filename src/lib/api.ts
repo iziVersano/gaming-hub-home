@@ -170,6 +170,22 @@ export interface LoginRequest {
   password: string;
 }
 
+export type PlaceType = 'chabad' | 'hospital' | 'synagogue' | 'charity' | 'school' | 'community_center' | 'other';
+
+export interface Place {
+  id: number;
+  name: string;
+  type: PlaceType;
+  city: string;
+  address?: string;
+  website?: string;
+  phone?: string;
+  mitzvot: string[];
+  description?: string;
+  approved: boolean;
+  createdAt: string;
+}
+
 export interface LoginResponse {
   token: string;
   email: string;
@@ -339,4 +355,31 @@ export const getImageUrl = (imageUrl: string): string => {
     return imageUrl;
   }
   return imageUrl;
+};
+
+// Places API
+export const getPlaces = async (city?: string, mitzvah?: string): Promise<Place[]> => {
+  const params = new URLSearchParams();
+  if (city) params.set('city', city);
+  if (mitzvah) params.set('mitzvah', mitzvah);
+  const qs = params.toString();
+  const res = await fetch(`${API_BASE_URL}/places${qs ? '?' + qs : ''}`);
+  if (!res.ok) return [];
+  return res.json();
+};
+
+export const getAllPlacesAdmin = async (): Promise<Place[]> => {
+  return fetchApi('/places/all');
+};
+
+export const createPlace = async (data: Omit<Place, 'id' | 'createdAt'>): Promise<Place> => {
+  return fetchApi('/places', { method: 'POST', body: JSON.stringify(data) });
+};
+
+export const updatePlace = async (id: number, data: Partial<Place>): Promise<Place> => {
+  return fetchApi(`/places/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+};
+
+export const deletePlace = async (id: number): Promise<void> => {
+  await fetchApi(`/places/${id}`, { method: 'DELETE' });
 };

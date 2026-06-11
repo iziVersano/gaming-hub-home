@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
-import { Flame, Send, Trophy, Star, Globe, X, Loader2, ScrollText, Zap } from 'lucide-react';
+import { Flame, Send, Trophy, Star, Globe, X, Loader2, ScrollText, Zap, MapPin } from 'lucide-react';
+import { getPlaces, type Place } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -17,6 +18,7 @@ interface Wish {
   wish: string;
   category: string;
   forWhom?: string;
+  placeName?: string;
   candles: number;
   points: number;
   createdAt: string;
@@ -608,6 +610,11 @@ function NoteStone({ wish, lit, onLight }: { wish: Wish; lit: boolean; onLight: 
         <div className="text-base mb-1">{mitzvah.emoji}</div>
         <p className="text-[10px] font-semibold text-white/80 truncate">{wish.name}</p>
         <p className="text-[9px] text-white/35">{wish.city}</p>
+        {wish.placeName && (
+          <p className="text-[8px] mt-0.5 truncate" style={{ color: mitzvah.color + 'cc' }}>
+            🏛 {wish.placeName}
+          </p>
+        )}
         <div className="flex items-center justify-between mt-1">
           {wish.candles > 0 && (
             <div className="flex items-center gap-0.5">
@@ -661,6 +668,11 @@ function NoteStone({ wish, lit, onLight }: { wish: Wish; lit: boolean; onLight: 
               {wish.forWhom && (
                 <p className="text-center text-xs text-stone-500 mb-3">עבור: <span className="font-semibold">{wish.forWhom}</span></p>
               )}
+              {wish.placeName && (
+                <p className="text-center text-xs mb-3" style={{ color: mitzvah.color }}>
+                  🏛️ <span className="font-semibold">{wish.placeName}</span>
+                </p>
+              )}
 
               <div className="flex items-center justify-between text-xs text-stone-400 mb-4">
                 <span>{wish.name} · {wish.city}</span>
@@ -713,6 +725,8 @@ export default function KotelWall() {
   const [selectedLeaf, setSelectedLeaf] = useState<MitzvahKey | null>(null);
   const [category, setCategory] = useState(MITZVOT[0].he);
   const [forWhom, setForWhom] = useState('');
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
 
   const { toast } = useToast();
 
@@ -745,11 +759,25 @@ export default function KotelWall() {
   const handleLeafSelect = (key: MitzvahKey) => {
     if (selectedLeaf === key) {
       setSelectedLeaf(null);
+      setPlaces([]);
+      setSelectedPlace(null);
     } else {
       setSelectedLeaf(key);
       const m = MITZVOT.find(m => m.key === key)!;
       setCategory(m.he);
+      setSelectedPlace(null);
+      getPlaces(city, key).then(setPlaces).catch(() => setPlaces([]));
     }
+  };
+
+  useEffect(() => {
+    if (!selectedLeaf) return;
+    setSelectedPlace(null);
+    getPlaces(city, selectedLeaf).then(setPlaces).catch(() => setPlaces([]));
+  }, [city, selectedLeaf]);
+
+  const togglePlace = (place: Place) => {
+    setSelectedPlace(prev => prev?.id === place.id ? null : place);
   };
 
   const handleDeedSelect = (deed: string) => {
@@ -770,7 +798,7 @@ export default function KotelWall() {
       const res = await fetch(`${API_BASE}/wishes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), city, wish: wish.trim(), category, forWhom: forWhom.trim() || undefined }),
+        body: JSON.stringify({ name: name.trim(), city, wish: wish.trim(), category, forWhom: forWhom.trim() || undefined, placeName: selectedPlace?.name || undefined }),
       });
       if (!res.ok) throw new Error();
       const result: PlaceResult = await res.json();
@@ -779,6 +807,8 @@ export default function KotelWall() {
       setWish('');
       setForWhom('');
       setSelectedLeaf(null);
+      setSelectedPlace(null);
+      setPlaces([]);
       setShowForm(false);
 
       const breakdown: string[] = ['📜 note placed +1'];
@@ -933,6 +963,46 @@ export default function KotelWall() {
                         onSelect={handleDeedSelect}
                       />
                     )}
+                  </AnimatePresence>
+
+                  {/* Official places */}
+                  <AnimatePresence>
+                    {selectedLeaf && places.length > 0 && (() => {
+                      const m = MITZVOT.find(x => x.key === selectedLeaf)!;
+                      return (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="overflow-hidden pt-3"
+                        >
+                          <p className="text-[10px] font-semibold text-stone-500 mb-1.5 flex items-center gap-1" dir="rtl">
+                            <MapPin className="h-3 w-3" /> מקומות רשמיים — {city}:
+                          </p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {places.map(p => (
+                              <button
+                                key={p.id}
+                                type="button"
+                                onClick={() => togglePlace(p)}
+                                className="rounded-full px-3 py-1 text-xs font-medium transition-all"
+                                style={selectedPlace?.id === p.id
+                                  ? { background: m.color + '22', color: m.color, border: `1px solid ${m.color}` }
+                                  : { background: 'rgba(255,255,255,0.6)', color: '#78716c', border: '1px solid #e7e5e4' }
+                                }
+                              >
+                                🏛️ {p.name}
+                              </button>
+                            ))}
+                          </div>
+                          {selectedPlace && (
+                            <p className="text-[10px] text-stone-400 mt-1.5" dir="rtl">
+                              הפתק שלך יתויג עם <span className="font-semibold text-stone-600">{selectedPlace.name}</span>
+                            </p>
+                          )}
+                        </motion.div>
+                      );
+                    })()}
                   </AnimatePresence>
                 </div>
 

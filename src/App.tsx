@@ -29,6 +29,8 @@ const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const AdminProducts = lazy(() => import("./pages/admin/Products"));
 const AdminProductForm = lazy(() => import("./pages/admin/ProductForm"));
 const WarrantyRecords = lazy(() => import("./pages/admin/WarrantyRecords"));
+const AdminPlaces = lazy(() => import("./pages/admin/Places"));
+const AdminPlaceForm = lazy(() => import("./pages/admin/PlaceForm"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -94,6 +96,9 @@ const App = () => {
                   <Route path="/admin/products/new" element={<AdminProductForm />} />
                   <Route path="/admin/products/edit/:id" element={<AdminProductForm />} />
                   {featureFlags.WARRANTY_ENABLED && <Route path="/admin/warranty-records" element={<WarrantyRecords />} />}
+                  <Route path="/admin/places" element={<AdminPlaces />} />
+                  <Route path="/admin/places/new" element={<AdminPlaceForm />} />
+                  <Route path="/admin/places/edit/:id" element={<AdminPlaceForm />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>

@@ -7,6 +7,7 @@ export interface PlaceWishDto {
   wish: string;
   category: string;
   forWhom?: string;
+  placeName?: string;
 }
 
 export interface PlaceWishResult {
@@ -46,6 +47,7 @@ export class WishesService {
       wish: dto.wish.trim().slice(0, 280),
       category: dto.category,
       forWhom: dto.forWhom?.trim().slice(0, 80) || undefined,
+      placeName: dto.placeName?.trim().slice(0, 100) || undefined,
       points,
     });
 

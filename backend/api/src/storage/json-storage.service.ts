@@ -50,6 +50,7 @@ export interface WishEntity {
   wish: string;
   category: string;
   forWhom?: string;
+  placeName?: string;
   candles: number;
   points: number;
   createdAt: string;
@@ -61,6 +62,22 @@ export interface StreakRecord {
   streak: number;
 }
 
+export type PlaceType = 'chabad' | 'hospital' | 'synagogue' | 'charity' | 'school' | 'community_center' | 'other';
+
+export interface PlaceEntity {
+  id: number;
+  name: string;
+  type: PlaceType;
+  city: string;
+  address?: string;
+  website?: string;
+  phone?: string;
+  mitzvot: string[];
+  description?: string;
+  approved: boolean;
+  createdAt: string;
+}
+
 @Injectable()
 export class JsonStorageService {
   private productsPath: string;
@@ -70,6 +87,7 @@ export class JsonStorageService {
   private goodDeedsPath: string;
   private wishesPath: string;
   private streaksPath: string;
+  private placesPath: string;
 
   constructor() {
     this.dataDir = join(process.cwd(), 'data');
@@ -78,6 +96,7 @@ export class JsonStorageService {
     this.goodDeedsPath = join(this.dataDir, 'gooddeeds.json');
     this.wishesPath = join(this.dataDir, 'wishes.json');
     this.streaksPath = join(this.dataDir, 'streaks.json');
+    this.placesPath = join(this.dataDir, 'places.json');
 
     // Ensure data directory exists
     if (!existsSync(this.dataDir)) {
@@ -99,6 +118,9 @@ export class JsonStorageService {
     }
     if (!existsSync(this.streaksPath)) {
       writeFileSync(this.streaksPath, JSON.stringify([], null, 2));
+    }
+    if (!existsSync(this.placesPath)) {
+      writeFileSync(this.placesPath, JSON.stringify(this.seedPlaces(), null, 2));
     }
   }
 
@@ -255,6 +277,79 @@ export class JsonStorageService {
   async getStreak(name: string): Promise<number> {
     const streaks = await this.getStreaks();
     return streaks.find((s) => s.name === name)?.streak ?? 0;
+  }
+
+  // Places
+  async getPlaces(city?: string, mitzvah?: string): Promise<PlaceEntity[]> {
+    const data: PlaceEntity[] = JSON.parse(readFileSync(this.placesPath, 'utf-8'));
+    return data.filter((p) => {
+      if (!p.approved) return false;
+      if (city && p.city !== city) return false;
+      if (mitzvah && !p.mitzvot.includes(mitzvah)) return false;
+      return true;
+    });
+  }
+
+  async getAllPlaces(): Promise<PlaceEntity[]> {
+    return JSON.parse(readFileSync(this.placesPath, 'utf-8'));
+  }
+
+  async createPlace(place: Omit<PlaceEntity, 'id' | 'createdAt'>): Promise<PlaceEntity> {
+    const places = await this.getAllPlaces();
+    const maxId = places.length > 0 ? Math.max(...places.map((p) => p.id)) : 0;
+    const entity: PlaceEntity = { id: maxId + 1, createdAt: new Date().toISOString(), ...place };
+    places.push(entity);
+    writeFileSync(this.placesPath, JSON.stringify(places, null, 2));
+    return entity;
+  }
+
+  async updatePlace(id: number, updates: Partial<PlaceEntity>): Promise<PlaceEntity | null> {
+    const places = await this.getAllPlaces();
+    const index = places.findIndex((p) => p.id === id);
+    if (index === -1) return null;
+    places[index] = { ...places[index], ...updates, id };
+    writeFileSync(this.placesPath, JSON.stringify(places, null, 2));
+    return places[index];
+  }
+
+  async deletePlace(id: number): Promise<boolean> {
+    const places = await this.getAllPlaces();
+    const filtered = places.filter((p) => p.id !== id);
+    if (filtered.length === places.length) return false;
+    writeFileSync(this.placesPath, JSON.stringify(filtered, null, 2));
+    return true;
+  }
+
+  private seedPlaces(): PlaceEntity[] {
+    const ALL = ['chesed', 'tzedakah', 'bikur', 'orchim', 'avelim', 'horim', 'olam', 'gmilut'];
+    const now = new Date().toISOString();
+    return [
+      { id: 1, name: 'Chabad of Jerusalem', type: 'chabad', city: 'ישראל', mitzvot: ALL, description: 'Chabad House open to all', approved: true, createdAt: now },
+      { id: 2, name: 'Hadassah Medical Center', type: 'hospital', city: 'ישראל', mitzvot: ['bikur', 'chesed'], address: 'הר הצופים, ירושלים', approved: true, createdAt: now },
+      { id: 3, name: 'Mayanei HaYeshua Hospital', type: 'hospital', city: 'ישראל', mitzvot: ['bikur', 'chesed'], address: 'בני ברק', approved: true, createdAt: now },
+      { id: 4, name: 'Leket Israel Food Bank', type: 'charity', city: 'ישראל', mitzvot: ['tzedakah', 'olam'], website: 'https://www.leket.org', approved: true, createdAt: now },
+      { id: 5, name: 'Yad Sarah', type: 'charity', city: 'ישראל', mitzvot: ['chesed', 'bikur', 'gmilut'], website: 'https://www.yadsarah.org.il', approved: true, createdAt: now },
+      { id: 6, name: 'Chabad of Manhattan', type: 'chabad', city: 'New York', mitzvot: ALL, website: 'https://www.chabadofmanhattan.com', approved: true, createdAt: now },
+      { id: 7, name: 'Bikur Cholim of Greater New York', type: 'charity', city: 'New York', mitzvot: ['bikur', 'chesed', 'avelim'], approved: true, createdAt: now },
+      { id: 8, name: 'UJA-Federation of New York', type: 'charity', city: 'New York', mitzvot: ['tzedakah', 'olam'], website: 'https://www.ujafedny.org', approved: true, createdAt: now },
+      { id: 9, name: 'Mount Sinai Hospital', type: 'hospital', city: 'New York', mitzvot: ['bikur', 'chesed'], address: '1 Gustave L. Levy Pl, New York', approved: true, createdAt: now },
+      { id: 10, name: 'Jewish Home Lifecare', type: 'community_center', city: 'New York', mitzvot: ['horim', 'bikur', 'chesed'], approved: true, createdAt: now },
+      { id: 11, name: 'Chabad de Paris', type: 'chabad', city: 'Paris', mitzvot: ALL, approved: true, createdAt: now },
+      { id: 12, name: 'Hôpital Rothschild', type: 'hospital', city: 'Paris', mitzvot: ['bikur', 'chesed'], address: '33 Bd de Picpus, Paris', approved: true, createdAt: now },
+      { id: 13, name: 'FSJU — Fonds Social Juif Unifié', type: 'charity', city: 'Paris', mitzvot: ['tzedakah', 'olam', 'chesed'], website: 'https://www.fsju.org', approved: true, createdAt: now },
+      { id: 14, name: 'Association Bikour Holim de Paris', type: 'charity', city: 'Paris', mitzvot: ['bikur', 'chesed', 'avelim'], approved: true, createdAt: now },
+      { id: 15, name: 'Chabad de Buenos Aires', type: 'chabad', city: 'Buenos Aires', mitzvot: ALL, approved: true, createdAt: now },
+      { id: 16, name: 'AMIA', type: 'community_center', city: 'Buenos Aires', mitzvot: ['tzedakah', 'olam', 'chesed', 'gmilut'], website: 'https://www.amia.org.ar', approved: true, createdAt: now },
+      { id: 17, name: 'Hospital Israelita', type: 'hospital', city: 'Buenos Aires', mitzvot: ['bikur', 'chesed'], address: 'Av. Las Heras 2670, Buenos Aires', approved: true, createdAt: now },
+      { id: 18, name: 'Fundación Tzedaká', type: 'charity', city: 'Buenos Aires', mitzvot: ['tzedakah', 'olam'], website: 'https://www.tzedaka.org.ar', approved: true, createdAt: now },
+      { id: 19, name: 'Chabad of London', type: 'chabad', city: 'London', mitzvot: ALL, approved: true, createdAt: now },
+      { id: 20, name: 'Jewish Care', type: 'charity', city: 'London', mitzvot: ['chesed', 'bikur', 'horim', 'tzedakah'], website: 'https://www.jewishcare.org', approved: true, createdAt: now },
+      { id: 21, name: 'World Jewish Relief', type: 'charity', city: 'London', mitzvot: ['tzedakah', 'olam'], website: 'https://www.worldjewishrelief.org', approved: true, createdAt: now },
+      { id: 22, name: 'Bikur Cholim London', type: 'charity', city: 'London', mitzvot: ['bikur', 'chesed', 'avelim'], approved: true, createdAt: now },
+      { id: 23, name: 'Chabad Moscow — Marina Roscha', type: 'chabad', city: 'Moscow', mitzvot: ALL, approved: true, createdAt: now },
+      { id: 24, name: 'Federation of Jewish Communities', type: 'community_center', city: 'Moscow', mitzvot: ['tzedakah', 'olam', 'chesed'], approved: true, createdAt: now },
+      { id: 25, name: 'Hesed Avot Social Services', type: 'charity', city: 'Moscow', mitzvot: ['horim', 'chesed', 'bikur', 'gmilut'], approved: true, createdAt: now },
+    ];
   }
 
   private seedProducts(): void {
