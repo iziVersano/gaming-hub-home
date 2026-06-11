@@ -43,6 +43,17 @@ export interface GoodDeedEntity {
   createdAt: string;
 }
 
+export interface WishEntity {
+  id: number;
+  name: string;
+  city: string;
+  wish: string;
+  category: string;
+  forWhom?: string;
+  candles: number;
+  createdAt: string;
+}
+
 @Injectable()
 export class JsonStorageService {
   private productsPath: string;
@@ -50,12 +61,14 @@ export class JsonStorageService {
   private dataDir: string;
 
   private goodDeedsPath: string;
+  private wishesPath: string;
 
   constructor() {
     this.dataDir = join(process.cwd(), 'data');
     this.productsPath = join(this.dataDir, 'products.json');
     this.warrantyPath = join(this.dataDir, 'warranty.json');
     this.goodDeedsPath = join(this.dataDir, 'gooddeeds.json');
+    this.wishesPath = join(this.dataDir, 'wishes.json');
 
     // Ensure data directory exists
     if (!existsSync(this.dataDir)) {
@@ -71,6 +84,9 @@ export class JsonStorageService {
     }
     if (!existsSync(this.goodDeedsPath)) {
       writeFileSync(this.goodDeedsPath, JSON.stringify([], null, 2));
+    }
+    if (!existsSync(this.wishesPath)) {
+      writeFileSync(this.wishesPath, JSON.stringify([], null, 2));
     }
   }
 
@@ -169,6 +185,35 @@ export class JsonStorageService {
     deeds[index].vouches += 1;
     writeFileSync(this.goodDeedsPath, JSON.stringify(deeds, null, 2));
     return deeds[index];
+  }
+
+  // Wishes (Kotel Wall)
+  async getWishes(): Promise<WishEntity[]> {
+    const data = readFileSync(this.wishesPath, 'utf-8');
+    return JSON.parse(data);
+  }
+
+  async saveWish(wish: Omit<WishEntity, 'id' | 'candles' | 'createdAt'>): Promise<WishEntity> {
+    const wishes = await this.getWishes();
+    const maxId = wishes.length > 0 ? Math.max(...wishes.map((w) => w.id)) : 0;
+    const entity: WishEntity = {
+      id: maxId + 1,
+      candles: 0,
+      createdAt: new Date().toISOString(),
+      ...wish,
+    };
+    wishes.unshift(entity);
+    writeFileSync(this.wishesPath, JSON.stringify(wishes, null, 2));
+    return entity;
+  }
+
+  async lightWish(id: number): Promise<WishEntity | null> {
+    const wishes = await this.getWishes();
+    const index = wishes.findIndex((w) => w.id === id);
+    if (index === -1) return null;
+    wishes[index].candles += 1;
+    writeFileSync(this.wishesPath, JSON.stringify(wishes, null, 2));
+    return wishes[index];
   }
 
   private seedProducts(): void {
