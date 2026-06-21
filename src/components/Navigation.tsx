@@ -63,7 +63,7 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
     { name: t('menu.products'), href: '/products', icon: ShoppingBag },
     { name: t('menu.contact'), href: '/contact', icon: Mail },
     { name: t('menu.accessibility'), href: '/accessibility', icon: Accessibility },
-    { name: t('menu.goodDeeds'), href: '/games', icon: Heart },
+    { name: t('menu.games'), href: '/games', icon: Gamepad2 },
   ];
 
   // Brand logos for the bottom of the full-screen menu
