@@ -160,6 +160,10 @@ const Navigation = ({ transparent = false }: { transparent?: boolean }) => {
                   <WhatsAppIcon className="h-[22px] w-[22px] shrink-0 text-[#25D366] drop-shadow-[0_0_8px_rgba(37,211,102,0.8)]" />
                 </a>
               </div>
+              {/* Theme toggle — visible in mobile bar without opening menu */}
+              <div className="shrink-0 px-1">
+                <ThemeToggle />
+              </div>
               {/* Burger menu */}
               <button
                 className="shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 text-white transition-colors"
