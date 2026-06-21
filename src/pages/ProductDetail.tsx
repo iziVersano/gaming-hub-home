@@ -163,13 +163,16 @@ const ProductDetail = () => {
 
             {/* Actions */}
             <div className="flex flex-wrap gap-3 pt-2">
-              <button
+              <a
+                href={`https://wa.me/972522768607?text=${encodeURIComponent(`שלום, אני מעוניין במוצר: ${product.title}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
                 aria-label={t('products.inquiryAria').replace('{title}', product.title)}
               >
                 <Phone className="h-5 w-5" />
                 {t('products.inquireNow')}
-              </button>
+              </a>
               <Button asChild variant="outline" size="lg">
                 <Link to="/products">
                   <ArrowLeft className="h-4 w-4 me-2" />
