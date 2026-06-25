@@ -27,8 +27,11 @@ export interface WarrantySubmissionEntity {
   rowKey: string;
   customerName: string;
   email: string;
+  phone?: string;
   product: string;
   serialNumber: string;
+  purchaseDate?: string;
+  storeName?: string;
   invoiceUrl?: string;
   invoiceFileName?: string;
   createdAt: string;
@@ -140,7 +143,7 @@ export class JsonStorageService {
     return { id: r.id, sku: r.sku, imageUrl: r.image_url, price: r.price, flags: r.flags, translations: r.translations ?? [] };
   }
   private toWarranty(r: any): WarrantySubmissionEntity {
-    return { id: r.id, rowKey: r.row_key, customerName: r.customer_name, email: r.email, product: r.product, serialNumber: r.serial_number, invoiceUrl: r.invoice_url, invoiceFileName: r.invoice_file_name, createdAt: r.created_at };
+    return { id: r.id, rowKey: r.row_key, customerName: r.customer_name, email: r.email, phone: r.phone, product: r.product, serialNumber: r.serial_number, purchaseDate: r.purchase_date, storeName: r.store_name, invoiceUrl: r.invoice_url, invoiceFileName: r.invoice_file_name, createdAt: r.created_at };
   }
   private toGoodDeed(r: any): GoodDeedEntity {
     return { id: r.id, name: r.name, city: r.city, deed: r.deed, category: r.category, proofUrl: r.proof_url, points: r.points, vouches: r.vouches, createdAt: r.created_at };
@@ -238,8 +241,9 @@ export class JsonStorageService {
     const rowKey = `warranty-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     if (this.useDb) {
       const { data } = await this.sb!.from('warranty_submissions').insert([{
-        row_key: rowKey, customer_name: record.customerName, email: record.email, product: record.product,
-        serial_number: record.serialNumber, invoice_url: record.invoiceUrl, invoice_file_name: record.invoiceFileName,
+        row_key: rowKey, customer_name: record.customerName, email: record.email, phone: record.phone ?? null,
+        product: record.product, serial_number: record.serialNumber, purchase_date: record.purchaseDate ?? null,
+        store_name: record.storeName ?? null, invoice_url: record.invoiceUrl, invoice_file_name: record.invoiceFileName,
       }]).select().single();
       return this.toWarranty(data);
     }
