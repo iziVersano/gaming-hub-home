@@ -36,6 +36,9 @@ export class EmailService {
     product: string,
     serialNumber: string,
     invoiceFileName?: string,
+    phone?: string,
+    purchaseDate?: string,
+    storeName?: string,
   ): Promise<boolean> {
     if (!this.isConfigured || !this.transporter) {
       console.log('Email service not configured. Skipping email send.');
@@ -51,6 +54,9 @@ export class EmailService {
       const invoiceLine = invoiceFileName
         ? `<tr><td style='padding: 8px 0; color: #777;'>חשבונית:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${invoiceFileName} (מצורף)</td></tr>`
         : "<tr><td style='padding: 8px 0; color: #777;'>חשבונית:</td><td style='padding: 8px 0; color: #333;'>לא צורפה</td></tr>";
+      const phoneLine = phone ? `<tr><td style='padding: 8px 0; color: #777;'>טלפון:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${phone}</td></tr>` : '';
+      const dateLine = purchaseDate ? `<tr><td style='padding: 8px 0; color: #777;'>תאריך רכישה:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${purchaseDate}</td></tr>` : '';
+      const storeLine = storeName ? `<tr><td style='padding: 8px 0; color: #777;'>שם חנות:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${storeName}</td></tr>` : '';
 
       const htmlBody = `
 <!DOCTYPE html>
@@ -65,8 +71,11 @@ export class EmailService {
             <table style='width: 100%; border-collapse: collapse;'>
                 <tr><td style='padding: 8px 0; color: #777;'>שם הלקוח:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${customerName}</td></tr>
                 <tr><td style='padding: 8px 0; color: #777;'>אימייל:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'><a href='mailto:${customerEmail}'>${customerEmail}</a></td></tr>
+                ${phoneLine}
                 <tr><td style='padding: 8px 0; color: #777;'>מוצר:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${product}</td></tr>
                 <tr><td style='padding: 8px 0; color: #777;'>מספר סידורי:</td><td style='padding: 8px 0; color: #333; font-weight: bold;'>${serialNumber}</td></tr>
+                ${dateLine}
+                ${storeLine}
                 ${invoiceLine}
             </table>
         </div>

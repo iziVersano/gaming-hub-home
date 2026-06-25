@@ -34,8 +34,11 @@ export class WarrantyController {
     return this.warrantyService.submitWarranty({
       customerName: body.customerName,
       email: body.email,
+      phone: body.phone,
       product: body.product,
       serialNumber: body.serialNumber,
+      purchaseDate: body.purchaseDate,
+      storeName: body.storeName,
       invoiceUrl,
       invoiceFileName: file?.originalname,
     });

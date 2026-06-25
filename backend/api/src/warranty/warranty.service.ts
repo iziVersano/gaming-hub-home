@@ -11,8 +11,11 @@ export class WarrantyService {
   async submitWarranty(data: {
     customerName: string;
     email: string;
+    phone?: string;
     product: string;
     serialNumber: string;
+    purchaseDate?: string;
+    storeName?: string;
     invoiceUrl?: string;
     invoiceFileName?: string;
   }) {
@@ -26,6 +29,9 @@ export class WarrantyService {
         data.product,
         data.serialNumber,
         data.invoiceFileName,
+        data.phone,
+        data.purchaseDate,
+        data.storeName,
       );
     } catch (error) {
       console.error('Email send failed (non-blocking):', error);

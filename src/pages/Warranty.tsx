@@ -9,7 +9,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { translations } from '@/i18n';
 
-const WARRANTY_ENDPOINT = 'https://formsubmit.co/sales@consoltech.co.il';
+const WARRANTY_ENDPOINT = `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/warranty`;
 
 // Field error type
 interface FieldErrors {
@@ -169,24 +169,18 @@ const Warranty = () => {
 
     try {
       const submitData = new FormData();
-      submitData.append('שם לקוח', formData.fullName);
-      submitData.append('אימייל', formData.email);
-      submitData.append('טלפון', formData.phone);
-      submitData.append('דגם מוצר', formData.productModel);
-      submitData.append('מספר סידורי', formData.serialNumber);
-      submitData.append('תאריך רכישה', formData.purchaseDate);
-      submitData.append('שם חנות', formData.storeName);
-      if (file) submitData.append('attachment', file, file.name);
-
-      submitData.append('_subject', `רישום אחריות - ${formData.productModel} - ${formData.fullName}`);
-      submitData.append('_replyto', formData.email);
-      submitData.append('_template', 'table');
-      submitData.append('_captcha', 'false');
+      submitData.append('customerName', formData.fullName);
+      submitData.append('email', formData.email);
+      submitData.append('phone', formData.phone);
+      submitData.append('product', formData.productModel);
+      submitData.append('serialNumber', formData.serialNumber);
+      submitData.append('purchaseDate', formData.purchaseDate);
+      submitData.append('storeName', formData.storeName);
+      if (file) submitData.append('invoice', file, file.name);
 
       const res = await fetch(WARRANTY_ENDPOINT, {
         method: 'POST',
         body: submitData,
-        headers: { Accept: 'application/json' },
       });
 
       if (!res.ok) throw new Error(`FormSubmit returned ${res.status}`);
