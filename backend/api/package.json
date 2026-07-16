@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Consoltech API - NestJS backend with JSON storage",
   "main": "dist/main.js",
-  "type": "module",
   "scripts": {
     "dev": "nest start --watch",
     "build": "nest build",
