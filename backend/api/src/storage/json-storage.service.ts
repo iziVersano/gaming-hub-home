@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
+import { randomBytes } from 'crypto';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+
+const INVOICE_BUCKET = 'warranty-invoices';
 
 // ─── Shared interfaces ────────────────────────────────────────────────────────
 
@@ -33,6 +36,7 @@ export interface WarrantySubmissionEntity {
   purchaseDate?: string;
   storeName?: string;
   invoiceUrl?: string;
+  invoicePath?: string;
   invoiceFileName?: string;
   createdAt: string;
 }
@@ -143,7 +147,7 @@ export class JsonStorageService {
     return { id: r.id, sku: r.sku, imageUrl: r.image_url, price: r.price, flags: r.flags, translations: r.translations ?? [] };
   }
   private toWarranty(r: any): WarrantySubmissionEntity {
-    return { id: r.id, rowKey: r.row_key, customerName: r.customer_name, email: r.email, phone: r.phone, product: r.product, serialNumber: r.serial_number, purchaseDate: r.purchase_date, storeName: r.store_name, invoiceUrl: r.invoice_url, invoiceFileName: r.invoice_file_name, createdAt: r.created_at };
+    return { id: r.id, rowKey: r.row_key, customerName: r.customer_name, email: r.email, phone: r.phone, product: r.product, serialNumber: r.serial_number, purchaseDate: r.purchase_date, storeName: r.store_name, invoiceUrl: r.invoice_url, invoicePath: r.invoice_path, invoiceFileName: r.invoice_file_name, createdAt: r.created_at };
   }
   private toGoodDeed(r: any): GoodDeedEntity {
     return { id: r.id, name: r.name, city: r.city, deed: r.deed, category: r.category, proofUrl: r.proof_url, points: r.points, vouches: r.vouches, createdAt: r.created_at };
@@ -229,10 +233,40 @@ export class JsonStorageService {
   // Warranty
   // ══════════════════════════════════════════════════════════════════════════════
 
+  /**
+   * Persist an uploaded invoice. Supabase mode stores the file in the private
+   * warranty-invoices bucket (survives dyno restarts); JSON mode writes to the
+   * local uploads/ directory served at /uploads.
+   */
+  async saveInvoiceFile(buffer: Buffer, originalName: string, mimetype: string): Promise<{ invoiceUrl?: string; invoicePath?: string }> {
+    const safeName = originalName.replace(/[^\w.\-]+/g, '_');
+    const fileName = `${randomBytes(8).toString('hex')}_${safeName}`;
+    if (this.useDb) {
+      const { error } = await this.sb!.storage.from(INVOICE_BUCKET).upload(fileName, buffer, { contentType: mimetype });
+      if (error) throw new Error(`Invoice upload failed: ${error.message}`);
+      return { invoicePath: fileName };
+    }
+    const uploadsDir = join(process.cwd(), 'uploads');
+    if (!existsSync(uploadsDir)) mkdirSync(uploadsDir, { recursive: true });
+    writeFileSync(join(uploadsDir, fileName), buffer);
+    return { invoiceUrl: `/uploads/${fileName}` };
+  }
+
   async getWarrantyRecords(): Promise<WarrantySubmissionEntity[]> {
     if (this.useDb) {
       const { data } = await this.sb!.from('warranty_submissions').select('*').order('created_at', { ascending: false });
-      return (data ?? []).map(this.toWarranty);
+      const records = (data ?? []).map(this.toWarranty);
+      // Bucket is private — expose invoices to the admin UI via short-lived signed URLs
+      const paths = records.filter(r => r.invoicePath).map(r => r.invoicePath!);
+      if (paths.length) {
+        const { data: signed } = await this.sb!.storage.from(INVOICE_BUCKET).createSignedUrls(paths, 3600);
+        const byPath = new Map((signed ?? []).filter(s => s.signedUrl).map(s => [s.path, s.signedUrl]));
+        for (const r of records) {
+          const url = r.invoicePath && byPath.get(r.invoicePath);
+          if (url) r.invoiceUrl = url;
+        }
+      }
+      return records;
     }
     return this.readJson<WarrantySubmissionEntity>(this.warrantyPath);
   }
@@ -240,11 +274,13 @@ export class JsonStorageService {
   async saveWarrantyRecord(record: Omit<WarrantySubmissionEntity, 'id' | 'rowKey' | 'createdAt'>): Promise<WarrantySubmissionEntity> {
     const rowKey = `warranty-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     if (this.useDb) {
-      const { data } = await this.sb!.from('warranty_submissions').insert([{
+      const { data, error } = await this.sb!.from('warranty_submissions').insert([{
         row_key: rowKey, customer_name: record.customerName, email: record.email, phone: record.phone ?? null,
         product: record.product, serial_number: record.serialNumber, purchase_date: record.purchaseDate ?? null,
-        store_name: record.storeName ?? null, invoice_url: record.invoiceUrl, invoice_file_name: record.invoiceFileName,
+        store_name: record.storeName ?? null, invoice_url: record.invoiceUrl ?? null,
+        invoice_path: record.invoicePath ?? null, invoice_file_name: record.invoiceFileName,
       }]).select().single();
+      if (error) throw new Error(`Warranty insert failed: ${error.message}`);
       return this.toWarranty(data);
     }
     const records = await this.getWarrantyRecords();
@@ -257,8 +293,11 @@ export class JsonStorageService {
 
   async deleteWarrantyRecord(identifier: string): Promise<boolean> {
     if (this.useDb) {
-      const { error } = await this.sb!.from('warranty_submissions')
-        .delete().or(`row_key.eq.${identifier},serial_number.eq.${identifier},id.eq.${identifier}`);
+      const filter = `row_key.eq.${identifier},serial_number.eq.${identifier},id.eq.${identifier}`;
+      const { data: rows } = await this.sb!.from('warranty_submissions').select('invoice_path').or(filter);
+      const paths = (rows ?? []).map(r => r.invoice_path).filter(Boolean);
+      if (paths.length) await this.sb!.storage.from(INVOICE_BUCKET).remove(paths);
+      const { error } = await this.sb!.from('warranty_submissions').delete().or(filter);
       return !error;
     }
     const records = await this.getWarrantyRecords();

@@ -8,18 +8,30 @@ import { join } from 'path';
 export class WarrantyService {
   constructor(private storage: JsonStorageService, private emailService: EmailService) {}
 
-  async submitWarranty(data: {
-    customerName: string;
-    email: string;
-    phone?: string;
-    product: string;
-    serialNumber: string;
-    purchaseDate?: string;
-    storeName?: string;
-    invoiceUrl?: string;
-    invoiceFileName?: string;
-  }) {
-    const record = await this.storage.saveWarrantyRecord(data);
+  async submitWarranty(
+    data: {
+      customerName: string;
+      email: string;
+      phone?: string;
+      product: string;
+      serialNumber: string;
+      purchaseDate?: string;
+      storeName?: string;
+    },
+    file?: { buffer: Buffer; originalName: string; mimetype: string },
+  ) {
+    let invoiceUrl: string | undefined;
+    let invoicePath: string | undefined;
+    if (file) {
+      ({ invoiceUrl, invoicePath } = await this.storage.saveInvoiceFile(file.buffer, file.originalName, file.mimetype));
+    }
+
+    const record = await this.storage.saveWarrantyRecord({
+      ...data,
+      invoiceUrl,
+      invoicePath,
+      invoiceFileName: file?.originalName,
+    });
 
     // Send email non-blocking
     try {
@@ -28,7 +40,7 @@ export class WarrantyService {
         data.email,
         data.product,
         data.serialNumber,
-        data.invoiceFileName,
+        file?.originalName,
         data.phone,
         data.purchaseDate,
         data.storeName,
@@ -52,8 +64,9 @@ export class WarrantyService {
       return { success: false, message: 'Warranty record not found' };
     }
 
-    // Delete associated file if it exists
-    if (record.invoiceUrl) {
+    // Delete locally stored file if it exists (Supabase-stored invoices are
+    // removed by the storage layer inside deleteWarrantyRecord)
+    if (record.invoiceUrl && record.invoiceUrl.startsWith('/uploads/')) {
       try {
         const filePath = join(process.cwd(), 'uploads', record.invoiceUrl.split('/').pop() || '');
         if (existsSync(filePath)) {
