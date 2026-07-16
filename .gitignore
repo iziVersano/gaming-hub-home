@@ -3,6 +3,13 @@
 .env.local
 .env.telegram
 backend/api/.env
+
+# Runtime data stores and customer uploads (auto-created by the API on boot;
+# hold real customer records/invoices in production)
+backend/api/uploads/*
+!backend/api/uploads/.gitkeep
+backend/api/data/*.json
+!backend/api/data/products.json
 scripts/.telegram-agent-state.json
 scripts/.tmp-images/
 

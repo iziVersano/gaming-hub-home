@@ -8,8 +8,7 @@ import { UploadModule } from './upload/upload.module';
 import { GoodDeedsModule } from './gooddeeds/gooddeeds.module';
 import { WishesModule } from './wishes/wishes.module';
 import { PlacesModule } from './places/places.module';
-import { JsonStorageService } from './storage/json-storage.service';
-import { EmailService } from './email/email.service';
+import { StorageModule } from './storage/storage.module';
 
 const jwtSecret = process.env.JWT_SECRET_KEY || 'ConsolTech-SuperSecret-JWT-Key-2024-MinLength32Chars!';
 
@@ -20,6 +19,7 @@ const jwtSecret = process.env.JWT_SECRET_KEY || 'ConsolTech-SuperSecret-JWT-Key-
       secret: jwtSecret,
       signOptions: { expiresIn: '8h' },
     }),
+    StorageModule,
     ProductsModule,
     WarrantyModule,
     AuthModule,
@@ -28,7 +28,6 @@ const jwtSecret = process.env.JWT_SECRET_KEY || 'ConsolTech-SuperSecret-JWT-Key-
     WishesModule,
     PlacesModule,
   ],
-  providers: [JsonStorageService, EmailService],
-  exports: [JsonStorageService, EmailService, JwtModule],
+  exports: [JwtModule],
 })
 export class AppModule {}

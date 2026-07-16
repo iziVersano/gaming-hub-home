@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
 import Index from "./pages/Index";
@@ -85,7 +85,8 @@ const App = () => {
                   <Route path="/products/:id" element={<ProductDetail />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/health" element={<Health />} />
-                  {featureFlags.WARRANTY_ENABLED && <Route path="/הוראותאחריות" element={<Warranty />} />}
+                  {featureFlags.WARRANTY_ENABLED && <Route path="/warranty" element={<Warranty />} />}
+                  {featureFlags.WARRANTY_ENABLED && <Route path="/הוראותאחריות" element={<Navigate to="/warranty" replace />} />}
                   <Route path="/nintendo-switch-2" element={<NintendoSwitch2Manual />} />
                   <Route path="/accessibility" element={<Accessibility />} />
                   <Route path="/games" element={<KotelWall />} />

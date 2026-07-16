@@ -15,6 +15,7 @@ async function bootstrap() {
       'https://consoltech.shop',
       'https://www.consoltech.shop',
       'http://localhost:5173',
+      'http://localhost:5175',
       'http://localhost:8080',
     ],
     credentials: true,
