@@ -9,7 +9,11 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { translations } from '@/i18n';
 
-const WARRANTY_ENDPOINT = `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/warranty`;
+// Production: same-origin Vercel serverless function (api/warranty.js).
+// Dev: the local NestJS backend (backend/api) via VITE_API_URL.
+const WARRANTY_ENDPOINT = import.meta.env.PROD
+  ? '/api/warranty'
+  : `${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/warranty`;
 
 // Field error type
 interface FieldErrors {
@@ -86,7 +90,7 @@ const Warranty = () => {
   const validateFile = (selectedFile: File | null): string | undefined => {
     if (!selectedFile) return t('warranty.errors.fileRequired');
     const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const maxSize = 4 * 1024 * 1024; // 4MB — Vercel serverless request body limit is 4.5MB
     if (!validTypes.includes(selectedFile.type)) return t('warranty.errors.invalidFileType');
     if (selectedFile.size > maxSize) return t('warranty.errors.fileTooLarge');
     return undefined;
@@ -183,7 +187,7 @@ const Warranty = () => {
         body: submitData,
       });
 
-      if (!res.ok) throw new Error(`FormSubmit returned ${res.status}`);
+      if (!res.ok) throw new Error(`Warranty API returned ${res.status}`);
 
       setIsSuccess(true);
       setTimeout(() => navigate('/'), 4000);
