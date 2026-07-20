@@ -1,5 +1,6 @@
-import { put, list } from '@vercel/blob';
+import { put, list, del } from '@vercel/blob';
 import Busboy from 'busboy';
+import { requireAdmin } from './_lib/admin-auth.js';
 
 // Warranty registration endpoint (replaces the suspended Render backend).
 // Storage: Vercel Blob — one JSON blob per submission under warranty/records/,
@@ -161,14 +162,10 @@ async function handlePost(req, res) {
 }
 
 async function handleGet(req, res) {
-  // Admin listing — requires ADMIN_API_KEY env var to be configured
-  const adminKey = process.env.ADMIN_API_KEY;
-  if (!adminKey) {
-    return res.status(503).json({ success: false, message: 'Admin listing not configured (set ADMIN_API_KEY)' });
-  }
-  const auth = req.headers.authorization || '';
-  if (auth !== `Bearer ${adminKey}`) {
-    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  // Admin listing — accepts an admin JWT (from /api/auth/login) or ADMIN_API_KEY
+  const gate = requireAdmin(req);
+  if (!gate.ok) {
+    return res.status(gate.status).json({ success: false, message: gate.message });
   }
 
   const records = [];
@@ -186,9 +183,55 @@ async function handleGet(req, res) {
   return res.status(200).json(records);
 }
 
+/**
+ * DELETE /api/warranty?id=<rowKey> — remove a record and its invoice.
+ * The rowKey is the blob pathname prefix (records are stored as
+ * warranty/records/<rowKey>.json with a random suffix appended), so the
+ * record can be located by prefix without reading every blob.
+ */
+async function handleDelete(req, res) {
+  const gate = requireAdmin(req);
+  if (!gate.ok) {
+    return res.status(gate.status).json({ success: false, message: gate.message });
+  }
+
+  const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  const rowKey = (url.searchParams.get('id') || '').trim();
+
+  // Constrain to the generated rowKey shape so the prefix cannot be widened
+  // (e.g. an empty or '/'-bearing value matching every record).
+  if (!/^[A-Za-z0-9_-]+$/.test(rowKey)) {
+    return res.status(400).json({ success: false, message: 'Invalid or missing id' });
+  }
+
+  const { blobs } = await list({ prefix: `warranty/records/${rowKey}`, limit: 1000 });
+  // Guard against a shorter id prefix-matching a longer, unrelated rowKey.
+  const matches = blobs.filter((b) => {
+    const name = b.pathname.slice('warranty/records/'.length);
+    return name === `${rowKey}.json` || name.startsWith(`${rowKey}-`);
+  });
+
+  if (!matches.length) {
+    return res.status(404).json({ success: false, message: 'Record not found' });
+  }
+
+  // Best-effort invoice cleanup; a missing invoice must not block the delete.
+  for (const blob of matches) {
+    try {
+      const record = await fetch(blob.url).then((r) => (r.ok ? r.json() : null));
+      if (record?.invoiceUrl) await del(record.invoiceUrl);
+    } catch (error) {
+      console.error('Invoice cleanup failed (non-blocking):', error);
+    }
+  }
+
+  await del(matches.map((b) => b.url));
+  return res.status(200).json({ success: true, message: 'Record deleted', id: rowKey });
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -196,6 +239,7 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'POST') return await handlePost(req, res);
     if (req.method === 'GET') return await handleGet(req, res);
+    if (req.method === 'DELETE') return await handleDelete(req, res);
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   } catch (error) {
     console.error('Warranty handler error:', error);

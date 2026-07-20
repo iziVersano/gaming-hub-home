@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Loader2, Eye, Trash2, X, Download, AlertTriangle, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AdminLayout from '@/components/AdminLayout';
-import { isAuthenticated } from '@/lib/api';
+import { isAuthenticated, getAuthToken, removeAuthToken } from '@/lib/api';
 import { USE_MOCK_DATA, getMockWarrantyRecords, deleteMockWarrantyRecord } from '@/lib/mockData';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -142,7 +142,33 @@ const WarrantyRecords = () => {
     }
   }, [navigate]);
 
-  const fetchRecords = async () => {
+  /**
+   * The warranty endpoint (api/warranty.js) is admin-gated and expects the
+   * bearer token issued by /api/auth/login. This keeps its own wrapper rather
+   * than using the shared fetchApi helper because responses here are not
+   * always JSON and a 401 should surface in-page rather than hard-navigate.
+   */
+  const authedFetch = useCallback(
+    async (path: string, options: RequestInit = {}) => {
+      const token = getAuthToken();
+      const response = await fetch(`${API_BASE_URL}${path}`, {
+        ...options,
+        headers: {
+          ...options.headers,
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      if (response.status === 401) {
+        removeAuthToken();
+        navigate('/admin/login');
+        throw new Error('Session expired');
+      }
+      return response;
+    },
+    [navigate],
+  );
+
+  const fetchRecords = useCallback(async () => {
     try {
       let data: WarrantyRecord[];
 
@@ -152,23 +178,27 @@ const WarrantyRecords = () => {
         data = mockData as WarrantyRecord[];
       } else {
         // Fetch from API in production
-        const response = await fetch(`${API_BASE_URL}/warranty`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const response = await authedFetch('/warranty');
+        if (!response.ok) {
+          const body = await response.json().catch(() => null);
+          throw new Error(body?.message || `HTTP ${response.status}`);
+        }
         data = await response.json();
       }
 
       setRecords(data);
     } catch (err) {
+      if (err instanceof Error && err.message === 'Session expired') return;
       console.error('Failed to fetch warranty records:', err);
-      setError('Failed to load warranty records');
+      setError(err instanceof Error ? err.message : 'Failed to load warranty records');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [authedFetch]);
 
   useEffect(() => {
     fetchRecords();
-  }, []);
+  }, [fetchRecords]);
 
   const handleDelete = async () => {
     if (!deleteRecord) return;
@@ -182,11 +212,18 @@ const WarrantyRecords = () => {
         const deleted = await deleteMockWarrantyRecord(identifier);
         if (!deleted) throw new Error('Record not found');
       } else {
-        // Delete via API in production
-        const response = await fetch(`${API_BASE_URL}/warranty/${encodeURIComponent(identifier)}`, {
+        // Delete via API in production. The blob-backed endpoint addresses
+        // records by rowKey only — serialNumber is not a valid handle.
+        if (!deleteRecord.rowKey) {
+          throw new Error('This record predates the current storage format and cannot be deleted here.');
+        }
+        const response = await authedFetch(`/warranty?id=${encodeURIComponent(deleteRecord.rowKey)}`, {
           method: 'DELETE',
         });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) {
+          const body = await response.json().catch(() => null);
+          throw new Error(body?.message || `HTTP ${response.status}`);
+        }
       }
 
       // Remove from local state
@@ -196,8 +233,9 @@ const WarrantyRecords = () => {
       ));
       setDeleteRecord(null);
     } catch (err) {
+      if (err instanceof Error && err.message === 'Session expired') return;
       console.error('Failed to delete warranty record:', err);
-      alert('Failed to delete warranty record. Please try again.');
+      alert(err instanceof Error ? err.message : 'Failed to delete warranty record. Please try again.');
     } finally {
       setIsDeleting(false);
     }
