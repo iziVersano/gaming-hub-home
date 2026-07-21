@@ -256,6 +256,20 @@ export const login = async (credentials: LoginRequest): Promise<LoginResponse> =
 };
 
 /**
+ * Credential-free admin sign-in. Mints a real admin token from the server so
+ * admin-gated endpoints (e.g. warranty) accept it. Returns null if the bypass
+ * endpoint is unavailable (e.g. local dev backend without this route), letting
+ * the caller fall back to mock-data mode.
+ */
+export const bypassLogin = async (): Promise<LoginResponse | null> => {
+  try {
+    return await fetchApi('/auth/bypass', { method: 'POST' });
+  } catch {
+    return null;
+  }
+};
+
+/**
  * Get current locale from i18n context.
  * This function should be called from within React components where useI18n hook is available.
  * For use outside components, pass locale explicitly to API functions.

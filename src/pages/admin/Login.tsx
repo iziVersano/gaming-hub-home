@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { login, setAuthToken } from '@/lib/api';
+import { login, bypassLogin, setAuthToken } from '@/lib/api';
 import { toast } from 'sonner';
 import { LogIn, Unlock } from 'lucide-react';
 
 // ============================================
-// TEMPORARY AUTH BYPASS - Set to false to require credentials again
+// AUTH BYPASS - "Enter Admin (No Login Required)".
+// When true, the bypass button mints a real admin token from the server
+// (/api/auth/bypass) so admin-gated pages like the warranty list load without
+// entering credentials. Set to false to require email + password.
+// The server can also disable it via ALLOW_ADMIN_BYPASS=false.
 // ============================================
 const ALLOW_BYPASS_LOGIN = true;
 // ============================================
@@ -17,23 +21,36 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isBypassing, setIsBypassing] = useState(false);
   const navigate = useNavigate();
 
-  // Auto-redirect if bypass is enabled and we're already "logged in"
+  // Already signed in? Skip straight to the warranty list.
   useEffect(() => {
-    if (ALLOW_BYPASS_LOGIN) {
-      const bypassToken = localStorage.getItem('adminToken');
-      if (bypassToken === 'BYPASS_TOKEN_DEV_MODE') {
-        navigate('/admin/warranty-records');
-      }
+    if (ALLOW_BYPASS_LOGIN && localStorage.getItem('adminToken')) {
+      navigate('/admin/warranty-records');
     }
   }, [navigate]);
 
-  const handleBypassLogin = () => {
-    // Set a fake token for bypass mode
-    setAuthToken('BYPASS_TOKEN_DEV_MODE');
-    toast.success('Dev mode: Login bypassed!');
-    navigate('/admin/warranty-records');
+  const handleBypassLogin = async () => {
+    setIsBypassing(true);
+    try {
+      // Mint a real admin token server-side so admin-gated APIs accept it.
+      const response = await bypassLogin();
+      if (response?.token) {
+        setAuthToken(response.token);
+      } else {
+        // Local dev (no serverless bypass route): fall back to a placeholder
+        // token; admin pages use mock data in dev, so this is sufficient.
+        setAuthToken('BYPASS_TOKEN_DEV_MODE');
+      }
+      toast.success('Entered admin');
+      navigate('/admin/warranty-records');
+    } catch (error) {
+      console.error('Bypass login error:', error);
+      toast.error('Could not enter admin. Please try again.');
+    } finally {
+      setIsBypassing(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -118,12 +135,13 @@ const Login = () => {
                 variant="outline"
                 className="w-full border-green-500 text-green-600 hover:bg-green-500/10"
                 onClick={handleBypassLogin}
+                disabled={isBypassing}
               >
                 <Unlock className="h-4 w-4" />
-                <span>Enter Admin (No Login Required)</span>
+                <span>{isBypassing ? 'Entering...' : 'Enter Admin (No Login Required)'}</span>
               </Button>
               <p className="text-xs text-muted-foreground text-center mt-2">
-                ⚠️ Temporary dev mode - credentials disabled
+                ⚠️ No password required — anyone with this link can access admin
               </p>
             </div>
           )}
