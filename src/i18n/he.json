@@ -167,6 +167,7 @@
   "admin.warranty.loading": "טוען רישומים...",
   "admin.warranty.empty": "לא נמצאו רישומי אחריות.",
   "admin.warranty.loadError": "טעינת רישומי האחריות נכשלה",
+  "admin.warranty.reference": "מספר אסמכתא",
   "admin.warranty.customer": "לקוח",
   "admin.warranty.email": "אימייל",
   "admin.warranty.product": "מוצר",

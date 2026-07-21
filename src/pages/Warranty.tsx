@@ -8,6 +8,7 @@ import { Loader2, Upload, CheckCircle2, Info, Home, RotateCcw } from 'lucide-rea
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { translations } from '@/i18n';
+import { formatWarrantyReference } from '@/lib/warranty';
 
 // Production: same-origin Vercel serverless function (api/warranty.js).
 // Dev: the local NestJS backend (backend/api) via VITE_API_URL.
@@ -53,15 +54,6 @@ const Warranty = () => {
 
   // Get today's date in YYYY-MM-DD format for max date validation
   const today = new Date().toISOString().split('T')[0];
-
-  // Build a human-friendly reference from the server-issued record id
-  // (shape: "warranty-<timestamp>-<random>"). Falls back to a local code if
-  // the response body is missing an id for any reason.
-  const formatReference = (id?: string | null): string => {
-    const raw = id?.split('-').pop();
-    const suffix = (raw || Date.now().toString(36)).toUpperCase();
-    return `CT-${suffix}`;
-  };
 
   const formatHebrewDate = (value: string): string => {
     if (!value) return '';
@@ -207,7 +199,7 @@ const Warranty = () => {
       if (!res.ok) throw new Error(`Warranty API returned ${res.status}`);
 
       const result = await res.json().catch(() => null);
-      setConfirmationRef(formatReference(result?.id));
+      setConfirmationRef(formatWarrantyReference(result?.id));
       setSubmittedData(formData);
       setIsSuccess(true);
       // Intentionally no auto-redirect: the customer must see a persistent
