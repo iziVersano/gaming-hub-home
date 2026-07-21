@@ -186,6 +186,7 @@
   "admin.warranty.loading": "Loading records...",
   "admin.warranty.empty": "No warranty records found.",
   "admin.warranty.loadError": "Failed to load warranty records",
+  "admin.warranty.reference": "Reference",
   "admin.warranty.customer": "Customer",
   "admin.warranty.email": "Email",
   "admin.warranty.product": "Product",

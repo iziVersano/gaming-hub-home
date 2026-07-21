@@ -7,6 +7,7 @@ import AdminLayout from '@/components/AdminLayout';
 import { isAuthenticated, getAuthToken, removeAuthToken } from '@/lib/api';
 import { USE_MOCK_DATA, getMockWarrantyRecords, deleteMockWarrantyRecord } from '@/lib/mockData';
 import { useI18n } from '@/hooks/I18nContext';
+import { formatWarrantyReference } from '@/lib/warranty';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const BACKEND_BASE_URL = API_BASE_URL.replace('/api', '');
@@ -289,6 +290,7 @@ const WarrantyRecords = () => {
               <table className="w-full">
                 <thead>
                   <tr className="bg-muted/50 border-b border-border">
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.reference')}</th>
                     <th className="text-start p-4 font-semibold">{t('admin.warranty.customer')}</th>
                     <th className="text-start p-4 font-semibold">{t('admin.warranty.email')}</th>
                     <th className="text-start p-4 font-semibold">{t('admin.warranty.product')}</th>
@@ -301,6 +303,7 @@ const WarrantyRecords = () => {
                 <tbody>
                   {records.map((record, index) => (
                     <tr key={record.rowKey || index} className="border-b border-border hover:bg-muted/30">
+                      <td className="p-4 font-mono text-sm text-primary whitespace-nowrap" dir="ltr">{record.rowKey ? formatWarrantyReference(record.rowKey) : t('admin.warranty.na')}</td>
                       <td className="p-4">{record.customerName}</td>
                       <td className="p-4 text-sm" dir="ltr">{record.email}</td>
                       <td className="p-4">{record.product}</td>
@@ -361,6 +364,10 @@ const WarrantyRecords = () => {
                     </Button>
                   </div>
                   <div className="space-y-2 text-sm border-t border-border pt-3">
+                    <div className="flex justify-between gap-3">
+                      <span className="text-muted-foreground">{t('admin.warranty.reference')}</span>
+                      <span className="font-mono text-xs text-primary text-end" dir="ltr">{record.rowKey ? formatWarrantyReference(record.rowKey) : t('admin.warranty.na')}</span>
+                    </div>
                     <div className="flex justify-between gap-3">
                       <span className="text-muted-foreground">{t('admin.warranty.product')}</span>
                       <span className="font-medium text-end">{record.product}</span>
