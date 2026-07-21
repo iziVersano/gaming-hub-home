@@ -96,6 +96,56 @@ async function sendWarrantyEmail(record) {
   }
 }
 
+/**
+ * Remove older submissions that duplicate a customer+device, keeping only the
+ * record identified by keepRowKey. A "duplicate" is a stored record with the
+ * same email (case-insensitive) and serialNumber. This makes resubmitting the
+ * same form idempotent — a double-submit (or a re-registration with a fresh
+ * invoice) replaces the previous record instead of piling up a copy.
+ * Best-effort: any failure here must not fail the submission itself.
+ */
+async function pruneDuplicateRecords({ email, serialNumber, keepRowKey }) {
+  const targetEmail = String(email).trim().toLowerCase();
+  const targetSerial = String(serialNumber).trim();
+
+  const stale = [];
+  let cursor;
+  do {
+    const page = await list({ prefix: 'warranty/records/', cursor, limit: 1000 });
+    const items = await Promise.all(
+      page.blobs.map(async (b) => {
+        const rec = await fetch(b.url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+        return rec ? { blob: b, record: rec } : null;
+      }),
+    );
+    for (const item of items) {
+      if (!item) continue;
+      const { record } = item;
+      const sameCustomer = String(record.email || '').trim().toLowerCase() === targetEmail;
+      const sameDevice = String(record.serialNumber || '').trim() === targetSerial;
+      if (sameCustomer && sameDevice && record.rowKey !== keepRowKey) {
+        stale.push(item);
+      }
+    }
+    cursor = page.cursor;
+  } while (cursor);
+
+  if (!stale.length) return 0;
+
+  // Clean up each stale record's invoice, then delete the record blobs.
+  for (const { record } of stale) {
+    if (record.invoiceUrl) {
+      try {
+        await del(record.invoiceUrl);
+      } catch (error) {
+        console.error('Duplicate invoice cleanup failed (non-blocking):', error);
+      }
+    }
+  }
+  await del(stale.map((s) => s.blob.url));
+  return stale.length;
+}
+
 async function handlePost(req, res) {
   const contentType = req.headers['content-type'] || '';
   if (!contentType.startsWith('multipart/form-data')) {
@@ -155,6 +205,17 @@ async function handlePost(req, res) {
     addRandomSuffix: true,
     contentType: 'application/json',
   });
+
+  // De-duplicate: drop any earlier submission for the same customer + device.
+  try {
+    await pruneDuplicateRecords({
+      email: record.email,
+      serialNumber: record.serialNumber,
+      keepRowKey: rowKey,
+    });
+  } catch (error) {
+    console.error('Duplicate prune failed (non-blocking):', error);
+  }
 
   await sendWarrantyEmail(record);
 
