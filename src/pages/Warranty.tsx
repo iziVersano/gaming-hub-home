@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Upload, CheckCircle, Info } from 'lucide-react';
+import { Loader2, Upload, CheckCircle2, Info, Home, RotateCcw } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { translations } from '@/i18n';
@@ -45,12 +45,29 @@ const Warranty = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [confirmationRef, setConfirmationRef] = useState<string | null>(null);
+  const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const { toast } = useToast();
 
   // Get today's date in YYYY-MM-DD format for max date validation
   const today = new Date().toISOString().split('T')[0];
+
+  // Build a human-friendly reference from the server-issued record id
+  // (shape: "warranty-<timestamp>-<random>"). Falls back to a local code if
+  // the response body is missing an id for any reason.
+  const formatReference = (id?: string | null): string => {
+    const raw = id?.split('-').pop();
+    const suffix = (raw || Date.now().toString(36)).toUpperCase();
+    return `CT-${suffix}`;
+  };
+
+  const formatHebrewDate = (value: string): string => {
+    if (!value) return '';
+    const d = new Date(value);
+    return isNaN(d.getTime()) ? value : d.toLocaleDateString('he-IL');
+  };
 
   // Validate a single field
   const validateField = (name: string, value: string): string | undefined => {
@@ -189,8 +206,13 @@ const Warranty = () => {
 
       if (!res.ok) throw new Error(`Warranty API returned ${res.status}`);
 
+      const result = await res.json().catch(() => null);
+      setConfirmationRef(formatReference(result?.id));
+      setSubmittedData(formData);
       setIsSuccess(true);
-      setTimeout(() => navigate('/'), 4000);
+      // Intentionally no auto-redirect: the customer must see a persistent
+      // confirmation with their reference number. They navigate away manually.
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error('Warranty submission error:', error);
       toast({
@@ -201,6 +223,25 @@ const Warranty = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleReset = () => {
+    setFormData({
+      fullName: '',
+      email: '',
+      phone: '',
+      productModel: '',
+      serialNumber: '',
+      purchaseDate: '',
+      storeName: '',
+    });
+    setFile(null);
+    setErrors({});
+    setTouched({});
+    setConfirmationRef(null);
+    setSubmittedData(null);
+    setIsSuccess(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const inputClass = "w-full px-4 py-3 bg-muted/30 rounded-lg border border-border focus:outline-none focus:border-primary text-foreground text-right box-border transition-colors";
@@ -249,14 +290,79 @@ const Warranty = () => {
 
         <p className="text-muted-foreground text-base mb-6 px-2 text-center">{t('warranty.description')}</p>
 
-        {/* Success Message */}
+        {/* Success / Confirmation screen */}
         {isSuccess ? (
-          <div className="product-card text-center py-12">
-            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
-            <h2 className="text-2xl font-bold mb-4 text-green-500">{t('warranty.success.title')}</h2>
-            <p className="text-muted-foreground text-lg">
-              {t('warranty.success.description')}
-            </p>
+          <div className="max-w-2xl mx-auto rounded-2xl bg-card/50 backdrop-blur-sm border border-border overflow-hidden">
+            {/* Header */}
+            <div className="text-center px-6 pt-10 pb-8 border-b border-border">
+              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-500/10 ring-8 ring-green-500/5">
+                <CheckCircle2 className="h-11 w-11 text-green-500" />
+              </div>
+              <span className="inline-block mb-3 rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-500">
+                {t('warranty.success.badge')}
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">{t('warranty.success.heading')}</h2>
+              <p className="text-muted-foreground">{t('warranty.success.intro')}</p>
+            </div>
+
+            {/* Reference number */}
+            <div className="px-6 py-5 text-center bg-muted/20 border-b border-border">
+              <p className="text-xs text-muted-foreground mb-1">{t('warranty.success.referenceLabel')}</p>
+              <p className="text-xl font-mono font-bold tracking-widest text-primary" dir="ltr">{confirmationRef}</p>
+            </div>
+
+            {/* Registration details */}
+            {submittedData && (
+              <div className="px-6 py-5 border-b border-border">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-3">{t('warranty.success.detailsTitle')}</h3>
+                <dl className="space-y-2.5 text-sm">
+                  {([
+                    [t('warranty.fullName'), submittedData.fullName, false],
+                    [t('warranty.email'), submittedData.email, true],
+                    [t('warranty.phone'), submittedData.phone, true],
+                    [t('warranty.productModel'), submittedData.productModel, false],
+                    [t('warranty.serialNumber'), submittedData.serialNumber, true],
+                    [t('warranty.purchaseDate'), formatHebrewDate(submittedData.purchaseDate), false],
+                    [t('warranty.storeName'), submittedData.storeName, false],
+                  ] as [string, string, boolean][]).map(([label, value, ltr]) => (
+                    <div key={label} className="flex items-start justify-between gap-4">
+                      <dt className="text-muted-foreground shrink-0">{label}</dt>
+                      <dd className="font-medium text-end break-words" dir={ltr ? 'ltr' : undefined}>
+                        {value || t('warranty.success.noValue')}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
+            {/* Reassurance note */}
+            <div className="px-6 py-5">
+              <div className="flex items-start gap-2 rounded-lg bg-muted/30 p-3 text-sm text-muted-foreground">
+                <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <p>{t('warranty.success.emailNote')}</p>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="px-6 pb-6 flex flex-col sm:flex-row gap-3">
+              <Button
+                onClick={() => navigate('/')}
+                className="flex-1 font-bold py-6 rounded-xl text-white transition-all duration-300 hover:opacity-90"
+                style={{ background: 'linear-gradient(135deg, #dc2626, #ef4444)', boxShadow: '0 0 24px rgba(220,38,38,0.5)' }}
+              >
+                <Home className="h-5 w-5" />
+                <span>{t('warranty.success.backHome')}</span>
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                className="flex-1 py-6 rounded-xl"
+              >
+                <RotateCcw className="h-5 w-5" />
+                <span>{t('warranty.success.submitAnother')}</span>
+              </Button>
+            </div>
           </div>
         ) : (
           /* Form — matches NintendoSwitch2Manual card style */

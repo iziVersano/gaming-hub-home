@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import AdminLayout from '@/components/AdminLayout';
 import { isAuthenticated, getAuthToken, removeAuthToken } from '@/lib/api';
 import { USE_MOCK_DATA, getMockWarrantyRecords, deleteMockWarrantyRecord } from '@/lib/mockData';
+import { useI18n } from '@/hooks/I18nContext';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const BACKEND_BASE_URL = API_BASE_URL.replace('/api', '');
@@ -28,6 +29,7 @@ interface InvoiceModalProps {
 }
 
 const InvoiceModal = ({ invoiceUrl, fileName, onClose }: InvoiceModalProps) => {
+  const { t } = useI18n();
   const isPdf = invoiceUrl.toLowerCase().includes('.pdf');
   const isImage = /\.(jpg|jpeg|png|gif|webp)/i.test(invoiceUrl);
 
@@ -38,7 +40,7 @@ const InvoiceModal = ({ invoiceUrl, fileName, onClose }: InvoiceModalProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <h3 className="font-semibold truncate">{fileName || 'Invoice Preview'}</h3>
+          <h3 className="font-semibold truncate">{fileName || t('admin.warranty.invoicePreview')}</h3>
           <div className="flex items-center gap-2">
             <a
               href={invoiceUrl}
@@ -46,7 +48,7 @@ const InvoiceModal = ({ invoiceUrl, fileName, onClose }: InvoiceModalProps) => {
               className="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 flex items-center gap-1"
             >
               <Download className="h-4 w-4" />
-              Download
+              {t('admin.warranty.download')}
             </a>
             <button onClick={onClose} className="p-1.5 hover:bg-muted rounded">
               <X className="h-5 w-5" />
@@ -55,16 +57,16 @@ const InvoiceModal = ({ invoiceUrl, fileName, onClose }: InvoiceModalProps) => {
         </div>
         <div className="flex-1 overflow-auto p-4 min-h-[400px]">
           {isPdf ? (
-            <iframe src={invoiceUrl} className="w-full h-[600px] border-0 rounded" title="Invoice PDF Preview" />
+            <iframe src={invoiceUrl} className="w-full h-[600px] border-0 rounded" title={t('admin.warranty.invoicePreview')} />
           ) : isImage ? (
             <div className="flex items-center justify-center">
-              <img src={invoiceUrl} alt="Invoice" className="max-w-full max-h-[70vh] object-contain rounded" />
+              <img src={invoiceUrl} alt={t('admin.warranty.invoice')} className="max-w-full max-h-[70vh] object-contain rounded" />
             </div>
           ) : (
             <div className="text-center py-12 text-muted-foreground">
-              <p>Preview not available for this file type.</p>
+              <p>{t('admin.warranty.previewNotAvailable')}</p>
               <a href={invoiceUrl} download={fileName} className="mt-4 inline-block px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90">
-                Download File
+                {t('admin.warranty.downloadFile')}
               </a>
             </div>
           )}
@@ -82,6 +84,7 @@ interface DeleteModalProps {
 }
 
 const DeleteModal = ({ record, onConfirm, onCancel, isDeleting }: DeleteModalProps) => {
+  const { t } = useI18n();
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70" onClick={onCancel}>
       <div
@@ -92,30 +95,30 @@ const DeleteModal = ({ record, onConfirm, onCancel, isDeleting }: DeleteModalPro
           <div className="p-2 bg-red-500/10 rounded-full">
             <AlertTriangle className="h-6 w-6 text-red-500" />
           </div>
-          <h3 className="text-lg font-semibold">Delete Warranty Record</h3>
+          <h3 className="text-lg font-semibold">{t('admin.warranty.deleteTitle')}</h3>
         </div>
         <p className="text-muted-foreground mb-2">
-          Are you sure you want to delete the warranty record for:
+          {t('admin.warranty.deleteConfirm')}
         </p>
         <div className="bg-muted/50 p-3 rounded-lg mb-4">
           <p className="font-medium">{record.customerName}</p>
           <p className="text-sm text-muted-foreground">{record.product} - {record.serialNumber}</p>
         </div>
-        <p className="text-sm text-red-500 mb-4">This action cannot be undone.</p>
+        <p className="text-sm text-red-500 mb-4">{t('admin.warranty.deleteWarning')}</p>
         <div className="flex gap-3 justify-end">
           <Button variant="outline" onClick={onCancel} disabled={isDeleting}>
-            Cancel
+            {t('admin.warranty.cancel')}
           </Button>
           <Button variant="destructive" onClick={onConfirm} disabled={isDeleting}>
             {isDeleting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Deleting...
+                {t('admin.warranty.deleting')}
               </>
             ) : (
               <>
                 <Trash2 className="h-4 w-4" />
-                Delete
+                {t('admin.warranty.delete')}
               </>
             )}
           </Button>
@@ -127,12 +130,17 @@ const DeleteModal = ({ record, onConfirm, onCancel, isDeleting }: DeleteModalPro
 
 const WarrantyRecords = () => {
   const navigate = useNavigate();
+  const { t, lang } = useI18n();
   const [records, setRecords] = useState<WarrantyRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedInvoice, setSelectedInvoice] = useState<{ url: string; fileName: string } | null>(null);
   const [deleteRecord, setDeleteRecord] = useState<WarrantyRecord | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const dateLocale = lang === 'he' ? 'he-IL' : 'en-US';
+  const formatDate = (value: string) =>
+    value ? new Date(value).toLocaleDateString(dateLocale) : t('admin.warranty.na');
 
   useEffect(() => {
     // Check authentication
@@ -190,11 +198,11 @@ const WarrantyRecords = () => {
     } catch (err) {
       if (err instanceof Error && err.message === 'Session expired') return;
       console.error('Failed to fetch warranty records:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load warranty records');
+      setError(err instanceof Error ? err.message : t('admin.warranty.loadError'));
     } finally {
       setIsLoading(false);
     }
-  }, [authedFetch]);
+  }, [authedFetch, t]);
 
   useEffect(() => {
     fetchRecords();
@@ -215,7 +223,7 @@ const WarrantyRecords = () => {
         // Delete via API in production. The blob-backed endpoint addresses
         // records by rowKey only — serialNumber is not a valid handle.
         if (!deleteRecord.rowKey) {
-          throw new Error('This record predates the current storage format and cannot be deleted here.');
+          throw new Error(t('admin.warranty.deleteLegacyError'));
         }
         const response = await authedFetch(`/warranty?id=${encodeURIComponent(deleteRecord.rowKey)}`, {
           method: 'DELETE',
@@ -235,40 +243,44 @@ const WarrantyRecords = () => {
     } catch (err) {
       if (err instanceof Error && err.message === 'Session expired') return;
       console.error('Failed to delete warranty record:', err);
-      alert(err instanceof Error ? err.message : 'Failed to delete warranty record. Please try again.');
+      alert(err instanceof Error ? err.message : t('admin.warranty.deleteError'));
     } finally {
       setIsDeleting(false);
     }
   };
 
+  const recordsLabel = records.length === 1
+    ? t('admin.warranty.recordsSingular')
+    : t('admin.warranty.recordsPlural');
+
   return (
     <AdminLayout>
       <Helmet>
-        <title>Warranty Records | Admin | Consoltech</title>
+        <title>{t('admin.warranty.pageTitle')}</title>
       </Helmet>
 
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold gradient-text">Warranty Records</h1>
-            <p className="text-muted-foreground mt-1">Manage customer warranty registrations</p>
+            <h1 className="text-3xl font-bold gradient-text">{t('admin.warranty.heading')}</h1>
+            <p className="text-muted-foreground mt-1">{t('admin.warranty.subtitle')}</p>
           </div>
-          <div className="text-sm text-muted-foreground">
-            {records.length} record{records.length !== 1 ? 's' : ''}
+          <div className="text-sm text-muted-foreground whitespace-nowrap">
+            {records.length} {recordsLabel}
           </div>
         </div>
 
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <span className="ml-3 text-muted-foreground">Loading records...</span>
+            <span className="ms-3 text-muted-foreground">{t('admin.warranty.loading')}</span>
           </div>
         ) : error ? (
           <div className="text-center py-12 text-red-500">{error}</div>
         ) : records.length === 0 ? (
           <div className="text-center py-12 text-muted-foreground border border-dashed border-border rounded-lg">
             <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p>No warranty records found.</p>
+            <p>{t('admin.warranty.empty')}</p>
           </div>
         ) : (
           <>
@@ -277,22 +289,22 @@ const WarrantyRecords = () => {
               <table className="w-full">
                 <thead>
                   <tr className="bg-muted/50 border-b border-border">
-                    <th className="text-left p-4 font-semibold">Customer</th>
-                    <th className="text-left p-4 font-semibold">Email</th>
-                    <th className="text-left p-4 font-semibold">Product</th>
-                    <th className="text-left p-4 font-semibold">Serial Number</th>
-                    <th className="text-left p-4 font-semibold">Invoice</th>
-                    <th className="text-left p-4 font-semibold">Date</th>
-                    <th className="text-center p-4 font-semibold">Actions</th>
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.customer')}</th>
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.email')}</th>
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.product')}</th>
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.serialNumber')}</th>
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.invoice')}</th>
+                    <th className="text-start p-4 font-semibold">{t('admin.warranty.date')}</th>
+                    <th className="text-center p-4 font-semibold">{t('admin.warranty.actions')}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {records.map((record, index) => (
                     <tr key={record.rowKey || index} className="border-b border-border hover:bg-muted/30">
                       <td className="p-4">{record.customerName}</td>
-                      <td className="p-4 text-sm">{record.email}</td>
+                      <td className="p-4 text-sm" dir="ltr">{record.email}</td>
                       <td className="p-4">{record.product}</td>
-                      <td className="p-4 font-mono text-sm">{record.serialNumber}</td>
+                      <td className="p-4 font-mono text-sm" dir="ltr">{record.serialNumber}</td>
                       <td className="p-4">
                         {record.invoiceUrl ? (
                           <button
@@ -303,14 +315,14 @@ const WarrantyRecords = () => {
                             className="text-primary hover:underline flex items-center gap-1"
                           >
                             <Eye className="h-4 w-4" />
-                            View
+                            {t('admin.warranty.view')}
                           </button>
                         ) : (
-                          <span className="text-muted-foreground">N/A</span>
+                          <span className="text-muted-foreground">{t('admin.warranty.na')}</span>
                         )}
                       </td>
-                      <td className="p-4 text-sm text-muted-foreground">
-                        {record.createdAt ? new Date(record.createdAt).toLocaleDateString() : 'N/A'}
+                      <td className="p-4 text-sm text-muted-foreground whitespace-nowrap">
+                        {formatDate(record.createdAt)}
                       </td>
                       <td className="p-4 text-center">
                         <Button
@@ -318,6 +330,7 @@ const WarrantyRecords = () => {
                           size="sm"
                           className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
                           onClick={() => setDeleteRecord(record)}
+                          aria-label={t('admin.warranty.delete')}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -332,32 +345,33 @@ const WarrantyRecords = () => {
             <div className="md:hidden space-y-4">
               {records.map((record, index) => (
                 <div key={record.rowKey || index} className="bg-card border border-border rounded-lg p-4 space-y-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{record.customerName}</h3>
-                      <p className="text-sm text-muted-foreground">{record.email}</p>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold truncate">{record.customerName}</h3>
+                      <p className="text-sm text-muted-foreground truncate" dir="ltr">{record.email}</p>
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-red-500 hover:text-red-600 hover:bg-red-500/10 -mt-1 -mr-2"
+                      className="text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0 -mt-1"
                       onClick={() => setDeleteRecord(record)}
+                      aria-label={t('admin.warranty.delete')}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
-                  <div className="space-y-2 text-sm">
-                    <div>
-                      <span className="text-muted-foreground">Product:</span>
-                      <span className="ml-2 font-medium">{record.product}</span>
+                  <div className="space-y-2 text-sm border-t border-border pt-3">
+                    <div className="flex justify-between gap-3">
+                      <span className="text-muted-foreground">{t('admin.warranty.product')}</span>
+                      <span className="font-medium text-end">{record.product}</span>
                     </div>
-                    <div>
-                      <span className="text-muted-foreground">Serial:</span>
-                      <span className="ml-2 font-mono text-xs">{record.serialNumber}</span>
+                    <div className="flex justify-between gap-3">
+                      <span className="text-muted-foreground">{t('admin.warranty.serialNumber')}</span>
+                      <span className="font-mono text-xs text-end" dir="ltr">{record.serialNumber}</span>
                     </div>
-                    <div>
-                      <span className="text-muted-foreground">Date:</span>
-                      <span className="ml-2">{record.createdAt ? new Date(record.createdAt).toLocaleDateString() : 'N/A'}</span>
+                    <div className="flex justify-between gap-3">
+                      <span className="text-muted-foreground">{t('admin.warranty.date')}</span>
+                      <span className="text-end">{formatDate(record.createdAt)}</span>
                     </div>
                   </div>
                   {record.invoiceUrl && (
@@ -370,8 +384,8 @@ const WarrantyRecords = () => {
                         fileName: record.invoiceFileName
                       })}
                     >
-                      <Eye className="h-4 w-4 mr-2" />
-                      View Invoice
+                      <Eye className="h-4 w-4 me-2" />
+                      {t('admin.warranty.viewInvoice')}
                     </Button>
                   )}
                 </div>

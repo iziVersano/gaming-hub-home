@@ -44,7 +44,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 >
                   <Link to="/admin">
                     <LayoutDashboard className="h-4 w-4" />
-                    <span>Dashboard</span>
+                    <span>{t('admin.layout.dashboard')}</span>
                   </Link>
                 </Button>
                 <Button
@@ -65,7 +65,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 >
                   <Link to="/admin/warranty-records">
                     <FileText className="h-4 w-4" />
-                    <span>Warranties</span>
+                    <span>{t('admin.layout.warranties')}</span>
                   </Link>
                 </Button>
                 )}
@@ -76,7 +76,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 >
                   <Link to="/admin/places">
                     <MapPin className="h-4 w-4" />
-                    <span>Places</span>
+                    <span>{t('admin.layout.places')}</span>
                   </Link>
                 </Button>
               </div>
