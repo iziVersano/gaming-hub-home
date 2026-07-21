@@ -172,6 +172,7 @@
   "footer.accessibility": "Accessibility",
   "footer.admin": "Admin",
   "admin.layout.admin": "Admin",
+  "admin.layout.menu": "Menu",
   "admin.layout.dashboard": "Dashboard",
   "admin.layout.products": "Products",
   "admin.layout.warranties": "Warranties",

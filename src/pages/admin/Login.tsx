@@ -24,7 +24,7 @@ const Login = () => {
     if (ALLOW_BYPASS_LOGIN) {
       const bypassToken = localStorage.getItem('adminToken');
       if (bypassToken === 'BYPASS_TOKEN_DEV_MODE') {
-        navigate('/admin/products');
+        navigate('/admin/warranty-records');
       }
     }
   }, [navigate]);
@@ -33,7 +33,7 @@ const Login = () => {
     // Set a fake token for bypass mode
     setAuthToken('BYPASS_TOKEN_DEV_MODE');
     toast.success('Dev mode: Login bypassed!');
-    navigate('/admin/products');
+    navigate('/admin/warranty-records');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +44,7 @@ const Login = () => {
       const response = await login({ email, password });
       setAuthToken(response.token);
       toast.success('Login successful!');
-      navigate('/admin/products');
+      navigate('/admin/warranty-records');
     } catch (error) {
       console.error('Login error:', error);
 
