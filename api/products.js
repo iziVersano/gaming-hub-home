@@ -1,13 +1,40 @@
+// Same catalog as FALLBACK_PRODUCTS / FALLBACK_PRODUCTS_HE in src/lib/api.ts; images live in public/images.
 const SEED = [
-  { id: 'ns2', sku: 'NS2-001', price: 299, imageUrl: 'https://images.unsplash.com/photo-1605559424843-9e4c3ca4b786?w=400', flags: ['new'], translations: [{ locale: 'en', title: 'Nintendo Switch 2', description: 'Next generation gaming console', category: 'Gaming Consoles', badges: ['Latest', 'Popular'] }, { locale: 'he', title: 'Nintendo Switch 2', description: 'קונסולת משחקים לדור הבא', category: 'קונסולות משחקים', badges: ['חדש', 'פופולרי'] }] },
-  { id: 'ps5', sku: 'PS5-001', price: 499, imageUrl: 'https://images.unsplash.com/photo-1606841837239-c5a1a8a07af7?w=400', flags: [], translations: [{ locale: 'en', title: 'PlayStation 5', description: 'Sony\'s flagship gaming console', category: 'Gaming Consoles', badges: ['Best Seller'] }, { locale: 'he', title: 'PlayStation 5', description: 'קונסולת הדגל של סוני', category: 'קונסולות משחקים', badges: ['מבחר הקונים'] }] },
-  { id: 'xsx', sku: 'XSX-001', price: 499, imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400', flags: [], translations: [{ locale: 'en', title: 'Xbox Series X', description: 'Microsoft\'s next-gen console', category: 'Gaming Consoles', badges: ['Powerful'] }, { locale: 'he', title: 'Xbox Series X', description: 'קונסולת הדור הבא של מיקרוסופט', category: 'קונסולות משחקים', badges: ['חזק'] }] },
-  { id: 'dji-mini', sku: 'DJI-MINI-001', price: 249, imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', flags: [], translations: [{ locale: 'en', title: 'DJI Mini Drone', description: 'Portable drone for enthusiasts', category: 'Drones', badges: ['Portable'] }, { locale: 'he', title: 'DJI Mini Drone', description: 'דרון נייד לחובבים', category: 'דרונים', badges: ['נייד'] }] },
-  { id: 'ebike', sku: 'EBIKE-001', price: 1299, imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400', flags: [], translations: [{ locale: 'en', title: 'Electric Bike', description: 'High-performance electric bike', category: 'E-Bikes', badges: ['Eco-Friendly'] }, { locale: 'he', title: 'אופניים חשמליים', description: 'אופניים חשמליים בעלי ביצועים גבוהים', category: 'אופניים חשמליים', badges: ['ידידותי לסביבה'] }] },
-  { id: 'tv-4k', sku: 'TV-4K-001', price: 799, imageUrl: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400', flags: [], translations: [{ locale: 'en', title: '55" 4K Smart TV', description: 'Ultra HD smart television', category: 'Televisions', badges: ['4K', 'Smart'] }, { locale: 'he', title: 'טלוויזיה חכמה 4K 55"', description: 'טלוויזיה אולטרה HD חכמה', category: 'טלוויזיות', badges: ['4K', 'חכמה'] }] },
-  { id: 'accessories', sku: 'ACC-001', price: 49, imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400', flags: [], translations: [{ locale: 'en', title: 'Gaming Accessories Bundle', description: 'Controller, headset, and cables', category: 'Accessories', badges: ['Bundle'] }, { locale: 'he', title: 'חבילת אביזרי משחקים', description: 'בקר, אוזניות וכבלים', category: 'אביזרים', badges: ['חבילה'] }] },
-  { id: 'smart-home', sku: 'SH-001', price: 199, imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400', flags: [], translations: [{ locale: 'en', title: 'Smart Home Hub', description: 'Central control for smart devices', category: 'Smart Home', badges: ['Connected'] }, { locale: 'he', title: 'Hub הבית החכם', description: 'שליטה מרכזית במכשירים חכמים', category: 'בית חכם', badges: ['מחובר'] }] },
+  { id: 8, price: 499.99, imageUrl: '/images/m3w.png', translations: {
+    en: { title: 'Meta Quest 3', description: 'Next-generation VR headset with breakthrough mixed reality, powerful performance, and an expanding library of immersive experiences.', category: 'New Arrivals' },
+    he: { title: 'Meta Quest 3', description: 'משקפי VR מהדור הבא עם מציאות מעורבת פורצת דרך, ביצועים חזקים וספרייה מתרחבת של חוויות סוחפות.', category: 'חדשים במלאי' } } },
+  { id: 9, price: 1799.99, imageUrl: '/images/asus-new.png', translations: {
+    en: { title: 'ASUS ROG Gaming Laptop', description: 'Ultimate gaming performance with cutting-edge graphics, high-refresh display, and advanced cooling technology for serious gamers.', category: 'New Arrivals' },
+    he: { title: 'מחשב גיימינג ASUS ROG', description: 'ביצועי גיימינג מושלמים עם גרפיקה מתקדמת, מסך בקצב רענון גבוה וטכנולוגיית קירור מתקדמת לגיימרים רציניים.', category: 'חדשים במלאי' } } },
+  { id: 10, price: 449.99, imageUrl: '/images/nin2.jpeg', translations: {
+    en: { title: 'Nintendo Switch 2', description: 'The next generation of Nintendo gaming. Experience enhanced graphics, faster performance, and an expanded game library.', category: 'New Arrivals' },
+    he: { title: 'Nintendo Switch 2', description: 'הדור הבא של משחקי Nintendo. חוו גרפיקה משופרת, ביצועים מהירים יותר וספריית משחקים מורחבת.', category: 'חדשים במלאי' } } },
+  { id: 11, price: 599.99, imageUrl: '/images/xbox-series-x-galaxy.png', translations: {
+    en: { title: 'Xbox Series X – Galaxy Black 2TB', description: 'The most powerful Xbox ever with 2TB storage, Galaxy Black special edition finish, and next-gen gaming performance.', category: 'New Arrivals' },
+    he: { title: 'Xbox Series X – Galaxy Black 2TB', description: 'ה-Xbox החזק ביותר אי פעם עם 2TB אחסון, מהדורת Galaxy Black מיוחדת וביצועי גיימינג מהדור הבא.', category: 'חדשים במלאי' } } },
+  { id: 3, price: 1299.99, imageUrl: '/images/07ba8bc0-8d14-4d62-a534-659913ac5f99.png', translations: {
+    en: { title: 'Professional Drones', description: 'High-performance drones for commercial photography, surveying, and recreational flying with advanced stabilization.', category: 'Drones' },
+    he: { title: 'רחפנים מקצועיים', description: 'רחפנים בעלי ביצועים גבוהים לצילום מסחרי, סקרים וטיסה פנאית עם ייצוב מתקדם.', category: 'רחפנים' } } },
+  { id: 4, price: 1899.99, imageUrl: '/images/a0bd3ab6-05d5-4312-b6ec-f0e256d7a63a.png', translations: {
+    en: { title: 'Smart E-Bikes', description: 'Electric bikes with smart connectivity, long-range batteries, and advanced motor systems for urban mobility.', category: 'E-Bikes' },
+    he: { title: 'אופניים חשמליים חכמים', description: 'אופניים חשמליים עם קישוריות חכמה, סוללות טווח ארוך ומערכות מנוע מתקדמות לניידות עירונית.', category: 'אופניים חשמליים' } } },
+  { id: 5, price: 799.99, imageUrl: '/images/6df37998-af04-426e-b749-365ffeb66787.png', translations: {
+    en: { title: '4K Smart TVs', description: 'Ultra-high definition smart TVs with AI upscaling, HDR support, and built-in streaming platforms.', category: 'TVs' },
+    he: { title: 'טלוויזיות חכמות 4K', description: 'טלוויזיות חכמות באיכות Ultra HD עם שדרוג AI, תמיכת HDR ופלטפורמות סטרימינג מובנות.', category: 'טלוויזיות' } } },
+  { id: 6, price: 149.99, imageUrl: '/images/bd80e124-a5e2-4d34-9c82-ebc0dbd6a697.png', translations: {
+    en: { title: 'Gaming Accessories', description: 'Premium gaming peripherals including controllers, headsets, and racing wheels from top brands.', category: 'Gaming' },
+    he: { title: 'אביזרי גיימינג', description: 'אביזרי גיימינג פרימיום כולל בקרים, אוזניות והגאים ממותגים מובילים.', category: 'גיימינג' } } },
+  { id: 7, price: 299.99, imageUrl: '/images/6df37998-af04-426e-b749-365ffeb66787.png', translations: {
+    en: { title: 'Smart Home Electronics', description: 'Connected home devices including smart speakers, security cameras, and automation systems.', category: 'Electronics' },
+    he: { title: 'אלקטרוניקה לבית חכם', description: 'מכשירים מחוברים לבית כולל רמקולים חכמים, מצלמות אבטחה ומערכות אוטומציה.', category: 'אלקטרוניקה' } } },
 ];
+
+// The frontend expects flat title/description/category in the requested language.
+const localize = (p, lang) => {
+  if (!p.translations) return p;
+  const { translations, ...rest } = p;
+  return { ...rest, ...(translations[lang] || translations.en) };
+};
 
 let products = [...SEED];
 
@@ -19,13 +46,14 @@ export default function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const { id } = req.query;
+  const lang = req.query.lang === 'he' ? 'he' : 'en';
 
   if (req.method === 'GET') {
     if (id) {
-      const p = products.find(x => x.id === id);
-      return res.status(p ? 200 : 404).json(p || { error: 'Not found' });
+      const p = products.find(x => String(x.id) === String(id));
+      return res.status(p ? 200 : 404).json(p ? localize(p, lang) : { error: 'Not found' });
     }
-    return res.status(200).json(products);
+    return res.status(200).json(products.map(p => localize(p, lang)));
   }
 
   if (req.method === 'POST') {
@@ -35,15 +63,15 @@ export default function handler(req, res) {
   }
 
   if (req.method === 'PUT' && id) {
-    const i = products.findIndex(x => x.id === id);
+    const i = products.findIndex(x => String(x.id) === String(id));
     if (i === -1) return res.status(404).json({ error: 'Not found' });
-    products[i] = { ...products[i], ...req.body, id };
+    products[i] = { ...products[i], ...req.body, id: products[i].id };
     return res.status(200).json(products[i]);
   }
 
   if (req.method === 'DELETE' && id) {
     const before = products.length;
-    products = products.filter(x => x.id !== id);
+    products = products.filter(x => String(x.id) !== String(id));
     if (products.length === before) return res.status(404).json({ error: 'Not found' });
     return res.status(200).json({ success: true });
   }
